@@ -1,4 +1,3 @@
-import Logger from './Logger';
+import Logger, { ILogger } from './Logger';
 
-// eslint-disable-next-line import/prefer-default-export
-export { Logger };
+export { Logger, ILogger };
