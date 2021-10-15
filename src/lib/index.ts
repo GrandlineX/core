@@ -123,6 +123,8 @@ export interface ICoreKernelModule<
 
   addService(service: ICoreService): void;
 
+  getServiceList(): ICoreService[];
+
   getKernel(): K;
 
   getDb(): T | null;

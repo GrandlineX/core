@@ -5,6 +5,7 @@ import {
   ICoreKernelModule,
   ICoreKernel,
   ICoreCache,
+  ICoreService,
 } from '../lib';
 import CoreAction from './CoreAction';
 import Logger from '../modules/logger/Logger';
@@ -159,6 +160,10 @@ export default abstract class CoreKernelModule<
 
   addService(service: CoreService): void {
     this.servicelist.push(service);
+  }
+
+  getServiceList(): ICoreService[] {
+    return this.servicelist;
   }
 
   getKernel(): K {
