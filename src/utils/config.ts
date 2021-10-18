@@ -17,6 +17,10 @@ export enum OsRelease {
   'LINUX',
   'DARWIN',
 }
+export interface ImgConf {
+  icon: string;
+  thump: string;
+}
 
 export interface BaseCoreConfig {
   dir: {
@@ -26,7 +30,8 @@ export interface BaseCoreConfig {
     certs: string;
     temp: string;
   };
-  icon: string;
+  img: ImgConf;
+
   os: OsRelease;
   arch: string;
 }
@@ -47,7 +52,8 @@ export interface CoreConfig extends BaseCoreConfig {
 }
 export function getConfig(
   appName: string,
-  pathOverride?: string
+  pathOverride?: string,
+  ico?: ImgConf
 ): BaseCoreConfig {
   let dir: string;
   let icon: string;
@@ -88,7 +94,10 @@ export function getConfig(
       certs: path.join(dir, 'data', 'certs'),
       temp: path.join(dir, 'temp'),
     },
-    icon,
+    img: ico || {
+      icon,
+      thump: icon,
+    },
     os: ose,
     arch,
   };
