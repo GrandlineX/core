@@ -145,7 +145,7 @@ package:peploy:prod:
   image: node:latest
   tags:
     - docker
-  stage: build
+  stage: publish
   only:
     - tags
     - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
