@@ -3,6 +3,11 @@ stages:
   - scan
   - docs
   - build
+
+cache:
+  paths:
+    - node_modules/
+
 docs:
   allow_failure: true
   image: node:latest
