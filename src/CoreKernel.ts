@@ -304,6 +304,10 @@ export default abstract class CoreKernel<X extends ICoreCClient>
         port: Number(env.REDIS_PORT),
         password: env?.REDIS_PASSWORD,
       };
+      if (Number.isNaN(conf.port)) {
+        this.warn(`${env.REDIS_PORT} is Invalid, using default port 6379`);
+        conf.port = 6379;
+      }
       if (this.globalConfig.db) {
         this.globalConfig.db.redis = conf;
       } else {
