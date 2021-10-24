@@ -3,6 +3,7 @@ stages:
   - scan
   - docs
   - build
+  - publish
 
 cache:
   paths:
@@ -117,7 +118,7 @@ sec:scan:prod:
     - report:test:prod
 
 
-publish:build:prod:
+make:build:prod:
   image: node:latest
   tags:
     - docker
@@ -134,7 +135,34 @@ publish:build:prod:
     - lint:scan:prod
     - sec:scan:prod
     - sonar:scan:prod
+  artifacts:
+    paths:
+      - dist
+    expire_in: 7 days
 
+
+package:peploy:prod:
+  image: node:latest
+  tags:
+    - docker
+  stage: build
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  except:
+    - branches
+  before_script:
+    - cp $NPM_DEPLOY ./.npmrc
+  after_script:
+    - rm ./.npmrc
+  script:
+    - npm publish
+    - npm pack
+  needs:
+    - make:build:prod
+  artifacts:
+    paths:
+      - ./*.tgz
 
 test:test:dev:
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
@@ -212,3 +240,4 @@ make:build:dev:
   artifacts:
     paths:
       - ./*.tgz
+    expire_in: 14 days
