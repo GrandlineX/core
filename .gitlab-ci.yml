@@ -35,8 +35,10 @@ report:test:prod:
   before_script:
     - cp $TESTENVFILE .env
   services:
-    - ${DOCKER_IMG_PRE}postgres:latest
-    - ${DOCKER_IMG_PRE}redis:alpine
+     - name: ${DOCKER_IMG_PRE}postgres:latest
+       alias: postgres
+     - name: ${DOCKER_IMG_PRE}redis:alpine
+       alias: redis
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
@@ -169,8 +171,10 @@ test:test:dev:
   before_script:
     - cp $TESTENVFILE .env
   services:
-    - ${DOCKER_IMG_PRE}postgres:latest
-    - ${DOCKER_IMG_PRE}redis:alpine
+    - name: ${DOCKER_IMG_PRE}postgres:latest
+      alias: postgres
+    - name: ${DOCKER_IMG_PRE}redis:alpine
+      alias: redis
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
