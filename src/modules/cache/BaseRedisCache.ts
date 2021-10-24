@@ -29,14 +29,16 @@ export default abstract class BaseRedisCache extends CoreCache {
       throw new Error('NO REDIS CONFIG FOUND');
     }
     this.client = createClient({
-      password: config.password,
+      password: config.password ? config.password : undefined,
       socket: {
         host: config.url,
         port: config.port,
       },
     });
     this.client.on('error', (err) => {
+      this.error(`Cant connect to ${config.url}:${config.port}`);
       this.error(err);
+      throw new Error(err);
     });
     await this.client.connect();
     this.log('Started');
