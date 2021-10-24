@@ -301,7 +301,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     if (env?.REDIS_URL && env?.REDIS_PORT) {
       const conf = {
         url: env.REDIS_URL,
-        port: parseInt(env.REDIS_PORT, 10),
+        port: Number(env.REDIS_PORT),
         password: env?.REDIS_PASSWORD,
       };
       if (this.globalConfig.db) {
