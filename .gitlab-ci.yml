@@ -35,7 +35,7 @@ report:test:prod:
   before_script:
     - cp $TESTENVFILE .env
   services:
-    - ${DOCKER_IMG_PRE}postgres:12.2-alpine
+    - ${DOCKER_IMG_PRE}postgres:latest
     - ${DOCKER_IMG_PRE}redis:alpine
   variables:
     POSTGRES_USER: $POSTGRES_USER
@@ -169,7 +169,7 @@ test:test:dev:
   before_script:
     - cp $TESTENVFILE .env
   services:
-    - ${DOCKER_IMG_PRE}postgres:12.2-alpine
+    - ${DOCKER_IMG_PRE}postgres:latest
     - ${DOCKER_IMG_PRE}redis:alpine
   variables:
     POSTGRES_USER: $POSTGRES_USER
