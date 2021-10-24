@@ -30,6 +30,7 @@ report:test:prod:
     - cp $TESTENVFILE .env
   services:
     - postgres:12.2-alpine
+    - redis:alpine
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
@@ -74,6 +75,19 @@ lint:scan:prod:
     - npm run lint
   needs: []
 
+'sonar:scan:prod':
+  allow_failure: true
+  image: sonarsource/sonar-scanner-cli
+  stage: scan
+  tags:
+    - docker
+  only:
+    - tags
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+  script:
+    - sonar-scanner -Dsonar.login=$sonar_key -Dsonar.host.url=$sonar_url
+  needs: []
+
 
 sec:scan:prod:
   before_script:
@@ -113,6 +127,7 @@ publish:build:prod:
   needs:
     - lint:scan:prod
     - sec:scan:prod
+    - sonar:scan:prod
 
 
 test:test:dev:
@@ -121,6 +136,7 @@ test:test:dev:
     - cp $TESTENVFILE .env
   services:
     - postgres:12.2-alpine
+    - redis:alpine
   variables:
     POSTGRES_USER: $POSTGRES_USER
     POSTGRES_PASSWORD: $POSTGRES_PASSWORD
