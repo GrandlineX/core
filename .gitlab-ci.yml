@@ -91,7 +91,8 @@ lint:scan:prod:
     - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
   script:
     - sonar-scanner -Dsonar.login=$sonar_key -Dsonar.host.url=$sonar_url
-  needs: []
+  needs:
+    - report:test:prod
 
 
 sec:scan:prod:
@@ -207,3 +208,7 @@ make:build:dev:
   script:
     - npm install
     - npm run buildprep
+    - npm pack
+  artifacts:
+    paths:
+      - ./*.tgz
