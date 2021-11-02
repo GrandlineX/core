@@ -235,6 +235,30 @@ describe('Clean Startup', () => {
     expect(exeres?.length).toBe(2);
   });
 
+  test('db function light', async () => {
+    const mod=kernel.getModuleList()[0];
+    const db = mod.getDb();
+    const conf = await db?.setConfig(testText, testText);
+    expect(conf).toBeTruthy();
+    const res = await db?.getConfig(testText);
+    expect(res?.c_value).toBe(testText);
+    await db?.removeConfig(testText);
+    const res2 = await db?.getConfig(testText);
+    expect(res2).toBeUndefined();
+
+    const exeres = await db?.execScripts([
+      {
+        exec: `INSERT INTO ${db.schemaName}.config VALUES (?,?)`,
+        param: ['test', 'test'],
+      },
+      {
+        exec: `DELETE FROM ${db.schemaName}.config WHERE c_key=?`,
+        param: ['test'],
+      },
+    ]);
+    expect(exeres?.length).toBe(2);
+  });
+
   test('crypto', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();

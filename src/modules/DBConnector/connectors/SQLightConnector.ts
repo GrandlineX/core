@@ -31,7 +31,7 @@ export default abstract class SQLightConnector
     try {
       const q = `DELETE 
                        FROM ${this.schemaName}.config
-                       WHERE c_key = $1;`;
+                       WHERE c_key = ?;`;
       const query = await this.db?.prepare(q);
 
       if (query) {
