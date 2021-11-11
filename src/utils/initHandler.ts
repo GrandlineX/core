@@ -1,10 +1,9 @@
-import { ICoreKernelModule } from '../lib';
-import { ILogger } from '../modules/logger/Logger';
+import { ICoreKernelModule, ILogChanel, WorkLoad } from '../lib';
 import CoreBridge from '../classes/CoreBridge';
 
 export default async function initHandler(
   modList: ICoreKernelModule<any, any, any, any, any>[],
-  logger: ILogger
+  logger: ILogChanel
 ): Promise<void> {
   modList.forEach((src) => {
     src.getDependencyList().forEach((dep) => {
@@ -19,13 +18,13 @@ export default async function initHandler(
     });
   });
 
-  const workload: Promise<any>[] = [];
+  const workload: WorkLoad<any> = [];
   modList.forEach((action) => {
     workload.push(action.register());
   });
 
   await Promise.all(workload);
-  const workloadStart: Promise<any>[] = [];
+  const workloadStart: WorkLoad<any> = [];
   modList.forEach((action) => {
     if (action?.start) {
       workloadStart.push(action.start());

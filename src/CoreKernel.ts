@@ -3,23 +3,21 @@ import {
   ICoreCClient,
   ICoreKernel,
   KernelTrigger,
+  IStore,
 } from './lib';
-import {
-  CoreConfig,
-  createCertsIfNotExist,
-  createFolderIfNotExist,
-  getConfig,
-} from './utils';
-import Logger from './modules/logger/Logger';
+import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
-import { DBConnection } from './modules';
+import CoreLogger from './classes/CoreLogger';
+import CoreLogChannel from './classes/CoreLogChannel';
+import CoreDBCon from './classes/CoreDBCon';
+import EnvStore from './modules/env/EnvStore';
 
 /**
  *  @class Kernel
  */
 
 export default abstract class CoreKernel<X extends ICoreCClient>
-  extends Logger
+  extends CoreLogChannel
   implements ICoreKernel<X>
 {
   protected master: boolean;
@@ -36,8 +34,6 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected state: any = null;
 
-  protected logM: string;
-
   protected moduleList: ICoreKernelModule<any, any, any, any, any>[];
 
   protected kernelModule: ICoreKernelModule<any, any, any, any, any> | null;
@@ -46,7 +42,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected updateSkip: boolean;
 
-  protected globalConfig: CoreConfig;
+  protected envStore: IStore;
 
   protected preRun?: (kernel: this) => Promise<void>;
 
@@ -56,18 +52,22 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected loadRun?: (kernel: this) => Promise<void>;
 
+  protected globalLogger: CoreLogger | null;
+
   /**
    * Default Constructor
-   * @param appName App Name
-   * @param appCode App Code (Only lower case)
-   * @param pathOverride set base path for config folder
+   * @param options Kernel options
    */
-  constructor(appName: string, appCode: string, pathOverride?: string) {
-    super('kernel', getConfig(appName, pathOverride).dir.temp);
-    this.appName = appName;
+  constructor(options: {
+    appName: string;
+    appCode: string;
+    pathOverride?: string;
+    logger?: CoreLogger;
+  }) {
+    super('kernel', options.logger || null);
+    this.appName = options.appName;
     this.devMode = false;
-    this.appCode = appCode;
-    this.logM = 'Process Starting';
+    this.appCode = options.appCode;
     this.cryptoClient = null;
     this.moduleList = [];
     this.offline = false;
@@ -75,12 +75,13 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.appVersion = 'noVersion';
     this.master = true;
     this.trigerFunction = this.trigerFunction.bind(this);
-    if (pathOverride) {
-      this.debug(`use custiom config path @ ${pathOverride}`);
+    if (options.logger === undefined) {
+      this.globalLogger = null;
+    } else {
+      this.globalLogger = options.logger;
     }
-    this.globalConfig = {
-      ...getConfig(appName, pathOverride),
-    };
+
+    this.envStore = new EnvStore(this, options.pathOverride);
     this.kernelModule = null;
     this.setState('init');
   }
@@ -98,6 +99,10 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       return this.kernelModule;
     }
     throw new Error('No Base module found');
+  }
+
+  getLogger(): CoreLogger | null {
+    return this.globalLogger;
   }
 
   getAppName(): string {
@@ -173,14 +178,6 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     }
   }
 
-  setLog(message: string) {
-    this.logM = message;
-  }
-
-  getLog(): string {
-    return this.logM;
-  }
-
   setState(message: string) {
     this.state = message;
   }
@@ -201,7 +198,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     return this.cryptoClient !== null;
   }
 
-  getDb(): DBConnection<any> | null {
+  getDb(): CoreDBCon<any> | null {
     if (this.kernelModule) {
       return this.kernelModule.getDb();
     }
@@ -223,8 +220,8 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.offline = mode;
   }
 
-  getGlobalConfig() {
-    return this.globalConfig;
+  getConfigStore() {
+    return this.envStore;
   }
 
   getDevMode(): boolean {
@@ -264,57 +261,19 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   }
 
   private preloadSetup() {
-    const config = this.getGlobalConfig();
-    const { root, data, db, temp, certs } = config.dir;
-    const { env } = process;
-
+    const st = this.getConfigStore();
+    this.appVersion = st.get('GLOBAL_APP_VERSION') || '';
     if (
       !(
-        createFolderIfNotExist(root) &&
-        createFolderIfNotExist(data) &&
-        createFolderIfNotExist(db) &&
-        createFolderIfNotExist(certs) &&
-        createFolderIfNotExist(temp)
+        createFolderIfNotExist(st.get('GLOBAL_PATH_HOME') || '') &&
+        createFolderIfNotExist(st.get('GLOBAL_PATH_DATA') || '') &&
+        createFolderIfNotExist(st.get('GLOBAL_PATH_DB') || '') &&
+        createFolderIfNotExist(st.get('GLOBAL_PATH_TEMP') || '')
       )
     ) {
-      console.error(`Cant create config folder at ${root}`);
+      console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
       process.exit(1);
     }
-    if (env?.npm_package_version) {
-      this.appVersion = env.npm_package_version;
-    }
-    if (
-      env?.DBPATH &&
-      env?.DBPORT &&
-      env?.POSTGRES_PASSWORD &&
-      env?.POSTGRES_USER
-    ) {
-      this.globalConfig.db = {
-        postgres: {
-          host: env.DBPATH,
-          port: Number(env.DBPORT),
-          password: env.POSTGRES_PASSWORD,
-          user: env.POSTGRES_USER,
-        },
-      };
-    }
-    if (env?.REDIS_URL && env?.REDIS_PORT) {
-      const conf = {
-        url: env.REDIS_URL,
-        port: Number(env.REDIS_PORT),
-        password: env?.REDIS_PASSWORD,
-      };
-      if (Number.isNaN(conf.port)) {
-        this.warn(`${env.REDIS_PORT} is Invalid, using default port 6379`);
-        conf.port = 6379;
-      }
-      if (this.globalConfig.db) {
-        this.globalConfig.db.redis = conf;
-      } else {
-        this.globalConfig.db = { redis: conf };
-      }
-    }
-    createCertsIfNotExist(config);
   }
 
   private async startUp() {

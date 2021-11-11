@@ -1,8 +1,8 @@
 import { ICoreElement, ICoreKernelModule, ICoreKernel } from '../lib';
-import Logger from '../modules/logger/Logger';
+import CoreLogChannel from './CoreLogChannel';
 
 export default abstract class CoreElement
-  extends Logger
+  extends CoreLogChannel
   implements ICoreElement
 {
   chanel: string;
@@ -13,7 +13,7 @@ export default abstract class CoreElement
     chanel: string,
     module: ICoreKernelModule<any, any, any, any, any>
   ) {
-    super(chanel, module.getKernel().getGlobalConfig().dir.temp);
+    super(chanel, module);
     this.chanel = chanel;
     this.module = module;
   }

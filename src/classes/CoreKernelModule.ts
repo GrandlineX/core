@@ -6,13 +6,12 @@ import {
   ICoreKernel,
   ICoreCache,
   ICoreService,
+  IDataBase,
 } from '../lib';
 import CoreAction from './CoreAction';
-import Logger from '../modules/logger/Logger';
 import CoreService from './CoreService';
 import CoreClient from './CoreClient';
-import CoreCache from './CoreCache';
-import { IDataBase } from '../modules/DBConnector/lib';
+import CoreLogChannel from './CoreLogChannel';
 
 export default abstract class CoreKernelModule<
     K extends ICoreKernel<any>,
@@ -21,7 +20,7 @@ export default abstract class CoreKernelModule<
     C extends ICoreCache | null,
     E extends ICoreEndpoint<any> | null
   >
-  extends Logger
+  extends CoreLogChannel
   implements ICoreKernelModule<K, T | null, P | null, C | null, E | null>
 {
   private actionlist: CoreAction[];
@@ -47,7 +46,7 @@ export default abstract class CoreKernelModule<
   private readonly name: string;
 
   constructor(name: string, kernel: K, ...deps: string[]) {
-    super(`${name}Module`, kernel.getGlobalConfig().dir.temp);
+    super(`${name}Module`, kernel);
     this.name = name;
     this.actionlist = [];
     this.servicelist = [];

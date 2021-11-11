@@ -1,8 +1,5 @@
 import * as Path from 'path';
-import { config } from 'dotenv';
 import Kernel, { createFolderIfNotExist } from '../src';
-
-config();
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -15,7 +12,7 @@ createFolderIfNotExist(testPath);
 
 class TestKernel extends Kernel<any>{
   constructor() {
-    super(appName,appCode,testPath);
+    super( { appName, appCode, pathOverride:testPath });
   }
 }
 const kernel = new TestKernel();

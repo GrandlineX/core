@@ -1,31 +1,25 @@
 import {
-  BaseDBUpdate,
-  CoreKernelModule,
-  CoreLoopService,
-  createFolderIfNotExist, DBConnection, ICoreKernelModule, ICoreKernel,
-  sleep, SQLightConnector, CoreClient, PGConnector, CoreCryptoClient, ICoreCClient
-} from '../src';
-import { config } from 'dotenv';
-import * as Path from 'path';
-import CoreKernel from '../src/CoreKernel';
 
-import BaseRedisCache from '../src/modules/cache/BaseRedisCache';
-config();
+  CoreKernelModule,
+  CoreLoopService, ICoreKernelModule,
+  sleep, CoreClient, CoreCryptoClient, ICoreCClient, RawQuery, ConfigType, createFolderIfNotExist
+} from '../src';
+ import * as Path from 'path';
+import CoreKernel from '../src/CoreKernel';
+import CoreDBCon from '../src/classes/CoreDBCon';
+import CoreDBUpdate from '../src/classes/CoreDBUpdate';
+import InMemDB from '../src/modules/db/InMemDB';
+
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
 const msiPath = Path.join(__dirname, '..', 'data');
 const testPath = Path.join(__dirname, '..', 'data', 'config');
- process.env.DLOG_LEVEL = 'debug';
+
 
 type TCoreKernel=CoreKernel<ICoreCClient>;
-class TestBaseDB extends PGConnector{
-  initNewDB(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
 
-}
-class TestBaseMod extends CoreKernelModule<TCoreKernel,TestBaseDB,null,null,null> {
+class TestBaseMod extends CoreKernelModule<TCoreKernel,InMemDB,null,null,null> {
   beforeServiceStart(): Promise<void> {
     return Promise.resolve( undefined );
   }
@@ -35,7 +29,7 @@ class TestBaseMod extends CoreKernelModule<TCoreKernel,TestBaseDB,null,null,null
   }
 
   initModule(): Promise<void> {
-    this.setDb(new TestBaseDB(this,"0"))
+    this.setDb(new InMemDB(this))
     return Promise.resolve( undefined );
   }
 
@@ -46,7 +40,7 @@ class TestBaseMod extends CoreKernelModule<TCoreKernel,TestBaseDB,null,null,null
 }
 class TestKernel extends CoreKernel<ICoreCClient> {
     constructor(appName:string, appCode:string,testPath:string) {
-      super(appName, appCode, testPath);
+      super( { appName, appCode, pathOverride:testPath });
       this.setBaseModule(new TestBaseMod("testbase2",this));
       this.setCryptoClient(new CoreCryptoClient(CoreCryptoClient.fromPW("testpw")))
       this.addModule(new TestModuel(this));
@@ -75,42 +69,31 @@ class TestClient extends CoreClient{
 }
 
 
-class TestDB extends SQLightConnector{
-  constructor(module:ICoreKernelModule<any, any, any, any, any>) {
-    super(module,"1");
-  }
-  async initNewDB(): Promise<void> {
-    await this.execScripts([])
-  }
-}
 
 
-class TestDBUpdate extends BaseDBUpdate<any>{
-  constructor(db:DBConnection<any>) {
+
+class TestDBUpdate extends CoreDBUpdate<any>{
+  constructor(db:CoreDBCon<any>) {
     super("0","1",db);
   }
   async performe(): Promise<boolean> {
     const db=this.getDb();
 
-    await db.execScripts([
-      { exec: `UPDATE ${db.schemaName}.config SET c_value=1 WHERE c_key='dbversion'` ,param:[]}
-    ])
+    await db.setConfig("dbversion","1")
     return true;
   }
 
 }
-class TestRedisCache extends BaseRedisCache{}
-class TestModuel extends CoreKernelModule<TCoreKernel,TestDB,TestClient,TestRedisCache, null>{
+class TestModuel extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,null>{
   constructor(kernel:TCoreKernel) {
     super("testModule",kernel);
   }
   async initModule(): Promise<void> {
     this.setClient(new TestClient("testc",this))
-    this.setCache(new TestRedisCache("testcache",this))
     this.log("FirstTHIS")
-    const db=new TestDB(this)
+    const db=new InMemDB(this)
     this.setDb(db)
-    db.setUpdateChain(new TestDBUpdate(this.getDb() as DBConnection<any>))
+    db.setUpdateChain(new TestDBUpdate(this.getDb() as CoreDBCon<any>))
   }
 
   startup(): Promise<void> {
@@ -181,29 +164,7 @@ describe('Clean Startup', () => {
     expect(conf?.c_value).not.toBeNull();
   });
 
-  test('redis test', async () => {
-    const cache = kernel.getModuleList()[0].getCache() as BaseRedisCache;
-    const obj={
-      test:"object",
-    }
-    const kk='dbversion'
-    const kk2='test'
-    await cache.clearAll();
-    expect(await cache.exist(kk)).toBeFalsy()
-    await cache.set(kk,"001");
-    expect( await cache.get(kk)).toBe("001")
-    expect(await cache.exist(kk)).toBeTruthy()
-    await cache.set(kk2,JSON.stringify(obj));
-    await cache.expire(kk,30);
-    const a=await cache.get(kk2);
-    expect(a).not.toBeUndefined()
-    expect(a).not.toBeNull()
-    if (!a){
-      return
-    }
-    expect(JSON.parse(a)?.test).toBe("object")
-    await cache.expire(kk2,30);
-  });
+
   test('test bridge', async () => {
     const mod = kernel.getModuleList()[1];
 
@@ -222,17 +183,9 @@ describe('Clean Startup', () => {
     const res2 = await db?.getConfig(testText);
     expect(res2).toBeUndefined();
 
-    const exeres = await db?.execScripts([
-      {
-        exec: `INSERT INTO ${db.schemaName}.config VALUES ($1,$2)`,
-        param: ['test', 'test'],
-      },
-      {
-        exec: `DELETE FROM ${db.schemaName}.config WHERE c_key=$1`,
-        param: ['test'],
-      },
-    ]);
-    expect(exeres?.length).toBe(2);
+    expect(await db?.setConfig("test","test")).toBeTruthy();
+    await db?.removeConfig("test")
+    expect(await db?.configExist("test")).toBeFalsy()
   });
 
   test('db function light', async () => {
@@ -246,17 +199,9 @@ describe('Clean Startup', () => {
     const res2 = await db?.getConfig(testText);
     expect(res2).toBeUndefined();
 
-    const exeres = await db?.execScripts([
-      {
-        exec: `INSERT INTO ${db.schemaName}.config VALUES (?,?)`,
-        param: ['test', 'test'],
-      },
-      {
-        exec: `DELETE FROM ${db.schemaName}.config WHERE c_key=?`,
-        param: ['test'],
-      },
-    ]);
-    expect(exeres?.length).toBe(2);
+    expect(await db?.setConfig("test","test")).toBeTruthy();
+    await db?.removeConfig("test")
+    expect(await db?.configExist("test")).toBeFalsy()
   });
 
   test('crypto', async () => {

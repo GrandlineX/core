@@ -1,8 +1,8 @@
 import { BridgeState, ICoreBridge, ICoreKernelModule } from '../lib';
 import { sleep } from '../utils/envUtil';
-import { Logger } from '../modules';
+import CoreLogChannel from './CoreLogChannel';
 
-export default class CoreBridge extends Logger implements ICoreBridge {
+export default class CoreBridge extends CoreLogChannel implements ICoreBridge {
   private state: BridgeState;
 
   private src: ICoreKernelModule<any, any, any, any, any>;
@@ -13,10 +13,7 @@ export default class CoreBridge extends Logger implements ICoreBridge {
     src: ICoreKernelModule<any, any, any, any, any>,
     target: ICoreKernelModule<any, any, any, any, any>
   ) {
-    super(
-      `BR:${src.getName()} => ${target.getName()}`,
-      src.getKernel().getGlobalConfig().dir.temp
-    );
+    super(`BR:${src.getName()} => ${target.getName()}`, src.getKernel());
     this.src = src;
     this.target = target;
     this.state = BridgeState.init;

@@ -1,19 +1,19 @@
-import DBConnection from '../classes/DBConnection';
 import { IBaseDBUpdate } from '../lib';
+import CoreDBCon from './CoreDBCon';
 
-export default abstract class BaseDBUpdate<T> implements IBaseDBUpdate {
+export default abstract class CoreDBUpdate<T> implements IBaseDBUpdate {
   srcVersion: string;
 
   tarVersion: string;
 
-  private readonly db: DBConnection<T>;
+  private readonly db: CoreDBCon<T>;
 
-  private nextUpdate: BaseDBUpdate<T> | null;
+  private nextUpdate: CoreDBUpdate<T> | null;
 
   protected constructor(
     srcVersion: string,
     tarVersion: string,
-    db: DBConnection<T>
+    db: CoreDBCon<T>
   ) {
     this.srcVersion = srcVersion;
     this.tarVersion = tarVersion;
@@ -46,11 +46,11 @@ export default abstract class BaseDBUpdate<T> implements IBaseDBUpdate {
     return true;
   }
 
-  setNext(db: BaseDBUpdate<T>): void {
+  setNext(db: CoreDBUpdate<T>): void {
     this.nextUpdate = db;
   }
 
-  find(version: string): BaseDBUpdate<T> | null {
+  find(version: string): CoreDBUpdate<T> | null {
     if (this.srcVersion === version) {
       return this;
     }
@@ -60,7 +60,7 @@ export default abstract class BaseDBUpdate<T> implements IBaseDBUpdate {
     return null;
   }
 
-  getDb(): DBConnection<T> {
+  getDb(): CoreDBCon<T> {
     return this.db;
   }
 

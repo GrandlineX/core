@@ -1,7 +1,5 @@
-import { CoreConfig } from '../utils/config';
-import { ILogger } from '../modules/logger/Logger';
-import { IDataBase } from '../modules/DBConnector/lib';
-import DBConnection from '../modules/DBConnector/classes/DBConnection';
+import CoreLogger from '../classes/CoreLogger';
+import CoreEntity from '../classes/CoreEntity';
 
 export type KernelTrigger = 'pre' | 'load' | 'start' | 'stop';
 
@@ -43,14 +41,10 @@ export interface ICoreCClient {
   getHash(seed: string, val: string): string;
 }
 
-export interface ICoreKernel<X extends ICoreCClient> extends ILogger {
+export interface ICoreKernel<X extends ICoreCClient> extends ILogChanel {
   start(): Promise<boolean>;
 
   stop(): Promise<boolean>;
-
-  setLog(message: string): void;
-
-  getLog(): string;
 
   setState(message: string): void;
 
@@ -73,7 +67,7 @@ export interface ICoreKernel<X extends ICoreCClient> extends ILogger {
     triggerFunc: (ik: ICoreKernel<X>) => Promise<void>
   ): void;
 
-  getDb(): DBConnection<any> | null;
+  getDb(): IDataBase<any> | null;
 
   addModule(module: ICoreKernelModule<any, any, any, any, any>): void;
 
@@ -91,7 +85,7 @@ export interface ICoreKernel<X extends ICoreCClient> extends ILogger {
 
   setDevMode(mode: boolean): void;
 
-  getGlobalConfig(): CoreConfig;
+  getConfigStore(): IStore;
 }
 
 export interface ICoreKernelModule<
@@ -100,7 +94,7 @@ export interface ICoreKernelModule<
   P extends ICoreElement | null,
   C extends ICoreCache | null,
   E extends ICoreEndpoint<any> | null
-> extends ILogger {
+> extends ILogChanel {
   addSrcBridge(bridge: ICoreBridge): void;
   addTarBridge(bridge: ICoreBridge): void;
   getBridges(): ICoreBridge[];
@@ -158,7 +152,7 @@ export interface ICoreEndpoint<E> extends ICoreElement {
   getApp(): E;
 }
 
-export interface ICoreElement extends ILogger {
+export interface ICoreElement extends ILogChanel {
   getKernel(): ICoreKernel<any>;
 
   getModule(): ICoreKernelModule<any, any, any, any, any>;
@@ -182,4 +176,88 @@ export interface ICoreBridge {
   waitForState(state: BridgeState): Promise<boolean>;
   getTarget(): ICoreKernelModule<any, any, any, any, any>;
 }
-export type WorkLoad = Promise<any>[];
+export type WorkLoad<T> = Promise<T>[];
+
+export interface ILogChanel {
+  log(...ags: unknown[]): void;
+
+  debug(...ags: unknown[]): void;
+
+  info(...ags: unknown[]): void;
+
+  error(...ags: unknown[]): void;
+
+  warn(...ags: unknown[]): void;
+
+  verbose(...ags: unknown[]): void;
+}
+export interface ConfigType {
+  c_key: string;
+  c_value: string;
+}
+
+export interface RawQuery {
+  exec: string;
+  param: any[];
+}
+
+export interface IBaseDBUpdate {
+  update(): Promise<boolean>;
+
+  performe(): Promise<boolean>;
+
+  updateNext(): Promise<boolean>;
+
+  setNext(db: IBaseDBUpdate): void;
+
+  find(version: string): IBaseDBUpdate | null;
+
+  getDb(): IDataBase<any>;
+
+  getSource(): string;
+}
+
+export interface IDataBase<T> extends ICoreDB {
+  initNewDB(): Promise<void>;
+
+  isNew(): Promise<boolean>;
+
+  getRawDBObject(): T | null;
+
+  configExist(key: string): Promise<boolean>;
+
+  setConfig(key: string, value: string): Promise<boolean>;
+
+  removeConfig(key: string): Promise<void>;
+
+  getConfig(key: string): Promise<ConfigType | undefined>;
+
+  execScripts(list: RawQuery[]): Promise<any[] | null>;
+}
+
+export interface ICoreDB extends ILogChanel {
+  setUpdateChain(chain: IBaseDBUpdate): void;
+
+  start(): Promise<void>;
+
+  isConected(): boolean;
+
+  disconnect(): Promise<boolean>;
+
+  setConnected(): void;
+
+  connect(): Promise<boolean>;
+}
+
+export interface IHaveLogger {
+  getLogger: () => CoreLogger;
+}
+
+export interface IStore {
+  clear(): void;
+  get(key: string): string | undefined;
+
+  has(key: string): boolean;
+
+  set(key: string, value: string): void;
+}
