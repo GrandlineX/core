@@ -4,7 +4,7 @@ import {
  import * as Path from 'path';
 import CoreDBCon from '../src/classes/CoreDBCon';
 
-import { TestEntity, TestKernel, TestServie } from './DebugClasses';
+import { TestEntity, TestKernel, TestService } from './DebugClasses';
 import CoreEntityWrapper from '../src/classes/CoreEntityWrapper';
 import CoreEntity from '../src/classes/CoreEntity';
 
@@ -34,6 +34,15 @@ describe('Clean start', () => {
     expect(kernel.getState()).toBe('running');
   });})
 
+describe('EnvStore', () => {
+
+  test('can load from .env file', async () => {
+    const store = kernel.getConfigStore();
+      expect(store.has("TESTENV")).toBeTruthy()
+      expect(store.get("TESTENV")).toBe("testdata")
+  });
+
+})
 describe('Module', () => {
 
   test('test bridge', async () => {
@@ -154,7 +163,7 @@ describe("Service",()=>{
 
   test('test tates', async () => {
     const mod=kernel.getModule()
-    const service=new TestServie("hello",30000,mod);
+    const service=new TestService("hello",30000,mod);
     expect(service.state).toBe("INIT")
     service.setRunning()
     expect(service.state).toBe("RUNNING")
@@ -166,7 +175,7 @@ describe("Service",()=>{
   });
   test('loop service cycle', async () => {
     const mod=kernel.getModule()
-    const service=new TestServie("hello",30000,mod);
+    const service=new TestService("hello",30000,mod);
     mod.addService(service)
     await service.start()
 

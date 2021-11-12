@@ -5,7 +5,6 @@ import {
   IDataBase,
   RawQuery,
 } from '../lib';
-import CoreLogChannel from './CoreLogChannel';
 import CoreEntity, { ICoreEntityHandler } from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
@@ -100,7 +99,10 @@ export default abstract class CoreDBCon<D, T>
   }
 
   async start(): Promise<void> {
-    await this.connect();
+    if (!(await this.connect())) {
+      this.error('Cant connect to Database');
+      process.exit(3);
+    }
     if (await this.canUpdate()) {
       await this.update();
     }

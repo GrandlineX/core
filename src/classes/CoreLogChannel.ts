@@ -22,26 +22,38 @@ export default class CoreLogChannel implements ILogChanel {
   }
 
   log(...ags: unknown[]): void {
-    this.logger?.log(this.channel, ags);
+    if (this.logger) {
+      this.logger.log(this.channel, ags);
+    }
   }
 
   debug(...ags: unknown[]): void {
-    this.logger?.debug(this.channel, ags);
+    if (this.logger) {
+      this.logger.debug(this.channel, ags);
+    }
   }
 
   info(...ags: unknown[]): void {
-    this.logger?.info(this.channel, ags);
+    if (this.logger) {
+      this.logger.info(this.channel, ags);
+    }
   }
 
   error(...ags: unknown[]): void {
-    this.logger?.error(this.channel, ags);
+    if (this.logger) {
+      this.logger.error(this.channel, ags);
+    }
   }
 
   warn(...ags: unknown[]): void {
-    this.logger?.warn(this.channel, ags);
+    if (this.logger) {
+      this.logger.warn(this.channel, ags);
+    }
   }
 
   verbose(...ags: unknown[]): void {
-    this.logger?.verbose(this.channel, ags);
+    if (this.logger) {
+      this.logger.verbose(this.channel, ags);
+    }
   }
 }

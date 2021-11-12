@@ -34,10 +34,10 @@ class TestBaseMod extends CoreKernelModule<TCoreKernel,InMemDB,null,null,null> {
 }
 class TestKernel extends CoreKernel<ICoreCClient> {
   constructor(appName:string, appCode:string,testPath:string) {
-    super( { appName, appCode, pathOverride:testPath });
+    super( { appName, appCode, pathOverride:testPath,envFilePath:__dirname });
     this.setBaseModule(new TestBaseMod("testbase2",this));
     this.setCryptoClient(new CoreCryptoClient(CoreCryptoClient.fromPW("testpw")))
-    this.addModule(new TestModuel(this));
+    this.addModule(new TestModule(this));
     this.addModule(new BridgeTestModule(this));
   }
 }
@@ -46,7 +46,7 @@ class TestKernel extends CoreKernel<ICoreCClient> {
 
 
 
-class TestServie extends CoreLoopService{
+class TestService extends CoreLoopService{
   async loop(): Promise<void> {
 
     await sleep(2000)
@@ -81,7 +81,7 @@ class TestEntity extends CoreEntity{
     super(0);
   }
 }
-class TestModuel extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,null>{
+class TestModule extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,null>{
   constructor(kernel:TCoreKernel) {
     super("testModule",kernel);
     this.addService(new OfflineService(this))
@@ -135,10 +135,10 @@ export {
   TCoreKernel,
   TestBaseMod,
   TestKernel,
-  TestServie,
+  TestService,
   TestClient,
   TestDBUpdate,
   TestEntity,
-  TestModuel,
+  TestModule,
   BridgeTestModule,
 }

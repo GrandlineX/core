@@ -12,7 +12,6 @@ import CoreLogChannel from './classes/CoreLogChannel';
 import CoreDBCon from './classes/CoreDBCon';
 import EnvStore from './modules/env/EnvStore';
 import { DefaultLogger } from './modules';
-import { CoreKernelModule } from './classes';
 
 /**
  *  Core Kernel class
@@ -81,6 +80,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     appCode: string;
     pathOverride?: string;
     logger?: CoreLogger;
+    envFilePath?: string;
   }) {
     super('kernel', options.logger || null);
     this.appName = options.appName;
@@ -100,7 +100,11 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     }
     this.setLogger(this.globalLogger);
 
-    this.envStore = new EnvStore(this, options.pathOverride);
+    this.envStore = new EnvStore(
+      this,
+      options.pathOverride,
+      options.envFilePath
+    );
     this.kernelModule = null;
     this.setState('init');
   }

@@ -1,5 +1,4 @@
 import CoreLogger from '../classes/CoreLogger';
-import CoreEntity from '../classes/CoreEntity';
 
 /**
  * Trigger:
