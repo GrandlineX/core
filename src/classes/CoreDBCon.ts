@@ -8,9 +8,10 @@ import {
 import CoreLogChannel from './CoreLogChannel';
 import CoreEntity, { ICoreEntityHandler } from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
+import CoreElement from './CoreElement';
 
 export default abstract class CoreDBCon<D, T>
-  extends CoreLogChannel
+  extends CoreElement
   implements IDataBase<D, T>, ICoreEntityHandler
 {
   dbVersion: string;
