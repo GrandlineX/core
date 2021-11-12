@@ -1,10 +1,12 @@
 import {
-  createFolderIfNotExist, generateSeed, sleep
+  createFolderIfNotExist, generateSeed, ICoreKernelModule, removeFolderIfExist, sleep
 } from '../src';
  import * as Path from 'path';
 import CoreDBCon from '../src/classes/CoreDBCon';
 
 import { TestEntity, TestKernel, TestServie } from './DebugClasses';
+import CoreEntityWrapper from '../src/classes/CoreEntityWrapper';
+import CoreEntity from '../src/classes/CoreEntity';
 
 
 const appName = 'TestKernel';
@@ -21,39 +23,37 @@ const testPath = Path.join(__dirname, '..', 'data', 'config');
 
 const testText = 'hello_world';
 
-describe('Clean Startup', () => {
-   test('definePreload', async () => {
+describe('Clean start', () => {
+   test('preload', async () => {
     expect(kernel.getState()).toBe('init');
   });
   test('start kernel', async () => {
     const result = await kernel.start();
     expect(result).toBe(true);
-    expect(kernel.getModuleList()).toHaveLength(2);
+    expect(kernel.getModCount()).toBe(2);
     expect(kernel.getState()).toBe('running');
+  });})
+
+describe('Module', () => {
+
+  test('test bridge', async () => {
+    const mod = kernel.getChildModule("bridgeModule");
+
+    expect(mod?.getBridgeModule("testModule")).not.toBeNull();
+    expect(mod?.getBridgeModule("testModule")).not.toBeUndefined();
   });
 
-  test('get db version', async () => {
+})
+
+describe('Database', () => {
+  test('get version', async () => {
     expect(kernel.getState()).toBe('running');
     const db = kernel.getDb();
     const conf = await db?.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
   });
 
-  test('get testdb version', async () => {
-    const db = kernel.getModuleList()[0].getDb();
-    const conf = await db?.getConfig('dbversion');
-    expect(conf?.c_value).not.toBeNull();
-  });
-
-
-  test('test bridge', async () => {
-    const mod = kernel.getModuleList()[1];
-
-    expect(mod.getBridgeModule("testModule")).not.toBeUndefined();
-  });
-
-
-  test('db function', async () => {
+  test('config test', async () => {
     expect(kernel.getState()).toBe('running');
     const db = kernel.getDb();
     const conf = await db?.setConfig(testText, testText);
@@ -68,27 +68,61 @@ describe('Clean Startup', () => {
     await db?.removeConfig("test")
     expect(await db?.configExist("test")).toBeFalsy()
   });
+})
+describe('TestDatabase', () => {
+  test('get version', async () => {
+    const db = kernel.getChildModule("testModule")?.getDb();
+    const conf = await db?.getConfig('dbversion');
+    expect(conf?.c_value).not.toBeNull();
+  });
+})
 
-  test('db entity function', async () => {
-    const mod=kernel.getModuleList()[0];
+describe('Entity', () => {
+  let e_id=1;
+  let wrapper:undefined|CoreEntityWrapper<any>=undefined;
+  let entity:CoreEntity|null=null
+
+  test('get wrapper class', async () => {
+    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
     const db = mod.getDb() as CoreDBCon<any>;
-    const wrapper=db.getEntityWrapper<TestEntity>("TestEntity")
+    wrapper=db.getEntityWrapper<TestEntity>("TestEntity")
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
       expect((await wrapper.getObjList()).length).toBe(0)
-      const entity=new TestEntity();
-      entity.e_id=1;
+    }
+  });
+  test('create new', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      entity=new TestEntity();
+      entity.e_id=e_id;
       expect((await wrapper.createObject(entity))).not.toBeNull()
-      expect((await wrapper.getObjList()).length).toBe(1)
+      expect((await wrapper.getObjList()).length).toBe(e_id)
+    }
+  });
+  test('update', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
       expect((await wrapper.updateObject(entity))).not.toBeNull()
       expect((await wrapper.getObjList()).length).toBe(1)
+    }
+  });
+  test('get by id', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
       expect((await wrapper.getObjById(1))).not.toBeNull()
+    }
+  });
+  test('delete', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
       expect((await wrapper.delete(1))).toBeTruthy();
       expect((await wrapper.getObjList()).length).toBe(0)
     }
   });
-
-  test('crypto', async () => {
+})
+describe('Crypto', () => {
+  test('encrypt/decrypt', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
     const enc = cc?.encrypt(testText);
@@ -96,16 +130,29 @@ describe('Clean Startup', () => {
     if (enc) {
       const dev = cc?.decrypt(enc.enc, enc.iv, enc.auth);
       expect(dev).toBe(testText);
-      expect(await cc?.generateSecureToken(48)).not.toBe("")
-      const seed=generateSeed();
-      expect(seed).not.toBe("")
-      expect(cc?.getHash(seed,testText)).not.toBeNull();
     }
   });
 
+  test('seeded hash', async () => {
+    const cc = kernel.getCryptoClient();
+    expect(cc).not.toBeNull();
 
+    const seed=generateSeed();
+    expect(seed).not.toBe("")
+    expect(cc?.getHash(seed,testText)).not.toBeNull();
 
-  test('loop service test', async () => {
+  });
+  test('token gen', async () => {
+    const cc = kernel.getCryptoClient();
+    expect(cc).not.toBeNull();
+    expect(await cc?.generateSecureToken(48)).not.toBe("")
+  });
+
+});
+
+describe("Service",()=>{
+
+  test('test tates', async () => {
     const mod=kernel.getModule()
     const service=new TestServie("hello",30000,mod);
     expect(service.state).toBe("INIT")
@@ -117,11 +164,10 @@ describe('Clean Startup', () => {
     service.setRunning()
     expect(service.state).toBe("SLEEPING")
   });
-
-  test('loop service test', async () => {
+  test('loop service cycle', async () => {
     const mod=kernel.getModule()
     const service=new TestServie("hello",30000,mod);
-      mod.addService(service)
+    mod.addService(service)
     await service.start()
 
     await sleep( 1 )
@@ -133,8 +179,10 @@ describe('Clean Startup', () => {
     expect(service.state).toBe("SLEEPING")
 
   });
+})
 
 
+describe("ShutDown",()=>{
 
   test('exit kernel', async () => {
     const result = await kernel.stop();
@@ -145,5 +193,10 @@ describe('Clean Startup', () => {
 
     expect(result).toBeTruthy();
   });
-});
+
+  test('cleanup', async () => {
+
+    removeFolderIfExist(testPath)
+  });
+})
 

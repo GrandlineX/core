@@ -1,6 +1,13 @@
 import CoreLogger from '../classes/CoreLogger';
 import CoreEntity from '../classes/CoreEntity';
 
+/**
+ * Trigger:
+ * - pre = executed before modules load
+ * - load = executed before modules load except the base module
+ * - start = executed after modules load
+ * - stop = executed before modules stopped
+ */
 export type KernelTrigger = 'pre' | 'load' | 'start' | 'stop';
 
 export enum BridgeState {

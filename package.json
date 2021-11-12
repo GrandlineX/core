@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "0.12.1-pre",
+  "version": "0.12.2-pre",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,8 +10,7 @@
     "test": "jest --runInBand ",
     "run": "ts-node tests/run.ts",
     "test-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
-    "makeDocs": "typedoc",
-    "openDocs": "npm run makeDocs"
+    "makeDocs": "typedoc"
   },
   "keywords": [
     "typescript",

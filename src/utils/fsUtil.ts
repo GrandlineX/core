@@ -14,11 +14,12 @@ export function createFolderIfNotExist(path: string): boolean {
   }
 }
 
-export function removeFolderIfNotExist(path: string): boolean {
+export function removeFolderIfExist(path: string): boolean {
   if (fs.existsSync(path)) {
     try {
-      fs.rmdirSync(path, {
+      fs.rmSync(path, {
         recursive: true,
+        force: true,
       });
       return true;
     } catch (e) {

@@ -12,9 +12,21 @@ import CoreLogChannel from './classes/CoreLogChannel';
 import CoreDBCon from './classes/CoreDBCon';
 import EnvStore from './modules/env/EnvStore';
 import { DefaultLogger } from './modules';
+import { CoreKernelModule } from './classes';
 
 /**
- *  @class Kernel
+ *  Core Kernel class
+ * @typeParam X Type of Crypto client.
+ * ```typescript
+ * // Default use
+ * class Kernel extends CoreKernel<any> {
+ * constructor() {
+ *   super({ appName: 'TestName', appCode: 'testcode' });
+ *  }
+ * }
+ * const kernel = new Kernel();
+ * kernel.start();
+ * ```
  */
 
 export default abstract class CoreKernel<X extends ICoreCClient>
@@ -57,6 +69,11 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   /**
    * Default Constructor
+   * - appName: string - AppName
+   * - appCode: string - AppCode only lower case letters
+   * - pathOverride: string - Path to config folder [optional]
+   * > Default path is ${HOME}/AppName or ${HOME}/Library/AppName (osx)
+   * - logger: CoreLogger {@link CoreLogger} [optional]
    * @param options Kernel options
    */
   constructor(options: {
@@ -88,14 +105,24 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.setState('init');
   }
 
+  /**
+   * GetKernelMode
+   */
   getMaster(): boolean {
     return this.master;
   }
 
+  /**
+   * set KernelMode
+   * @param mode
+   */
   setMaster(mode: boolean): void {
     this.master = mode;
   }
 
+  /**
+   * get base kernel module
+   */
   getModule(): ICoreKernelModule<any, any, any, any, any> {
     if (this.kernelModule) {
       return this.kernelModule;
@@ -103,18 +130,30 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     throw new Error('No Base module found');
   }
 
+  /**
+   * get global logger
+   */
   getLogger(): CoreLogger | null {
     return this.globalLogger;
   }
 
+  /**
+   * get app name
+   */
   getAppName(): string {
     return this.appName;
   }
 
+  /**
+   * get app code
+   */
   getAppCode(): string {
     return this.appCode;
   }
 
+  /**
+   * startup kernel
+   */
   public async start(): Promise<boolean> {
     this.log(
       `Start Kernel v${process.env.npm_package_version} ${
@@ -131,6 +170,12 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     return true;
   }
 
+  /**
+   * Run trigger function
+   * Cycle functions
+   * @see KernelTrigger
+   * @param trigger
+   */
   async triggerFunction(trigger: KernelTrigger): Promise<void> {
     switch (trigger) {
       case 'pre':
@@ -158,6 +203,13 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     }
   }
 
+  /**
+   * Set function run on trigger
+   * Cycle functions
+   * @see KernelTrigger
+   * @param trigger
+   * @param triggerFunc
+   */
   setTriggerFunction(
     trigger: KernelTrigger,
     triggerFunc: (ik: this) => Promise<void>
@@ -180,26 +232,50 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     }
   }
 
-  setState(message: string) {
+  /**
+   * Set core state code
+   * @param message
+   */
+  setState(message: string): void {
     this.state = message;
   }
 
+  /**
+   * Get core state code
+   */
   getState(): string {
     return this.state;
   }
 
+  /**
+   * Set global crypt client
+   * @link ICoreCClient
+   * @param crypto
+   */
   setCryptoClient(crypto: X | null): void {
     this.cryptoClient = crypto;
   }
 
+  /**
+   * Get global crypt client
+   * @link ICoreCClient
+   */
   getCryptoClient(): X | null {
     return this.cryptoClient;
   }
 
+  /**
+   * Has global crypt client
+   * @link ICoreCClient
+   */
   hasCryptoClient(): boolean {
     return this.cryptoClient !== null;
   }
 
+  /**
+   * Get database object of the base kernel module
+   * @link CoreDBCon
+   */
   getDb(): CoreDBCon<any> | null {
     if (this.kernelModule) {
       return this.kernelModule.getDb();
@@ -208,32 +284,50 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   }
 
   /**
-   * @deprecated The method should not be used
+   * Get the offline flag
    */
-  getModuleList(): ICoreKernelModule<any, any, any, any, any>[] {
-    return this.moduleList;
-  }
-
-  getOffline() {
+  getOffline(): boolean {
     return this.offline;
   }
 
-  setOffline(mode: boolean) {
+  /**
+   * Set the offline flag
+   * @param mode
+   */
+  setOffline(mode: boolean): void {
     this.offline = mode;
   }
 
-  getConfigStore() {
+  /**
+   * Get environment config store
+   * @link EnvStore
+   */
+  getConfigStore(): IStore {
     return this.envStore;
   }
 
+  /**
+   * Get dev mode flag
+   */
   getDevMode(): boolean {
     return this.devMode;
   }
 
+  /**
+   * Set dev mode flag
+   */
   setDevMode(mode: boolean): void {
     this.devMode = mode;
   }
 
+  /**
+   * register new module
+   * > In general there are two places to add Modules correctly: In the Kernel constructor or in the pre-trigger-function
+   *
+   * @see CoreKernelModule
+   * @param module
+   * @typeParam X Type of Crypto client.
+   */
   addModule(module: ICoreKernelModule<any, any, any, any, any>): void {
     this.moduleList.push(module);
   }
@@ -288,5 +382,9 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       }
     }
     await this.triggerFunction('start');
+  }
+
+  getModCount(): number {
+    return this.moduleList.length;
   }
 }

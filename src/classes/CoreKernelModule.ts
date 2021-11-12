@@ -13,6 +13,50 @@ import CoreService from './CoreService';
 import CoreClient from './CoreClient';
 import CoreLogChannel from './CoreLogChannel';
 
+/**
+ * Core kernel module
+ *
+ * ```typescript
+ * // Default use
+ *
+ * class ExampleModulen extends CoreKernelModule<any, any, any, any, any> {
+ *   constructor(module: ICoreKernel<any>) {
+ *     super('example', module);
+ *   }
+ *
+ *   beforeServiceStart(): Promise<void> {
+ *     return Promise.resolve(undefined);
+ *   }
+ *
+ *   final(): Promise<void> {
+ *     return Promise.resolve(undefined);
+ *   }
+ *
+ *   initModule(): Promise<void> {
+ *     return Promise.resolve(undefined);
+ *   }
+ *
+ *   startup(): Promise<void> {
+ *     return Promise.resolve(undefined);
+ *   }
+ * }
+ *
+ * class Kernel extends CoreKernel<any> {
+ *   constructor() {
+ *     super({ appName: 'TestName', appCode: 'testcode' });
+ *     // OPTION 01
+ *     this.addModule(new ExampleModulen(this));
+ *   }
+ * }
+ * const kernel = new Kernel();
+ * // OPTION 02
+ *   kernel.setTriggerFunction('pre', async (ik) => {
+ *   ik.addModule(new ExampleModulen(ik));
+ * });
+ *
+ * kernel.start();
+ * ```
+ */
 export default abstract class CoreKernelModule<
     K extends ICoreKernel<any>,
     T extends IDataBase<any> | null,
