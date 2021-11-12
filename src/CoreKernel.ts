@@ -276,7 +276,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * Get database object of the base kernel module
    * @link CoreDBCon
    */
-  getDb(): CoreDBCon<any> | null {
+  getDb(): CoreDBCon<any, any> | null {
     if (this.kernelModule) {
       return this.kernelModule.getDb();
     }

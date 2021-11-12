@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "0.12.2-pre",
+  "version": "0.12.4-pre",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

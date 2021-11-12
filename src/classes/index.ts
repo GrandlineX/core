@@ -12,6 +12,7 @@ import CoreLogger from './CoreLogger';
 import CoreLoopService from './CoreLoopService';
 import CorePresenter from './CorePresenter';
 import CoreService from './CoreService';
+import CoreDBUpdate from './CoreDBUpdate';
 
 export {
   CoreLoopService,
@@ -28,4 +29,5 @@ export {
   CoreLogChannel,
   CoreEntity,
   CoreEntityWrapper,
+  CoreDBUpdate,
 };

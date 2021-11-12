@@ -9,9 +9,9 @@ import CoreLogChannel from './CoreLogChannel';
 import CoreEntity, { ICoreEntityHandler } from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 
-export default abstract class CoreDBCon<T>
+export default abstract class CoreDBCon<D, T>
   extends CoreLogChannel
-  implements IDataBase<T>, ICoreEntityHandler
+  implements IDataBase<D, T>, ICoreEntityHandler
 {
   dbVersion: string;
 
@@ -22,6 +22,8 @@ export default abstract class CoreDBCon<T>
   private connected: boolean;
 
   private wrapperMap: Map<string, CoreEntityWrapper<any>>;
+
+  private isNew: boolean;
 
   protected constructor(
     dbVersion: string,
@@ -34,13 +36,16 @@ export default abstract class CoreDBCon<T>
     this.dbVersion = dbVersion;
     this.updater = null;
     this.schemaName = schemaName;
+    this.isNew = false;
     this.debug = this.debug.bind(this);
   }
 
   /**
-   * returns true if init new db should be triggered
+   * trigger the db init
    */
-  abstract isNew(): Promise<boolean>;
+  protected setNew(val: boolean): void {
+    this.isNew = val;
+  }
 
   registerEntity<E extends CoreEntity>(ent: E): void {
     const cName = ent.constructor.name;
@@ -98,7 +103,7 @@ export default abstract class CoreDBCon<T>
     if (await this.canUpdate()) {
       await this.update();
     }
-    if (await this.isNew()) {
+    if (this.isNew) {
       const keys = this.wrapperMap.keys();
       let key = keys.next().value;
       while (key) {
@@ -127,7 +132,7 @@ export default abstract class CoreDBCon<T>
 
   abstract removeConfig(key: string): Promise<void>;
 
-  abstract getRawDBObject(): T | null;
+  abstract getRawDBObject(): D | null;
 
   abstract initNewDB(): Promise<void>;
 

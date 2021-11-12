@@ -84,7 +84,7 @@ describe('Entity', () => {
 
   test('get wrapper class', async () => {
     const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
-    const db = mod.getDb() as CoreDBCon<any>;
+    const db = mod.getDb() as CoreDBCon<any,any>;
     wrapper=db.getEntityWrapper<TestEntity>("TestEntity")
     expect(wrapper).not.toBeUndefined()
     if (wrapper){

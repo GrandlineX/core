@@ -2,7 +2,7 @@ import CoreDBCon from '../../classes/CoreDBCon';
 import { ConfigType, ICoreKernelModule, RawQuery } from '../../lib';
 import CoreEntity from '../../classes/CoreEntity';
 
-export default class InMemDB extends CoreDBCon<any> {
+export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   map: Map<string, ConfigType>;
 
   e_map: Map<string, CoreEntity[]>;
@@ -19,6 +19,7 @@ export default class InMemDB extends CoreDBCon<any> {
 
   async connect(): Promise<boolean> {
     this.setConnected();
+    this.setNew(true);
     return true;
   }
 
@@ -111,10 +112,6 @@ export default class InMemDB extends CoreDBCon<any> {
       c_value: value,
       c_key: key,
     });
-    return true;
-  }
-
-  async isNew(): Promise<boolean> {
     return true;
   }
 }

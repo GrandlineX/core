@@ -59,7 +59,7 @@ import CoreLogChannel from './CoreLogChannel';
  */
 export default abstract class CoreKernelModule<
     K extends ICoreKernel<any>,
-    T extends IDataBase<any> | null,
+    T extends IDataBase<any, any> | null,
     P extends CoreClient | null,
     C extends ICoreCache | null,
     E extends ICorePresenter<any> | null

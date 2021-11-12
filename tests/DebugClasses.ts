@@ -64,8 +64,8 @@ class TestClient extends CoreClient{
 
 
 
-class TestDBUpdate extends CoreDBUpdate<any>{
-  constructor(db:CoreDBCon<any>) {
+class TestDBUpdate extends CoreDBUpdate<any,any>{
+  constructor(db:CoreDBCon<any,any>) {
     super("0","1",db);
   }
   async performe(): Promise<boolean> {
@@ -92,7 +92,7 @@ class TestModuel extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,nu
     const db=new InMemDB(this)
     db.registerEntity(new TestEntity())
     this.setDb(db)
-    db.setUpdateChain(new TestDBUpdate(this.getDb() as CoreDBCon<any>))
+    db.setUpdateChain(new TestDBUpdate(this.getDb() as CoreDBCon<any,any>))
   }
 
   startup(): Promise<void> {
