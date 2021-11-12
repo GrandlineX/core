@@ -5,12 +5,12 @@ import CoreEntity from '../../classes/CoreEntity';
 export default class InMemDB extends CoreDBCon<any> {
   map: Map<string, ConfigType>;
 
-  e_map: Map<string, CoreEntity<any>[]>;
+  e_map: Map<string, CoreEntity[]>;
 
   constructor(module: ICoreKernelModule<any, any, any, any, any>) {
     super('0', 'main', module);
     this.map = new Map<string, ConfigType>();
-    this.e_map = new Map<string, CoreEntity<any>[]>();
+    this.e_map = new Map<string, CoreEntity[]>();
   }
 
   async configExist(key: string): Promise<boolean> {
@@ -18,6 +18,7 @@ export default class InMemDB extends CoreDBCon<any> {
   }
 
   async connect(): Promise<boolean> {
+    this.setConnected();
     return true;
   }
 
@@ -33,16 +34,16 @@ export default class InMemDB extends CoreDBCon<any> {
     return this.map.get(key);
   }
 
-  async initEntity<E extends CoreEntity<any>>(entity: E): Promise<boolean> {
+  async initEntity<E extends CoreEntity>(entity: E): Promise<boolean> {
     this.e_map.set(entity.constructor.name, []);
     return true;
   }
 
-  async getEntityById<E extends CoreEntity<any>>(
-    entity: E,
+  async getEntityById<E extends CoreEntity>(
+    className: string,
     id: number
   ): Promise<E | null> {
-    const table = this.e_map.get(entity.constructor.name);
+    const table = this.e_map.get(className);
     if (!table) {
       return null;
     }
@@ -53,7 +54,7 @@ export default class InMemDB extends CoreDBCon<any> {
     return temp as E;
   }
 
-  async createEntity<E extends CoreEntity<any>>(entity: E): Promise<E | null> {
+  async createEntity<E extends CoreEntity>(entity: E): Promise<E | null> {
     const table = this.e_map.get(entity.constructor.name);
     if (!table) {
       return null;
@@ -62,31 +63,28 @@ export default class InMemDB extends CoreDBCon<any> {
     return entity;
   }
 
-  async deleteEntityById<E extends CoreEntity<any>>(
-    entity: E,
-    id: number
-  ): Promise<boolean> {
-    const table = this.e_map.get(entity.constructor.name);
+  async deleteEntityById(className: string, id: number): Promise<boolean> {
+    const table = this.e_map.get(className);
     if (!table) {
       return false;
     }
     const temp = table.filter((el) => el.e_id !== id);
-    this.e_map.set(entity.constructor.name, temp);
+    this.e_map.set(className, temp);
     return true;
   }
 
-  async updateEntity<E extends CoreEntity<any>>(entity: E): Promise<E | null> {
+  async updateEntity<E extends CoreEntity>(entity: E): Promise<E | null> {
     const table = this.e_map.get(entity.constructor.name);
     if (!table || !entity.e_id) {
       return null;
     }
-    await this.deleteEntityById<E>(entity, entity.e_id);
+    await this.deleteEntityById(entity.constructor.name, entity.e_id);
     await this.createEntity<E>(entity);
     return entity;
   }
 
-  async getEntityList<E extends CoreEntity<any>>(entity: E): Promise<E[]> {
-    const table = this.e_map.get(entity.constructor.name);
+  async getEntityList<E extends CoreEntity>(className: string): Promise<E[]> {
+    const table = this.e_map.get(className);
     if (!table) {
       return [];
     }

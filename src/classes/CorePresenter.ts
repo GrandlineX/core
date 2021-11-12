@@ -1,15 +1,15 @@
-import { ICoreEndpoint, ICoreKernelModule } from '../lib';
+import { ICorePresenter, ICoreKernelModule } from '../lib';
 import CoreElement from './CoreElement';
 
-export default abstract class CoreEndpoint<T>
+export default abstract class CorePresenter<T>
   extends CoreElement
-  implements ICoreEndpoint<T>
+  implements ICorePresenter<T>
 {
   constructor(
     chanel: string,
     module: ICoreKernelModule<any, any, any, any, any>
   ) {
-    super(`endpoint-${chanel}`, module);
+    super(`presenter-${chanel}`, module);
   }
 
   abstract start(): Promise<boolean>;

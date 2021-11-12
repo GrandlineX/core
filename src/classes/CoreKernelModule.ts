@@ -1,7 +1,7 @@
 import {
   BridgeState,
   ICoreBridge,
-  ICoreEndpoint,
+  ICorePresenter,
   ICoreKernelModule,
   ICoreKernel,
   ICoreCache,
@@ -18,7 +18,7 @@ export default abstract class CoreKernelModule<
     T extends IDataBase<any> | null,
     P extends CoreClient | null,
     C extends ICoreCache | null,
-    E extends ICoreEndpoint<any> | null
+    E extends ICorePresenter<any> | null
   >
   extends CoreLogChannel
   implements ICoreKernelModule<K, T | null, P | null, C | null, E | null>

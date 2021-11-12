@@ -7,27 +7,31 @@ import {
 } from '../lib';
 import CoreLogChannel from './CoreLogChannel';
 import CoreEntity, { ICoreEntityHandler } from './CoreEntity';
+import CoreEntityWrapper from './CoreEntityWrapper';
 
 export default abstract class CoreDBCon<T>
   extends CoreLogChannel
   implements IDataBase<T>, ICoreEntityHandler
 {
-  dbversion: string;
+  dbVersion: string;
 
   updater: IBaseDBUpdate | null;
 
   public schemaName: string;
 
-  private conected: boolean;
+  private connected: boolean;
+
+  private wrapperMap: Map<string, CoreEntityWrapper<any>>;
 
   protected constructor(
-    dbversion: string,
+    dbVersion: string,
     schemaName: string,
     module: ICoreKernelModule<any, any, any, any, any>
   ) {
     super(`db${module.getName()}`, module);
-    this.conected = false;
-    this.dbversion = dbversion;
+    this.wrapperMap = new Map<string, CoreEntityWrapper<any>>();
+    this.connected = false;
+    this.dbVersion = dbVersion;
     this.updater = null;
     this.schemaName = schemaName;
     this.debug = this.debug.bind(this);
@@ -38,6 +42,22 @@ export default abstract class CoreDBCon<T>
    */
   abstract isNew(): Promise<boolean>;
 
+  registerEntity<E extends CoreEntity>(ent: E): void {
+    const cName = ent.constructor.name;
+    this.wrapperMap.set(
+      cName,
+      new CoreEntityWrapper(this, cName, () => {
+        return ent;
+      })
+    );
+  }
+
+  getEntityWrapper<E extends CoreEntity>(
+    className: string
+  ): CoreEntityWrapper<E> | undefined {
+    return this.wrapperMap.get(className);
+  }
+
   setUpdateChain(chain: IBaseDBUpdate): void {
     this.updater = chain;
   }
@@ -45,7 +65,7 @@ export default abstract class CoreDBCon<T>
   async canUpdate(): Promise<boolean> {
     const version = await this.getConfig('dbversion');
     if (version) {
-      return version.c_value !== this.dbversion;
+      return version.c_value !== this.dbVersion;
     }
     return false;
   }
@@ -65,12 +85,12 @@ export default abstract class CoreDBCon<T>
     return true;
   }
 
-  isConected(): boolean {
-    return this.conected;
+  isConnected(): boolean {
+    return this.connected;
   }
 
   setConnected(): void {
-    this.conected = true;
+    this.connected = true;
   }
 
   async start(): Promise<void> {
@@ -79,6 +99,16 @@ export default abstract class CoreDBCon<T>
       await this.update();
     }
     if (await this.isNew()) {
+      const keys = this.wrapperMap.keys();
+      let key = keys.next().value;
+      while (key) {
+        const ins = this.wrapperMap.get(key)?.getIns();
+        if (ins) {
+          await this.initEntity(ins);
+        }
+        key = keys.next().value;
+      }
+
       await this.initNewDB();
     }
   }
@@ -105,46 +135,39 @@ export default abstract class CoreDBCon<T>
    * Create new Entity object
    * @param entity
    */
-  abstract createEntity<E extends CoreEntity<any>>(
-    entity: E
-  ): Promise<E | null>;
+  abstract createEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
 
   /**
    * Update Entity object
    * @param entity
    */
-  abstract updateEntity<E extends CoreEntity<any>>(
-    entity: E
-  ): Promise<E | null>;
+  abstract updateEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
 
   /**
    * Get Entity object by ID
-   * @param entity
+   * @param className
    * @param id
    */
-  abstract getEntityById<E extends CoreEntity<any>>(
-    entity: E,
+  abstract getEntityById<E extends CoreEntity>(
+    className: string,
     id: number
   ): Promise<E | null>;
 
   /**
    * Delete Entity object by ID
-   * @param entity
+   * @param className
    * @param id
    */
-  abstract deleteEntityById<E extends CoreEntity<any>>(
-    entity: E,
-    id: number
-  ): Promise<boolean>;
+  abstract deleteEntityById(className: string, id: number): Promise<boolean>;
 
   /**
    * Get Entity object list
-   * @param entity
+   * @param className
    */
-  abstract getEntityList<E extends CoreEntity<any>>(entity: E): Promise<E[]>;
+  abstract getEntityList<E extends CoreEntity>(className: string): Promise<E[]>;
   /**
    * Init Entity object list
    * @param entity
    */
-  abstract initEntity<E extends CoreEntity<any>>(entity: E): Promise<boolean>;
+  abstract initEntity<E extends CoreEntity>(entity: E): Promise<boolean>;
 }

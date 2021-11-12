@@ -1,14 +1,10 @@
 import {
-
-  CoreKernelModule,
-  CoreLoopService, ICoreKernelModule,
-  sleep, CoreClient, CoreCryptoClient, ICoreCClient, RawQuery, ConfigType, createFolderIfNotExist
+  createFolderIfNotExist, generateSeed, sleep
 } from '../src';
  import * as Path from 'path';
-import CoreKernel from '../src/CoreKernel';
 import CoreDBCon from '../src/classes/CoreDBCon';
-import CoreDBUpdate from '../src/classes/CoreDBUpdate';
-import InMemDB from '../src/modules/db/InMemDB';
+
+import { TestEntity, TestKernel, TestServie } from './DebugClasses';
 
 
 const appName = 'TestKernel';
@@ -17,126 +13,11 @@ const msiPath = Path.join(__dirname, '..', 'data');
 const testPath = Path.join(__dirname, '..', 'data', 'config');
 
 
-type TCoreKernel=CoreKernel<ICoreCClient>;
-
-class TestBaseMod extends CoreKernelModule<TCoreKernel,InMemDB,null,null,null> {
-  beforeServiceStart(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  final(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  initModule(): Promise<void> {
-    this.setDb(new InMemDB(this))
-    return Promise.resolve( undefined );
-  }
-
-  startup(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-}
-class TestKernel extends CoreKernel<ICoreCClient> {
-    constructor(appName:string, appCode:string,testPath:string) {
-      super( { appName, appCode, pathOverride:testPath });
-      this.setBaseModule(new TestBaseMod("testbase2",this));
-      this.setCryptoClient(new CoreCryptoClient(CoreCryptoClient.fromPW("testpw")))
-      this.addModule(new TestModuel(this));
-      this.addModule(new BridgeTestModule(this));
-    }
-}
-
-function testKernelUtil() {
-   return  new TestKernel(appName, appCode, testPath);
-}
-
-
-
-class TestServie extends CoreLoopService{
-  async loop(): Promise<void> {
-
-    await sleep(2000)
-    await this.next()
-  }
-}
-
-
-
-class TestClient extends CoreClient{
-
-}
-
-
-
-
-
-class TestDBUpdate extends CoreDBUpdate<any>{
-  constructor(db:CoreDBCon<any>) {
-    super("0","1",db);
-  }
-  async performe(): Promise<boolean> {
-    const db=this.getDb();
-
-    await db.setConfig("dbversion","1")
-    return true;
-  }
-
-}
-class TestModuel extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,null>{
-  constructor(kernel:TCoreKernel) {
-    super("testModule",kernel);
-  }
-  async initModule(): Promise<void> {
-    this.setClient(new TestClient("testc",this))
-    this.log("FirstTHIS")
-    const db=new InMemDB(this)
-    this.setDb(db)
-    db.setUpdateChain(new TestDBUpdate(this.getDb() as CoreDBCon<any>))
-  }
-
-  startup(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  beforeServiceStart(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  final(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-}
-class BridgeTestModule extends CoreKernelModule<TCoreKernel,null,TestClient,null, null>{
-  constructor(kernel:TCoreKernel) {
-    super("bridgeModule",kernel,"testModule");
-  }
-  initModule(): Promise<void> {
-    this.log("LaterTHIS")
-    return Promise.resolve( undefined );
-  }
-
-  startup(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  beforeServiceStart(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  final(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-}
-
  createFolderIfNotExist(msiPath);
  createFolderIfNotExist(testPath);
 
 
- let kernel = testKernelUtil();
+ let kernel = new TestKernel(appName,appCode,testPath);
 
 const testText = 'hello_world';
 
@@ -188,20 +69,23 @@ describe('Clean Startup', () => {
     expect(await db?.configExist("test")).toBeFalsy()
   });
 
-  test('db function light', async () => {
+  test('db entity function', async () => {
     const mod=kernel.getModuleList()[0];
-    const db = mod.getDb();
-    const conf = await db?.setConfig(testText, testText);
-    expect(conf).toBeTruthy();
-    const res = await db?.getConfig(testText);
-    expect(res?.c_value).toBe(testText);
-    await db?.removeConfig(testText);
-    const res2 = await db?.getConfig(testText);
-    expect(res2).toBeUndefined();
-
-    expect(await db?.setConfig("test","test")).toBeTruthy();
-    await db?.removeConfig("test")
-    expect(await db?.configExist("test")).toBeFalsy()
+    const db = mod.getDb() as CoreDBCon<any>;
+    const wrapper=db.getEntityWrapper<TestEntity>("TestEntity")
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.getObjList()).length).toBe(0)
+      const entity=new TestEntity();
+      entity.e_id=1;
+      expect((await wrapper.createObject(entity))).not.toBeNull()
+      expect((await wrapper.getObjList()).length).toBe(1)
+      expect((await wrapper.updateObject(entity))).not.toBeNull()
+      expect((await wrapper.getObjList()).length).toBe(1)
+      expect((await wrapper.getObjById(1))).not.toBeNull()
+      expect((await wrapper.delete(1))).toBeTruthy();
+      expect((await wrapper.getObjList()).length).toBe(0)
+    }
   });
 
   test('crypto', async () => {
@@ -213,6 +97,9 @@ describe('Clean Startup', () => {
       const dev = cc?.decrypt(enc.enc, enc.iv, enc.auth);
       expect(dev).toBe(testText);
       expect(await cc?.generateSecureToken(48)).not.toBe("")
+      const seed=generateSeed();
+      expect(seed).not.toBe("")
+      expect(cc?.getHash(seed,testText)).not.toBeNull();
     }
   });
 

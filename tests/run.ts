@@ -1,5 +1,6 @@
 import * as Path from 'path';
-import Kernel, { createFolderIfNotExist } from '../src';
+import  { createFolderIfNotExist } from '../src';
+import { TestKernel } from './DebugClasses';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -10,13 +11,7 @@ const testPath = Path.join(__dirname, '..', 'data', 'config');
 createFolderIfNotExist(testPathData);
 createFolderIfNotExist(testPath);
 
-class TestKernel extends Kernel<any>{
-  constructor() {
-    super( { appName, appCode, pathOverride:testPath });
-  }
-}
-const kernel = new TestKernel();
-
+const kernel = new TestKernel(appName, appCode, testPath );
 
 
 kernel.start();

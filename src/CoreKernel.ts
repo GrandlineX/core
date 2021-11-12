@@ -11,6 +11,7 @@ import CoreLogger from './classes/CoreLogger';
 import CoreLogChannel from './classes/CoreLogChannel';
 import CoreDBCon from './classes/CoreDBCon';
 import EnvStore from './modules/env/EnvStore';
+import { DefaultLogger } from './modules';
 
 /**
  *  @class Kernel
@@ -74,12 +75,13 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.updateSkip = false;
     this.appVersion = 'noVersion';
     this.master = true;
-    this.trigerFunction = this.trigerFunction.bind(this);
+    this.triggerFunction = this.triggerFunction.bind(this);
     if (options.logger === undefined) {
-      this.globalLogger = null;
+      this.globalLogger = new DefaultLogger();
     } else {
       this.globalLogger = options.logger;
     }
+    this.setLogger(this.globalLogger);
 
     this.envStore = new EnvStore(this, options.pathOverride);
     this.kernelModule = null;
@@ -121,7 +123,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     );
     this.log('Run startup script');
     this.preloadSetup();
-    await this.trigerFunction('pre');
+    await this.triggerFunction('pre');
     this.log('Startup script complete');
     this.log('Run launcher');
     await this.startUp();
@@ -129,8 +131,8 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     return true;
   }
 
-  async trigerFunction(triger: KernelTrigger): Promise<void> {
-    switch (triger) {
+  async triggerFunction(trigger: KernelTrigger): Promise<void> {
+    switch (trigger) {
       case 'pre':
         if (this.preRun) {
           await this.preRun(this);
@@ -156,7 +158,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     }
   }
 
-  setTrigerFunction(
+  setTriggerFunction(
     trigger: KernelTrigger,
     triggerFunc: (ik: this) => Promise<void>
   ): void {
@@ -242,7 +244,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   async stop(): Promise<boolean> {
     const workload: Promise<void>[] = [];
-    await this.trigerFunction('stop');
+    await this.triggerFunction('stop');
     this.moduleList.forEach((el) => workload.push(el.shutdown()));
     await Promise.all(workload);
     await this.getModule().shutdown();
@@ -285,6 +287,6 @@ export default abstract class CoreKernel<X extends ICoreCClient>
         await mod.final();
       }
     }
-    await this.trigerFunction('start');
+    await this.triggerFunction('start');
   }
 }

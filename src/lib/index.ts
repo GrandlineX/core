@@ -60,9 +60,9 @@ export interface ICoreKernel<X extends ICoreCClient> extends ILogChanel {
 
   hasCryptoClient(): boolean;
 
-  trigerFunction(triger: KernelTrigger): Promise<void>;
+  triggerFunction(triger: KernelTrigger): Promise<void>;
 
-  setTrigerFunction(
+  setTriggerFunction(
     trigger: KernelTrigger,
     triggerFunc: (ik: ICoreKernel<X>) => Promise<void>
   ): void;
@@ -93,7 +93,7 @@ export interface ICoreKernelModule<
   T extends IDataBase<any> | null,
   P extends ICoreElement | null,
   C extends ICoreCache | null,
-  E extends ICoreEndpoint<any> | null
+  E extends ICorePresenter<any> | null
 > extends ILogChanel {
   addSrcBridge(bridge: ICoreBridge): void;
   addTarBridge(bridge: ICoreBridge): void;
@@ -144,7 +144,7 @@ export interface ICoreKernelModule<
   ): ICoreKernelModule<K, any, any, any, any> | undefined;
 }
 
-export interface ICoreEndpoint<E> extends ICoreElement {
+export interface ICorePresenter<E> extends ICoreElement {
   start(): Promise<boolean>;
 
   stop(): Promise<boolean>;
@@ -240,7 +240,7 @@ export interface ICoreDB extends ILogChanel {
 
   start(): Promise<void>;
 
-  isConected(): boolean;
+  isConnected(): boolean;
 
   disconnect(): Promise<boolean>;
 
