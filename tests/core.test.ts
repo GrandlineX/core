@@ -6,8 +6,6 @@ import CoreDBCon from '../src/classes/CoreDBCon';
 
 import { TestEntity, TestKernel, TestService } from './DebugClasses';
 import CoreEntityWrapper from '../src/classes/CoreEntityWrapper';
-import CoreEntity from '../src/classes/CoreEntity';
-
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -76,6 +74,18 @@ describe('Default logger: db', () => {
 })
 
 
+describe('DevMode', () => {
+
+  test('switch', async () => {
+      expect(kernel.getDevMode()).toBeFalsy()
+      kernel.setDevMode(true)
+      expect(kernel.getDevMode()).toBeTruthy()
+      kernel.setDevMode(false)
+      expect(kernel.getDevMode()).toBeFalsy()
+  });
+
+})
+
 describe('EnvStore', () => {
 
   test('can load from .env file', async () => {
@@ -140,8 +150,8 @@ describe('TestDatabase', () => {
 
 describe('Entity', () => {
   let e_id=1;
-  let wrapper:undefined|CoreEntityWrapper<any>=undefined;
-  let entity:CoreEntity|null=null
+  let wrapper:undefined|CoreEntityWrapper<TestEntity>=undefined;
+  let entity:TestEntity|null=null
 
   test('get wrapper class', async () => {
     const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
@@ -163,7 +173,8 @@ describe('Entity', () => {
   });
   test('update', async () => {
     expect(wrapper).not.toBeUndefined()
-    if (wrapper){
+    expect(entity).not.toBeNull()
+    if (wrapper && entity){
       expect((await wrapper.updateObject(entity))).not.toBeNull()
       expect((await wrapper.getObjList()).length).toBe(1)
     }
@@ -172,6 +183,30 @@ describe('Entity', () => {
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
       expect((await wrapper.getObjById(1))).not.toBeNull()
+    }
+  });
+  test('listing search id', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.getObjList({
+        e_id: e_id,
+      }))).toHaveLength(1);
+    }
+  });
+  test('listing search version', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.getObjList({
+        e_version:0
+      }))).toHaveLength(1);
+    }
+  });
+  test('listing search version no result', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.getObjList({
+        e_version:2
+      }))).toHaveLength(0);
     }
   });
   test('delete', async () => {
@@ -186,6 +221,7 @@ describe('Crypto', () => {
   test('encrypt/decrypt', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
+    expect(kernel.hasCryptoClient()).toBeTruthy();
     const enc = cc?.encrypt(testText);
     expect(enc).not.toBeUndefined();
     if (enc) {

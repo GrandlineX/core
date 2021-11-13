@@ -39,13 +39,12 @@ class TestKernel extends CoreKernel<ICoreCClient> {
     this.setCryptoClient(new CoreCryptoClient(CoreCryptoClient.fromPW("testpw")))
     this.addModule(new TestModule(this));
     this.addModule(new BridgeTestModule(this));
+    this.setTriggerFunction("pre",async ()=>{})
+    this.setTriggerFunction("start",async ()=>{})
+    this.setTriggerFunction("stop",async ()=>{})
+    this.setTriggerFunction("load",async ()=>{})
   }
 }
-
-
-
-
-
 class TestService extends CoreLoopService{
   async loop(): Promise<void> {
 
@@ -53,17 +52,9 @@ class TestService extends CoreLoopService{
     await this.next()
   }
 }
-
-
-
 class TestClient extends CoreClient{
 
 }
-
-
-
-
-
 class TestDBUpdate01 extends CoreDBUpdate<any,any>{
   constructor(db:CoreDBCon<any,any>) {
     super("0","1",db);
@@ -109,7 +100,7 @@ class TestModule extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,nu
     db.registerEntity(new TestEntity())
     db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db),)
     this.setDb(db)
-
+    await this.getKernel().triggerFunction("load")
   }
 
   startup(): Promise<void> {

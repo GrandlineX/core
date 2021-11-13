@@ -1,4 +1,5 @@
-import CoreEntity, { ICoreEntityHandler } from './CoreEntity';
+import CoreEntity from './CoreEntity';
+import { ICoreEntityHandler } from '../lib/EntityRelationTypes';
 
 export default class CoreEntityWrapper<E extends CoreEntity> {
   protected e_con: ICoreEntityHandler;
@@ -25,8 +26,10 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     return this.e_con.getEntityById(this.className, id);
   }
 
-  async getObjList(): Promise<E[]> {
-    return this.e_con.getEntityList(this.className);
+  async getObjList(search?: {
+    [P in keyof E]?: E[P];
+  }): Promise<E[]> {
+    return this.e_con.getEntityList(this.className, search);
   }
 
   async delete(id: number): Promise<boolean> {

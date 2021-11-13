@@ -84,10 +84,24 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     return entity;
   }
 
-  async getEntityList<E extends CoreEntity>(className: string): Promise<E[]> {
+  async getEntityList<E extends CoreEntity>(
+    className: string,
+    search: { [P in keyof E]?: E[P] }
+  ): Promise<E[]> {
     const table = this.e_map.get(className);
     if (!table) {
       return [];
+    }
+    if (search) {
+      return (table as E[]).filter((row) => {
+        const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
+        for (const key of keys) {
+          if (row[key] !== search[key]) {
+            return false;
+          }
+        }
+        return true;
+      });
     }
     return table as E[];
   }

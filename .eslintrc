@@ -8,8 +8,7 @@
     "plugin:prettier/recommended"
   ],
   "plugins": [
-    "react",
-    "@typescript-eslint"
+   "@typescript-eslint"
   ],
   "env": {
     "browser": true,

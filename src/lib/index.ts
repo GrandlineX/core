@@ -1,4 +1,5 @@
 import CoreLogger from '../classes/CoreLogger';
+import { ICoreEntityHandler } from './EntityRelationTypes';
 
 /**
  * Trigger:
@@ -226,7 +227,7 @@ export interface IBaseDBUpdate {
   getSource(): string;
 }
 
-export interface IDataBase<D, T> extends ICoreDB {
+export interface IDataBase<D, T> extends ICoreDB, ICoreEntityHandler {
   initNewDB(): Promise<void>;
 
   getRawDBObject(): D | null;

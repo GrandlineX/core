@@ -5,13 +5,14 @@ import {
   IDataBase,
   RawQuery,
 } from '../lib';
-import CoreEntity, { ICoreEntityHandler } from './CoreEntity';
+import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
+import { ICoreEntityHandler } from '../lib/EntityRelationTypes';
 
 export default abstract class CoreDBCon<D, T>
   extends CoreElement
-  implements IDataBase<D, T>, ICoreEntityHandler
+  implements IDataBase<D, T>
 {
   dbVersion: string;
 
@@ -181,8 +182,14 @@ export default abstract class CoreDBCon<D, T>
   /**
    * Get Entity object list
    * @param className
+   * @param search
    */
-  abstract getEntityList<E extends CoreEntity>(className: string): Promise<E[]>;
+  abstract getEntityList<E extends CoreEntity>(
+    className: string,
+    search?: {
+      [P in keyof E]?: E[P];
+    }
+  ): Promise<E[]>;
   /**
    * Init Entity object list
    * @param entity
