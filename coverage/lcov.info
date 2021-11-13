@@ -1661,8 +1661,8 @@ DA:5,13
 DA:6,13
 LF:5
 LH:5
-BRDA:2,0,0,13
-BRDA:2,0,1,52
+BRDA:2,0,0,0
+BRDA:2,0,1,65
 BRF:2
-BRH:2
+BRH:1
 end_of_record
