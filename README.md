@@ -26,6 +26,6 @@ GrandLineX is an out-of-the-box server framework for ElectronJs and ExpressJs.
 
 
 ## Documentation 
-- [Documentation](https://grandlinex.github.io/docs/)
+- [Documentation](https://grandlinex.github.io/core/)
 - [Test Report](https://grandlinex.github.io/core/coverage/)
 - [GrandLineX Docs](https://grandlinex.github.io/docs/)
