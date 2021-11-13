@@ -7,11 +7,13 @@ import {
   ICoreCache,
   ICoreService,
   IDataBase,
+  IHaveLogger,
 } from '../lib';
 import CoreAction from './CoreAction';
 import CoreService from './CoreService';
 import CoreClient from './CoreClient';
 import CoreLogChannel from './CoreLogChannel';
+import CoreLogger from './CoreLogger';
 
 /**
  * Core kernel module
@@ -235,4 +237,8 @@ export default abstract class CoreKernelModule<
   }
 
   abstract final(): Promise<void>;
+
+  getLogger(): CoreLogger {
+    return this.kernel.getLogger();
+  }
 }

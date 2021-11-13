@@ -4,6 +4,7 @@ import {
   ICoreKernel,
   KernelTrigger,
   IStore,
+  IHaveLogger,
 } from './lib';
 import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
@@ -30,7 +31,7 @@ import { DefaultLogger } from './modules';
 
 export default abstract class CoreKernel<X extends ICoreCClient>
   extends CoreLogChannel
-  implements ICoreKernel<X>
+  implements ICoreKernel<X>, IHaveLogger
 {
   protected master: boolean;
 
@@ -137,8 +138,11 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   /**
    * get global logger
    */
-  getLogger(): CoreLogger | null {
-    return this.globalLogger;
+  getLogger(): CoreLogger {
+    if (this.globalLogger) {
+      return this.globalLogger;
+    }
+    throw new Error('Logger not defined');
   }
 
   /**

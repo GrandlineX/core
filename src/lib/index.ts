@@ -47,7 +47,9 @@ export interface ICoreCClient {
   getHash(seed: string, val: string): string;
 }
 
-export interface ICoreKernel<X extends ICoreCClient> extends ILogChanel {
+export interface ICoreKernel<X extends ICoreCClient>
+  extends ILogChanel,
+    IHaveLogger {
   start(): Promise<boolean>;
 
   stop(): Promise<boolean>;
@@ -100,7 +102,8 @@ export interface ICoreKernelModule<
   P extends ICoreElement | null,
   C extends ICoreCache | null,
   E extends ICorePresenter<any> | null
-> extends ILogChanel {
+> extends ILogChanel,
+    IHaveLogger {
   addSrcBridge(bridge: ICoreBridge): void;
   addTarBridge(bridge: ICoreBridge): void;
   getBridges(): ICoreBridge[];

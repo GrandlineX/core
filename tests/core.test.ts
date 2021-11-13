@@ -35,7 +35,7 @@ describe('Clean start', () => {
   });})
 
 
-describe('Default logger', () => {
+describe('Default logger: kernel', () => {
 
   test('log', async () => {
     kernel.log("log")
@@ -54,6 +54,27 @@ describe('Default logger', () => {
   });
 
 })
+
+describe('Default logger: db', () => {
+
+  test('log', async () => {
+    kernel.getDb()?.log("db-log")
+  });
+  test('debug', async () => {
+    kernel.getDb()?.debug("db-debug")
+  });
+  test('warn', async () => {
+    kernel.getDb()?.warn("db-warn")
+  });
+  test('error', async () => {
+    kernel.getDb()?.error("db-error")
+  });
+  test('verbose', async () => {
+    kernel.getDb()?.verbose("db-verbose")
+  });
+
+})
+
 
 describe('EnvStore', () => {
 
