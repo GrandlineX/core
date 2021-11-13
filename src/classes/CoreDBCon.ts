@@ -63,8 +63,18 @@ export default abstract class CoreDBCon<D, T>
     return this.wrapperMap.get(className);
   }
 
-  setUpdateChain(chain: IBaseDBUpdate): void {
-    this.updater = chain;
+  setUpdateChain(...chain: IBaseDBUpdate[]): void {
+    const [first] = chain;
+    if (!first) {
+      this.error('No element in update chain');
+      return;
+    }
+    this.updater = first;
+    chain.forEach((el, index) => {
+      if (index < chain.length - 1) {
+        el.setNext(chain[index + 1]);
+      }
+    });
   }
 
   async canUpdate(): Promise<boolean> {

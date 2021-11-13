@@ -1,5 +1,5 @@
 import {
-  createFolderIfNotExist, generateSeed, ICoreKernelModule, removeFolderIfExist, sleep
+  createFolderIfNotExist, generateSeed, ICoreKernelModule, InMemDB, removeFolderIfExist, sleep
 } from '../src';
  import * as Path from 'path';
 import CoreDBCon from '../src/classes/CoreDBCon';
@@ -33,6 +33,27 @@ describe('Clean start', () => {
     expect(kernel.getModCount()).toBe(2);
     expect(kernel.getState()).toBe('running');
   });})
+
+
+describe('Default logger', () => {
+
+  test('log', async () => {
+    kernel.log("log")
+  });
+  test('debug', async () => {
+    kernel.debug("debug")
+  });
+  test('warn', async () => {
+    kernel.warn("warn")
+  });
+  test('error', async () => {
+    kernel.error("error")
+  });
+  test('verbose', async () => {
+    kernel.verbose("verbose")
+  });
+
+})
 
 describe('EnvStore', () => {
 
@@ -83,6 +104,16 @@ describe('TestDatabase', () => {
     const db = kernel.getChildModule("testModule")?.getDb();
     const conf = await db?.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
+  });
+  test('manual update', async () => {
+    const db = kernel.getChildModule("testModule")?.getDb() as InMemDB;
+    const conf = await db.getConfig('dbversion');
+    expect(conf?.c_value).not.toBeNull();
+    expect(db.dbVersion).toBe("0");
+    db.dbVersion="2"
+    expect(await db.canUpdate()).toBeTruthy();
+    expect(await db.update()).toBeTruthy();
+    expect(await db.getCurrenDBVersion()).toBe("2");
   });
 })
 

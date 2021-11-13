@@ -99,8 +99,8 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     };
   }
 
-  initNewDB(): Promise<void> {
-    return Promise.resolve(undefined);
+  async initNewDB(): Promise<void> {
+    await this.setConfig('dbversion', this.dbVersion);
   }
 
   async removeConfig(key: string): Promise<void> {

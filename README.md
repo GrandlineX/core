@@ -12,16 +12,16 @@ GrandLineX is an out-of-the-box server framework for ElectronJs and ExpressJs.
 ![TS](https://img.shields.io/static/v1?label=Language&message=TypeScript&color=blue&logo=TypeScript)
 
 ### Status
-![Quality Gate Status](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=alert_status)
-![Security Rating](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=security_rating)
-![Maintainability Rating](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=sqale_rating)
-![Reliability Rating](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=reliability_rating)
-![Coverage](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=coverage)
+![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=alert_status)
+![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=security_rating)
+![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=sqale_rating)
+![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=reliability_rating)
+![Coverage](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=coverage)
 
 ### Issues
-![Bugs](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=bugs)
-![Vulnerabilities](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=vulnerabilities)
-![Code Smells](https://pop.echo4.eu/api/project_badges/measure?project=GrandLineX-Core&metric=code_smells)
+![Bugs](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=bugs)
+![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=vulnerabilities)
+![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=GrandlineX_core&metric=code_smells)
 
 
 

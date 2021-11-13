@@ -64,14 +64,30 @@ class TestClient extends CoreClient{
 
 
 
-class TestDBUpdate extends CoreDBUpdate<any,any>{
+class TestDBUpdate01 extends CoreDBUpdate<any,any>{
   constructor(db:CoreDBCon<any,any>) {
     super("0","1",db);
-  }
+   }
   async performe(): Promise<boolean> {
     const db=this.getDb();
-
+    if (await db.configExist("dbversion")){
+      await db.removeConfig("dbversion")
+    }
     await db.setConfig("dbversion","1")
+    return true;
+  }
+
+}
+class TestDBUpdate02 extends CoreDBUpdate<any,any>{
+  constructor(db:CoreDBCon<any,any>) {
+    super("1","2",db);
+   }
+  async performe(): Promise<boolean> {
+    const db=this.getDb();
+    if (await db.configExist("dbversion")){
+      await db.removeConfig("dbversion")
+    }
+    await db.setConfig("dbversion","2")
     return true;
   }
 
@@ -91,8 +107,9 @@ class TestModule extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,nu
     this.log("FirstTHIS")
     const db=new InMemDB(this)
     db.registerEntity(new TestEntity())
+    db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db),)
     this.setDb(db)
-    db.setUpdateChain(new TestDBUpdate(this.getDb() as CoreDBCon<any,any>))
+
   }
 
   startup(): Promise<void> {
@@ -137,7 +154,8 @@ export {
   TestKernel,
   TestService,
   TestClient,
-  TestDBUpdate,
+  TestDBUpdate01,
+  TestDBUpdate02,
   TestEntity,
   TestModule,
   BridgeTestModule,
