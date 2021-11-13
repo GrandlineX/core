@@ -1649,8 +1649,8 @@ DA:5,8
 DA:6,8
 LF:5
 LH:5
-BRDA:2,0,0,8
-BRDA:2,0,1,32
+BRDA:2,0,0,0
+BRDA:2,0,1,40
 BRF:2
-BRH:2
+BRH:1
 end_of_record

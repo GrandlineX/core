@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="752" lines-covered="638" line-rate="0.8484" branches-valid="202" branches-covered="116" branch-rate="0.5742" timestamp="1636808614546" complexity="0" version="0.1">
+<coverage lines-valid="752" lines-covered="638" line-rate="0.8484" branches-valid="202" branches-covered="115" branch-rate="0.5693" timestamp="1636809404319" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/core/core</source>
   </sources>
@@ -1842,7 +1842,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.utils" line-rate="0.8367" branch-rate="0.6923">
+    <package name="src.utils" line-rate="0.8367" branch-rate="0.6153">
       <classes>
         <class name="envUtil.ts" filename="src/utils/envUtil.ts" line-rate="1" branch-rate="1">
           <methods>
@@ -1972,7 +1972,7 @@
             <line number="33" hits="2" branch="false"/>
           </lines>
         </class>
-        <class name="timeUtil.ts" filename="src/utils/timeUtil.ts" line-rate="1" branch-rate="1">
+        <class name="timeUtil.ts" filename="src/utils/timeUtil.ts" line-rate="1" branch-rate="0.5">
           <methods>
             <method name="timePrint" hits="40" signature="()V">
               <lines>
@@ -1987,7 +1987,7 @@
           </methods>
           <lines>
             <line number="1" hits="1" branch="false"/>
-            <line number="2" hits="40" branch="true" condition-coverage="100% (2/2)"/>
+            <line number="2" hits="40" branch="true" condition-coverage="50% (1/2)"/>
             <line number="4" hits="1" branch="false"/>
             <line number="5" hits="8" branch="false"/>
             <line number="6" hits="8" branch="false"/>
