@@ -7,7 +7,6 @@ import {
   ICoreCache,
   ICoreService,
   IDataBase,
-  IHaveLogger,
 } from '../lib';
 import CoreAction from './CoreAction';
 import CoreService from './CoreService';
@@ -91,6 +90,8 @@ export default abstract class CoreKernelModule<
 
   private readonly name: string;
 
+  protected trigger?: () => Promise<void>;
+
   constructor(name: string, kernel: K, ...deps: string[]) {
     super(`${name}Module`, kernel);
     this.name = name;
@@ -170,6 +171,9 @@ export default abstract class CoreKernelModule<
   async register(): Promise<void> {
     await this.waitForBridgeState(BridgeState.ready);
     await this.initModule();
+    if (this.trigger) {
+      await this.trigger();
+    }
     await this.db?.start();
     await this.cache?.start();
     this.actionlist.forEach((el) => {

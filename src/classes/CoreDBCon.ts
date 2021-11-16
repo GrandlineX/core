@@ -8,7 +8,7 @@ import {
 import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
-import { ICoreEntityHandler } from '../lib/EntityRelationTypes';
+import { getEntityNames } from '../utils';
 
 export default abstract class CoreDBCon<D, T>
   extends CoreElement
@@ -49,10 +49,10 @@ export default abstract class CoreDBCon<D, T>
   }
 
   registerEntity<E extends CoreEntity>(ent: E): void {
-    const cName = ent.constructor.name;
+    const cName = getEntityNames(ent);
     this.wrapperMap.set(
-      cName,
-      new CoreEntityWrapper(this, cName, () => {
+      cName.className,
+      new CoreEntityWrapper(this, cName.tableName, () => {
         return ent;
       })
     );
@@ -121,9 +121,9 @@ export default abstract class CoreDBCon<D, T>
       const keys = this.wrapperMap.keys();
       let key = keys.next().value;
       while (key) {
-        const ins = this.wrapperMap.get(key)?.getIns();
-        if (ins) {
-          await this.initEntity(ins);
+        const wrapper = this.wrapperMap.get(key);
+        if (wrapper) {
+          await wrapper.init();
         }
         key = keys.next().value;
       }
@@ -154,13 +154,19 @@ export default abstract class CoreDBCon<D, T>
    * Create new Entity object
    * @param entity
    */
-  abstract createEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
+  abstract createEntity<E extends CoreEntity>(
+    className: string,
+    entity: E
+  ): Promise<E | null>;
 
   /**
    * Update Entity object
    * @param entity
    */
-  abstract updateEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
+  abstract updateEntity<E extends CoreEntity>(
+    className: string,
+    entity: E
+  ): Promise<E | null>;
 
   /**
    * Get Entity object by ID
@@ -191,8 +197,23 @@ export default abstract class CoreDBCon<D, T>
     }
   ): Promise<E[]>;
   /**
+   * Get Entity object list
+   * @param className
+   * @param search
+   */
+  abstract findEntity<E extends CoreEntity>(
+    className: string,
+    search: {
+      [P in keyof E]?: E[P];
+    }
+  ): Promise<E | null>;
+  /**
    * Init Entity object list
+   * @param className
    * @param entity
    */
-  abstract initEntity<E extends CoreEntity>(entity: E): Promise<boolean>;
+  abstract initEntity<E extends CoreEntity>(
+    className: string,
+    entity: E
+  ): Promise<boolean>;
 }

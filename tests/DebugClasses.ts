@@ -10,6 +10,7 @@ import InMemDB from '../src/modules/db/InMemDB';
 import CoreDBUpdate from '../src/classes/CoreDBUpdate';
 import CoreDBCon from '../src/classes/CoreDBCon';
 import CoreEntity from '../src/classes/CoreEntity';
+import CoreBundleModule from '../src/classes/CoreBundleModule';
 
 type TCoreKernel=CoreKernel<ICoreCClient>;
 
@@ -88,7 +89,8 @@ class TestEntity extends CoreEntity{
     super(0);
   }
 }
-class TestModule extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,null>{
+class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,null,null>{
+
   constructor(kernel:TCoreKernel) {
     super("testModule",kernel);
     this.addService(new OfflineService(this))
@@ -100,7 +102,11 @@ class TestModule extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,nu
     db.registerEntity(new TestEntity())
     db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db),)
     this.setDb(db)
+    await this.initBundleModule();
     await this.getKernel().triggerFunction("load")
+  }
+  async initBundleModule(): Promise<void>{
+    this.log("triggerBundleInit")
   }
 
   startup(): Promise<void> {

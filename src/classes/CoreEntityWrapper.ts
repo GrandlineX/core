@@ -15,11 +15,11 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
   }
 
   async createObject(args: E): Promise<E | null> {
-    return this.e_con.createEntity(args);
+    return this.e_con.createEntity(this.className, args);
   }
 
   async updateObject(args: E): Promise<E | null> {
-    return this.e_con.updateEntity(args);
+    return this.e_con.updateEntity(this.className, args);
   }
 
   async getObjById(id: number): Promise<E | null> {
@@ -32,7 +32,17 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     return this.e_con.getEntityList(this.className, search);
   }
 
+  async findObj(search: {
+    [P in keyof E]?: E[P];
+  }): Promise<E | null> {
+    return this.e_con.findEntity(this.className, search);
+  }
+
   async delete(id: number): Promise<boolean> {
     return this.e_con.deleteEntityById(this.className, id);
+  }
+
+  async init(): Promise<boolean> {
+    return this.e_con.initEntity(this.className, this.getIns());
   }
 }

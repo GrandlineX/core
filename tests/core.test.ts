@@ -149,7 +149,7 @@ describe('TestDatabase', () => {
 })
 
 describe('Entity', () => {
-  let e_id=1;
+  let e_id=0;
   let wrapper:undefined|CoreEntityWrapper<TestEntity>=undefined;
   let entity:TestEntity|null=null
 
@@ -166,9 +166,13 @@ describe('Entity', () => {
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
       entity=new TestEntity();
-      entity.e_id=e_id;
-      expect((await wrapper.createObject(entity))).not.toBeNull()
-      expect((await wrapper.getObjList()).length).toBe(e_id)
+      entity= await wrapper.createObject(entity)
+      expect(entity).not.toBeNull()
+      expect(entity?.e_id).not.toBeNull()
+      if (entity && entity.e_id){
+        e_id= entity.e_id
+        expect((await wrapper.getObjList()).length).toBe(1)
+      }
     }
   });
   test('update', async () => {
@@ -182,7 +186,7 @@ describe('Entity', () => {
   test('get by id', async () => {
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
-      expect((await wrapper.getObjById(1))).not.toBeNull()
+      expect((await wrapper.getObjById(e_id))).not.toBeNull()
     }
   });
   test('listing search id', async () => {
@@ -207,6 +211,30 @@ describe('Entity', () => {
       expect((await wrapper.getObjList({
         e_version:2
       }))).toHaveLength(0);
+    }
+  });
+  test('find entity', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.findObj({
+        e_version:0
+      }))).not.toBeNull();
+    }
+  });
+  test('find entity no result', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.findObj({
+        e_version:2
+      }))).toBeNull();
+    }
+  });
+  test('find entity by id', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.findObj({
+        e_id: e_id,
+      }))).not.toBeNull();
     }
   });
   test('delete', async () => {
@@ -267,7 +295,7 @@ describe("Service",()=>{
     mod.addService(service)
     await service.start()
 
-    await sleep( 1 )
+    await sleep( 10 )
 
     expect(service.state).toBe("RUNNING")
 
