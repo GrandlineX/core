@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.54% </span>
+                <span class="strong">90.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>67/74</span>
+                <span class='fraction'>68/75</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.96% </span>
+                <span class="strong">60.86% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/27</span>
+                <span class='fraction'>14/23</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">89.06% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>56/63</span>
+                <span class='fraction'>57/64</span>
             </div>
         
             
@@ -255,7 +255,28 @@
 <a name='L196'></a><a href='#L196'>196</a>
 <a name='L197'></a><a href='#L197'>197</a>
 <a name='L198'></a><a href='#L198'>198</a>
-<a name='L199'></a><a href='#L199'>199</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -265,7 +286,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -452,6 +473,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   ConfigType,
@@ -463,7 +505,7 @@
 import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
-import { ICoreEntityHandler } from '../lib/EntityRelationTypes';
+import { getEntityNames } from '../utils';
 &nbsp;
 export default abstract class CoreDBCon&lt;D, T&gt;
   extends CoreElement
@@ -504,10 +546,10 @@ export default abstract class CoreDBCon&lt;D, T&gt;
   }
 &nbsp;
   registerEntity&lt;E extends CoreEntity&gt;(ent: E): void {
-    const cName = ent.constructor.name;
+    const cName = getEntityNames(ent);
     this.wrapperMap.set(
-      cName,
-      new CoreEntityWrapper(this, cName, () =&gt; {
+      cName.className,
+      new CoreEntityWrapper(this, cName.tableName, () =&gt; {
         return ent;
       })
     );
@@ -576,9 +618,9 @@ export default abstract class CoreDBCon&lt;D, T&gt;
       const keys = this.wrapperMap.keys();
       let key = keys.next().value;
       while (key) {
-        const ins = this.wrapperMap.get(key)<span class="branch-0 cbranch-no" title="branch not covered" >?.g</span>etIns();
-        if (<span class="missing-if-branch" title="if path not taken" >I</span>ins) {
-          await this.initEntity(ins);
+        const wrapper = this.wrapperMap.get(key);
+        if (<span class="missing-if-branch" title="if path not taken" >I</span>wrapper) {
+          await wrapper.init();
         }
         key = keys.next().value;
       }
@@ -609,13 +651,19 @@ export default abstract class CoreDBCon&lt;D, T&gt;
    * Create new Entity object
    * @param entity
    */
-  abstract createEntity&lt;E extends CoreEntity&gt;(entity: E): Promise&lt;E | null&gt;;
+  abstract createEntity&lt;E extends CoreEntity&gt;(
+    className: string,
+    entity: E
+  ): Promise&lt;E | null&gt;;
 &nbsp;
   /**
    * Update Entity object
    * @param entity
    */
-  abstract updateEntity&lt;E extends CoreEntity&gt;(entity: E): Promise&lt;E | null&gt;;
+  abstract updateEntity&lt;E extends CoreEntity&gt;(
+    className: string,
+    entity: E
+  ): Promise&lt;E | null&gt;;
 &nbsp;
   /**
    * Get Entity object by ID
@@ -646,10 +694,25 @@ export default abstract class CoreDBCon&lt;D, T&gt;
     }
   ): Promise&lt;E[]&gt;;
   /**
+   * Get Entity object list
+   * @param className
+   * @param search
+   */
+  abstract findEntity&lt;E extends CoreEntity&gt;(
+    className: string,
+    search: {
+      [P in keyof E]?: E[P];
+    }
+  ): Promise&lt;E | null&gt;;
+  /**
    * Init Entity object list
+   * @param className
    * @param entity
    */
-  abstract initEntity&lt;E extends CoreEntity&gt;(entity: E): Promise&lt;boolean&gt;;
+  abstract initEntity&lt;E extends CoreEntity&gt;(
+    className: string,
+    entity: E
+  ): Promise&lt;boolean&gt;;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -658,7 +721,7 @@ export default abstract class CoreDBCon&lt;D, T&gt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Nov 13 2021 21:44:17 GMT+0000 (Coordinated Universal Time)
+                at Tue Nov 16 2021 18:37:20 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
