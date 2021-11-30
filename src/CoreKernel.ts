@@ -1,10 +1,10 @@
 import {
-  ICoreKernelModule,
   ICoreCClient,
   ICoreKernel,
-  KernelTrigger,
-  IStore,
+  ICoreKernelModule,
   IHaveLogger,
+  IStore,
+  KernelTrigger,
 } from './lib';
 import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';

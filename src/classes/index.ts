@@ -33,3 +33,5 @@ export {
   CoreEntityWrapper,
   CoreDBUpdate,
 };
+
+export * from './annotation';

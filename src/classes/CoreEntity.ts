@@ -1,10 +1,13 @@
-export default abstract class CoreEntity {
-  e_version: number;
+import { Column, IEntity } from './annotation';
 
+export default abstract class CoreEntity implements IEntity {
+  @Column({
+    primaryKey: true,
+  })
   e_id: number | null;
 
-  protected constructor(version: number) {
-    this.e_version = version;
+  protected constructor() {
     this.e_id = null;
   }
+  abstract getEntityName(): string;
 }
