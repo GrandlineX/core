@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-import { ColumnProps, DecorationType, IEntity } from './types';
+import { ColumnProps } from './types';
 
 const columnKey = Symbol('column');
 
-function Column(props?: ColumnProps): DecorationType {
+function Column(props?: ColumnProps): PropertyDecorator {
   let prop: ColumnProps;
   if (!props) {
     prop = {};
@@ -13,7 +13,7 @@ function Column(props?: ColumnProps): DecorationType {
   return Reflect.metadata(columnKey, prop);
 }
 
-function getColumnMeta<T extends IEntity>(
+function getColumnMeta<T>(
   target: T,
   propertyKey: keyof T
 ): ColumnProps | undefined {

@@ -46,5 +46,19 @@ type ColumnProps = {
   canBeNull?: boolean;
   dataType?: DataType;
 };
+type EntityProps = {
+  name: string;
+  version: number;
+};
 
-export { DecorationType, IEntity, EProperties, DataType, ColumnProps };
+type ObjectLike = Object;
+
+export {
+  ObjectLike,
+  DecorationType,
+  IEntity,
+  EProperties,
+  DataType,
+  ColumnProps,
+  EntityProps,
+};

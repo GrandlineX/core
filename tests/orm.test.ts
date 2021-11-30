@@ -1,6 +1,15 @@
 import { CoreEntity, Column, getColumnMeta, EProperties, validateColumnMeta } from '../src';
+import { Entity, getEntityMeta } from '../src/classes/annotation/Entity';
 
 
+class BadEntity extends CoreEntity{
+  constructor() {
+    super();
+  }
+
+}
+
+@Entity("TestEntity",1)
 class TestEntity extends CoreEntity{
 
   @Column({
@@ -60,6 +69,16 @@ describe("annotation",()=>{
     primaryKeyNull:null,
     invalidKey:0.1,
   });
+  test("entity props",()=>{
+    const classMeta=getEntityMeta(first);
+    expect(classMeta?.name).toBe(first.constructor.name)
+    expect(classMeta?.version).toBe(1)
+  })
+  test("entity props empty",()=>{
+
+    const classMeta=getEntityMeta(new BadEntity());
+    expect(classMeta).toBeUndefined()
+  })
   test("e_id is primary key",()=>{
       const meta= getColumnMeta(first,"e_id");
       expect(meta).not.toBeUndefined()

@@ -1,6 +1,6 @@
-import { Column, IEntity } from './annotation';
+import { Column } from './annotation';
 
-export default abstract class CoreEntity implements IEntity {
+export default abstract class CoreEntity {
   @Column({
     primaryKey: true,
   })
@@ -9,5 +9,4 @@ export default abstract class CoreEntity implements IEntity {
   protected constructor() {
     this.e_id = null;
   }
-  abstract getEntityName(): string;
 }

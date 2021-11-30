@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "0.14.0",
+  "version": "0.15.0-pre0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,8 @@
     "typescript",
     "framework",
     "server",
-    "backend"
+    "backend",
+    "orm"
   ],
   "author": {
     "name": "Elschnagoo"
