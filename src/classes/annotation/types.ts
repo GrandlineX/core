@@ -11,6 +11,8 @@ type DataType =
   | 'string'
   | 'blob'
   | 'boolean'
+  | 'json'
+  | 'date'
   | 'serial';
 
 type EPropertyNames<T> = {
@@ -23,18 +25,11 @@ type EPropertyNames<T> = {
 type EProperties<T> = Pick<T, EPropertyNames<T>>;
 
 /**
- * Base Entity interface
- */
-interface IEntity {
-  getEntityName(): string;
-}
-
-/**
  * Return type for annotation
  */
 type DecorationType = {
   (target: Function): void;
-  (target: IEntity, propertyKey: string | symbol): void;
+  (target: ObjectLike, propertyKey: string | symbol): void;
 };
 type ColumnProps = {
   primaryKey?: boolean;
@@ -54,9 +49,9 @@ type EntityProps = {
 type ObjectLike = Object;
 
 export {
+  EPropertyNames,
   ObjectLike,
   DecorationType,
-  IEntity,
   EProperties,
   DataType,
   ColumnProps,
