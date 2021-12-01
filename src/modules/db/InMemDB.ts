@@ -2,6 +2,19 @@ import CoreDBCon from '../../classes/CoreDBCon';
 import { ConfigType, ICoreKernelModule, RawQuery } from '../../lib';
 import CoreEntity from '../../classes/CoreEntity';
 
+function eFilter<E extends CoreEntity>(
+  row: E,
+  search: { [P in keyof E]?: E[P] }
+) {
+  const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
+  for (const key of keys) {
+    if (row[key] !== search[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   map: Map<string, ConfigType>;
 
@@ -106,15 +119,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
       return [];
     }
     if (search) {
-      return (table as E[]).filter((row) => {
-        const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
-        for (const key of keys) {
-          if (row[key] !== search[key]) {
-            return false;
-          }
-        }
-        return true;
-      });
+      return (table as E[]).filter((row) => eFilter(row, search));
     }
     return table as E[];
   }
@@ -128,17 +133,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
       return null;
     }
 
-    return (
-      (table as E[]).find((row) => {
-        const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
-        for (const key of keys) {
-          if (row[key] !== search[key]) {
-            return false;
-          }
-        }
-        return true;
-      }) || null
-    );
+    return (table as E[]).find((row) => eFilter(row, search)) || null;
   }
 
   getRawDBObject(): any {

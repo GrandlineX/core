@@ -1,10 +1,17 @@
 import {
-  createFolderIfNotExist, generateSeed, ICoreKernelModule, InMemDB, removeFolderIfExist, sleep
+  createFolderIfNotExist,
+  generateSeed,
+  getColumnMeta,
+  ICoreKernelModule,
+  InMemDB,
+  removeFolderIfExist,
+  sleep,
+  validateEntity
 } from '../src';
  import * as Path from 'path';
 import CoreDBCon from '../src/classes/CoreDBCon';
 
-import { TestEntity, TestKernel, TestService } from './DebugClasses';
+import { TestEnt, TestKernel, TestService } from './DebugClasses';
 import CoreEntityWrapper from '../src/classes/CoreEntityWrapper';
 
 const appName = 'TestKernel';
@@ -150,13 +157,13 @@ describe('TestDatabase', () => {
 
 describe('Entity', () => {
   let e_id=0;
-  let wrapper:undefined|CoreEntityWrapper<TestEntity>=undefined;
-  let entity:TestEntity|null=null
+  let wrapper:undefined|CoreEntityWrapper<TestEnt>=undefined;
+  let entity:TestEnt|null=null
 
   test('get wrapper class', async () => {
     const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
     const db = mod.getDb() as CoreDBCon<any,any>;
-    wrapper=db.getEntityWrapper<TestEntity>("TestEntity")
+    wrapper=db.getEntityWrapper<TestEnt>("TestEnt")
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
       expect((await wrapper.getObjList()).length).toBe(0)
@@ -165,7 +172,7 @@ describe('Entity', () => {
   test('create new', async () => {
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
-      entity=new TestEntity();
+      entity=new TestEnt();
       entity= await wrapper.createObject(entity)
       expect(entity).not.toBeNull()
       expect(entity?.e_id).not.toBeNull()
@@ -197,38 +204,6 @@ describe('Entity', () => {
       }))).toHaveLength(1);
     }
   });
-  test('listing search version', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjList({
-        e_version:0
-      }))).toHaveLength(1);
-    }
-  });
-  test('listing search version no result', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjList({
-        e_version:2
-      }))).toHaveLength(0);
-    }
-  });
-  test('find entity', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.findObj({
-        e_version:0
-      }))).not.toBeNull();
-    }
-  });
-  test('find entity no result', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.findObj({
-        e_version:2
-      }))).toBeNull();
-    }
-  });
   test('find entity by id', async () => {
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
@@ -244,6 +219,11 @@ describe('Entity', () => {
       expect((await wrapper.getObjList()).length).toBe(0)
     }
   });
+  test("full validation",()=>{
+    if (entity){
+       expect(validateEntity(entity)).toBeTruthy()
+    }
+  })
 })
 describe('Crypto', () => {
   test('encrypt/decrypt', async () => {

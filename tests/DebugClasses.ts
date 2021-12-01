@@ -1,8 +1,9 @@
 import CoreKernel, {
+  Column,
   CoreClient,
   CoreCryptoClient,
   CoreKernelModule,
-  CoreLoopService,
+  CoreLoopService, EProperties,
   ICoreCClient, OfflineService,
   sleep
 } from '../src';
@@ -11,6 +12,7 @@ import CoreDBUpdate from '../src/classes/CoreDBUpdate';
 import CoreDBCon from '../src/classes/CoreDBCon';
 import CoreEntity from '../src/classes/CoreEntity';
 import CoreBundleModule from '../src/classes/CoreBundleModule';
+import { Entity } from '../src/classes/annotation/Entity';
 
 type TCoreKernel=CoreKernel<ICoreCClient>;
 
@@ -84,11 +86,76 @@ class TestDBUpdate02 extends CoreDBUpdate<any,any>{
   }
 
 }
-class TestEntity extends CoreEntity{
-  constructor() {
-    super(0);
+
+@Entity("TestEnt")
+class TestEnt extends CoreEntity{
+  @Column(
+    {
+      dataType:"int"
+    }
+  )
+  testProp:number;
+  constructor(prop?:EProperties<TestEnt>) {
+    super();
+    this.testProp=prop?.testProp||0;
   }
 }
+
+
+class BadEntity extends CoreEntity{
+  constructor() {
+    super();
+  }
+}
+
+@Entity("TestEntity",1)
+class TestEntity extends CoreEntity{
+
+  @Column({
+    canBeNull:true,
+    dataType:"text"
+  })
+  name:string|null
+
+
+  @Column()
+  simpleNumber:number
+
+
+  @Column({
+    canBeNull:true,
+  })
+  missingType:any
+
+  @Column({
+    canBeNull:true,
+    primaryKey:true
+  })
+  primaryKeyNull:any
+
+  @Column({
+    canBeNull:true,
+    dataType:"float",
+    foreignKey:{
+      key:"id",
+      relation:"test_entity"
+    }
+  })
+  invalidKey:any
+
+  notAColumn:string
+
+  constructor(val?:EProperties<TestEntity>) {
+    super();
+    this.name=val?.name||""
+    this.notAColumn=val?.notAColumn||""
+    this.simpleNumber=val?.simpleNumber||0
+    this.primaryKeyNull=null;
+    this.invalidKey=null;
+  }
+}
+
+
 class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,null,null>{
 
   constructor(kernel:TCoreKernel) {
@@ -99,7 +166,7 @@ class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,null,nu
     this.setClient(new TestClient("testc",this))
     this.log("FirstTHIS")
     const db=new InMemDB(this)
-    db.registerEntity(new TestEntity())
+    db.registerEntity(new TestEnt())
     db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db),)
     this.setDb(db)
     await this.initBundleModule();
@@ -154,6 +221,8 @@ export {
   TestDBUpdate01,
   TestDBUpdate02,
   TestEntity,
+  TestEnt,
+  BadEntity,
   TestModule,
   BridgeTestModule,
 }

@@ -1,63 +1,8 @@
-import { CoreEntity, Column, getColumnMeta, EProperties, validateColumnMeta } from '../src';
-import { Entity, getEntityMeta } from '../src/classes/annotation/Entity';
+import { getColumnMeta, validateColumnMeta, validateEntity } from '../src';
+import {  getEntityMeta } from '../src';
+import { BadEntity, TestEntity } from './DebugClasses';
 
 
-class BadEntity extends CoreEntity{
-  constructor() {
-    super();
-  }
-
-}
-
-@Entity("TestEntity",1)
-class TestEntity extends CoreEntity{
-
-  @Column({
-    canBeNull:true,
-    dataType:"text"
-  })
-  name:string|null
-
-
-  @Column()
-  simpleNumber:number
-
-
-  @Column({
-    canBeNull:true,
-  })
-  missingType:any
-
-  @Column({
-    canBeNull:true,
-    primaryKey:true
-  })
-  primaryKeyNull:any
-
-  @Column({
-    canBeNull:true,
-    dataType:"float",
-    foreignKey:{
-      key:"id",
-      relation:"test_entity"
-    }
-  })
-  invalidKey:any
-
-  notAColumn:string
-
-  constructor(val?:EProperties<TestEntity>) {
-    super();
-    this.name=val?.name||""
-    this.notAColumn=val?.notAColumn||""
-    this.simpleNumber=val?.simpleNumber||0
-    this.primaryKeyNull=null;
-    this.invalidKey=null;
-  }
-  getEntityName(): string {
-    return 'TestEntity';
-  }
-}
 
 describe("annotation",()=>{
   const  first= new TestEntity({
@@ -125,5 +70,8 @@ describe("annotation",()=>{
       expect(meta?.dataType).toBe("float")
       expect(meta?.foreignKey).not.toBeUndefined()
       expect(validateColumnMeta(meta)).toBeFalsy()
+  })
+  test("full validation",()=>{
+      expect(validateEntity(first)).toBeFalsy()
   })
 })

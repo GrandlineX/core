@@ -1,4 +1,5 @@
 import CoreEntity from '../classes/CoreEntity';
+import { getEntityMeta } from '../classes/annotation';
 
 /**
  * Convert Camel case string to snake case
@@ -22,9 +23,12 @@ export interface ClassNameInterface {
  * @param entity
  */
 export function getEntityNames(entity: CoreEntity): ClassNameInterface {
-  const { name } = entity.constructor;
+  const meta = getEntityMeta(entity);
+  if (!meta) {
+    throw new Error('InvalidClassMeta');
+  }
   return {
-    className: name,
-    tableName: camelToSnakeCase(name),
+    className: meta.name,
+    tableName: camelToSnakeCase(meta.name),
   };
 }

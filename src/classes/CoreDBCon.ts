@@ -9,6 +9,7 @@ import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
 import { getEntityNames } from '../utils';
+import { validateEntity } from './annotation';
 
 export default abstract class CoreDBCon<D, T>
   extends CoreElement
@@ -49,6 +50,10 @@ export default abstract class CoreDBCon<D, T>
   }
 
   registerEntity<E extends CoreEntity>(ent: E): void {
+    if (!validateEntity(ent)) {
+      this.error(`Invalid Entity: ${ent.constructor.name}`);
+      throw new Error('Invalid Entity');
+    }
     const cName = getEntityNames(ent);
     this.wrapperMap.set(
       cName.className,
