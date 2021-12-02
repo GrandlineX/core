@@ -12,6 +12,8 @@ import CoreLogger from './CoreLogger';
 import CoreLoopService from './CoreLoopService';
 import CorePresenter from './CorePresenter';
 import CoreService from './CoreService';
+import CoreDBUpdate from './CoreDBUpdate';
+import CoreBundleModule from './CoreBundleModule';
 
 export {
   CoreLoopService,
@@ -23,9 +25,13 @@ export {
   CoreAction,
   CoreClient,
   CoreBridge,
+  CoreBundleModule,
   CoreDBCon,
   CoreLogger,
   CoreLogChannel,
   CoreEntity,
   CoreEntityWrapper,
+  CoreDBUpdate,
 };
+
+export * from './annotation';

@@ -12,6 +12,7 @@ import CoreAction from './CoreAction';
 import CoreService from './CoreService';
 import CoreClient from './CoreClient';
 import CoreLogChannel from './CoreLogChannel';
+import CoreLogger from './CoreLogger';
 
 /**
  * Core kernel module
@@ -59,7 +60,7 @@ import CoreLogChannel from './CoreLogChannel';
  */
 export default abstract class CoreKernelModule<
     K extends ICoreKernel<any>,
-    T extends IDataBase<any> | null,
+    T extends IDataBase<any, any> | null,
     P extends CoreClient | null,
     C extends ICoreCache | null,
     E extends ICorePresenter<any> | null
@@ -88,6 +89,8 @@ export default abstract class CoreKernelModule<
   private endpoint: E | null;
 
   private readonly name: string;
+
+  protected trigger?: () => Promise<void>;
 
   constructor(name: string, kernel: K, ...deps: string[]) {
     super(`${name}Module`, kernel);
@@ -168,6 +171,9 @@ export default abstract class CoreKernelModule<
   async register(): Promise<void> {
     await this.waitForBridgeState(BridgeState.ready);
     await this.initModule();
+    if (this.trigger) {
+      await this.trigger();
+    }
     await this.db?.start();
     await this.cache?.start();
     this.actionlist.forEach((el) => {
@@ -235,4 +241,8 @@ export default abstract class CoreKernelModule<
   }
 
   abstract final(): Promise<void>;
+
+  getLogger(): CoreLogger {
+    return this.kernel.getLogger();
+  }
 }

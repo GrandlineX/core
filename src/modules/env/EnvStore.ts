@@ -8,29 +8,23 @@ export default class EnvStore implements IStore {
 
   kernel: ICoreKernel<any>;
 
-  constructor(kernel: ICoreKernel<any>, pathOverride?: string) {
+  constructor(
+    kernel: ICoreKernel<any>,
+    pathOverride?: string,
+    envFilePath?: string
+  ) {
     this.store = new Map<string, string>();
     this.kernel = kernel;
-    this.initNew(pathOverride);
+    this.initNew(pathOverride, envFilePath);
   }
 
-  initNew(pathOverride?: string): void {
+  initNew(pathOverride?: string, envFilePath?: string): void {
     this.clear();
-    const root = process.env.npm_config_local_prefix;
+    const root = envFilePath || process.env.npm_config_local_prefix;
     if (root) {
       const path = Path.join(root, '.env');
       if (fs.existsSync(path)) {
-        this.kernel.log(`Load env from ${path}`);
-        const env = fs.readFileSync(path).toString('utf-8');
-        const lines = env.split('\n');
-        lines.forEach((line) => {
-          const split = line.indexOf('=');
-          if (split > 0) {
-            const key = line.substring(0, split);
-            const value = line.substring(split + 1);
-            this.store.set(key, value);
-          }
-        });
+        this.loadFromFile(path);
       } else {
         this.kernel.warn(`Cant load env from ${path}`);
       }
@@ -40,17 +34,14 @@ export default class EnvStore implements IStore {
     this.store.set('GLOBAL_ARCH', os.arch());
     const appName = this.kernel.getAppName();
     let base;
-    switch (os.platform()) {
-      case 'darwin':
-        base = pathOverride
-          ? Path.join(pathOverride, appName)
-          : Path.join(os.homedir(), 'Library', appName);
-        break;
-      default:
-        base = pathOverride
-          ? Path.join(pathOverride, appName)
-          : Path.join(os.homedir(), appName);
-        break;
+    if (os.platform() === 'darwin') {
+      base = pathOverride
+        ? Path.join(pathOverride, appName)
+        : Path.join(os.homedir(), 'Library', appName);
+    } else {
+      base = pathOverride
+        ? Path.join(pathOverride, appName)
+        : Path.join(os.homedir(), appName);
     }
     this.store.set('GLOBAL_PATH_HOME', base);
     this.store.set('GLOBAL_PATH_DATA', Path.join(base, 'data'));
@@ -62,6 +53,23 @@ export default class EnvStore implements IStore {
     } else {
       this.store.set('GLOBAL_APP_VERSION', '0.0.0');
     }
+  }
+
+  private loadFromFile(path: string) {
+    this.kernel.log(`Load env from ${path}`);
+    const env = fs.readFileSync(path).toString('utf-8');
+    const lines = env.split('\n');
+    lines.forEach((line) => {
+      if (line.startsWith('#')) {
+        return;
+      }
+      const split = line.indexOf('=');
+      if (split > 0) {
+        const key = line.substring(0, split);
+        const value = line.substring(split + 1).trim();
+        this.store.set(key, value);
+      }
+    });
   }
 
   clear(): void {

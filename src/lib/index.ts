@@ -1,5 +1,5 @@
 import CoreLogger from '../classes/CoreLogger';
-import CoreEntity from '../classes/CoreEntity';
+import { ICoreEntityHandler } from './EntityRelationTypes';
 
 /**
  * Trigger:
@@ -48,7 +48,9 @@ export interface ICoreCClient {
   getHash(seed: string, val: string): string;
 }
 
-export interface ICoreKernel<X extends ICoreCClient> extends ILogChanel {
+export interface ICoreKernel<X extends ICoreCClient>
+  extends ILogChanel,
+    IHaveLogger {
   start(): Promise<boolean>;
 
   stop(): Promise<boolean>;
@@ -74,7 +76,7 @@ export interface ICoreKernel<X extends ICoreCClient> extends ILogChanel {
     triggerFunc: (ik: ICoreKernel<X>) => Promise<void>
   ): void;
 
-  getDb(): IDataBase<any> | null;
+  getDb(): IDataBase<any, any> | null;
 
   addModule(module: ICoreKernelModule<any, any, any, any, any>): void;
 
@@ -97,11 +99,12 @@ export interface ICoreKernel<X extends ICoreCClient> extends ILogChanel {
 
 export interface ICoreKernelModule<
   K extends ICoreKernel<any>,
-  T extends IDataBase<any> | null,
+  T extends IDataBase<any, any> | null,
   P extends ICoreElement | null,
   C extends ICoreCache | null,
   E extends ICorePresenter<any> | null
-> extends ILogChanel {
+> extends ILogChanel,
+    IHaveLogger {
   addSrcBridge(bridge: ICoreBridge): void;
   addTarBridge(bridge: ICoreBridge): void;
   getBridges(): ICoreBridge[];
@@ -219,17 +222,15 @@ export interface IBaseDBUpdate {
 
   find(version: string): IBaseDBUpdate | null;
 
-  getDb(): IDataBase<any>;
+  getDb(): IDataBase<any, any>;
 
   getSource(): string;
 }
 
-export interface IDataBase<T> extends ICoreDB {
+export interface IDataBase<D, T> extends ICoreDB, ICoreEntityHandler {
   initNewDB(): Promise<void>;
 
-  isNew(): Promise<boolean>;
-
-  getRawDBObject(): T | null;
+  getRawDBObject(): D | null;
 
   configExist(key: string): Promise<boolean>;
 
@@ -239,7 +240,7 @@ export interface IDataBase<T> extends ICoreDB {
 
   getConfig(key: string): Promise<ConfigType | undefined>;
 
-  execScripts(list: RawQuery[]): Promise<any[] | null>;
+  execScripts(list: RawQuery[]): Promise<T[] | null>;
 }
 
 export interface ICoreDB extends ILogChanel {

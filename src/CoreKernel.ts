@@ -1,9 +1,10 @@
 import {
-  ICoreKernelModule,
   ICoreCClient,
   ICoreKernel,
-  KernelTrigger,
+  ICoreKernelModule,
+  IHaveLogger,
   IStore,
+  KernelTrigger,
 } from './lib';
 import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
@@ -12,7 +13,6 @@ import CoreLogChannel from './classes/CoreLogChannel';
 import CoreDBCon from './classes/CoreDBCon';
 import EnvStore from './modules/env/EnvStore';
 import { DefaultLogger } from './modules';
-import { CoreKernelModule } from './classes';
 
 /**
  *  Core Kernel class
@@ -31,7 +31,7 @@ import { CoreKernelModule } from './classes';
 
 export default abstract class CoreKernel<X extends ICoreCClient>
   extends CoreLogChannel
-  implements ICoreKernel<X>
+  implements ICoreKernel<X>, IHaveLogger
 {
   protected master: boolean;
 
@@ -81,6 +81,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     appCode: string;
     pathOverride?: string;
     logger?: CoreLogger;
+    envFilePath?: string;
   }) {
     super('kernel', options.logger || null);
     this.appName = options.appName;
@@ -100,7 +101,11 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     }
     this.setLogger(this.globalLogger);
 
-    this.envStore = new EnvStore(this, options.pathOverride);
+    this.envStore = new EnvStore(
+      this,
+      options.pathOverride,
+      options.envFilePath
+    );
     this.kernelModule = null;
     this.setState('init');
   }
@@ -133,8 +138,11 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   /**
    * get global logger
    */
-  getLogger(): CoreLogger | null {
-    return this.globalLogger;
+  getLogger(): CoreLogger {
+    if (this.globalLogger) {
+      return this.globalLogger;
+    }
+    throw new Error('Logger not defined');
   }
 
   /**
@@ -276,7 +284,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * Get database object of the base kernel module
    * @link CoreDBCon
    */
-  getDb(): CoreDBCon<any> | null {
+  getDb(): CoreDBCon<any, any> | null {
     if (this.kernelModule) {
       return this.kernelModule.getDb();
     }

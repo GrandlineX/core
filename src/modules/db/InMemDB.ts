@@ -1,14 +1,31 @@
 import CoreDBCon from '../../classes/CoreDBCon';
 import { ConfigType, ICoreKernelModule, RawQuery } from '../../lib';
 import CoreEntity from '../../classes/CoreEntity';
+import { EntityConfig } from '../../classes';
 
-export default class InMemDB extends CoreDBCon<any> {
+function eFilter<E extends CoreEntity>(
+  row: E,
+  search: { [P in keyof E]?: E[P] }
+) {
+  const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
+  for (const key of keys) {
+    if (row[key] !== search[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   map: Map<string, ConfigType>;
 
   e_map: Map<string, CoreEntity[]>;
 
+  private dbCounter: number;
+
   constructor(module: ICoreKernelModule<any, any, any, any, any>) {
     super('0', 'main', module);
+    this.dbCounter = 0;
     this.map = new Map<string, ConfigType>();
     this.e_map = new Map<string, CoreEntity[]>();
   }
@@ -19,6 +36,7 @@ export default class InMemDB extends CoreDBCon<any> {
 
   async connect(): Promise<boolean> {
     this.setConnected();
+    this.setNew(true);
     return true;
   }
 
@@ -34,16 +52,16 @@ export default class InMemDB extends CoreDBCon<any> {
     return this.map.get(key);
   }
 
-  async initEntity<E extends CoreEntity>(entity: E): Promise<boolean> {
-    this.e_map.set(entity.constructor.name, []);
+  async initEntity<E extends CoreEntity>(className: string): Promise<boolean> {
+    this.e_map.set(className, []);
     return true;
   }
 
   async getEntityById<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     id: number
   ): Promise<E | null> {
-    const table = this.e_map.get(className);
+    const table = this.e_map.get(config.className);
     if (!table) {
       return null;
     }
@@ -54,10 +72,17 @@ export default class InMemDB extends CoreDBCon<any> {
     return temp as E;
   }
 
-  async createEntity<E extends CoreEntity>(entity: E): Promise<E | null> {
-    const table = this.e_map.get(entity.constructor.name);
+  async createEntity<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    entity: E
+  ): Promise<E | null> {
+    const clone = entity;
+    const table = this.e_map.get(config.className);
     if (!table) {
       return null;
+    }
+    if (clone.e_id === null) {
+      clone.e_id = this.getNewObjectID();
     }
     table.push(entity);
     return entity;
@@ -73,22 +98,50 @@ export default class InMemDB extends CoreDBCon<any> {
     return true;
   }
 
-  async updateEntity<E extends CoreEntity>(entity: E): Promise<E | null> {
-    const table = this.e_map.get(entity.constructor.name);
+  async updateEntity<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    entity: E
+  ): Promise<E | null> {
+    const table = this.e_map.get(config.className);
     if (!table || !entity.e_id) {
       return null;
     }
-    await this.deleteEntityById(entity.constructor.name, entity.e_id);
-    await this.createEntity<E>(entity);
+    await this.deleteEntityById(config.className, entity.e_id);
+    await this.createEntity<E>(config, entity);
     return entity;
   }
 
-  async getEntityList<E extends CoreEntity>(className: string): Promise<E[]> {
-    const table = this.e_map.get(className);
-    if (!table) {
+  async getEntityList<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    limit?: number,
+    search?: { [P in keyof E]?: E[P] }
+  ): Promise<E[]> {
+    const table = this.e_map.get(config.className);
+    if (!table || limit === 0) {
       return [];
     }
-    return table as E[];
+    let out: E[];
+    if (search) {
+      out = (table as E[]).filter((row) => eFilter(row, search));
+    } else {
+      out = table as E[];
+    }
+    if (!!limit && limit > 0) {
+      return out.slice(0, limit);
+    }
+    return out;
+  }
+
+  async findEntity<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    search: { [P in keyof E]?: E[P] | undefined }
+  ): Promise<E | null> {
+    const table = this.e_map.get(config.className);
+    if (!table) {
+      return null;
+    }
+
+    return (table as E[]).find((row) => eFilter(row, search)) || null;
   }
 
   getRawDBObject(): any {
@@ -98,8 +151,8 @@ export default class InMemDB extends CoreDBCon<any> {
     };
   }
 
-  initNewDB(): Promise<void> {
-    return Promise.resolve(undefined);
+  async initNewDB(): Promise<void> {
+    await this.setConfig('dbversion', this.dbVersion);
   }
 
   async removeConfig(key: string): Promise<void> {
@@ -114,7 +167,8 @@ export default class InMemDB extends CoreDBCon<any> {
     return true;
   }
 
-  async isNew(): Promise<boolean> {
-    return true;
+  private getNewObjectID() {
+    this.dbCounter += 1;
+    return this.dbCounter;
   }
 }

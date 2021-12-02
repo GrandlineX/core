@@ -1,8 +1,9 @@
 import CoreKernel, {
+  Column,
   CoreClient,
   CoreCryptoClient,
   CoreKernelModule,
-  CoreLoopService,
+  CoreLoopService, EProperties,
   ICoreCClient, OfflineService,
   sleep
 } from '../src';
@@ -10,6 +11,8 @@ import InMemDB from '../src/modules/db/InMemDB';
 import CoreDBUpdate from '../src/classes/CoreDBUpdate';
 import CoreDBCon from '../src/classes/CoreDBCon';
 import CoreEntity from '../src/classes/CoreEntity';
+import CoreBundleModule from '../src/classes/CoreBundleModule';
+import { Entity } from '../src/classes/annotation/Entity';
 
 type TCoreKernel=CoreKernel<ICoreCClient>;
 
@@ -34,54 +37,127 @@ class TestBaseMod extends CoreKernelModule<TCoreKernel,InMemDB,null,null,null> {
 }
 class TestKernel extends CoreKernel<ICoreCClient> {
   constructor(appName:string, appCode:string,testPath:string) {
-    super( { appName, appCode, pathOverride:testPath });
+    super( { appName, appCode, pathOverride:testPath,envFilePath:__dirname });
     this.setBaseModule(new TestBaseMod("testbase2",this));
     this.setCryptoClient(new CoreCryptoClient(CoreCryptoClient.fromPW("testpw")))
-    this.addModule(new TestModuel(this));
+    this.addModule(new TestModule(this));
     this.addModule(new BridgeTestModule(this));
+    this.setTriggerFunction("pre",async ()=>{})
+    this.setTriggerFunction("start",async ()=>{})
+    this.setTriggerFunction("stop",async ()=>{})
+    this.setTriggerFunction("load",async ()=>{})
   }
 }
-
-
-
-
-
-class TestServie extends CoreLoopService{
+class TestService extends CoreLoopService{
   async loop(): Promise<void> {
 
     await sleep(2000)
     await this.next()
   }
 }
-
-
-
 class TestClient extends CoreClient{
 
 }
-
-
-
-
-
-class TestDBUpdate extends CoreDBUpdate<any>{
-  constructor(db:CoreDBCon<any>) {
+class TestDBUpdate01 extends CoreDBUpdate<any,any>{
+  constructor(db:CoreDBCon<any,any>) {
     super("0","1",db);
-  }
+   }
   async performe(): Promise<boolean> {
     const db=this.getDb();
-
+    if (await db.configExist("dbversion")){
+      await db.removeConfig("dbversion")
+    }
     await db.setConfig("dbversion","1")
     return true;
   }
 
 }
-class TestEntity extends CoreEntity{
-  constructor() {
-    super(0);
+class TestDBUpdate02 extends CoreDBUpdate<any,any>{
+  constructor(db:CoreDBCon<any,any>) {
+    super("1","2",db);
+   }
+  async performe(): Promise<boolean> {
+    const db=this.getDb();
+    if (await db.configExist("dbversion")){
+      await db.removeConfig("dbversion")
+    }
+    await db.setConfig("dbversion","2")
+    return true;
+  }
+
+}
+
+@Entity("TestEnt")
+class TestEnt extends CoreEntity{
+  @Column(
+    {
+      dataType:"int"
+    }
+  )
+  testProp:number;
+  constructor(prop?:EProperties<TestEnt>) {
+    super();
+    this.testProp=prop?.testProp||0;
   }
 }
-class TestModuel extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,null>{
+
+
+class BadEntity extends CoreEntity{
+  constructor() {
+    super();
+  }
+}
+
+@Entity("TestEntity",1)
+class TestEntity extends CoreEntity{
+
+  @Column({
+    canBeNull:true,
+    dataType:"text"
+  })
+  name:string|null
+
+
+  @Column()
+  simpleNumber:number
+
+
+  @Column({
+    canBeNull:true,
+  })
+  missingType:any
+
+  @Column({
+    canBeNull:true,
+    primaryKey:true
+  })
+  primaryKeyNull:any
+
+  @Column({
+    canBeNull:true,
+    dataType:"float",
+    foreignKey:{
+      key:"id",
+      relation:"test_entity"
+    }
+  })
+  invalidKey:any
+
+  notAColumn:string
+
+  constructor(val?:EProperties<TestEntity>) {
+    super();
+    this.name=val?.name||""
+    this.notAColumn=val?.notAColumn||""
+    this.simpleNumber=val?.simpleNumber||0
+    this.primaryKeyNull=null;
+    this.invalidKey=null;
+  }
+}
+
+
+class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,null,null>{
+
   constructor(kernel:TCoreKernel) {
     super("testModule",kernel);
     this.addService(new OfflineService(this))
@@ -90,9 +166,14 @@ class TestModuel extends CoreKernelModule<TCoreKernel,InMemDB,TestClient,null,nu
     this.setClient(new TestClient("testc",this))
     this.log("FirstTHIS")
     const db=new InMemDB(this)
-    db.registerEntity(new TestEntity())
+    db.registerEntity(new TestEnt())
+    db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db),)
     this.setDb(db)
-    db.setUpdateChain(new TestDBUpdate(this.getDb() as CoreDBCon<any>))
+    await this.initBundleModule();
+    await this.getKernel().triggerFunction("load")
+  }
+  async initBundleModule(): Promise<void>{
+    this.log("triggerBundleInit")
   }
 
   startup(): Promise<void> {
@@ -135,10 +216,13 @@ export {
   TCoreKernel,
   TestBaseMod,
   TestKernel,
-  TestServie,
+  TestService,
   TestClient,
-  TestDBUpdate,
+  TestDBUpdate01,
+  TestDBUpdate02,
   TestEntity,
-  TestModuel,
+  TestEnt,
+  BadEntity,
+  TestModule,
   BridgeTestModule,
 }

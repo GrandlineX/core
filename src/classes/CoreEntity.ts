@@ -1,21 +1,69 @@
-export interface ICoreEntityHandler {
-  createEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
-  updateEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
-  getEntityById<E extends CoreEntity>(
-    className: string,
-    id: number
-  ): Promise<E | null>;
-  deleteEntityById(className: string, id: number): Promise<boolean>;
-  getEntityList<E extends CoreEntity>(className: string): Promise<E[]>;
-}
+import { Column } from './annotation';
+
+/**
+ * @name CoreEntity
+ * ```typescript
+ * // Entity Example
+ * @Entity("TestEntity",1)
+ *  class TestEntity extends CoreEntity{
+ *
+ *   @Column({
+ *     canBeNull:true,
+ *     dataType:"text"
+ *   })
+ *   name:string|null
+ *
+ *
+ *   @Column()
+ *   simpleNumber:number
+ *
+ *
+ *   @Column({
+ *     canBeNull:true,
+ *   })
+ *   missingType:any
+ *
+ *   @Column({
+ *     canBeNull:true,
+ *     primaryKey:true
+ *   })
+ *   primaryKeyNull:any
+ *
+ *   @Column({
+ *     canBeNull:true,
+ *     dataType:"float",
+ *     foreignKey:{
+ *       key:"id",
+ *       relation:"test_entity"
+ *     }
+ *   })
+ *   invalidKey:any
+ *
+ *   notAColumn:string
+ *
+ *   constructor(val?:EProperties<TestEntity>) {
+ *     super();
+ *     this.name=val?.name||""
+ *     this.notAColumn=val?.notAColumn||""
+ *     this.simpleNumber=val?.simpleNumber||0
+ *     this.primaryKeyNull=null;
+ *     this.invalidKey=null;
+ *   }
+ * }
+ *
+ * // Register db entity in BaseModule or in the DbConstructor
+ * const db=new CoreDBCon(module)
+ * db.registerEntity(new TestEntity())
+ * ```
+ */
 
 export default abstract class CoreEntity {
-  e_version: number;
-
+  @Column({
+    primaryKey: true,
+  })
   e_id: number | null;
 
-  protected constructor(version: number) {
-    this.e_version = version;
+  protected constructor() {
     this.e_id = null;
   }
 }

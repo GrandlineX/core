@@ -5,13 +5,15 @@ import {
   IDataBase,
   RawQuery,
 } from '../lib';
-import CoreLogChannel from './CoreLogChannel';
-import CoreEntity, { ICoreEntityHandler } from './CoreEntity';
+import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
+import CoreElement from './CoreElement';
+import { getEntityNames } from '../utils';
+import { EntityConfig, validateEntity } from './annotation';
 
-export default abstract class CoreDBCon<T>
-  extends CoreLogChannel
-  implements IDataBase<T>, ICoreEntityHandler
+export default abstract class CoreDBCon<D, T>
+  extends CoreElement
+  implements IDataBase<D, T>
 {
   dbVersion: string;
 
@@ -22,6 +24,8 @@ export default abstract class CoreDBCon<T>
   private connected: boolean;
 
   private wrapperMap: Map<string, CoreEntityWrapper<any>>;
+
+  private isNew: boolean;
 
   protected constructor(
     dbVersion: string,
@@ -34,19 +38,26 @@ export default abstract class CoreDBCon<T>
     this.dbVersion = dbVersion;
     this.updater = null;
     this.schemaName = schemaName;
+    this.isNew = false;
     this.debug = this.debug.bind(this);
   }
 
   /**
-   * returns true if init new db should be triggered
+   * trigger the db init
    */
-  abstract isNew(): Promise<boolean>;
+  protected setNew(val: boolean): void {
+    this.isNew = val;
+  }
 
   registerEntity<E extends CoreEntity>(ent: E): void {
-    const cName = ent.constructor.name;
+    if (!validateEntity(ent)) {
+      this.error(`Invalid Entity: ${ent.constructor.name}`);
+      throw new Error('Invalid Entity');
+    }
+    const cName = getEntityNames(ent);
     this.wrapperMap.set(
-      cName,
-      new CoreEntityWrapper(this, cName, () => {
+      cName.className,
+      new CoreEntityWrapper(this, cName.tableName, () => {
         return ent;
       })
     );
@@ -58,8 +69,18 @@ export default abstract class CoreDBCon<T>
     return this.wrapperMap.get(className);
   }
 
-  setUpdateChain(chain: IBaseDBUpdate): void {
-    this.updater = chain;
+  setUpdateChain(...chain: IBaseDBUpdate[]): void {
+    const [first] = chain;
+    if (!first) {
+      this.error('No element in update chain');
+      return;
+    }
+    this.updater = first;
+    chain.forEach((el, index) => {
+      if (index < chain.length - 1) {
+        el.setNext(chain[index + 1]);
+      }
+    });
   }
 
   async canUpdate(): Promise<boolean> {
@@ -94,17 +115,20 @@ export default abstract class CoreDBCon<T>
   }
 
   async start(): Promise<void> {
-    await this.connect();
+    if (!(await this.connect())) {
+      this.error('Cant connect to Database');
+      process.exit(3);
+    }
     if (await this.canUpdate()) {
       await this.update();
     }
-    if (await this.isNew()) {
+    if (this.isNew) {
       const keys = this.wrapperMap.keys();
       let key = keys.next().value;
       while (key) {
-        const ins = this.wrapperMap.get(key)?.getIns();
-        if (ins) {
-          await this.initEntity(ins);
+        const wrapper = this.wrapperMap.get(key);
+        if (wrapper) {
+          await wrapper.init();
         }
         key = keys.next().value;
       }
@@ -127,29 +151,37 @@ export default abstract class CoreDBCon<T>
 
   abstract removeConfig(key: string): Promise<void>;
 
-  abstract getRawDBObject(): T | null;
+  abstract getRawDBObject(): D | null;
 
   abstract initNewDB(): Promise<void>;
 
   /**
    * Create new Entity object
+   * @param config
    * @param entity
    */
-  abstract createEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
+  abstract createEntity<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    entity: E
+  ): Promise<E | null>;
 
   /**
    * Update Entity object
+   * @param config
    * @param entity
    */
-  abstract updateEntity<E extends CoreEntity>(entity: E): Promise<E | null>;
+  abstract updateEntity<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    entity: E
+  ): Promise<E | null>;
 
   /**
    * Get Entity object by ID
-   * @param className
+   * @param config
    * @param id
    */
   abstract getEntityById<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     id: number
   ): Promise<E | null>;
 
@@ -162,12 +194,35 @@ export default abstract class CoreDBCon<T>
 
   /**
    * Get Entity object list
-   * @param className
+   * @param config
+   * @param limit
+   * @param search
    */
-  abstract getEntityList<E extends CoreEntity>(className: string): Promise<E[]>;
+  abstract getEntityList<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    limit?: number,
+    search?: {
+      [P in keyof E]?: E[P];
+    }
+  ): Promise<E[]>;
+  /**
+   * Get Entity object list
+   * @param config
+   * @param search
+   */
+  abstract findEntity<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    search: {
+      [P in keyof E]?: E[P];
+    }
+  ): Promise<E | null>;
   /**
    * Init Entity object list
+   * @param className
    * @param entity
    */
-  abstract initEntity<E extends CoreEntity>(entity: E): Promise<boolean>;
+  abstract initEntity<E extends CoreEntity>(
+    className: string,
+    entity: E
+  ): Promise<boolean>;
 }
