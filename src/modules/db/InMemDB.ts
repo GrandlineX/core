@@ -1,6 +1,7 @@
 import CoreDBCon from '../../classes/CoreDBCon';
 import { ConfigType, ICoreKernelModule, RawQuery } from '../../lib';
 import CoreEntity from '../../classes/CoreEntity';
+import { EntityConfig } from '../../classes';
 
 function eFilter<E extends CoreEntity>(
   row: E,
@@ -57,10 +58,10 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   }
 
   async getEntityById<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     id: number
   ): Promise<E | null> {
-    const table = this.e_map.get(className);
+    const table = this.e_map.get(config.className);
     if (!table) {
       return null;
     }
@@ -72,11 +73,11 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   }
 
   async createEntity<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     entity: E
   ): Promise<E | null> {
     const clone = entity;
-    const table = this.e_map.get(className);
+    const table = this.e_map.get(config.className);
     if (!table) {
       return null;
     }
@@ -98,23 +99,23 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   }
 
   async updateEntity<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     entity: E
   ): Promise<E | null> {
-    const table = this.e_map.get(className);
+    const table = this.e_map.get(config.className);
     if (!table || !entity.e_id) {
       return null;
     }
-    await this.deleteEntityById(className, entity.e_id);
-    await this.createEntity<E>(className, entity);
+    await this.deleteEntityById(config.className, entity.e_id);
+    await this.createEntity<E>(config, entity);
     return entity;
   }
 
   async getEntityList<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     search?: { [P in keyof E]?: E[P] }
   ): Promise<E[]> {
-    const table = this.e_map.get(className);
+    const table = this.e_map.get(config.className);
     if (!table) {
       return [];
     }
@@ -125,10 +126,10 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   }
 
   async findEntity<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     search: { [P in keyof E]?: E[P] | undefined }
   ): Promise<E | null> {
-    const table = this.e_map.get(className);
+    const table = this.e_map.get(config.className);
     if (!table) {
       return null;
     }

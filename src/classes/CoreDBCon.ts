@@ -9,7 +9,7 @@ import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
 import { getEntityNames } from '../utils';
-import { validateEntity } from './annotation';
+import { EntityConfig, validateEntity } from './annotation';
 
 export default abstract class CoreDBCon<D, T>
   extends CoreElement
@@ -157,29 +157,31 @@ export default abstract class CoreDBCon<D, T>
 
   /**
    * Create new Entity object
+   * @param config
    * @param entity
    */
   abstract createEntity<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     entity: E
   ): Promise<E | null>;
 
   /**
    * Update Entity object
+   * @param config
    * @param entity
    */
   abstract updateEntity<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     entity: E
   ): Promise<E | null>;
 
   /**
    * Get Entity object by ID
-   * @param className
+   * @param config
    * @param id
    */
   abstract getEntityById<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     id: number
   ): Promise<E | null>;
 
@@ -192,22 +194,22 @@ export default abstract class CoreDBCon<D, T>
 
   /**
    * Get Entity object list
-   * @param className
+   * @param config
    * @param search
    */
   abstract getEntityList<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     search?: {
       [P in keyof E]?: E[P];
     }
   ): Promise<E[]>;
   /**
    * Get Entity object list
-   * @param className
+   * @param config
    * @param search
    */
   abstract findEntity<E extends CoreEntity>(
-    className: string,
+    config: EntityConfig<E>,
     search: {
       [P in keyof E]?: E[P];
     }

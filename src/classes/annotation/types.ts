@@ -24,13 +24,6 @@ type EPropertyNames<T> = {
  */
 type EProperties<T> = Pick<T, EPropertyNames<T>>;
 
-/**
- * Return type for annotation
- */
-type DecorationType = {
-  (target: Function): void;
-  (target: ObjectLike, propertyKey: string | symbol): void;
-};
 type ColumnProps = {
   primaryKey?: boolean;
   unique?: boolean;
@@ -40,6 +33,11 @@ type ColumnProps = {
   };
   canBeNull?: boolean;
   dataType?: DataType;
+};
+type ColumnPropMap<E> = Map<keyof E, ColumnProps>;
+type EntityConfig<E> = {
+  className: string;
+  meta: ColumnPropMap<E>;
 };
 type EntityProps = {
   name: string;
@@ -51,9 +49,10 @@ type ObjectLike = Object;
 export {
   EPropertyNames,
   ObjectLike,
-  DecorationType,
+  ColumnPropMap,
   EProperties,
   DataType,
   ColumnProps,
   EntityProps,
+  EntityConfig,
 };
