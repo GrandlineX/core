@@ -17,6 +17,7 @@ export interface ICoreEntityHandler {
   deleteEntityById(className: string, id: number): Promise<boolean>;
   getEntityList<E extends CoreEntity>(
     config: EntityConfig<E>,
+    limit?: number,
     search?: {
       [P in keyof E]?: E[P];
     }

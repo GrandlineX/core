@@ -113,16 +113,23 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
 
   async getEntityList<E extends CoreEntity>(
     config: EntityConfig<E>,
+    limit?: number,
     search?: { [P in keyof E]?: E[P] }
   ): Promise<E[]> {
     const table = this.e_map.get(config.className);
-    if (!table) {
+    if (!table || limit === 0) {
       return [];
     }
+    let out: E[];
     if (search) {
-      return (table as E[]).filter((row) => eFilter(row, search));
+      out = (table as E[]).filter((row) => eFilter(row, search));
+    } else {
+      out = table as E[];
     }
-    return table as E[];
+    if (!!limit && limit > 0) {
+      return out.slice(0, limit);
+    }
+    return out;
   }
 
   async findEntity<E extends CoreEntity>(

@@ -195,10 +195,12 @@ export default abstract class CoreDBCon<D, T>
   /**
    * Get Entity object list
    * @param config
+   * @param limit
    * @param search
    */
   abstract getEntityList<E extends CoreEntity>(
     config: EntityConfig<E>,
+    limit?: number,
     search?: {
       [P in keyof E]?: E[P];
     }

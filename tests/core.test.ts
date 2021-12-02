@@ -204,6 +204,30 @@ describe('Entity', () => {
       }))).toHaveLength(1);
     }
   });
+  test('listing search id limit 0', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.getObjList({
+        e_id: e_id,
+      },0))).toHaveLength(0);
+    }
+  });
+  test('listing search id limit 1', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.getObjList({
+        e_id: e_id,
+      },1))).toHaveLength(1);
+    }
+  });
+  test('listing search id limit 2', async () => {
+    expect(wrapper).not.toBeUndefined()
+    if (wrapper){
+      expect((await wrapper.getObjList({
+        e_id: e_id,
+      },1))).toHaveLength(1);
+    }
+  });
   test('find entity by id', async () => {
     expect(wrapper).not.toBeUndefined()
     if (wrapper){

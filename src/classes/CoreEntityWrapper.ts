@@ -48,14 +48,18 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     );
   }
 
-  async getObjList(search?: {
-    [P in keyof E]?: E[P];
-  }): Promise<E[]> {
+  async getObjList(
+    search?: {
+      [P in keyof E]?: E[P];
+    },
+    limit?: number
+  ): Promise<E[]> {
     return this.e_con.getEntityList<E>(
       {
         className: this.className,
         meta: this.propMap,
       },
+      limit,
       search
     );
   }
