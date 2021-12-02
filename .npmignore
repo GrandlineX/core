@@ -24,3 +24,4 @@ coverage
 .npmrc
 junit.xml
 .github
+CHANGELOG.md

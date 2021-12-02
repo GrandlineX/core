@@ -225,7 +225,7 @@ describe('Entity', () => {
     if (wrapper){
       expect((await wrapper.getObjList({
         e_id: e_id,
-      },1))).toHaveLength(1);
+      },2))).toHaveLength(1);
     }
   });
   test('find entity by id', async () => {
