@@ -3,6 +3,7 @@ import { ICoreEntityHandler, ICoreCache } from '../lib';
 import {
   ColumnPropMap,
   ColumnProps,
+  EOrderBy,
   EProperties,
   EUpDateProperties,
   getColumnMeta,
@@ -77,7 +78,8 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     search?: {
       [P in keyof E]?: E[P];
     },
-    limit?: number
+    limit?: number,
+    order?: EOrderBy<E>
   ): Promise<E[]> {
     return this.e_con.getEntityList<E>(
       {
@@ -85,7 +87,8 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
         meta: this.propMap,
       },
       limit,
-      search
+      search,
+      order
     );
   }
 

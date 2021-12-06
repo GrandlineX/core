@@ -1,7 +1,7 @@
 import CoreDBCon from '../../classes/CoreDBCon';
 import { ConfigType, ICoreKernelModule, RawQuery } from '../../lib';
 import CoreEntity from '../../classes/CoreEntity';
-import { EntityConfig, EUpDateProperties } from '../../classes';
+import { EntityConfig, EOrderBy, EUpDateProperties } from '../../classes';
 
 function eFilter<E extends CoreEntity>(
   row: E,
@@ -125,7 +125,8 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   async getEntityList<E extends CoreEntity>(
     config: EntityConfig<E>,
     limit?: number,
-    search?: { [P in keyof E]?: E[P] }
+    search?: { [P in keyof E]?: E[P] },
+    order?: EOrderBy<E>
   ): Promise<E[]> {
     const table = this.e_map.get(config.className);
     if (!table || limit === 0) {
@@ -136,6 +137,10 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
       out = (table as E[]).filter((row) => eFilter(row, search));
     } else {
       out = table as E[];
+    }
+    const odw = order ? order[0] : null;
+    if (odw && odw.key === 'e_id' && odw.order === 'DESC') {
+      out = out.reverse();
     }
     if (!!limit && limit > 0) {
       return out.slice(0, limit);

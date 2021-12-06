@@ -245,7 +245,7 @@ describe('Entity', () => {
     if (wrapper){
       expect((await wrapper.getObjList({
         e_id: e_id,
-      },1))).toHaveLength(1);
+      },1,[{ key:"e_id", order: "ASC" }]))).toHaveLength(1);
     }
   });
   test('listing search id limit 2', async () => {
@@ -253,7 +253,7 @@ describe('Entity', () => {
     if (wrapper){
       expect((await wrapper.getObjList({
         e_id: e_id,
-      },2))).toHaveLength(1);
+      },2,[{ key:"e_id", order: "DESC" }]))).toHaveLength(1);
     }
   });
   test('find entity by id', async () => {

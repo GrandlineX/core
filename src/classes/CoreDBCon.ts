@@ -11,6 +11,7 @@ import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
 import {
   EntityConfig,
+  EOrderBy,
   EUpDateProperties,
   getEntityNames,
   validateEntity,
@@ -210,13 +211,15 @@ export default abstract class CoreDBCon<D, T>
    * @param config
    * @param limit
    * @param search
+   * @param order
    */
   abstract getEntityList<E extends CoreEntity>(
     config: EntityConfig<E>,
     limit?: number,
     search?: {
       [P in keyof E]?: E[P];
-    }
+    },
+    order?: EOrderBy<E>
   ): Promise<E[]>;
   /**
    * Get Entity object list

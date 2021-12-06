@@ -1,5 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.16.1] - 2021-12-06
+
+### Fixed
+- Wrapper Entity interface for order result
 
 ## [0.16.0] - 2021-12-06
 
