@@ -132,7 +132,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     if (this.kernelModule) {
       return this.kernelModule;
     }
-    throw new Error('No Base module found');
+    throw this.lError('No Base module found');
   }
 
   /**
@@ -142,7 +142,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     if (this.globalLogger) {
       return this.globalLogger;
     }
-    throw new Error('Logger not defined');
+    throw this.lError('Logger not defined');
   }
 
   /**
@@ -207,7 +207,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
         }
         break;
       default:
-        throw new Error('Method not implemented.');
+        throw this.lError('Method not implemented.');
     }
   }
 
@@ -236,7 +236,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
         this.loadRun = triggerFunc;
         break;
       default:
-        throw new Error('Method not implemented.');
+        throw this.lError('Method not implemented.');
     }
   }
 
@@ -288,7 +288,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     if (this.kernelModule) {
       return this.kernelModule.getDb();
     }
-    throw new Error('No base module found');
+    throw this.lError('No base module found');
   }
 
   /**

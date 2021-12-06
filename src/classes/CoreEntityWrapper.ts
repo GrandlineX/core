@@ -1,6 +1,12 @@
 import CoreEntity from './CoreEntity';
 import { ICoreEntityHandler } from '../lib/EntityRelationTypes';
-import { ColumnPropMap, ColumnProps, getColumnMeta } from './annotation';
+import {
+  ColumnPropMap,
+  ColumnProps,
+  EProperties,
+  EUpDateProperties,
+  getColumnMeta,
+} from './annotation';
 
 export default class CoreEntityWrapper<E extends CoreEntity> {
   protected e_con: ICoreEntityHandler;
@@ -18,7 +24,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     this.propMap = this.genPropMap();
   }
 
-  async createObject(args: E): Promise<E | null> {
+  async createObject(args: EProperties<E>): Promise<E> {
     return this.e_con.createEntity<E>(
       {
         className: this.className,
@@ -28,12 +34,16 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     );
   }
 
-  async updateObject(args: E): Promise<E | null> {
+  async updateObject(
+    e_id: number,
+    args: EUpDateProperties<E>
+  ): Promise<boolean> {
     return this.e_con.updateEntity<E>(
       {
         className: this.className,
         meta: this.propMap,
       },
+      e_id,
       args
     );
   }
@@ -76,8 +86,8 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     );
   }
 
-  async delete(id: number): Promise<boolean> {
-    return this.e_con.deleteEntityById(this.className, id);
+  async delete(e_id: number): Promise<boolean> {
+    return this.e_con.deleteEntityById(this.className, e_id);
   }
 
   async init(): Promise<boolean> {

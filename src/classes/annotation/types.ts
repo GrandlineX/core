@@ -22,7 +22,9 @@ type EPropertyNames<T> = {
 /**
  * Constructor parameter interface
  */
-type EProperties<T> = Pick<T, EPropertyNames<T>>;
+type EProperties<T> = Omit<Pick<T, EPropertyNames<T>>, 'e_id'>;
+type EPropertiesOpt<T> = Partial<EProperties<T>>;
+type EUpDateProperties<T> = Partial<EProperties<T>>;
 
 type ColumnProps = {
   primaryKey?: boolean;
@@ -48,6 +50,8 @@ type ObjectLike = Object;
 
 export {
   EPropertyNames,
+  EUpDateProperties,
+  EPropertiesOpt,
   ObjectLike,
   ColumnPropMap,
   EProperties,

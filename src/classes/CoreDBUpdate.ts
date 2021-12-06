@@ -28,7 +28,7 @@ export default abstract class CoreDBUpdate<D, T> implements IBaseDBUpdate {
         `Update DB from ${this.srcVersion} to ${this.tarVersion} successful`
       );
     } else {
-      throw new Error(
+      throw this.db.lError(
         `Updating DB from ${this.srcVersion} to ${this.tarVersion} failed`
       );
     }

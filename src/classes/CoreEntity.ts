@@ -61,9 +61,9 @@ export default abstract class CoreEntity {
   @Column({
     primaryKey: true,
   })
-  e_id: number | null;
+  e_id: number;
 
   protected constructor() {
-    this.e_id = null;
+    this.e_id = -1;
   }
 }

@@ -6,13 +6,10 @@ import { BadEntity, TestEntity } from './DebugClasses';
 
 describe("annotation",()=>{
   const  first= new TestEntity({
-    e_id:null,
     name:"Bob",
     notAColumn:"test",
     simpleNumber:1,
-    missingType:null,
-    primaryKeyNull:null,
-    invalidKey:0.1,
+    invalidKey:0.1
   });
   test("entity props",()=>{
     const classMeta=getEntityMeta(first);

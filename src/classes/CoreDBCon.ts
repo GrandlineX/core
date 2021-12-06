@@ -9,7 +9,7 @@ import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
 import { getEntityNames } from '../utils';
-import { EntityConfig, validateEntity } from './annotation';
+import { EntityConfig, EUpDateProperties, validateEntity } from './annotation';
 
 export default abstract class CoreDBCon<D, T>
   extends CoreElement
@@ -49,18 +49,17 @@ export default abstract class CoreDBCon<D, T>
     this.isNew = val;
   }
 
-  registerEntity<E extends CoreEntity>(ent: E): void {
+  registerEntity<E extends CoreEntity>(ent: E): CoreEntityWrapper<E> {
     if (!validateEntity(ent)) {
       this.error(`Invalid Entity: ${ent.constructor.name}`);
-      throw new Error('Invalid Entity');
+      throw this.lError('Invalid Entity');
     }
     const cName = getEntityNames(ent);
-    this.wrapperMap.set(
-      cName.className,
-      new CoreEntityWrapper(this, cName.tableName, () => {
-        return ent;
-      })
-    );
+    const wrapper = new CoreEntityWrapper(this, cName.tableName, () => {
+      return ent;
+    });
+    this.wrapperMap.set(cName.className, wrapper);
+    return wrapper;
   }
 
   getEntityWrapper<E extends CoreEntity>(
@@ -163,17 +162,19 @@ export default abstract class CoreDBCon<D, T>
   abstract createEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
     entity: E
-  ): Promise<E | null>;
+  ): Promise<E>;
 
   /**
    * Update Entity object
    * @param config
+   * @param e_id
    * @param entity
    */
   abstract updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    entity: E
-  ): Promise<E | null>;
+    e_id: number,
+    entity: EUpDateProperties<E>
+  ): Promise<boolean>;
 
   /**
    * Get Entity object by ID

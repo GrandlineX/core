@@ -1,5 +1,6 @@
 import { IHaveLogger, ILogChanel } from '../lib';
 import CoreLogger from './CoreLogger';
+import CoreError from './CoreError';
 
 export default class CoreLogChannel implements ILogChanel {
   protected channel: string;
@@ -55,5 +56,9 @@ export default class CoreLogChannel implements ILogChanel {
     if (this.logger) {
       this.logger.verbose(this.channel, ags);
     }
+  }
+
+  lError(message: string): Error {
+    return new CoreError(message, this);
   }
 }

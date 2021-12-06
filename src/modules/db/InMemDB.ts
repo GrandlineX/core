@@ -1,7 +1,7 @@
 import CoreDBCon from '../../classes/CoreDBCon';
 import { ConfigType, ICoreKernelModule, RawQuery } from '../../lib';
 import CoreEntity from '../../classes/CoreEntity';
-import { EntityConfig } from '../../classes';
+import { EntityConfig, EUpDateProperties } from '../../classes';
 
 function eFilter<E extends CoreEntity>(
   row: E,
@@ -75,11 +75,11 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   async createEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
     entity: E
-  ): Promise<E | null> {
+  ): Promise<E> {
     const clone = entity;
     const table = this.e_map.get(config.className);
     if (!table) {
-      return null;
+      throw this.lError('Cant create Entity');
     }
     if (clone.e_id === null) {
       clone.e_id = this.getNewObjectID();
@@ -100,15 +100,26 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
 
   async updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    entity: E
-  ): Promise<E | null> {
+    e_id: number,
+    entity: EUpDateProperties<E>
+  ): Promise<boolean> {
     const table = this.e_map.get(config.className);
-    if (!table || !entity.e_id) {
-      return null;
+    if (!table) {
+      throw this.lError('Cant create Entity');
     }
-    await this.deleteEntityById(config.className, entity.e_id);
-    await this.createEntity<E>(config, entity);
-    return entity;
+    const target: any = table.find((el) => {
+      return el.e_id === e_id;
+    });
+
+    if (!target) {
+      throw this.lError('Cant create Entity');
+    }
+    const keys = Object.keys(entity) as (keyof EUpDateProperties<E>)[];
+    for (const key of keys) {
+      target[key] = entity[key];
+    }
+
+    return true;
   }
 
   async getEntityList<E extends CoreEntity>(

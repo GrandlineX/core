@@ -57,6 +57,13 @@ describe('Default logger: kernel', () => {
   test('verbose', async () => {
     kernel.verbose("verbose")
   });
+  test('lError', (callback) => {
+    try {
+      throw kernel.lError("TestError")
+    }catch (e) {
+      callback(false)
+    }
+  });
 
 })
 
@@ -157,7 +164,7 @@ describe('TestDatabase', () => {
 
 describe('Entity', () => {
   let e_id=0;
-  let wrapper:undefined|CoreEntityWrapper<TestEnt>=undefined;
+ let wrapper:undefined|CoreEntityWrapper<TestEnt>=undefined;
   let entity:TestEnt|null=null
 
   test('get wrapper class', async () => {
@@ -175,19 +182,31 @@ describe('Entity', () => {
       entity=new TestEnt();
       entity= await wrapper.createObject(entity)
       expect(entity).not.toBeNull()
-      expect(entity?.e_id).not.toBeNull()
+      expect(entity.e_id).not.toBeNull()
       if (entity && entity.e_id){
-        e_id= entity.e_id
-        expect((await wrapper.getObjList()).length).toBe(1)
+        e_id=entity.e_id;
+         expect((await wrapper.getObjList()).length).toBe(1)
       }
     }
   });
   test('update', async () => {
     expect(wrapper).not.toBeUndefined()
     expect(entity).not.toBeNull()
+
     if (wrapper && entity){
-      expect((await wrapper.updateObject(entity))).not.toBeNull()
-      expect((await wrapper.getObjList()).length).toBe(1)
+      let oj=await wrapper.getObjById(e_id)
+
+      expect(oj).not.toBeNull()
+      expect(oj?.testProp).not.toBeNull()
+      expect(oj?.testProp).toBe(0)
+      expect((await wrapper.updateObject(e_id,{
+        testProp:2
+      }))).toBeTruthy()
+
+      oj=await wrapper.getObjById(e_id)
+      expect(oj).not.toBeNull()
+      expect(oj?.testProp).toBe(2)
+
     }
   });
   test('get by id', async () => {
@@ -239,7 +258,7 @@ describe('Entity', () => {
   test('delete', async () => {
     expect(wrapper).not.toBeUndefined()
     if (wrapper){
-      expect((await wrapper.delete(1))).toBeTruthy();
+      expect((await wrapper.delete(e_id))).toBeTruthy();
       expect((await wrapper.getObjList()).length).toBe(0)
     }
   });

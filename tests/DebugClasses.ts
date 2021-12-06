@@ -3,7 +3,7 @@ import CoreKernel, {
   CoreClient,
   CoreCryptoClient,
   CoreKernelModule,
-  CoreLoopService, EProperties,
+  CoreLoopService, EProperties, EPropertiesOpt,
   ICoreCClient, OfflineService,
   sleep
 } from '../src';
@@ -145,7 +145,7 @@ class TestEntity extends CoreEntity{
 
   notAColumn:string
 
-  constructor(val?:EProperties<TestEntity>) {
+  constructor(val?:EPropertiesOpt<TestEntity>) {
     super();
     this.name=val?.name||""
     this.notAColumn=val?.notAColumn||""
