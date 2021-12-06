@@ -1,8 +1,9 @@
 import {
-  createFolderIfNotExist,
+  CoreCache,
+  createFolderIfNotExist, EProperties,
   generateSeed,
   getColumnMeta,
-  ICoreKernelModule,
+  ICoreKernelModule, ILogChanel,
   InMemDB,
   removeFolderIfExist,
   sleep,
@@ -39,54 +40,36 @@ describe('Clean start', () => {
     expect(kernel.getState()).toBe('running');
   });})
 
+describe.each([
+  ["kernel",kernel],
+  ["module",kernel.getModule()as ILogChanel]]
+)(
+  'Default logger:(%s):',
+  (name:string,log:ILogChanel  ) => {
 
-describe('Default logger: kernel', () => {
-
-  test('log', async () => {
-    kernel.log("log")
-  });
-  test('debug', async () => {
-    kernel.debug("debug")
-  });
-  test('warn', async () => {
-    kernel.warn("warn")
-  });
-  test('error', async () => {
-    kernel.error("error")
-  });
-  test('verbose', async () => {
-    kernel.verbose("verbose")
-  });
-  test('lError', (callback) => {
-    try {
-      throw kernel.lError("TestError")
-    }catch (e) {
-      callback(false)
-    }
-  });
-
-})
-
-describe('Default logger: db', () => {
-
-  test('log', async () => {
-    kernel.getDb()?.log("db-log")
-  });
-  test('debug', async () => {
-    kernel.getDb()?.debug("db-debug")
-  });
-  test('warn', async () => {
-    kernel.getDb()?.warn("db-warn")
-  });
-  test('error', async () => {
-    kernel.getDb()?.error("db-error")
-  });
-  test('verbose', async () => {
-    kernel.getDb()?.verbose("db-verbose")
-  });
-
-})
-
+    test('log', async () => {
+      log.log("log")
+    });
+    test('debug', async () => {
+      log.debug("debug")
+    });
+    test('warn', async () => {
+      log.warn("warn")
+    });
+    test('error', async () => {
+      log.error("error")
+    });
+    test('verbose', async () => {
+      log.verbose("verbose")
+    });
+    test('lError', (callback) => {
+      try {
+        throw log.lError("TestError")
+      }catch (e) {
+        callback(false)
+      }
+    });
+  })
 
 describe('DevMode', () => {
 
@@ -161,10 +144,36 @@ describe('TestDatabase', () => {
     expect(await db.getCurrenDBVersion()).toBe("2");
   });
 })
+describe('Cache', () => {
+  test( 'set', async () => {
+    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
+    const cache = mod.getCache() as CoreCache
+    const conf = await cache.set( "test","test" );
+  } );
+  test( 'exist', async () => {
+    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
+    const cache = mod.getCache() as CoreCache
+    const conf = await cache.exist( "test" );
+    expect(conf).toBeTruthy()
+  } );
+  test( 'get', async () => {
+    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
+    const cache = mod.getCache() as CoreCache
+    const conf = await cache.get( "test" );
+    expect(conf).toBe("test")
+  } );
+  test( 'del', async () => {
+    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
+    const cache = mod.getCache() as CoreCache
+     await cache.delete( "test" );
+    const conf = await cache.exist( "test" );
+    expect(conf).toBeFalsy()
+  } );
 
+})
 describe('Entity', () => {
   let e_id=0;
- let wrapper:undefined|CoreEntityWrapper<TestEnt>=undefined;
+  let wrapper:undefined|CoreEntityWrapper<TestEnt>=undefined;
   let entity:TestEnt|null=null
 
   test('get wrapper class', async () => {
@@ -267,6 +276,29 @@ describe('Entity', () => {
        expect(validateEntity(entity)).toBeTruthy()
     }
   })
+  test.each([
+    [0,{testProp:0}],
+    [1,{testProp:0}]]
+  )(
+    'Default logger:(%i):',
+    async (name:number,props:EProperties<TestEnt>  ) => {
+      expect(wrapper).not.toBeUndefined()
+      if (wrapper){
+        const obj= await wrapper.createObject(new TestEnt(props))
+        let cacheOld= await wrapper.getObjById(obj.e_id)
+        let cache= await wrapper.getObjById(obj.e_id)
+        expect(cache).not.toBeNull()
+        expect(cache).toBe(cacheOld);
+
+        await wrapper.updateObject(obj.e_id,{
+          testProp:1
+        })
+        cache= await wrapper.getObjById(obj.e_id)
+        expect(cache?.testProp).toBe(1)
+
+      }
+
+    })
 })
 describe('Crypto', () => {
   test('encrypt/decrypt', async () => {

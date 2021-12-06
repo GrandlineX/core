@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.16.0] - 2021-12-06
+
+### Added
+- Extending entityList interface 
+  - result can now be ordered by `ASC` or `DESC`
+  - (optinal) schema name for `foreignKey`
+- Caching for entities
+- InMemCache
+### Changed
+- Restructure entity module
 ## [0.15.1] - 2021-12-06
 ### Added
 - CoreError # log to error log chanel

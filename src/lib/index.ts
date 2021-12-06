@@ -1,5 +1,44 @@
 import CoreLogger from '../classes/CoreLogger';
-import { ICoreEntityHandler } from './EntityRelationTypes';
+import {
+  IEntity,
+  EntityConfig,
+  EOrderBy,
+  EProperties,
+  EUpDateProperties,
+} from '../classes/annotation';
+
+export interface ICoreEntityHandler {
+  getCache<E extends ICoreCache>(): E | null;
+  createEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    entity: EProperties<E>
+  ): Promise<E>;
+  updateEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    e_id: number,
+    entity: EUpDateProperties<E>
+  ): Promise<boolean>;
+  getEntityById<E extends IEntity>(
+    config: EntityConfig<E>,
+    e_id: number
+  ): Promise<E | null>;
+  deleteEntityById(className: string, id: number): Promise<boolean>;
+  getEntityList<E extends IEntity>(
+    config: EntityConfig<E>,
+    limit?: number,
+    search?: {
+      [P in keyof E]?: E[P];
+    },
+    order?: EOrderBy<E>
+  ): Promise<E[]>;
+  findEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    search: {
+      [P in keyof E]?: E[P];
+    }
+  ): Promise<E | null>;
+  initEntity<E extends IEntity>(className: string, entity: E): Promise<boolean>;
+}
 
 /**
  * Trigger:
@@ -27,9 +66,17 @@ export interface ICoreCache {
 
   delete(key: string): Promise<void>;
 
-  clearAll(key: string): Promise<void>;
+  clearAll(): Promise<void>;
 
   exist(key: string): Promise<boolean>;
+
+  setE<E extends IEntity>(className: string, val: E): Promise<void>;
+
+  getE<E extends IEntity>(className: string, e_id: number): Promise<E | null>;
+
+  deleteE(className: string, e_id: number): Promise<boolean>;
+
+  clearAllE(className: string): Promise<void>;
 
   stop(): Promise<void>;
 }
@@ -200,6 +247,8 @@ export interface ILogChanel {
   warn(...ags: unknown[]): void;
 
   verbose(...ags: unknown[]): void;
+
+  lError(message: string): Error;
 }
 export interface ConfigType {
   c_key: string;

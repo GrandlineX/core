@@ -1,6 +1,7 @@
 import {
   ConfigType,
   IBaseDBUpdate,
+  ICoreCache,
   ICoreKernelModule,
   IDataBase,
   RawQuery,
@@ -8,8 +9,12 @@ import {
 import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
-import { getEntityNames } from '../utils';
-import { EntityConfig, EUpDateProperties, validateEntity } from './annotation';
+import {
+  EntityConfig,
+  EUpDateProperties,
+  getEntityNames,
+  validateEntity,
+} from './annotation';
 
 export default abstract class CoreDBCon<D, T>
   extends CoreElement
@@ -22,6 +27,8 @@ export default abstract class CoreDBCon<D, T>
   public schemaName: string;
 
   private connected: boolean;
+
+  private cacheEnabled: boolean;
 
   private wrapperMap: Map<string, CoreEntityWrapper<any>>;
 
@@ -39,6 +46,7 @@ export default abstract class CoreDBCon<D, T>
     this.updater = null;
     this.schemaName = schemaName;
     this.isNew = false;
+    this.cacheEnabled = false;
     this.debug = this.debug.bind(this);
   }
 
@@ -47,6 +55,10 @@ export default abstract class CoreDBCon<D, T>
    */
   protected setNew(val: boolean): void {
     this.isNew = val;
+  }
+
+  setEntityCache(status: boolean) {
+    this.cacheEnabled = status;
   }
 
   registerEntity<E extends CoreEntity>(ent: E): CoreEntityWrapper<E> {
@@ -226,4 +238,11 @@ export default abstract class CoreDBCon<D, T>
     className: string,
     entity: E
   ): Promise<boolean>;
+
+  getCache<E extends ICoreCache>(): E | null {
+    if (!this.cacheEnabled) {
+      return null;
+    }
+    return this.getModule().getCache();
+  }
 }

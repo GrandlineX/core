@@ -1,5 +1,5 @@
 import CoreEntity from './CoreEntity';
-import { ICoreEntityHandler } from '../lib/EntityRelationTypes';
+import { ICoreEntityHandler, ICoreCache } from '../lib';
 import {
   ColumnPropMap,
   ColumnProps,
@@ -17,11 +17,14 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
 
   propMap: ColumnPropMap<E>;
 
+  cache: ICoreCache | null;
+
   constructor(con: ICoreEntityHandler, name: string, getIns: () => E) {
     this.e_con = con;
     this.className = name;
     this.getIns = getIns;
     this.propMap = this.genPropMap();
+    this.cache = con.getCache();
   }
 
   async createObject(args: EProperties<E>): Promise<E> {
@@ -38,6 +41,8 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     e_id: number,
     args: EUpDateProperties<E>
   ): Promise<boolean> {
+    await this.cache?.deleteE(this.className, e_id);
+
     return this.e_con.updateEntity<E>(
       {
         className: this.className,
@@ -49,13 +54,23 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
   }
 
   async getObjById(id: number): Promise<E | null> {
-    return this.e_con.getEntityById<E>(
+    if (this.cache) {
+      const has = await this.cache.getE<E>(this.className, id);
+      if (has) {
+        return has;
+      }
+    }
+    const res = await this.e_con.getEntityById<E>(
       {
         className: this.className,
         meta: this.propMap,
       },
       id
     );
+    if (res && this.cache) {
+      await this.cache.setE<E>(this.className, res);
+    }
+    return res;
   }
 
   async getObjList(

@@ -3,8 +3,8 @@ import CoreKernel, {
   CoreClient,
   CoreCryptoClient,
   CoreKernelModule,
-  CoreLoopService, EProperties, EPropertiesOpt,
-  ICoreCClient, OfflineService,
+  CoreLoopService, easyRelation, Entity, EProperties, EPropertiesOpt,
+  ICoreCClient, InMemCache, OfflineService,
   sleep
 } from '../src';
 import InMemDB from '../src/modules/db/InMemDB';
@@ -12,7 +12,6 @@ import CoreDBUpdate from '../src/classes/CoreDBUpdate';
 import CoreDBCon from '../src/classes/CoreDBCon';
 import CoreEntity from '../src/classes/CoreEntity';
 import CoreBundleModule from '../src/classes/CoreBundleModule';
-import { Entity } from '../src/classes/annotation/Entity';
 
 type TCoreKernel=CoreKernel<ICoreCClient>;
 
@@ -143,6 +142,13 @@ class TestEntity extends CoreEntity{
   })
   invalidKey:any
 
+  @Column({
+    canBeNull:true,
+    dataType:"float",
+    foreignKey: { ...easyRelation('TestEntity'), schema:"noSchema" }
+  })
+  autoRelation:number
+
   notAColumn:string
 
   constructor(val?:EPropertiesOpt<TestEntity>) {
@@ -152,11 +158,12 @@ class TestEntity extends CoreEntity{
     this.simpleNumber=val?.simpleNumber||0
     this.primaryKeyNull=null;
     this.invalidKey=null;
+    this.autoRelation=val?.autoRelation||-1
   }
 }
 
 
-class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,null,null>{
+class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,InMemCache,null>{
 
   constructor(kernel:TCoreKernel) {
     super("testModule",kernel);
@@ -165,7 +172,9 @@ class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,null,nu
   async initModule(): Promise<void> {
     this.setClient(new TestClient("testc",this))
     this.log("FirstTHIS")
+    this.setCache(new InMemCache(this,60000))
     const db=new InMemDB(this)
+    db.setEntityCache(true)
     db.registerEntity(new TestEnt())
     db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db),)
     this.setDb(db)

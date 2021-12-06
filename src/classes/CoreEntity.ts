@@ -1,4 +1,4 @@
-import { Column } from './annotation';
+import { Column, IEntity } from './annotation';
 
 /**
  * @name CoreEntity
@@ -57,7 +57,7 @@ import { Column } from './annotation';
  * ```
  */
 
-export default abstract class CoreEntity {
+export default abstract class CoreEntity implements IEntity {
   @Column({
     primaryKey: true,
   })

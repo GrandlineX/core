@@ -1,5 +1,6 @@
 import { ICoreCache, ICoreKernelModule } from '../lib';
 import CoreElement from './CoreElement';
+import { IEntity } from './annotation';
 
 export default abstract class CoreCache
   extends CoreElement
@@ -22,7 +23,18 @@ export default abstract class CoreCache
 
   abstract delete(key: string): Promise<void>;
 
-  abstract clearAll(key: string): Promise<void>;
+  abstract clearAll(): Promise<void>;
 
   abstract exist(key: string): Promise<boolean>;
+
+  abstract clearAllE(className: string): Promise<void>;
+
+  abstract deleteE(className: string, e_id: number): Promise<boolean>;
+
+  abstract getE<E extends IEntity>(
+    className: string,
+    e_id: number
+  ): Promise<E | null>;
+
+  abstract setE<E extends IEntity>(className: string, val: E): Promise<void>;
 }

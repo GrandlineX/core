@@ -1,6 +1,7 @@
-import { getColumnMeta, validateColumnMeta, validateEntity } from '../src';
-import {  getEntityMeta } from '../src';
+
 import { BadEntity, TestEntity } from './DebugClasses';
+import { getColumnMeta, getEntityMeta, validateColumnMeta, validateEntity } from '../src/classes/annotation/Meta';
+import { camelToSnakeCase, instanceOfEntity } from '../src';
 
 
 
@@ -20,6 +21,12 @@ describe("annotation",()=>{
 
     const classMeta=getEntityMeta(new BadEntity());
     expect(classMeta).toBeUndefined()
+  })
+  test("instance test",()=>{
+    expect(instanceOfEntity(new TestEntity())).toBeTruthy()
+  })
+  test("util test",()=>{
+    expect(camelToSnakeCase("")).toBe("")
   })
   test("e_id is primary key",()=>{
       const meta= getColumnMeta(first,"e_id");
