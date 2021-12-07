@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,7 @@
     "lint": "eslint src",
     "test": "jest --runInBand ",
     "run": "ts-node tests/run.ts",
+    "pack": "eslint && npm run buildprep && npm pack",
     "test-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
     "doc-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./docs/coverage\"  --reporters=default --reporters=jest-junit",
     "makeDocs": "typedoc"

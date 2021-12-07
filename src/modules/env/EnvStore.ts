@@ -2,9 +2,12 @@ import * as Path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 import { ICoreKernel, IStore } from '../../lib';
+import { ArchType, OsRelease, StoreGlobal } from './Global';
 
+type EnvKey = StoreGlobal | string;
+type StoreItem = ArchType | OsRelease | string;
 export default class EnvStore implements IStore {
-  store: Map<string, string>;
+  store: Map<EnvKey, StoreItem>;
 
   kernel: ICoreKernel<any>;
 
@@ -13,7 +16,7 @@ export default class EnvStore implements IStore {
     pathOverride?: string,
     envFilePath?: string
   ) {
-    this.store = new Map<string, string>();
+    this.store = new Map<EnvKey, StoreItem>();
     this.kernel = kernel;
     this.initNew(pathOverride, envFilePath);
   }
@@ -30,8 +33,8 @@ export default class EnvStore implements IStore {
       }
     }
 
-    this.store.set('GLOBAL_OS', os.platform());
-    this.store.set('GLOBAL_ARCH', os.arch());
+    this.store.set(StoreGlobal.GLOBAL_OS, os.platform());
+    this.store.set(StoreGlobal.GLOBAL_ARCH, os.arch());
     const appName = this.kernel.getAppName();
     let base;
     if (os.platform() === 'darwin') {
@@ -43,15 +46,18 @@ export default class EnvStore implements IStore {
         ? Path.join(pathOverride, appName)
         : Path.join(os.homedir(), appName);
     }
-    this.store.set('GLOBAL_PATH_HOME', base);
-    this.store.set('GLOBAL_PATH_DATA', Path.join(base, 'data'));
-    this.store.set('GLOBAL_PATH_DB', Path.join(base, 'db'));
-    this.store.set('GLOBAL_PATH_TEMP', Path.join(base, 'temp'));
+    this.store.set(StoreGlobal.GLOBAL_PATH_HOME, base);
+    this.store.set(StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data'));
+    this.store.set(StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db'));
+    this.store.set(StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp'));
 
     if (process.env.npm_package_version) {
-      this.store.set('GLOBAL_APP_VERSION', process.env.npm_package_version);
+      this.store.set(
+        StoreGlobal.GLOBAL_APP_VERSION,
+        process.env.npm_package_version
+      );
     } else {
-      this.store.set('GLOBAL_APP_VERSION', '0.0.0');
+      this.store.set(StoreGlobal.GLOBAL_APP_VERSION, '0.0.0');
     }
   }
 
@@ -73,22 +79,22 @@ export default class EnvStore implements IStore {
   }
 
   clear(): void {
-    this.store = new Map<string, string>();
+    this.store = new Map<EnvKey, StoreItem>();
   }
 
-  get(key: string): string | undefined {
+  get(key: EnvKey): StoreItem | undefined {
     return this.store.get(key);
   }
 
-  has(key: string): boolean {
+  has(key: EnvKey): boolean {
     return this.store.has(key);
   }
 
-  delete(key: string): boolean {
+  delete(key: EnvKey): boolean {
     return this.store.delete(key);
   }
 
-  set(key: string, value: string): void {
+  set(key: EnvKey, value: StoreItem): void {
     this.store.set(key, value);
   }
 }

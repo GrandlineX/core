@@ -1,5 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.16.2] - 2021-12-07
+
+### Added 
+- Env Store globals 
+- Os globals 
+- Arch globals 
+### Fixed
+- InMemCache fix 
+
 ## [0.16.1] - 2021-12-06
 
 ### Fixed

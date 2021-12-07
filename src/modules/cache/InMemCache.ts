@@ -20,6 +20,7 @@ export default class InMemCache extends CoreCache {
     this.eMap = new Map<string, Map<number, any>>();
     this.loop = null;
     this.deleteTime = deleteTime;
+    this.flash = this.flash.bind(this);
   }
 
   async clearAll(): Promise<void> {
@@ -68,6 +69,7 @@ export default class InMemCache extends CoreCache {
   }
 
   flash() {
+    this.debug(`Clear cache:${this.chanel}`);
     this.keyMap.clear();
     this.eMap.clear();
   }
@@ -76,6 +78,7 @@ export default class InMemCache extends CoreCache {
     if (this.deleteTime) {
       this.loop = setInterval(this.flash, this.deleteTime);
     }
+    this.log(`Init cache:${this.chanel}`);
   }
 
   async stop(): Promise<void> {

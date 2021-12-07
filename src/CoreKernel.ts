@@ -8,11 +8,9 @@ import {
 } from './lib';
 import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
-import CoreLogger from './classes/CoreLogger';
-import CoreLogChannel from './classes/CoreLogChannel';
-import CoreDBCon from './classes/CoreDBCon';
-import EnvStore from './modules/env/EnvStore';
-import { DefaultLogger } from './modules';
+import { CoreLogger, CoreLogChannel, CoreDBCon } from './classes';
+
+import { DefaultLogger, EnvStore } from './modules';
 
 /**
  *  Core Kernel class

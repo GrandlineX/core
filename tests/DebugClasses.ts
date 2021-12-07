@@ -172,7 +172,7 @@ class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,InMemCa
   async initModule(): Promise<void> {
     this.setClient(new TestClient("testc",this))
     this.log("FirstTHIS")
-    this.setCache(new InMemCache(this,60000))
+    this.setCache(new InMemCache(this,10000))
     const db=new InMemDB(this)
     db.setEntityCache(true)
     db.registerEntity(new TestEnt())
