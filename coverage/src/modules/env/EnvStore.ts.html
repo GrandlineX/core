@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.38% </span>
+                <span class="strong">90.56% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/52</span>
+                <span class='fraction'>48/53</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.19% </span>
+                <span class="strong">90.38% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>46/51</span>
+                <span class='fraction'>47/52</span>
             </div>
         
             
@@ -157,9 +157,18 @@
 <a name='L92'></a><a href='#L92'>92</a>
 <a name='L93'></a><a href='#L93'>93</a>
 <a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -209,6 +218,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -255,9 +267,12 @@
 import * as fs from 'fs';
 import * as os from 'os';
 import { ICoreKernel, IStore } from '../../lib';
+import { ArchType, OsRelease, StoreGlobal } from './Global';
 &nbsp;
+type EnvKey = StoreGlobal | string;
+type StoreItem = ArchType | OsRelease | string;
 export default class EnvStore implements IStore {
-  store: Map&lt;string, string&gt;;
+  store: Map&lt;EnvKey, StoreItem&gt;;
 &nbsp;
   kernel: ICoreKernel&lt;any&gt;;
 &nbsp;
@@ -266,7 +281,7 @@ export default class EnvStore implements IStore {
     pathOverride?: string,
     envFilePath?: string
   ) {
-    this.store = new Map&lt;string, string&gt;();
+    this.store = new Map&lt;EnvKey, StoreItem&gt;();
     this.kernel = kernel;
     this.initNew(pathOverride, envFilePath);
   }
@@ -283,8 +298,8 @@ export default class EnvStore implements IStore {
       }
     }
 &nbsp;
-    this.store.set('GLOBAL_OS', os.platform());
-    this.store.set('GLOBAL_ARCH', os.arch());
+    this.store.set(StoreGlobal.GLOBAL_OS, os.platform());
+    this.store.set(StoreGlobal.GLOBAL_ARCH, os.arch());
     const appName = this.kernel.getAppName();
     let base;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (os.platform() === 'darwin') {
@@ -296,15 +311,18 @@ export default class EnvStore implements IStore {
         ? Path.join(pathOverride, appName)
         : <span class="branch-1 cbranch-no" title="branch not covered" >Path.join(os.homedir(), appName);</span>
     }
-    this.store.set('GLOBAL_PATH_HOME', base);
-    this.store.set('GLOBAL_PATH_DATA', Path.join(base, 'data'));
-    this.store.set('GLOBAL_PATH_DB', Path.join(base, 'db'));
-    this.store.set('GLOBAL_PATH_TEMP', Path.join(base, 'temp'));
+    this.store.set(StoreGlobal.GLOBAL_PATH_HOME, base);
+    this.store.set(StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data'));
+    this.store.set(StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db'));
+    this.store.set(StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp'));
 &nbsp;
     if (process.env.npm_package_version) {
-      this.store.set('GLOBAL_APP_VERSION', process.env.npm_package_version);
+      this.store.set(
+        StoreGlobal.GLOBAL_APP_VERSION,
+        process.env.npm_package_version
+      );
     } else <span class="missing-if-branch" title="else path not taken" >E</span>{
-<span class="cstat-no" title="statement not covered" >      this.store.set('GLOBAL_APP_VERSION', '0.0.0');</span>
+<span class="cstat-no" title="statement not covered" >      this.store.set(StoreGlobal.GLOBAL_APP_VERSION, '0.0.0');</span>
     }
   }
 &nbsp;
@@ -326,22 +344,22 @@ export default class EnvStore implements IStore {
   }
 &nbsp;
   clear(): void {
-    this.store = new Map&lt;string, string&gt;();
+    this.store = new Map&lt;EnvKey, StoreItem&gt;();
   }
 &nbsp;
-  get(key: string): string | undefined {
+  get(key: EnvKey): StoreItem | undefined {
     return this.store.get(key);
   }
 &nbsp;
-  has(key: string): boolean {
+  has(key: EnvKey): boolean {
     return this.store.has(key);
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  delete(</span>key: string): boolean {
+<span class="fstat-no" title="function not covered" >  delete(</span>key: EnvKey): boolean {
 <span class="cstat-no" title="statement not covered" >    return this.store.delete(key);</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  set(</span>key: string, value: string): void {
+<span class="fstat-no" title="function not covered" >  set(</span>key: EnvKey, value: StoreItem): void {
 <span class="cstat-no" title="statement not covered" >    this.store.set(key, value);</span>
   }
 }
@@ -352,7 +370,7 @@ export default class EnvStore implements IStore {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Mon Dec 06 2021 14:34:34 GMT+0000 (Coordinated Universal Time)
+                at Tue Dec 07 2021 11:15:18 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
