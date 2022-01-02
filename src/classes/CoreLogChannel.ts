@@ -1,5 +1,5 @@
 import { IHaveLogger, ILogChanel } from '../lib';
-import CoreLogger from './CoreLogger';
+import CoreLogger, { LogLevel } from './CoreLogger';
 import CoreError from './CoreError';
 
 export default class CoreLogChannel implements ILogChanel {
@@ -23,37 +23,37 @@ export default class CoreLogChannel implements ILogChanel {
   }
 
   log(...ags: unknown[]): void {
-    if (this.logger) {
+    if (this.logger && this.logger.isOnLevel(LogLevel.INFO)) {
       this.logger.log(this.channel, ags);
     }
   }
 
   debug(...ags: unknown[]): void {
-    if (this.logger) {
+    if (this.logger && this.logger.isOnLevel(LogLevel.DEBUG)) {
       this.logger.debug(this.channel, ags);
     }
   }
 
   info(...ags: unknown[]): void {
-    if (this.logger) {
+    if (this.logger && this.logger.isOnLevel(LogLevel.INFO)) {
       this.logger.info(this.channel, ags);
     }
   }
 
   error(...ags: unknown[]): void {
-    if (this.logger) {
+    if (this.logger && this.logger.isOnLevel(LogLevel.ERROR)) {
       this.logger.error(this.channel, ags);
     }
   }
 
   warn(...ags: unknown[]): void {
-    if (this.logger) {
+    if (this.logger && this.logger.isOnLevel(LogLevel.WARN)) {
       this.logger.warn(this.channel, ags);
     }
   }
 
   verbose(...ags: unknown[]): void {
-    if (this.logger) {
+    if (this.logger && this.logger.isOnLevel(LogLevel.VERBOSE)) {
       this.logger.verbose(this.channel, ags);
     }
   }

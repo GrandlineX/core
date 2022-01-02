@@ -10,7 +10,7 @@ import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
 import { CoreLogger, CoreLogChannel, CoreDBCon } from './classes';
 
-import { DefaultLogger, EnvStore } from './modules';
+import { DefaultLogger, EnvStore, StoreGlobal } from './modules';
 
 /**
  *  Core Kernel class
@@ -104,6 +104,11 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       options.pathOverride,
       options.envFilePath
     );
+    const log = this.envStore.get(StoreGlobal.GLOBAL_LOG_LEVEL);
+    if (log) {
+      this.globalLogger.setLogLevel(log);
+    }
+
     this.kernelModule = null;
     this.setState('init');
   }

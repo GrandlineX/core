@@ -1,19 +1,21 @@
 import {
   CoreCache,
-  createFolderIfNotExist, EProperties,
+  createFolderIfNotExist,
+  EProperties,
   generateSeed,
-  getColumnMeta,
-  ICoreKernelModule, ILogChanel,
+  ICoreKernelModule,
+  ILogChanel,
   InMemDB,
   removeFolderIfExist,
   sleep,
   validateEntity
 } from '../src';
- import * as Path from 'path';
+import * as Path from 'path';
 import CoreDBCon from '../src/classes/CoreDBCon';
 
 import { TestEnt, TestKernel, TestService } from './DebugClasses';
 import CoreEntityWrapper from '../src/classes/CoreEntityWrapper';
+import { LogLevel } from '../src/classes/CoreLogger';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -25,7 +27,8 @@ const testPath = Path.join(__dirname, '..', 'data', 'config');
  createFolderIfNotExist(testPath);
 
 
- let kernel = new TestKernel(appName,appCode,testPath);
+let kernel = new TestKernel(appName,appCode,testPath);
+kernel.getLogger().setLogLevel(LogLevel.VERBOSE);
 
 const testText = 'hello_world';
 
@@ -42,10 +45,12 @@ describe('Clean start', () => {
 
 describe.each([
   ["kernel",kernel],
-  ["module",kernel.getModule()as ILogChanel]]
+  ["module",kernel.getModule()as ILogChanel]
+  ]
 )(
   'Default logger:(%s):',
-  (name:string,log:ILogChanel  ) => {
+  (name:string,log:ILogChanel ) => {
+
 
     test('log', async () => {
       log.log("log")

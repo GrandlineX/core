@@ -4,18 +4,18 @@ import { ICoreKernelModule } from '../lib';
 
 export default class OfflineService extends CoreLoopService {
   constructor(module: ICoreKernelModule<any, any, any, any, any>) {
-    super('offlineService', 60000, module);
+    super('offlineService', 120000, module);
     this.loop = this.loop.bind(this);
   }
 
   async loop() {
-    const a = !(await this.checkInternet());
+    const a = !(await OfflineService.checkInternet());
     this.getKernel().setOffline(a);
-    this.debug(a);
+    this.verbose(a);
     await this.next();
   }
 
-  checkInternet(): Promise<boolean> {
+  static checkInternet(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       dns.lookup('google.com', (err) => {
         if (err && err.code === 'ENOTFOUND') {
