@@ -1,5 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.17.1] - 2022-01-03
+
+### Fixed 
+- Add async init function for DbPrefab
+- DbPrefab is now abstract
+
 ## [0.17.0] - 2022-01-03
 
 ### Added 

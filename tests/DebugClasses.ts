@@ -172,6 +172,10 @@ class TestPrefab extends CoreDBPrefab<CoreDBCon<any,any>>{
   db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db))
 }
 
+  async initPrefabDB(): Promise<void> {
+    return Promise.resolve( undefined );
+  }
+
 }
 
 class TestModule extends CoreBundleModule<TCoreKernel,CoreDBPrefab<any>,TestClient,InMemCache,null>{

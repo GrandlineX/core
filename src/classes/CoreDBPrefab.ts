@@ -16,7 +16,7 @@ import {
 } from './annotation';
 import CoreDBCon from './CoreDBCon';
 
-export default class CoreDBPrefab<T extends CoreDBCon<any, any>>
+export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
   extends CoreElement
   implements IDataBase<unknown, unknown>
 {
@@ -26,6 +26,8 @@ export default class CoreDBPrefab<T extends CoreDBCon<any, any>>
     super(`db${db.getModule().getName()}`, db.getModule());
     this.db = db;
   }
+
+  abstract initPrefabDB(): Promise<void>;
 
   getEntityMeta(): { key: string; meta: ColumnPropMap<any> }[] {
     return this.db.getEntityMeta();
@@ -110,7 +112,8 @@ export default class CoreDBPrefab<T extends CoreDBCon<any, any>>
   }
 
   async initNewDB(): Promise<void> {
-    return this.db.initNewDB();
+    await this.db.initNewDB();
+    await this.initPrefabDB();
   }
 
   /**
