@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.48% </span>
+                <span class="strong">89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>86/94</span>
+                <span class='fraction'>89/100</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.12% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>25/32</span>
+                <span class='fraction'>26/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.2% </span>
+                <span class="strong">90.32% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>83/91</span>
+                <span class='fraction'>84/93</span>
             </div>
         
             
@@ -311,7 +311,11 @@
 <a name='L246'></a><a href='#L246'>246</a>
 <a name='L247'></a><a href='#L247'>247</a>
 <a name='L248'></a><a href='#L248'>248</a>
-<a name='L249'></a><a href='#L249'>249</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -518,10 +522,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -533,7 +541,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -556,16 +564,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   BridgeState,
   ICoreBridge,
-  ICorePresenter,
-  ICoreKernelModule,
-  ICoreKernel,
   ICoreCache,
+  ICoreKernel,
+  ICoreKernelModule,
+  ICorePresenter,
   ICoreService,
   IDataBase,
 } from '../lib';
@@ -629,6 +637,8 @@ export default abstract class CoreKernelModule&lt;
   extends CoreLogChannel
   implements ICoreKernelModule&lt;K, T | null, P | null, C | null, E | null&gt;
 {
+  protected trigger?: () =&gt; Promise&lt;void&gt;;
+&nbsp;
   private actionlist: CoreAction[];
 &nbsp;
   private servicelist: CoreService[];
@@ -650,8 +660,6 @@ export default abstract class CoreKernelModule&lt;
   private endpoint: E | null;
 &nbsp;
   private readonly name: string;
-&nbsp;
-  protected trigger?: () =&gt; Promise&lt;void&gt;;
 &nbsp;
   constructor(name: string, kernel: K, ...deps: string[]) {
     super(`${name}Module`, kernel);
@@ -764,12 +772,16 @@ export default abstract class CoreKernelModule&lt;
     this.notifyBridges(BridgeState.end);
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  addAction(</span>action: CoreAction): void {
-<span class="cstat-no" title="statement not covered" >    this.actionlist.push(action);</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  addAction(<span class="cstat-no" title="statement not covered" ></span></span>...action: CoreAction[])</span>: void {
+<span class="cstat-no" title="statement not covered" >    action.forEach(<span class="fstat-no" title="function not covered" >(v</span>alue) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.actionlist.push(value);</span>
+    });
   }
 &nbsp;
-  addService(service: CoreService): void {
-    this.servicelist.push(service);
+  addService(...service: CoreService[]): void {
+    service.forEach((value) =&gt; {
+      this.servicelist.push(value);
+    });
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  getServiceList(</span>): ICoreService[] {
@@ -813,10 +825,9 @@ export default abstract class CoreKernelModule&lt;
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Dec 07 2021 11:15:19 GMT+0000 (Coordinated Universal Time)
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at Sun Jan 02 2022 23:19:38 GMT+0000 (Coordinated Universal Time)
             </div>
-        </div>
         <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {

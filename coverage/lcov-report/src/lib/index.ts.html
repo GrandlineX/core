@@ -383,7 +383,39 @@
 <a name='L318'></a><a href='#L318'>318</a>
 <a name='L319'></a><a href='#L319'>319</a>
 <a name='L320'></a><a href='#L320'>320</a>
-<a name='L321'></a><a href='#L321'>321</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a>
+<a name='L328'></a><a href='#L328'>328</a>
+<a name='L329'></a><a href='#L329'>329</a>
+<a name='L330'></a><a href='#L330'>330</a>
+<a name='L331'></a><a href='#L331'>331</a>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -438,6 +470,18 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -705,29 +749,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import CoreLogger from '../classes/CoreLogger';
 import {
-  IEntity,
+  ColumnPropMap,
   EntityConfig,
   EOrderBy,
   EProperties,
   EUpDateProperties,
+  IEntity,
 } from '../classes/annotation';
 &nbsp;
 export interface ICoreEntityHandler {
+  getEntityMeta(): { key: string; meta: ColumnPropMap&lt;any&gt; }[];
+&nbsp;
   getCache&lt;E extends ICoreCache&gt;(): E | null;
+&nbsp;
   createEntity&lt;E extends IEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     entity: EProperties&lt;E&gt;
   ): Promise&lt;E&gt;;
+&nbsp;
   updateEntity&lt;E extends IEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     e_id: number,
     entity: EUpDateProperties&lt;E&gt;
   ): Promise&lt;boolean&gt;;
+&nbsp;
   getEntityById&lt;E extends IEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     e_id: number
   ): Promise&lt;E | null&gt;;
+&nbsp;
   deleteEntityById(className: string, id: number): Promise&lt;boolean&gt;;
+&nbsp;
   getEntityList&lt;E extends IEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     limit?: number,
@@ -736,12 +788,14 @@ export interface ICoreEntityHandler {
     },
     order?: EOrderBy&lt;E&gt;
   ): Promise&lt;E[]&gt;;
+&nbsp;
   findEntity&lt;E extends IEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     search: {
       [P in keyof E]?: E[P];
     }
   ): Promise&lt;E | null&gt;;
+&nbsp;
   initEntity&lt;E extends IEntity&gt;(className: string, entity: E): Promise&lt;boolean&gt;;
 }
 &nbsp;
@@ -796,7 +850,9 @@ export interface ICoreCClient {
   decrypt(enc: string, iv: Buffer, authTag: Buffer): string;
 &nbsp;
   isValid(): boolean;
+&nbsp;
   generateSecureToken(length: number): Promise&lt;string&gt;;
+&nbsp;
   getHash(seed: string, val: string): string;
 }
 &nbsp;
@@ -838,10 +894,6 @@ export interface ICoreKernel&lt;X extends ICoreCClient&gt;
 &nbsp;
   setOffline(mode: boolean): void;
 &nbsp;
-  getMaster(): boolean;
-&nbsp;
-  setMaster(mode: boolean): void;
-&nbsp;
   getDevMode(): boolean;
 &nbsp;
   setDevMode(mode: boolean): void;
@@ -858,7 +910,9 @@ export interface ICoreKernelModule&lt;
 &gt; extends ILogChanel,
     IHaveLogger {
   addSrcBridge(bridge: ICoreBridge): void;
+&nbsp;
   addTarBridge(bridge: ICoreBridge): void;
+&nbsp;
   getBridges(): ICoreBridge[];
 &nbsp;
   getDependencyList(): string[];
@@ -875,27 +929,27 @@ export interface ICoreKernelModule&lt;
 &nbsp;
   beforeServiceStart?(): Promise&lt;void&gt;;
 &nbsp;
-  addAction(action: ICoreAction): void;
+  addAction(...action: ICoreAction[]): void;
 &nbsp;
-  addService(service: ICoreService): void;
+  addService(...service: ICoreService[]): void;
 &nbsp;
   getServiceList(): ICoreService[];
 &nbsp;
   getKernel(): K;
 &nbsp;
-  getDb(): T | null;
+  getDb(): T;
 &nbsp;
   setDb(db: T): void;
 &nbsp;
-  getClient(): P | null;
+  getClient(): P;
 &nbsp;
   setClient(client: P): void;
 &nbsp;
-  getEndpoint(): E | null;
+  getEndpoint(): E;
 &nbsp;
   setEndpoint(endpoint: E): void;
 &nbsp;
-  getCache(): C | null;
+  getCache(): C;
 &nbsp;
   setCache(cache: C): void;
 &nbsp;
@@ -934,10 +988,14 @@ export interface ICoreService extends ICoreElement {
 &nbsp;
 export interface ICoreBridge {
   connect(): void;
+&nbsp;
   setState(state: BridgeState): void;
+&nbsp;
   waitForState(state: BridgeState): Promise&lt;boolean&gt;;
+&nbsp;
   getTarget(): ICoreKernelModule&lt;any, any, any, any, any&gt;;
 }
+&nbsp;
 export type WorkLoad&lt;T&gt; = Promise&lt;T&gt;[];
 &nbsp;
 export interface ILogChanel {
@@ -955,6 +1013,7 @@ export interface ILogChanel {
 &nbsp;
   lError(message: string): Error;
 }
+&nbsp;
 export interface ConfigType {
   c_key: string;
   c_value: string;
@@ -995,6 +1054,12 @@ export interface IDataBase&lt;D, T&gt; extends ICoreDB, ICoreEntityHandler {
   getConfig(key: string): Promise&lt;ConfigType | undefined&gt;;
 &nbsp;
   execScripts(list: RawQuery[]): Promise&lt;T[] | null&gt;;
+&nbsp;
+  canUpdate(): Promise&lt;boolean&gt;;
+&nbsp;
+  getCurrenDBVersion(): Promise&lt;string&gt;;
+&nbsp;
+  update(): Promise&lt;boolean&gt;;
 }
 &nbsp;
 export interface ICoreDB extends ILogChanel {
@@ -1017,6 +1082,7 @@ export interface IHaveLogger {
 &nbsp;
 export interface IStore {
   clear(): void;
+&nbsp;
   get(key: string): string | undefined;
 &nbsp;
   has(key: string): boolean;
@@ -1029,10 +1095,9 @@ export interface IStore {
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank" rel="noopener">istanbul</a>
-                at Tue Dec 07 2021 11:15:19 GMT+0000 (Coordinated Universal Time)
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at Sun Jan 02 2022 23:19:38 GMT+0000 (Coordinated Universal Time)
             </div>
-        </div>
         <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
