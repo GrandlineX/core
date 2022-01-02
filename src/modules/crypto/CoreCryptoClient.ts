@@ -18,6 +18,11 @@ export default class CoreCryptoClient implements ICoreCClient {
     this.AesIV = key.substring(0, 16);
   }
 
+  static fromPW(pw: string): string {
+    const shasum = crypto.createHash('sha512').update(pw).digest('hex');
+    return shasum.substring(0, 32);
+  }
+
   generateSecureToken(length: number): Promise<string> {
     return new Promise<string>((resolve) => {
       crypto.randomBytes(length, (err, buf) => {
@@ -64,10 +69,5 @@ export default class CoreCryptoClient implements ICoreCClient {
       .createHash('sha512')
       .update(seed + val)
       .digest('hex');
-  }
-
-  static fromPW(pw: string): string {
-    const shasum = crypto.createHash('sha512').update(pw).digest('hex');
-    return shasum.substring(0, 32);
   }
 }

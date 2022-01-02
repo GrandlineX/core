@@ -1,4 +1,4 @@
-import { ICorePresenter, ICoreKernelModule } from '../lib';
+import { ICoreKernelModule, ICorePresenter } from '../lib';
 import CoreElement from './CoreElement';
 
 export default abstract class CorePresenter<T>

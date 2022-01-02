@@ -61,23 +61,6 @@ export default class EnvStore implements IStore {
     }
   }
 
-  private loadFromFile(path: string) {
-    this.kernel.log(`Load env from ${path}`);
-    const env = fs.readFileSync(path).toString('utf-8');
-    const lines = env.split('\n');
-    lines.forEach((line) => {
-      if (line.startsWith('#')) {
-        return;
-      }
-      const split = line.indexOf('=');
-      if (split > 0) {
-        const key = line.substring(0, split);
-        const value = line.substring(split + 1).trim();
-        this.store.set(key, value);
-      }
-    });
-  }
-
   clear(): void {
     this.store = new Map<EnvKey, StoreItem>();
   }
@@ -96,5 +79,22 @@ export default class EnvStore implements IStore {
 
   set(key: EnvKey, value: StoreItem): void {
     this.store.set(key, value);
+  }
+
+  private loadFromFile(path: string) {
+    this.kernel.log(`Load env from ${path}`);
+    const env = fs.readFileSync(path).toString('utf-8');
+    const lines = env.split('\n');
+    lines.forEach((line) => {
+      if (line.startsWith('#')) {
+        return;
+      }
+      const split = line.indexOf('=');
+      if (split > 0) {
+        const key = line.substring(0, split);
+        const value = line.substring(split + 1).trim();
+        this.store.set(key, value);
+      }
+    });
   }
 }

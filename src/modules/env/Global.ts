@@ -9,6 +9,7 @@ export enum ArchType {
   ARM = 'arm',
   ARM64 = 'arm64',
 }
+
 export enum StoreGlobal {
   'GLOBAL_OS' = 'GLOBAL_OS',
   'GLOBAL_ARCH' = 'GLOBAL_ARCH',

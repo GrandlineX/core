@@ -3,9 +3,9 @@ import CoreLogger, { LogLevel } from './CoreLogger';
 import CoreError from './CoreError';
 
 export default class CoreLogChannel implements ILogChanel {
-  protected channel: string;
-
   logger: CoreLogger | null;
+
+  protected channel: string;
 
   constructor(chanel: string, target: CoreLogger | IHaveLogger | null) {
     this.channel = chanel;

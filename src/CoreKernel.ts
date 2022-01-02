@@ -8,7 +8,7 @@ import {
 } from './lib';
 import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
-import { CoreLogger, CoreLogChannel, CoreDBCon } from './classes';
+import { CoreDBCon, CoreLogChannel, CoreLogger } from './classes';
 
 import { DefaultLogger, EnvStore, StoreGlobal } from './modules';
 
@@ -31,8 +31,6 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   extends CoreLogChannel
   implements ICoreKernel<X>, IHaveLogger
 {
-  protected master: boolean;
-
   protected devMode: boolean;
 
   protected appCode: string;
@@ -63,7 +61,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected loadRun?: (kernel: this) => Promise<void>;
 
-  protected globalLogger: CoreLogger | null;
+  protected globalLogger: CoreLogger;
 
   /**
    * Default Constructor
@@ -90,7 +88,6 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.offline = false;
     this.updateSkip = false;
     this.appVersion = 'noVersion';
-    this.master = true;
     this.triggerFunction = this.triggerFunction.bind(this);
     if (options.logger === undefined) {
       this.globalLogger = new DefaultLogger();
@@ -114,21 +111,6 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   }
 
   /**
-   * GetKernelMode
-   */
-  getMaster(): boolean {
-    return this.master;
-  }
-
-  /**
-   * set KernelMode
-   * @param mode
-   */
-  setMaster(mode: boolean): void {
-    this.master = mode;
-  }
-
-  /**
    * get base kernel module
    */
   getModule(): ICoreKernelModule<any, any, any, any, any> {
@@ -142,10 +124,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * get global logger
    */
   getLogger(): CoreLogger {
-    if (this.globalLogger) {
-      return this.globalLogger;
-    }
-    throw this.lError('Logger not defined');
+    return this.globalLogger;
   }
 
   /**
@@ -367,6 +346,10 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     return null;
   }
 
+  getModCount(): number {
+    return this.moduleList.length;
+  }
+
   private preloadSetup() {
     const st = this.getConfigStore();
     this.appVersion = st.get('GLOBAL_APP_VERSION') || '';
@@ -393,9 +376,5 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       }
     }
     await this.triggerFunction('start');
-  }
-
-  getModCount(): number {
-    return this.moduleList.length;
   }
 }

@@ -1,10 +1,10 @@
 import {
   BridgeState,
   ICoreBridge,
-  ICorePresenter,
-  ICoreKernelModule,
-  ICoreKernel,
   ICoreCache,
+  ICoreKernel,
+  ICoreKernelModule,
+  ICorePresenter,
   ICoreService,
   IDataBase,
 } from '../lib';
@@ -68,6 +68,8 @@ export default abstract class CoreKernelModule<
   extends CoreLogChannel
   implements ICoreKernelModule<K, T | null, P | null, C | null, E | null>
 {
+  protected trigger?: () => Promise<void>;
+
   private actionlist: CoreAction[];
 
   private servicelist: CoreService[];
@@ -89,8 +91,6 @@ export default abstract class CoreKernelModule<
   private endpoint: E | null;
 
   private readonly name: string;
-
-  protected trigger?: () => Promise<void>;
 
   constructor(name: string, kernel: K, ...deps: string[]) {
     super(`${name}Module`, kernel);

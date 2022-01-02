@@ -3,7 +3,7 @@ import {
   createFolderIfNotExist,
   EProperties,
   generateSeed,
-  ICoreKernelModule, IDataBase,
+  ICoreKernelModule,
   ILogChanel,
   InMemDB,
   removeFolderIfExist,
@@ -42,7 +42,20 @@ describe('Clean start', () => {
     expect(result).toBe(true);
     expect(kernel.getModCount()).toBe(2);
     expect(kernel.getState()).toBe('running');
-  });})
+  });
+})
+
+describe('kernel extend',  () => {
+  test('getChild empty', async () => {
+    expect(kernel.getChildModule("invaldimodname")).toBeNull();
+  });
+  test('getOffline', async () => {
+    expect(kernel.getOffline()).toBeFalsy();
+  });
+  test('getAppCode', async () => {
+    expect(kernel.getAppCode()).not.toBe("");
+  });
+});
 
 describe.each([
   ["kernel",kernel],
@@ -138,6 +151,7 @@ describe('TestDatabase', () => {
     const db = kernel.getChildModule("testModule")?.getDb();
     const conf = await db?.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
+    expect(db.getEntityMeta()).toHaveLength(1)
   });
   test('manual update', async () => {
     const dbpre = kernel.getChildModule("testModule")?.getDb() as CoreDBPrefab<InMemDB>;

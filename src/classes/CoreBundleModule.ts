@@ -1,4 +1,4 @@
-import { ICoreKernel, ICoreCache, IDataBase, ICorePresenter } from '../lib';
+import { ICoreCache, ICoreKernel, ICorePresenter, IDataBase } from '../lib';
 import CoreClient from './CoreClient';
 import CoreKernelModule from './CoreKernelModule';
 
@@ -13,5 +13,6 @@ export default abstract class CoreBundleModule<
     super(name, kernel);
     this.trigger = this.initBundleModule;
   }
+
   abstract initBundleModule(): Promise<void>;
 }

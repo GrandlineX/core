@@ -8,7 +8,12 @@ import {
 import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
-import { EntityConfig, EOrderBy, EUpDateProperties } from './annotation';
+import {
+  ColumnPropMap,
+  EntityConfig,
+  EOrderBy,
+  EUpDateProperties,
+} from './annotation';
 import CoreDBCon from './CoreDBCon';
 
 export default class CoreDBPrefab<T extends CoreDBCon<any, any>>
@@ -20,6 +25,10 @@ export default class CoreDBPrefab<T extends CoreDBCon<any, any>>
   constructor(db: T) {
     super(`db${db.getModule().getName()}`, db.getModule());
     this.db = db;
+  }
+
+  getEntityMeta(): { key: string; meta: ColumnPropMap<any> }[] {
+    return this.db.getEntityMeta();
   }
 
   getPrefabDB() {

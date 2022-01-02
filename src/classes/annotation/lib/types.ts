@@ -37,5 +37,6 @@ function instanceOfEntity(object: any): object is IEntity {
     typeof object.e_id === 'number'
   );
 }
+
 export { ColumnPropMap, EntityProps, EntityConfig, IEntity };
 export { instanceOfEntity };

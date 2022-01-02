@@ -1,5 +1,5 @@
 import CoreEntity from './CoreEntity';
-import { ICoreEntityHandler, ICoreCache } from '../lib';
+import { ICoreCache, ICoreEntityHandler } from '../lib';
 import {
   ColumnPropMap,
   ColumnProps,
@@ -10,15 +10,15 @@ import {
 } from './annotation';
 
 export default class CoreEntityWrapper<E extends CoreEntity> {
-  protected e_con: ICoreEntityHandler;
-
-  protected className: string;
-
   getIns: () => E;
 
   propMap: ColumnPropMap<E>;
 
   cache: ICoreCache | null;
+
+  protected e_con: ICoreEntityHandler;
+
+  protected className: string;
 
   constructor(con: ICoreEntityHandler, name: string, getIns: () => E) {
     this.e_con = con;

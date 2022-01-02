@@ -1,4 +1,4 @@
-import { ICoreElement, ICoreKernelModule, ICoreKernel } from '../lib';
+import { ICoreElement, ICoreKernel, ICoreKernelModule } from '../lib';
 import CoreLogChannel from './CoreLogChannel';
 
 export default abstract class CoreElement

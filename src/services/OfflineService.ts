@@ -8,13 +8,6 @@ export default class OfflineService extends CoreLoopService {
     this.loop = this.loop.bind(this);
   }
 
-  async loop() {
-    const a = !(await OfflineService.checkInternet());
-    this.getKernel().setOffline(a);
-    this.verbose(a);
-    await this.next();
-  }
-
   static checkInternet(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       dns.lookup('google.com', (err) => {
@@ -25,5 +18,12 @@ export default class OfflineService extends CoreLoopService {
         }
       });
     });
+  }
+
+  async loop() {
+    const a = !(await OfflineService.checkInternet());
+    this.getKernel().setOffline(a);
+    this.verbose(a);
+    await this.next();
   }
 }

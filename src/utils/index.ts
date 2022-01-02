@@ -1,5 +1,5 @@
 import initHandler from './initHandler';
-import { timePrint, getTimeStamp } from './timeUtil';
+import { getTimeStamp, timePrint } from './timeUtil';
 
 export * from './envUtil';
 export * from './fsUtil';

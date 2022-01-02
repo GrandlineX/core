@@ -12,6 +12,7 @@ function getEntityMeta<T extends ObjectLike>(
 ): EntityProps | undefined {
   return Reflect.getMetadata(entityKey, target.constructor.prototype);
 }
+
 function Column(props?: ColumnProps): PropertyDecorator {
   let prop: ColumnProps;
   if (!props) {
@@ -84,6 +85,7 @@ function validateEntity<T extends ObjectLike>(target: T): boolean {
   }
   return true;
 }
+
 /**
  * getTableName  by entity
  * @param entity
@@ -98,4 +100,5 @@ export function getEntityNames(entity: IEntity): ClassNameInterface {
     tableName: camelToSnakeCase(meta.name),
   };
 }
+
 export { Entity, getEntityMeta, validateEntity };

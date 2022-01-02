@@ -1,28 +1,36 @@
 import CoreLogger from '../classes/CoreLogger';
 import {
-  IEntity,
+  ColumnPropMap,
   EntityConfig,
   EOrderBy,
   EProperties,
   EUpDateProperties,
+  IEntity,
 } from '../classes/annotation';
 
 export interface ICoreEntityHandler {
+  getEntityMeta(): { key: string; meta: ColumnPropMap<any> }[];
+
   getCache<E extends ICoreCache>(): E | null;
+
   createEntity<E extends IEntity>(
     config: EntityConfig<E>,
     entity: EProperties<E>
   ): Promise<E>;
+
   updateEntity<E extends IEntity>(
     config: EntityConfig<E>,
     e_id: number,
     entity: EUpDateProperties<E>
   ): Promise<boolean>;
+
   getEntityById<E extends IEntity>(
     config: EntityConfig<E>,
     e_id: number
   ): Promise<E | null>;
+
   deleteEntityById(className: string, id: number): Promise<boolean>;
+
   getEntityList<E extends IEntity>(
     config: EntityConfig<E>,
     limit?: number,
@@ -31,12 +39,14 @@ export interface ICoreEntityHandler {
     },
     order?: EOrderBy<E>
   ): Promise<E[]>;
+
   findEntity<E extends IEntity>(
     config: EntityConfig<E>,
     search: {
       [P in keyof E]?: E[P];
     }
   ): Promise<E | null>;
+
   initEntity<E extends IEntity>(className: string, entity: E): Promise<boolean>;
 }
 
@@ -91,7 +101,9 @@ export interface ICoreCClient {
   decrypt(enc: string, iv: Buffer, authTag: Buffer): string;
 
   isValid(): boolean;
+
   generateSecureToken(length: number): Promise<string>;
+
   getHash(seed: string, val: string): string;
 }
 
@@ -133,10 +145,6 @@ export interface ICoreKernel<X extends ICoreCClient>
 
   setOffline(mode: boolean): void;
 
-  getMaster(): boolean;
-
-  setMaster(mode: boolean): void;
-
   getDevMode(): boolean;
 
   setDevMode(mode: boolean): void;
@@ -153,7 +161,9 @@ export interface ICoreKernelModule<
 > extends ILogChanel,
     IHaveLogger {
   addSrcBridge(bridge: ICoreBridge): void;
+
   addTarBridge(bridge: ICoreBridge): void;
+
   getBridges(): ICoreBridge[];
 
   getDependencyList(): string[];
@@ -229,10 +239,14 @@ export interface ICoreService extends ICoreElement {
 
 export interface ICoreBridge {
   connect(): void;
+
   setState(state: BridgeState): void;
+
   waitForState(state: BridgeState): Promise<boolean>;
+
   getTarget(): ICoreKernelModule<any, any, any, any, any>;
 }
+
 export type WorkLoad<T> = Promise<T>[];
 
 export interface ILogChanel {
@@ -250,6 +264,7 @@ export interface ILogChanel {
 
   lError(message: string): Error;
 }
+
 export interface ConfigType {
   c_key: string;
   c_value: string;
@@ -318,6 +333,7 @@ export interface IHaveLogger {
 
 export interface IStore {
   clear(): void;
+
   get(key: string): string | undefined;
 
   has(key: string): boolean;

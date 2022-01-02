@@ -10,6 +10,7 @@ import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
 import {
+  ColumnPropMap,
   EntityConfig,
   EOrderBy,
   EUpDateProperties,
@@ -51,13 +52,6 @@ export default abstract class CoreDBCon<D, T>
     this.debug = this.debug.bind(this);
   }
 
-  /**
-   * trigger the db init
-   */
-  protected setNew(val: boolean): void {
-    this.isNew = val;
-  }
-
   setEntityCache(status: boolean) {
     this.cacheEnabled = status;
   }
@@ -79,6 +73,17 @@ export default abstract class CoreDBCon<D, T>
     className: string
   ): CoreEntityWrapper<E> | undefined {
     return this.wrapperMap.get(className);
+  }
+
+  getEntityMeta() {
+    const out: { key: string; meta: ColumnPropMap<any> }[] = [];
+    this.wrapperMap.forEach((value, key) => {
+      out.push({
+        key,
+        meta: value.getPropMap(),
+      });
+    });
+    return out;
   }
 
   setUpdateChain(...chain: IBaseDBUpdate[]): void {
@@ -221,6 +226,7 @@ export default abstract class CoreDBCon<D, T>
     },
     order?: EOrderBy<E>
   ): Promise<E[]>;
+
   /**
    * Get Entity object list
    * @param config
@@ -232,6 +238,7 @@ export default abstract class CoreDBCon<D, T>
       [P in keyof E]?: E[P];
     }
   ): Promise<E | null>;
+
   /**
    * Init Entity object list
    * @param className
@@ -247,5 +254,12 @@ export default abstract class CoreDBCon<D, T>
       return null;
     }
     return this.getModule().getCache();
+  }
+
+  /**
+   * trigger the db init
+   */
+  protected setNew(val: boolean): void {
+    this.isNew = val;
   }
 }

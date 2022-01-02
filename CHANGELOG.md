@@ -1,5 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.17.0] - 2022-01-03
+
+### Added 
+- Log level -> set  StoreGlobal.GLOBAL_LOG_LEVEL {VERBOSE,DEBUG,WARN,INFO,ERROR,SILENT}
+- Array Load for add action/service
+- Add Db Prefab/Facade
+- DB getEntityMeta
+
 ## [0.16.2] - 2021-12-07
 
 ### Added 
