@@ -12,6 +12,7 @@ import CoreDBUpdate from '../src/classes/CoreDBUpdate';
 import CoreDBCon from '../src/classes/CoreDBCon';
 import CoreEntity from '../src/classes/CoreEntity';
 import CoreBundleModule from '../src/classes/CoreBundleModule';
+import CoreDBPrefab from '../src/classes/CoreDBPrefab';
 
 type TCoreKernel=CoreKernel<ICoreCClient>;
 
@@ -163,7 +164,17 @@ class TestEntity extends CoreEntity{
 }
 
 
-class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,InMemCache,null>{
+class TestPrefab extends CoreDBPrefab<CoreDBCon<any,any>>{
+  constructor(db:CoreDBCon<any, any>) {
+  super(db);
+  db.setEntityCache(true)
+  db.registerEntity(new TestEnt())
+  db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db))
+}
+
+}
+
+class TestModule extends CoreBundleModule<TCoreKernel,CoreDBPrefab<any>,TestClient,InMemCache,null>{
 
   constructor(kernel:TCoreKernel) {
     super("testModule",kernel);
@@ -173,11 +184,7 @@ class TestModule extends CoreBundleModule<TCoreKernel,InMemDB,TestClient,InMemCa
     this.setClient(new TestClient("testc",this))
     this.log("FirstTHIS")
     this.setCache(new InMemCache(this,10000))
-    const db=new InMemDB(this)
-    db.setEntityCache(true)
-    db.registerEntity(new TestEnt())
-    db.setUpdateChain(new TestDBUpdate01(db),new TestDBUpdate02(db),)
-    this.setDb(db)
+    this.setDb(new TestPrefab(new InMemDB(this)));
     await this.initBundleModule();
     await this.getKernel().triggerFunction("load")
   }

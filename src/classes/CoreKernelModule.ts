@@ -203,12 +203,16 @@ export default abstract class CoreKernelModule<
     this.notifyBridges(BridgeState.end);
   }
 
-  addAction(action: CoreAction): void {
-    this.actionlist.push(action);
+  addAction(...action: CoreAction[]): void {
+    action.forEach((value) => {
+      this.actionlist.push(value);
+    });
   }
 
-  addService(service: CoreService): void {
-    this.servicelist.push(service);
+  addService(...service: CoreService[]): void {
+    service.forEach((value) => {
+      this.servicelist.push(value);
+    });
   }
 
   getServiceList(): ICoreService[] {

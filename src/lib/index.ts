@@ -170,27 +170,27 @@ export interface ICoreKernelModule<
 
   beforeServiceStart?(): Promise<void>;
 
-  addAction(action: ICoreAction): void;
+  addAction(...action: ICoreAction[]): void;
 
-  addService(service: ICoreService): void;
+  addService(...service: ICoreService[]): void;
 
   getServiceList(): ICoreService[];
 
   getKernel(): K;
 
-  getDb(): T | null;
+  getDb(): T;
 
   setDb(db: T): void;
 
-  getClient(): P | null;
+  getClient(): P;
 
   setClient(client: P): void;
 
-  getEndpoint(): E | null;
+  getEndpoint(): E;
 
   setEndpoint(endpoint: E): void;
 
-  getCache(): C | null;
+  getCache(): C;
 
   setCache(cache: C): void;
 
@@ -290,6 +290,12 @@ export interface IDataBase<D, T> extends ICoreDB, ICoreEntityHandler {
   getConfig(key: string): Promise<ConfigType | undefined>;
 
   execScripts(list: RawQuery[]): Promise<T[] | null>;
+
+  canUpdate(): Promise<boolean>;
+
+  getCurrenDBVersion(): Promise<string>;
+
+  update(): Promise<boolean>;
 }
 
 export interface ICoreDB extends ILogChanel {

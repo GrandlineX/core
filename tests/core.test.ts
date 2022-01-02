@@ -3,7 +3,7 @@ import {
   createFolderIfNotExist,
   EProperties,
   generateSeed,
-  ICoreKernelModule,
+  ICoreKernelModule, IDataBase,
   ILogChanel,
   InMemDB,
   removeFolderIfExist,
@@ -16,6 +16,7 @@ import CoreDBCon from '../src/classes/CoreDBCon';
 import { TestEnt, TestKernel, TestService } from './DebugClasses';
 import CoreEntityWrapper from '../src/classes/CoreEntityWrapper';
 import { LogLevel } from '../src/classes/CoreLogger';
+import CoreDBPrefab from '../src/classes/CoreDBPrefab';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -139,7 +140,8 @@ describe('TestDatabase', () => {
     expect(conf?.c_value).not.toBeNull();
   });
   test('manual update', async () => {
-    const db = kernel.getChildModule("testModule")?.getDb() as InMemDB;
+    const dbpre = kernel.getChildModule("testModule")?.getDb() as CoreDBPrefab<InMemDB>;
+    const db = dbpre.getPrefabDB();
     const conf = await db.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
     expect(db.dbVersion).toBe("0");
