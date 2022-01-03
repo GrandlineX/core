@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1057" lines-covered="964" line-rate="0.912" branches-valid="343" branches-covered="241" branch-rate="0.7026" timestamp="1641171576008" complexity="0" version="0.1">
+<coverage lines-valid="1060" lines-covered="967" line-rate="0.9122" branches-valid="343" branches-covered="241" branch-rate="0.7026" timestamp="1641230471989" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/core/core</source>
   </sources>
@@ -309,7 +309,7 @@
         </class>
       </classes>
     </package>
-    <package name="src.classes" line-rate="0.8893000000000001" branch-rate="0.7058">
+    <package name="src.classes" line-rate="0.8898999999999999" branch-rate="0.7058">
       <classes>
         <class name="CoreAction.ts" filename="src/classes/CoreAction.ts" line-rate="1" branch-rate="1">
           <methods>
@@ -1658,6 +1658,11 @@
         </class>
         <class name="index.ts" filename="src/classes/index.ts" line-rate="1" branch-rate="1">
           <methods>
+            <method name="(anonymous_8)" hits="0" signature="()V">
+              <lines>
+                <line number="37" hits="0"/>
+              </lines>
+            </method>
           </methods>
           <lines>
             <line number="1" hits="2" branch="false"/>
@@ -1676,7 +1681,7 @@
             <line number="14" hits="2" branch="false"/>
             <line number="15" hits="2" branch="false"/>
             <line number="16" hits="2" branch="false"/>
-            <line number="19" hits="2" branch="false"/>
+            <line number="17" hits="2" branch="false"/>
             <line number="20" hits="2" branch="false"/>
             <line number="21" hits="2" branch="false"/>
             <line number="22" hits="2" branch="false"/>
@@ -1692,7 +1697,10 @@
             <line number="32" hits="2" branch="false"/>
             <line number="33" hits="2" branch="false"/>
             <line number="34" hits="2" branch="false"/>
+            <line number="35" hits="2" branch="false"/>
+            <line number="36" hits="2" branch="false"/>
             <line number="37" hits="2" branch="false"/>
+            <line number="40" hits="2" branch="false"/>
           </lines>
         </class>
       </classes>
