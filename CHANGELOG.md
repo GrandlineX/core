@@ -1,5 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.17.3] - 2022-01-03
+
+### Fixed 
+- Add missing module exports 
+ 
+All notable changes to this project will be documented in this file.
 ## [0.17.2] - 2022-01-03
 
 ### Fixed 
