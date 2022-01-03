@@ -1,5 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.17.2] - 2022-01-03
+
+### Fixed 
+- Fix Core kernel interface (BREAKING)
+ 
 ## [0.17.1] - 2022-01-03
 
 ### Fixed 

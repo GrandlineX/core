@@ -2,13 +2,14 @@ import {
   ICoreCClient,
   ICoreKernel,
   ICoreKernelModule,
+  IDataBase,
   IHaveLogger,
   IStore,
   KernelTrigger,
 } from './lib';
 import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
-import { CoreDBCon, CoreLogChannel, CoreLogger } from './classes';
+import { CoreLogChannel, CoreLogger } from './classes';
 
 import { DefaultLogger, EnvStore, StoreGlobal } from './modules';
 
@@ -266,7 +267,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * Get database object of the base kernel module
    * @link CoreDBCon
    */
-  getDb(): CoreDBCon<any, any> | null {
+  getDb(): IDataBase<any, any> | null {
     if (this.kernelModule) {
       return this.kernelModule.getDb();
     }
