@@ -9,10 +9,6 @@ export default abstract class CoreService
 
   public state: ServiceStates = 'INIT';
 
-  getName() {
-    return this.chanel;
-  }
-
   abstract start(): Promise<any>;
 
   abstract stop(): Promise<any>;

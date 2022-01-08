@@ -4,7 +4,7 @@ import {
   EProperties,
   generateSeed,
   ICoreKernelModule,
-  ILogChanel,
+  ILogChannel,
   InMemDB,
   removeFolderIfExist,
   sleep,
@@ -59,11 +59,11 @@ describe('kernel extend',  () => {
 
 describe.each([
   ["kernel",kernel],
-  ["module",kernel.getModule()as ILogChanel]
+  ["module",kernel.getModule()as ILogChannel]
   ]
 )(
   'Default logger:(%s):',
-  (name:string,log:ILogChanel ) => {
+  (name:string,log:ILogChannel ) => {
 
 
     test('log', async () => {

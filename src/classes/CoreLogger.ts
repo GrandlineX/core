@@ -9,7 +9,7 @@ export enum LogLevel {
 
 /**
  *
- * set StoreGlobal.GLOBAL_LOG_LEVEL {VERBOSE,DEBUG,WARN,INFO,ERROR,SILENT}
+ * set StoreGlobal.GLOBAL_LOG_LEVEL {VERBOSE, DEBUG, WARN, INFO, ERROR, SILENT}
  */
 export default abstract class CoreLogger {
   private logLevel: LogLevel;

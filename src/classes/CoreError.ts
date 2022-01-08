@@ -1,10 +1,10 @@
-import { ILogChanel } from '../lib';
+import { ILogChannel } from '../lib';
 
 /**
- * Error that's logs error message to the current log chanel
+ * Error that's logs error message to the current log channel
  */
 export default class CoreError extends Error {
-  constructor(errorMessage: string, logger: ILogChanel) {
+  constructor(errorMessage: string, logger: ILogChannel) {
     super(errorMessage);
     logger.error('G-ERR:', errorMessage);
   }

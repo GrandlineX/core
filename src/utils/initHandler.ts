@@ -1,9 +1,9 @@
-import { ICoreKernelModule, ILogChanel, WorkLoad } from '../lib';
+import { ICoreKernelModule, ILogChannel, WorkLoad } from '../lib';
 import CoreBridge from '../classes/CoreBridge';
 
 export default async function initHandler(
   modList: ICoreKernelModule<any, any, any, any, any>[],
-  logger: ILogChanel
+  logger: ILogChannel
 ): Promise<void> {
   modList.forEach((src) => {
     src.getDependencyList().forEach((dep) => {

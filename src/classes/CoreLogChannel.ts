@@ -1,14 +1,14 @@
-import { IHaveLogger, ILogChanel } from '../lib';
+import { IHaveLogger, ILogChannel } from '../lib';
 import CoreLogger, { LogLevel } from './CoreLogger';
 import CoreError from './CoreError';
 
-export default class CoreLogChannel implements ILogChanel {
+export default class CoreLogChannel implements ILogChannel {
   logger: CoreLogger | null;
 
   protected channel: string;
 
-  constructor(chanel: string, target: CoreLogger | IHaveLogger | null) {
-    this.channel = chanel;
+  constructor(channel: string, target: CoreLogger | IHaveLogger | null) {
+    this.channel = channel;
     if (target instanceof CoreLogger) {
       this.logger = target;
     } else if (target?.getLogger) {
@@ -60,5 +60,9 @@ export default class CoreLogChannel implements ILogChanel {
 
   lError(message: string): Error {
     return new CoreError(message, this);
+  }
+
+  getName(): string {
+    return this.channel;
   }
 }

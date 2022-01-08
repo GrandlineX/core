@@ -1,7 +1,9 @@
 import {
   BridgeState,
+  ICoreAnyModule,
   ICoreBridge,
   ICoreCache,
+  ICoreClient,
   ICoreKernel,
   ICoreKernelModule,
   ICorePresenter,
@@ -10,7 +12,6 @@ import {
 } from '../lib';
 import CoreAction from './CoreAction';
 import CoreService from './CoreService';
-import CoreClient from './CoreClient';
 import CoreLogChannel from './CoreLogChannel';
 import CoreLogger from './CoreLogger';
 
@@ -61,22 +62,22 @@ import CoreLogger from './CoreLogger';
 export default abstract class CoreKernelModule<
     K extends ICoreKernel<any>,
     T extends IDataBase<any, any> | null,
-    P extends CoreClient | null,
+    P extends ICoreClient | null,
     C extends ICoreCache | null,
     E extends ICorePresenter<any> | null
   >
   extends CoreLogChannel
-  implements ICoreKernelModule<K, T | null, P | null, C | null, E | null>
+  implements ICoreKernelModule<K, T, P, C, E>
 {
   protected trigger?: () => Promise<void>;
 
   private actionlist: CoreAction[];
 
-  private servicelist: CoreService[];
+  private readonly servicelist: CoreService[];
 
-  private deps: string[];
+  private readonly deps: string[];
 
-  private srcBridges: ICoreBridge[];
+  private readonly srcBridges: ICoreBridge[];
 
   private tarBridges: ICoreBridge[];
 
@@ -107,6 +108,22 @@ export default abstract class CoreKernelModule<
     this.deps = deps;
   }
 
+  hasDb(): boolean {
+    return !!this.db;
+  }
+
+  hasClient(): boolean {
+    return !!this.client;
+  }
+
+  hasEndpoint(): boolean {
+    return !!this.endpoint;
+  }
+
+  hasCache(): boolean {
+    return !!this.cache;
+  }
+
   addSrcBridge(bridge: ICoreBridge): void {
     this.srcBridges.push(bridge);
   }
@@ -115,14 +132,19 @@ export default abstract class CoreKernelModule<
     this.tarBridges.push(bridge);
   }
 
-  abstract startup(): Promise<void>;
+  async startup(): Promise<void> {
+    this.verbose('run-startup');
+  }
 
   async start(): Promise<void> {
     await this.endpoint?.start();
     await this.startup();
   }
 
-  getEndpoint(): E | null {
+  getEndpoint(): E {
+    if (!this.endpoint) {
+      throw this.lError('no endpoint');
+    }
     return this.endpoint;
   }
 
@@ -130,7 +152,10 @@ export default abstract class CoreKernelModule<
     this.endpoint = endpoint;
   }
 
-  getDb(): T | null {
+  getDb(): T {
+    if (!this.db) {
+      throw this.lError('no db');
+    }
     return this.db;
   }
 
@@ -138,7 +163,10 @@ export default abstract class CoreKernelModule<
     this.db = db;
   }
 
-  getClient(): P | null {
+  getClient(): P {
+    if (!this.client) {
+      throw this.lError('no client');
+    }
     return this.client;
   }
 
@@ -146,7 +174,10 @@ export default abstract class CoreKernelModule<
     this.client = client;
   }
 
-  getCache(): C | null {
+  getCache(): C {
+    if (!this.cache) {
+      throw this.lError('no cache');
+    }
     return this.cache;
   }
 
@@ -166,7 +197,9 @@ export default abstract class CoreKernelModule<
 
   abstract initModule(): Promise<void>;
 
-  abstract beforeServiceStart(): Promise<void>;
+  async beforeServiceStart(): Promise<void> {
+    this.verbose('run-before-service');
+  }
 
   async register(): Promise<void> {
     await this.waitForBridgeState(BridgeState.ready);
@@ -235,16 +268,19 @@ export default abstract class CoreKernelModule<
     return this.srcBridges;
   }
 
-  getBridgeModule(
-    name: string
-  ): ICoreKernelModule<any, any, any, any, any> | undefined {
+  getBridgeModule<M extends ICoreAnyModule>(name: string): M | undefined {
     const br = this.srcBridges.find(
       (bridge) => bridge.getTarget().getName() === name
     );
-    return br?.getTarget();
+    if (!br) {
+      return undefined;
+    }
+    return br.getTarget() as M;
   }
 
-  abstract final(): Promise<void>;
+  async final(): Promise<void> {
+    this.verbose('run-final');
+  }
 
   getLogger(): CoreLogger {
     return this.kernel.getLogger();

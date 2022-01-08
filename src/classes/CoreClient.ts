@@ -6,9 +6,9 @@ export default abstract class CoreClient
   implements ICoreElement
 {
   constructor(
-    chanel: string,
+    channel: string,
     module: ICoreKernelModule<any, any, any, any, any>
   ) {
-    super(`client-${chanel}`, module);
+    super(`client-${channel}`, module);
   }
 }

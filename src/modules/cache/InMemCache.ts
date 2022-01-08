@@ -69,7 +69,7 @@ export default class InMemCache extends CoreCache {
   }
 
   flash() {
-    this.debug(`Clear cache:${this.chanel}`);
+    this.debug(`Clear cache:${this.channel}`);
     this.keyMap.clear();
     this.eMap.clear();
   }
@@ -78,7 +78,7 @@ export default class InMemCache extends CoreCache {
     if (this.deleteTime) {
       this.loop = setInterval(this.flash, this.deleteTime);
     }
-    this.log(`Init cache:${this.chanel}`);
+    this.log(`Init cache:${this.channel}`);
   }
 
   async stop(): Promise<void> {

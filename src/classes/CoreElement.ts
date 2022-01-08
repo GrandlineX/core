@@ -1,20 +1,25 @@
-import { ICoreElement, ICoreKernel, ICoreKernelModule } from '../lib';
+import {
+  ICoreAnyModule,
+  ICoreElement,
+  ICoreKernel,
+  ICoreKernelModule,
+} from '../lib';
 import CoreLogChannel from './CoreLogChannel';
 
 export default abstract class CoreElement
   extends CoreLogChannel
   implements ICoreElement
 {
-  chanel: string;
+  channel: string;
 
-  private module: ICoreKernelModule<any, any, any, any, any>;
+  private readonly module: ICoreKernelModule<any, any, any, any, any>;
 
   constructor(
-    chanel: string,
+    channel: string,
     module: ICoreKernelModule<any, any, any, any, any>
   ) {
-    super(chanel, module);
-    this.chanel = chanel;
+    super(channel, module);
+    this.channel = channel;
     this.module = module;
   }
 
@@ -22,7 +27,7 @@ export default abstract class CoreElement
     return this.module.getKernel();
   }
 
-  getModule(): ICoreKernelModule<any, any, any, any, any> {
-    return this.module;
+  getModule<M extends ICoreAnyModule>(): M {
+    return this.module as M;
   }
 }

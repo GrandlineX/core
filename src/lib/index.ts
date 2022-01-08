@@ -108,7 +108,7 @@ export interface ICoreCClient {
 }
 
 export interface ICoreKernel<X extends ICoreCClient>
-  extends ILogChanel,
+  extends ILogChannel,
     IHaveLogger {
   start(): Promise<boolean>;
 
@@ -137,9 +137,9 @@ export interface ICoreKernel<X extends ICoreCClient>
 
   getDb(): IDataBase<any, any> | null;
 
-  addModule(module: ICoreKernelModule<any, any, any, any, any>): void;
+  addModule(module: ICoreAnyModule): void;
 
-  getModule(): ICoreKernelModule<any, any, any, any, any>;
+  getModule(): ICoreAnyModule;
 
   getOffline(): boolean;
 
@@ -152,13 +152,15 @@ export interface ICoreKernel<X extends ICoreCClient>
   getConfigStore(): IStore;
 }
 
+export type ICoreClient = ICoreElement;
+export type ICoreAnyModule = ICoreKernelModule<any, any, any, any, any>;
 export interface ICoreKernelModule<
   K extends ICoreKernel<any>,
   T extends IDataBase<any, any> | null,
-  P extends ICoreElement | null,
+  P extends ICoreClient | null,
   C extends ICoreCache | null,
   E extends ICorePresenter<any> | null
-> extends ILogChanel,
+> extends ILogChannel,
     IHaveLogger {
   addSrcBridge(bridge: ICoreBridge): void;
 
@@ -174,11 +176,11 @@ export interface ICoreKernelModule<
 
   start(): Promise<void>;
 
-  final?(): Promise<void>;
+  final(): Promise<void>;
 
-  startup?(): Promise<void>;
+  startup(): Promise<void>;
 
-  beforeServiceStart?(): Promise<void>;
+  beforeServiceStart(): Promise<void>;
 
   addAction(...action: ICoreAction[]): void;
 
@@ -192,23 +194,27 @@ export interface ICoreKernelModule<
 
   setDb(db: T): void;
 
+  hasDb(): boolean;
+
   getClient(): P;
 
   setClient(client: P): void;
+
+  hasClient(): boolean;
 
   getEndpoint(): E;
 
   setEndpoint(endpoint: E): void;
 
+  hasEndpoint(): boolean;
+
   getCache(): C;
 
   setCache(cache: C): void;
 
-  getName(): string;
+  hasCache(): boolean;
 
-  getBridgeModule(
-    name: string
-  ): ICoreKernelModule<K, any, any, any, any> | undefined;
+  getBridgeModule<M extends ICoreAnyModule>(name: string): M | undefined;
 }
 
 export interface ICorePresenter<E> extends ICoreElement {
@@ -219,10 +225,10 @@ export interface ICorePresenter<E> extends ICoreElement {
   getApp(): E;
 }
 
-export interface ICoreElement extends ILogChanel {
+export interface ICoreElement extends ILogChannel {
   getKernel(): ICoreKernel<any>;
 
-  getModule(): ICoreKernelModule<any, any, any, any, any>;
+  getModule<M extends ICoreAnyModule>(): M;
 }
 
 export interface ICoreAction extends ICoreElement {
@@ -230,8 +236,6 @@ export interface ICoreAction extends ICoreElement {
 }
 
 export interface ICoreService extends ICoreElement {
-  getName(): string;
-
   start(): Promise<any>;
 
   stop(): Promise<any>;
@@ -244,12 +248,12 @@ export interface ICoreBridge {
 
   waitForState(state: BridgeState): Promise<boolean>;
 
-  getTarget(): ICoreKernelModule<any, any, any, any, any>;
+  getTarget(): ICoreAnyModule;
 }
 
 export type WorkLoad<T> = Promise<T>[];
 
-export interface ILogChanel {
+export interface ILogChannel {
   log(...ags: unknown[]): void;
 
   debug(...ags: unknown[]): void;
@@ -263,6 +267,8 @@ export interface ILogChanel {
   verbose(...ags: unknown[]): void;
 
   lError(message: string): Error;
+
+  getName(): string;
 }
 
 export interface ConfigType {
@@ -313,7 +319,11 @@ export interface IDataBase<D, T> extends ICoreDB, ICoreEntityHandler {
   update(): Promise<boolean>;
 }
 
-export interface ICoreDB extends ILogChanel {
+/**
+ * Don't use this interface use {IDataBase} instead
+ * @see  IDataBase
+ */
+export interface ICoreDB extends ILogChannel {
   setUpdateChain(chain: IBaseDBUpdate): void;
 
   start(): Promise<void>;

@@ -6,10 +6,10 @@ export default abstract class CorePresenter<T>
   implements ICorePresenter<T>
 {
   constructor(
-    chanel: string,
+    channel: string,
     module: ICoreKernelModule<any, any, any, any, any>
   ) {
-    super(`presenter-${chanel}`, module);
+    super(`presenter-${channel}`, module);
   }
 
   abstract start(): Promise<boolean>;

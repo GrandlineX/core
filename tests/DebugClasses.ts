@@ -194,20 +194,8 @@ class TestModule extends CoreBundleModule<TCoreKernel,CoreDBPrefab<any>,TestClie
   }
   async initBundleModule(): Promise<void>{
     this.log("triggerBundleInit")
-  }
 
-  startup(): Promise<void> {
-    return Promise.resolve( undefined );
   }
-
-  beforeServiceStart(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
-  final(): Promise<void> {
-    return Promise.resolve( undefined );
-  }
-
 }
 class BridgeTestModule extends CoreKernelModule<TCoreKernel,null,TestClient,null, null>{
   constructor(kernel:TCoreKernel) {

@@ -1,5 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.18.0-pre01] 
+
+### Changed
+- update Module interfaces
+### Fixed
+- fix many spelling issues
+
 ## [0.17.3] - 2022-01-03
 
 ### Fixed 
@@ -51,7 +58,7 @@ All notable changes to this project will be documented in this file.
 - Restructure entity module
 ## [0.15.1] - 2021-12-06
 ### Added
-- CoreError # log to error log chanel
+- CoreError # log to error log channel
 ### Changed
 - Interface for entity update 
 - Better interfaces for entity constructor

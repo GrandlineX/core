@@ -1,4 +1,5 @@
 import {
+  ICoreAnyModule,
   ICoreCClient,
   ICoreKernel,
   ICoreKernelModule,
@@ -114,7 +115,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   /**
    * get base kernel module
    */
-  getModule(): ICoreKernelModule<any, any, any, any, any> {
+  getModule(): ICoreAnyModule {
     if (this.kernelModule) {
       return this.kernelModule;
     }
@@ -337,9 +338,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     return true;
   }
 
-  getChildModule(
-    modName: string
-  ): ICoreKernelModule<any, any, any, any, any> | null {
+  getChildModule(modName: string): ICoreAnyModule | null {
     const mod = this.moduleList.find((mo) => mo.getName() === modName);
     if (mod) {
       return mod;
@@ -353,13 +352,13 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   private preloadSetup() {
     const st = this.getConfigStore();
-    this.appVersion = st.get('GLOBAL_APP_VERSION') || '';
+    this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) || '';
     if (
       !(
-        createFolderIfNotExist(st.get('GLOBAL_PATH_HOME') || '') &&
-        createFolderIfNotExist(st.get('GLOBAL_PATH_DATA') || '') &&
-        createFolderIfNotExist(st.get('GLOBAL_PATH_DB') || '') &&
-        createFolderIfNotExist(st.get('GLOBAL_PATH_TEMP') || '')
+        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_HOME) || '') &&
+        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_DATA) || '') &&
+        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_DB) || '') &&
+        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_TEMP) || '')
       )
     ) {
       console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
