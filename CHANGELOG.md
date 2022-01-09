@@ -1,11 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-## [0.18.0-pre01] 
+## [0.18.0] 
 
 ### Changed
 - update Module interfaces
+- the module getter now throw exception instead of null
+- update dev dependencies
 ### Fixed
 - fix many spelling issues
+- InMemDb ID Bug 
 
 ## [0.17.3] - 2022-01-03
 
