@@ -81,11 +81,11 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     if (!table) {
       throw this.lError('Cant create Entity');
     }
-    if (clone.e_id === null) {
+    if (clone.e_id === -1) {
       clone.e_id = this.getNewObjectID();
     }
-    table.push(entity);
-    return entity;
+    table.push(clone);
+    return clone;
   }
 
   async deleteEntityById(className: string, id: number): Promise<boolean> {

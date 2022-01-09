@@ -10,7 +10,7 @@ export function camelToSnakeCase(str: string): string {
   return className.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 }
 
-export function easyRelation(name: string) {
+export function EntityRelation(name: string) {
   return {
     key: 'e_id',
     relation: camelToSnakeCase(name),

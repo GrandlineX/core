@@ -1,3 +1,4 @@
+import * as Path from 'path';
 import {
   CoreCache,
   createFolderIfNotExist,
@@ -8,33 +9,30 @@ import {
   InMemDB,
   removeFolderIfExist,
   sleep,
-  validateEntity
+  validateEntity,
+  LogLevel,
+  CoreEntityWrapper,
+  CoreDBPrefab,
+  CoreDBCon,
 } from '../src';
-import * as Path from 'path';
-import CoreDBCon from '../src/classes/CoreDBCon';
 
 import { TestEnt, TestKernel, TestService } from './DebugClasses';
-import CoreEntityWrapper from '../src/classes/CoreEntityWrapper';
-import { LogLevel } from '../src/classes/CoreLogger';
-import CoreDBPrefab from '../src/classes/CoreDBPrefab';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
 const msiPath = Path.join(__dirname, '..', 'data');
 const testPath = Path.join(__dirname, '..', 'data', 'config');
 
+createFolderIfNotExist(msiPath);
+createFolderIfNotExist(testPath);
 
- createFolderIfNotExist(msiPath);
- createFolderIfNotExist(testPath);
-
-
-let kernel = new TestKernel(appName,appCode,testPath);
+const kernel = new TestKernel(appName, appCode, testPath);
 kernel.getLogger().setLogLevel(LogLevel.VERBOSE);
 
 const testText = 'hello_world';
 
 describe('Clean start', () => {
-   test('preload', async () => {
+  test('preload', async () => {
     expect(kernel.getState()).toBe('init');
   });
   test('start kernel', async () => {
@@ -43,84 +41,73 @@ describe('Clean start', () => {
     expect(kernel.getModCount()).toBe(2);
     expect(kernel.getState()).toBe('running');
   });
-})
+});
 
-describe('kernel extend',  () => {
+describe('kernel extend', () => {
   test('getChild empty', async () => {
-    expect(kernel.getChildModule("invaldimodname")).toBeNull();
+    expect(kernel.getChildModule('invaldimodname')).toBeNull();
   });
   test('getOffline', async () => {
     expect(kernel.getOffline()).toBeFalsy();
   });
   test('getAppCode', async () => {
-    expect(kernel.getAppCode()).not.toBe("");
+    expect(kernel.getAppCode()).not.toBe('');
   });
 });
 
 describe.each([
-  ["kernel",kernel],
-  ["module",kernel.getModule()as ILogChannel]
-  ]
-)(
-  'Default logger:(%s):',
-  (name:string,log:ILogChannel ) => {
-
-
-    test('log', async () => {
-      log.log("log")
-    });
-    test('debug', async () => {
-      log.debug("debug")
-    });
-    test('warn', async () => {
-      log.warn("warn")
-    });
-    test('error', async () => {
-      log.error("error")
-    });
-    test('verbose', async () => {
-      log.verbose("verbose")
-    });
-    test('lError', (callback) => {
-      try {
-        throw log.lError("TestError")
-      }catch (e) {
-        callback(false)
-      }
-    });
-  })
+  ['kernel', kernel],
+  ['module', kernel.getModule() as ILogChannel],
+])('Default logger:(%s):', (name: string, log: ILogChannel) => {
+  test('log', async () => {
+    log.log('log');
+  });
+  test('debug', async () => {
+    log.debug('debug');
+  });
+  test('warn', async () => {
+    log.warn('warn');
+  });
+  test('error', async () => {
+    log.error('error');
+  });
+  test('verbose', async () => {
+    log.verbose('verbose');
+  });
+  test('lError', (callback) => {
+    try {
+      throw log.lError('TestError');
+    } catch (e) {
+      callback(false);
+    }
+  });
+});
 
 describe('DevMode', () => {
-
   test('switch', async () => {
-      expect(kernel.getDevMode()).toBeFalsy()
-      kernel.setDevMode(true)
-      expect(kernel.getDevMode()).toBeTruthy()
-      kernel.setDevMode(false)
-      expect(kernel.getDevMode()).toBeFalsy()
+    expect(kernel.getDevMode()).toBeFalsy();
+    kernel.setDevMode(true);
+    expect(kernel.getDevMode()).toBeTruthy();
+    kernel.setDevMode(false);
+    expect(kernel.getDevMode()).toBeFalsy();
   });
-
-})
+});
 
 describe('EnvStore', () => {
-
   test('can load from .env file', async () => {
     const store = kernel.getConfigStore();
-      expect(store.has("TESTENV")).toBeTruthy()
-      expect(store.get("TESTENV")).toBe("testdata")
+    expect(store.has('TESTENV')).toBeTruthy();
+    expect(store.get('TESTENV')).toBe('testdata');
   });
-
-})
+});
 describe('Module', () => {
-
   test('test bridge', async () => {
-    const mod = kernel.getChildModule("bridgeModule");
+    const mod = kernel.getChildModule('bridgeModule');
 
-    expect(mod?.getBridgeModule("testModule")).not.toBeNull();
-    expect(mod?.getBridgeModule("testModule")).not.toBeUndefined();
+    expect(mod?.getBridgeModule('testModule')).not.toBeNull();
+    expect(mod?.getBridgeModule('testModule')).not.toBeUndefined();
   });
-
-})
+});
 
 describe('Database', () => {
   test('get version', async () => {
@@ -141,186 +128,244 @@ describe('Database', () => {
     const res2 = await db?.getConfig(testText);
     expect(res2).toBeUndefined();
 
-    expect(await db?.setConfig("test","test")).toBeTruthy();
-    await db?.removeConfig("test")
-    expect(await db?.configExist("test")).toBeFalsy()
+    expect(await db?.setConfig('test', 'test')).toBeTruthy();
+    await db?.removeConfig('test');
+    expect(await db?.configExist('test')).toBeFalsy();
   });
-})
+});
 describe('TestDatabase', () => {
   test('get version', async () => {
-    const db = kernel.getChildModule("testModule")?.getDb();
+    const db = kernel.getChildModule('testModule')?.getDb();
     const conf = await db?.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
-    expect(db.getEntityMeta()).toHaveLength(1)
+    expect(db.getEntityMeta()).toHaveLength(1);
   });
   test('manual update', async () => {
-    const dbpre = kernel.getChildModule("testModule")?.getDb() as CoreDBPrefab<InMemDB>;
+    const dbpre = kernel
+      .getChildModule('testModule')
+      ?.getDb() as CoreDBPrefab<InMemDB>;
     const db = dbpre.getPrefabDB();
     const conf = await db.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
-    expect(db.dbVersion).toBe("0");
-    db.dbVersion="2"
+    expect(db.dbVersion).toBe('0');
+    db.dbVersion = '2';
     expect(await db.canUpdate()).toBeTruthy();
     expect(await db.update()).toBeTruthy();
-    expect(await db.getCurrenDBVersion()).toBe("2");
+    expect(await db.getCurrenDBVersion()).toBe('2');
   });
-})
+});
 describe('Cache', () => {
-  test( 'set', async () => {
-    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
-    const cache = mod.getCache() as CoreCache
-    const conf = await cache.set( "test","test" );
-  } );
-  test( 'exist', async () => {
-    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
-    const cache = mod.getCache() as CoreCache
-    const conf = await cache.exist( "test" );
-    expect(conf).toBeTruthy()
-  } );
-  test( 'get', async () => {
-    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
-    const cache = mod.getCache() as CoreCache
-    const conf = await cache.get( "test" );
-    expect(conf).toBe("test")
-  } );
-  test( 'del', async () => {
-    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
-    const cache = mod.getCache() as CoreCache
-     await cache.delete( "test" );
-    const conf = await cache.exist( "test" );
-    expect(conf).toBeFalsy()
-  } );
-
-})
+  test('set', async () => {
+    const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
+      any,
+      any,
+      any,
+      any,
+      any
+    >;
+    const cache = mod.getCache() as CoreCache;
+    const conf = await cache.set('test', 'test');
+  });
+  test('exist', async () => {
+    const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
+      any,
+      any,
+      any,
+      any,
+      any
+    >;
+    const cache = mod.getCache() as CoreCache;
+    const conf = await cache.exist('test');
+    expect(conf).toBeTruthy();
+  });
+  test('get', async () => {
+    const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
+      any,
+      any,
+      any,
+      any,
+      any
+    >;
+    const cache = mod.getCache() as CoreCache;
+    const conf = await cache.get('test');
+    expect(conf).toBe('test');
+  });
+  test('del', async () => {
+    const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
+      any,
+      any,
+      any,
+      any,
+      any
+    >;
+    const cache = mod.getCache() as CoreCache;
+    await cache.delete('test');
+    const conf = await cache.exist('test');
+    expect(conf).toBeFalsy();
+  });
+});
 describe('Entity', () => {
-  let e_id=0;
-  let wrapper:undefined|CoreEntityWrapper<TestEnt>=undefined;
-  let entity:TestEnt|null=null
+  let e_id = 0;
+  let wrapper: undefined | CoreEntityWrapper<TestEnt>;
+  let entity: TestEnt | null = null;
 
   test('get wrapper class', async () => {
-    const mod=kernel.getChildModule("testModule") as ICoreKernelModule<any, any, any, any, any>;
-    const db = mod.getDb() as CoreDBCon<any,any>;
-    wrapper=db.getEntityWrapper<TestEnt>("TestEnt")
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjList()).length).toBe(0)
+    const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
+      any,
+      any,
+      any,
+      any,
+      any
+    >;
+    const db = mod.getDb() as CoreDBCon<any, any>;
+    wrapper = db.getEntityWrapper<TestEnt>('TestEnt');
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect((await wrapper.getObjList()).length).toBe(0);
     }
   });
   test('create new', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      entity=new TestEnt();
-      entity= await wrapper.createObject(entity)
-      expect(entity).not.toBeNull()
-      expect(entity.e_id).not.toBeNull()
-      if (entity && entity.e_id){
-        e_id=entity.e_id;
-         expect((await wrapper.getObjList()).length).toBe(1)
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      entity = new TestEnt();
+      entity = await wrapper.createObject(entity);
+      expect(entity).not.toBeNull();
+      expect(entity.e_id).not.toBeNull();
+      if (entity && entity.e_id) {
+        e_id = entity.e_id;
+        expect((await wrapper.getObjList()).length).toBe(1);
+        expect(entity.e_id).not.toBe(-1);
       }
     }
   });
   test('update', async () => {
-    expect(wrapper).not.toBeUndefined()
-    expect(entity).not.toBeNull()
+    expect(wrapper).not.toBeUndefined();
+    expect(entity).not.toBeNull();
 
-    if (wrapper && entity){
-      let oj=await wrapper.getObjById(e_id)
+    if (wrapper && entity) {
+      let oj = await wrapper.getObjById(e_id);
 
-      expect(oj).not.toBeNull()
-      expect(oj?.testProp).not.toBeNull()
-      expect(oj?.testProp).toBe(0)
-      expect((await wrapper.updateObject(e_id,{
-        testProp:2
-      }))).toBeTruthy()
+      expect(oj).not.toBeNull();
+      expect(oj?.testProp).not.toBeNull();
+      expect(oj?.testProp).toBe(0);
+      expect(
+        await wrapper.updateObject(e_id, {
+          testProp: 2,
+        })
+      ).toBeTruthy();
 
-      oj=await wrapper.getObjById(e_id)
-      expect(oj).not.toBeNull()
-      expect(oj?.testProp).toBe(2)
-
+      oj = await wrapper.getObjById(e_id);
+      expect(oj).not.toBeNull();
+      expect(oj?.testProp).toBe(2);
     }
   });
   test('get by id', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjById(e_id))).not.toBeNull()
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect(await wrapper.getObjById(e_id)).not.toBeNull();
     }
   });
   test('listing search id', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjList({
-        e_id: e_id,
-      }))).toHaveLength(1);
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect(
+        await wrapper.getObjList({
+          e_id,
+        })
+      ).toHaveLength(1);
     }
   });
   test('listing search id limit 0', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjList({
-        e_id: e_id,
-      },0))).toHaveLength(0);
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect(
+        await wrapper.getObjList(
+          {
+            e_id,
+          },
+          0
+        )
+      ).toHaveLength(0);
     }
   });
   test('listing search id limit 1', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjList({
-        e_id: e_id,
-      },1,[{ key:"e_id", order: "ASC" }]))).toHaveLength(1);
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect(
+        await wrapper.getObjList(
+          {
+            e_id,
+          },
+          1,
+          [{ key: 'e_id', order: 'ASC' }]
+        )
+      ).toHaveLength(1);
     }
   });
   test('listing search id limit 2', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.getObjList({
-        e_id: e_id,
-      },2,[{ key:"e_id", order: "DESC" }]))).toHaveLength(1);
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect(
+        await wrapper.getObjList(
+          {
+            e_id,
+          },
+          2,
+          [{ key: 'e_id', order: 'DESC' }]
+        )
+      ).toHaveLength(1);
     }
   });
   test('find entity by id', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.findObj({
-        e_id: e_id,
-      }))).not.toBeNull();
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect(
+        await wrapper.findObj({
+          e_id,
+        })
+      ).not.toBeNull();
     }
   });
   test('delete', async () => {
-    expect(wrapper).not.toBeUndefined()
-    if (wrapper){
-      expect((await wrapper.delete(e_id))).toBeTruthy();
-      expect((await wrapper.getObjList()).length).toBe(0)
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      expect(await wrapper.delete(e_id)).toBeTruthy();
+      expect((await wrapper.getObjList()).length).toBe(0);
     }
   });
-  test("full validation",()=>{
-    if (entity){
-       expect(validateEntity(entity)).toBeTruthy()
+  test('full validation', () => {
+    if (entity) {
+      expect(validateEntity(entity)).toBeTruthy();
     }
-  })
+  });
   test.each([
-    [0,{testProp:0}],
-    [1,{testProp:0}]]
-  )(
-    'Default logger:(%i):',
-    async (name:number,props:EProperties<TestEnt>  ) => {
-      expect(wrapper).not.toBeUndefined()
-      if (wrapper){
-        const obj= await wrapper.createObject(new TestEnt(props))
-        let cacheOld= await wrapper.getObjById(obj.e_id)
-        let cache= await wrapper.getObjById(obj.e_id)
-        expect(cache).not.toBeNull()
+    [0, { testProp: 0 }],
+    [1, { testProp: 0 }],
+    [2, { testProp: 0 }],
+  ])(
+    'Bulk load:(%i):',
+    async (name: number, props: EProperties<TestEnt>) => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        const fakeEnt={
+          e_id:-1,
+          ...props
+        } as TestEnt
+        const obj = await wrapper.createObject(fakeEnt);
+        const cacheOld = await wrapper.getObjById(obj.e_id);
+        let cache = await wrapper.getObjById(obj.e_id);
+        expect(cache).not.toBeNull();
         expect(cache).toBe(cacheOld);
 
-        await wrapper.updateObject(obj.e_id,{
-          testProp:1
-        })
-        cache= await wrapper.getObjById(obj.e_id)
-        expect(cache?.testProp).toBe(1)
-
+        await wrapper.updateObject(obj.e_id, {
+          testProp: 1,
+        });
+        cache = await wrapper.getObjById(obj.e_id);
+        expect(cache?.testProp).toBe(1);
       }
-
-    })
-})
+    }
+  );
+});
 describe('Crypto', () => {
   test('encrypt/decrypt', async () => {
     const cc = kernel.getCryptoClient();
@@ -338,53 +383,47 @@ describe('Crypto', () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
 
-    const seed=generateSeed();
-    expect(seed).not.toBe("")
-    expect(cc?.getHash(seed,testText)).not.toBeNull();
-
+    const seed = generateSeed();
+    expect(seed).not.toBe('');
+    expect(cc?.getHash(seed, testText)).not.toBeNull();
   });
   test('token gen', async () => {
     const cc = kernel.getCryptoClient();
     expect(cc).not.toBeNull();
-    expect(await cc?.generateSecureToken(48)).not.toBe("")
+    expect(await cc?.generateSecureToken(48)).not.toBe('');
   });
-
 });
 
-describe("Service",()=>{
-
+describe('Service', () => {
   test('test tates', async () => {
-    const mod=kernel.getModule()
-    const service=new TestService("hello",30000,mod);
-    expect(service.state).toBe("INIT")
-    service.setRunning()
-    expect(service.state).toBe("RUNNING")
-    service.setSleeping()
-    expect(service.state).toBe("SLEEPING")
-    service.forceStop=true;
-    service.setRunning()
-    expect(service.state).toBe("SLEEPING")
+    const mod = kernel.getModule();
+    const service = new TestService('hello', 30000, mod);
+    expect(service.state).toBe('INIT');
+    service.setRunning();
+    expect(service.state).toBe('RUNNING');
+    service.setSleeping();
+    expect(service.state).toBe('SLEEPING');
+    service.forceStop = true;
+    service.setRunning();
+    expect(service.state).toBe('SLEEPING');
   });
   test('loop service cycle', async () => {
-    const mod=kernel.getModule()
-    const service=new TestService("hello",30000,mod);
-    mod.addService(service)
-    await service.start()
+    const mod = kernel.getModule();
+    const service = new TestService('hello', 30000, mod);
+    mod.addService(service);
+    await service.start();
 
-    await sleep( 10 )
+    await sleep(10);
 
-    expect(service.state).toBe("RUNNING")
+    expect(service.state).toBe('RUNNING');
 
-    await service.stop()
+    await service.stop();
 
-    expect(service.state).toBe("SLEEPING")
-
+    expect(service.state).toBe('SLEEPING');
   });
-})
+});
 
-
-describe("ShutDown",()=>{
-
+describe('ShutDown', () => {
   test('exit kernel', async () => {
     const result = await kernel.stop();
 
@@ -396,8 +435,6 @@ describe("ShutDown",()=>{
   });
 
   test('cleanup', async () => {
-
-    removeFolderIfExist(testPath)
+    removeFolderIfExist(testPath);
   });
-})
-
+});
