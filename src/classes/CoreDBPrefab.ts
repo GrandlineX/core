@@ -60,11 +60,11 @@ export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
   }
 
   async getCurrenDBVersion(): Promise<string> {
-    return this.getCurrenDBVersion();
+    return this.db.getCurrenDBVersion();
   }
 
   async update(): Promise<boolean> {
-    return this.update();
+    return this.db.update();
   }
 
   isConnected(): boolean {

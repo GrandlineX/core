@@ -14,9 +14,10 @@ import {
   CoreEntityWrapper,
   CoreDBPrefab,
   CoreDBCon,
+  ICoreAnyModule,
 } from '../src';
 
-import { TestEnt, TestKernel, TestService } from './DebugClasses';
+import { TestEnt, TestKernel, TestModule, TestService } from './DebugClasses';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -100,15 +101,71 @@ describe('EnvStore', () => {
     expect(store.get('TESTENV')).toBe('testdata');
   });
 });
-describe('Module', () => {
-  test('test bridge', async () => {
-    const mod = kernel.getChildModule('bridgeModule');
 
-    expect(mod?.getBridgeModule('testModule')).not.toBeNull();
-    expect(mod?.getBridgeModule('testModule')).not.toBeUndefined();
-  });
-});
+describe.each([
+  ['testModule', false, 0, [null]],
+  ['bridgeModule', true, 1, ['testModule']],
+])(
+  'Module: (%s):',
+  (name: string, failing: boolean, br: number, mods: (string | null)[]) => {
+    const module = kernel.getChildModule(name) as ICoreAnyModule;
 
+    test('exist', () => {
+      expect(module).not.toBeNull();
+    });
+
+    test('hasPresenter', () => {
+      try {
+        expect(module.hasPresenter()).toBeTruthy();
+        expect(module.getPresenter()).not.toBeNull();
+        expect(failing).toBeFalsy();
+      } catch (e) {
+        expect(failing).toBeTruthy();
+      }
+    });
+    test('hasDb', () => {
+      try {
+        expect(module.hasDb()).toBeTruthy();
+        expect(module.getDb()).not.toBeNull();
+        expect(failing).toBeFalsy();
+      } catch (e) {
+        expect(failing).toBeTruthy();
+      }
+    });
+    test('hasCache', () => {
+      try {
+        expect(module.hasCache()).toBeTruthy();
+        expect(module.getCache()).not.toBeNull();
+        expect(failing).toBeFalsy();
+      } catch (e) {
+        expect(failing).toBeTruthy();
+      }
+    });
+    test('hasClient', () => {
+      try {
+        expect(module.hasClient()).toBeTruthy();
+        expect(module.getClient()).not.toBeNull();
+        expect(failing).toBeFalsy();
+      } catch (e) {
+        expect(failing).toBeTruthy();
+      }
+    });
+    test('hasServiceList', () => {
+      expect(module.getServiceList()).toHaveLength(failing ? 0 : 1);
+    });
+    test('hasBridges', () => {
+      expect(module.getBridges()).toHaveLength(br);
+    });
+
+    test.each(mods)('Bridge: (%s):', (mName: string | null) => {
+      if (mName) {
+        expect(module.getBridgeModule(mName)).not.toBeUndefined();
+      } else {
+        expect(module.getBridgeModule('modnotexist')).toBeUndefined();
+      }
+    });
+  }
+);
 describe('Database', () => {
   test('get version', async () => {
     expect(kernel.getState()).toBe('running');
@@ -342,29 +399,26 @@ describe('Entity', () => {
     [0, { testProp: 0 }],
     [1, { testProp: 0 }],
     [2, { testProp: 0 }],
-  ])(
-    'Bulk load:(%i):',
-    async (name: number, props: EProperties<TestEnt>) => {
-      expect(wrapper).not.toBeUndefined();
-      if (wrapper) {
-        const fakeEnt={
-          e_id:-1,
-          ...props
-        } as TestEnt
-        const obj = await wrapper.createObject(fakeEnt);
-        const cacheOld = await wrapper.getObjById(obj.e_id);
-        let cache = await wrapper.getObjById(obj.e_id);
-        expect(cache).not.toBeNull();
-        expect(cache).toBe(cacheOld);
+  ])('Bulk load:(%i):', async (name: number, props: EProperties<TestEnt>) => {
+    expect(wrapper).not.toBeUndefined();
+    if (wrapper) {
+      const fakeEnt = {
+        e_id: -1,
+        ...props,
+      } as TestEnt;
+      const obj = await wrapper.createObject(fakeEnt);
+      const cacheOld = await wrapper.getObjById(obj.e_id);
+      let cache = await wrapper.getObjById(obj.e_id);
+      expect(cache).not.toBeNull();
+      expect(cache).toBe(cacheOld);
 
-        await wrapper.updateObject(obj.e_id, {
-          testProp: 1,
-        });
-        cache = await wrapper.getObjById(obj.e_id);
-        expect(cache?.testProp).toBe(1);
-      }
+      await wrapper.updateObject(obj.e_id, {
+        testProp: 1,
+      });
+      cache = await wrapper.getObjById(obj.e_id);
+      expect(cache?.testProp).toBe(1);
     }
-  );
+  });
 });
 describe('Crypto', () => {
   test('encrypt/decrypt', async () => {

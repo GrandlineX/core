@@ -89,7 +89,7 @@ export default abstract class CoreKernelModule<
 
   private cache: C | null;
 
-  private endpoint: E | null;
+  private presenter: E | null;
 
   private readonly name: string;
 
@@ -102,7 +102,7 @@ export default abstract class CoreKernelModule<
     this.db = null;
     this.client = null;
     this.cache = null;
-    this.endpoint = null;
+    this.presenter = null;
     this.srcBridges = [];
     this.tarBridges = [];
     this.deps = deps;
@@ -116,8 +116,8 @@ export default abstract class CoreKernelModule<
     return !!this.client;
   }
 
-  hasEndpoint(): boolean {
-    return !!this.endpoint;
+  hasPresenter(): boolean {
+    return !!this.presenter;
   }
 
   hasCache(): boolean {
@@ -137,19 +137,19 @@ export default abstract class CoreKernelModule<
   }
 
   async start(): Promise<void> {
-    await this.endpoint?.start();
+    await this.presenter?.start();
     await this.startup();
   }
 
-  getEndpoint(): E {
-    if (!this.endpoint) {
+  getPresenter(): E {
+    if (!this.presenter) {
       throw this.lError('no endpoint');
     }
-    return this.endpoint;
+    return this.presenter;
   }
 
-  setEndpoint(endpoint: E | null): void {
-    this.endpoint = endpoint;
+  setPresenter(presenter: E | null): void {
+    this.presenter = presenter;
   }
 
   getDb(): T {
@@ -222,8 +222,8 @@ export default abstract class CoreKernelModule<
 
   async shutdown(): Promise<void> {
     await this.waitForBridgeState(BridgeState.end);
-    if (this.endpoint) {
-      this.endpoint.stop();
+    if (this.presenter) {
+      this.presenter.stop();
     }
 
     const workload: Promise<any>[] = [];

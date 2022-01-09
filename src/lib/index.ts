@@ -202,11 +202,11 @@ export interface ICoreKernelModule<
 
   hasClient(): boolean;
 
-  getEndpoint(): E;
+  getPresenter(): E;
 
-  setEndpoint(endpoint: E): void;
+  setPresenter(presenter: E): void;
 
-  hasEndpoint(): boolean;
+  hasPresenter(): boolean;
 
   getCache(): C;
 

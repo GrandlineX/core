@@ -19,7 +19,10 @@ import {
   InMemDB,
   CoreDBUpdate,
   sleep,
+  ICoreAnyModule,
+  CoreAction,
 } from '../src';
+import CorePresenter from '../src/classes/CorePresenter';
 
 type TCoreKernel = CoreKernel<ICoreCClient>;
 
@@ -45,6 +48,23 @@ class TestBaseMod extends CoreKernelModule<
 
   startup(): Promise<void> {
     return Promise.resolve(undefined);
+  }
+}
+class TestPresenter extends CorePresenter<null> {
+  constructor(module: ICoreAnyModule) {
+    super('test-presenter', module);
+  }
+
+  getApp(): null {
+    return null;
+  }
+
+  start(): Promise<boolean> {
+    return Promise.resolve(true);
+  }
+
+  stop(): Promise<boolean> {
+    return Promise.resolve(true);
   }
 }
 class TestKernel extends CoreKernel<ICoreCClient> {
@@ -182,23 +202,34 @@ class TestPrefab extends CoreDBPrefab<CoreDBCon<any, any>> {
   }
 }
 
+class TestAction extends CoreAction {
+  constructor(mod: ICoreAnyModule) {
+    super('test-action', mod);
+  }
+
+  register(): void {}
+}
 class TestModule extends CoreBundleModule<
   TCoreKernel,
   CoreDBPrefab<any>,
   TestClient,
   InMemCache,
-  null
+  TestPresenter
 > {
   constructor(kernel: TCoreKernel) {
     super('testModule', kernel);
+    this.addAction(new TestAction(this));
     this.addService(new OfflineService(this));
   }
 
   async initModule(): Promise<void> {
     this.setClient(new TestClient('testc', this));
+    this.setPresenter(new TestPresenter(this));
     this.log('FirstTHIS');
     this.setCache(new InMemCache(this, 10000));
-    this.setDb(new TestPrefab(new InMemDB(this)));
+    const db = new TestPrefab(new InMemDB(this));
+    db.setEntityCache(true);
+    this.setDb(db);
     await this.initBundleModule();
     await this.getKernel().triggerFunction('load');
   }
@@ -210,7 +241,7 @@ class TestModule extends CoreBundleModule<
 class BridgeTestModule extends CoreKernelModule<
   TCoreKernel,
   null,
-  TestClient,
+  null,
   null,
   null
 > {
