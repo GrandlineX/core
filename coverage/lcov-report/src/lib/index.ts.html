@@ -405,7 +405,17 @@
 <a name='L340'></a><a href='#L340'>340</a>
 <a name='L341'></a><a href='#L341'>341</a>
 <a name='L342'></a><a href='#L342'>342</a>
-<a name='L343'></a><a href='#L343'>343</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a>
+<a name='L349'></a><a href='#L349'>349</a>
+<a name='L350'></a><a href='#L350'>350</a>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a>
+<a name='L353'></a><a href='#L353'>353</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -470,6 +480,16 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -857,7 +877,7 @@ export interface ICoreCClient {
 }
 &nbsp;
 export interface ICoreKernel&lt;X extends ICoreCClient&gt;
-  extends ILogChanel,
+  extends ILogChannel,
     IHaveLogger {
   start(): Promise&lt;boolean&gt;;
 &nbsp;
@@ -886,9 +906,9 @@ export interface ICoreKernel&lt;X extends ICoreCClient&gt;
 &nbsp;
   getDb(): IDataBase&lt;any, any&gt; | null;
 &nbsp;
-  addModule(module: ICoreKernelModule&lt;any, any, any, any, any&gt;): void;
+  addModule(module: ICoreAnyModule): void;
 &nbsp;
-  getModule(): ICoreKernelModule&lt;any, any, any, any, any&gt;;
+  getModule(): ICoreAnyModule;
 &nbsp;
   getOffline(): boolean;
 &nbsp;
@@ -901,13 +921,15 @@ export interface ICoreKernel&lt;X extends ICoreCClient&gt;
   getConfigStore(): IStore;
 }
 &nbsp;
+export type ICoreClient = ICoreElement;
+export type ICoreAnyModule = ICoreKernelModule&lt;any, any, any, any, any&gt;;
 export interface ICoreKernelModule&lt;
   K extends ICoreKernel&lt;any&gt;,
   T extends IDataBase&lt;any, any&gt; | null,
-  P extends ICoreElement | null,
+  P extends ICoreClient | null,
   C extends ICoreCache | null,
   E extends ICorePresenter&lt;any&gt; | null
-&gt; extends ILogChanel,
+&gt; extends ILogChannel,
     IHaveLogger {
   addSrcBridge(bridge: ICoreBridge): void;
 &nbsp;
@@ -923,11 +945,11 @@ export interface ICoreKernelModule&lt;
 &nbsp;
   start(): Promise&lt;void&gt;;
 &nbsp;
-  final?(): Promise&lt;void&gt;;
+  final(): Promise&lt;void&gt;;
 &nbsp;
-  startup?(): Promise&lt;void&gt;;
+  startup(): Promise&lt;void&gt;;
 &nbsp;
-  beforeServiceStart?(): Promise&lt;void&gt;;
+  beforeServiceStart(): Promise&lt;void&gt;;
 &nbsp;
   addAction(...action: ICoreAction[]): void;
 &nbsp;
@@ -941,23 +963,27 @@ export interface ICoreKernelModule&lt;
 &nbsp;
   setDb(db: T): void;
 &nbsp;
+  hasDb(): boolean;
+&nbsp;
   getClient(): P;
 &nbsp;
   setClient(client: P): void;
 &nbsp;
-  getEndpoint(): E;
+  hasClient(): boolean;
 &nbsp;
-  setEndpoint(endpoint: E): void;
+  getPresenter(): E;
+&nbsp;
+  setPresenter(presenter: E): void;
+&nbsp;
+  hasPresenter(): boolean;
 &nbsp;
   getCache(): C;
 &nbsp;
   setCache(cache: C): void;
 &nbsp;
-  getName(): string;
+  hasCache(): boolean;
 &nbsp;
-  getBridgeModule(
-    name: string
-  ): ICoreKernelModule&lt;K, any, any, any, any&gt; | undefined;
+  getBridgeModule&lt;M extends ICoreAnyModule&gt;(name: string): M | undefined;
 }
 &nbsp;
 export interface ICorePresenter&lt;E&gt; extends ICoreElement {
@@ -968,10 +994,10 @@ export interface ICorePresenter&lt;E&gt; extends ICoreElement {
   getApp(): E;
 }
 &nbsp;
-export interface ICoreElement extends ILogChanel {
+export interface ICoreElement extends ILogChannel {
   getKernel(): ICoreKernel&lt;any&gt;;
 &nbsp;
-  getModule(): ICoreKernelModule&lt;any, any, any, any, any&gt;;
+  getModule&lt;M extends ICoreAnyModule&gt;(): M;
 }
 &nbsp;
 export interface ICoreAction extends ICoreElement {
@@ -979,8 +1005,6 @@ export interface ICoreAction extends ICoreElement {
 }
 &nbsp;
 export interface ICoreService extends ICoreElement {
-  getName(): string;
-&nbsp;
   start(): Promise&lt;any&gt;;
 &nbsp;
   stop(): Promise&lt;any&gt;;
@@ -993,12 +1017,12 @@ export interface ICoreBridge {
 &nbsp;
   waitForState(state: BridgeState): Promise&lt;boolean&gt;;
 &nbsp;
-  getTarget(): ICoreKernelModule&lt;any, any, any, any, any&gt;;
+  getTarget(): ICoreAnyModule;
 }
 &nbsp;
 export type WorkLoad&lt;T&gt; = Promise&lt;T&gt;[];
 &nbsp;
-export interface ILogChanel {
+export interface ILogChannel {
   log(...ags: unknown[]): void;
 &nbsp;
   debug(...ags: unknown[]): void;
@@ -1012,6 +1036,8 @@ export interface ILogChanel {
   verbose(...ags: unknown[]): void;
 &nbsp;
   lError(message: string): Error;
+&nbsp;
+  getName(): string;
 }
 &nbsp;
 export interface ConfigType {
@@ -1062,7 +1088,11 @@ export interface IDataBase&lt;D, T&gt; extends ICoreDB, ICoreEntityHandler {
   update(): Promise&lt;boolean&gt;;
 }
 &nbsp;
-export interface ICoreDB extends ILogChanel {
+/**
+ * Don't use this interface use {IDataBase} instead
+ * @see  IDataBase
+ */
+export interface ICoreDB extends ILogChannel {
   setUpdateChain(chain: IBaseDBUpdate): void;
 &nbsp;
   start(): Promise&lt;void&gt;;
@@ -1096,7 +1126,7 @@ export interface IStore {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jan 04 2022 18:49:11 GMT+0000 (Coordinated Universal Time)
+                at Sun Jan 09 2022 21:48:58 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
