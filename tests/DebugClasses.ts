@@ -145,17 +145,21 @@ class TestEntity extends CoreEntity {
   })
   name: string | null;
 
-  @Column()
+  @Column({
+    dataType: 'int',
+  })
   simpleNumber: number;
 
   @Column({
     canBeNull: true,
+    dataType: 'json',
   })
   missingType: any;
 
   @Column({
     canBeNull: true,
     primaryKey: true,
+    dataType: 'float',
   })
   primaryKeyNull: any;
 

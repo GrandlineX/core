@@ -4,7 +4,7 @@ export interface ColumnPropsBase {
   primaryKey?: boolean;
   unique?: boolean;
   canBeNull?: boolean;
-  dataType?: DataType;
+  dataType: DataType;
 }
 
 export interface ColumnProps extends ColumnPropsBase {

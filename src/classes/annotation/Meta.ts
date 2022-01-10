@@ -13,15 +13,8 @@ function getEntityMeta<T extends ObjectLike>(
   return Reflect.getMetadata(entityKey, target.constructor.prototype);
 }
 
-function Column(props?: ColumnProps): PropertyDecorator {
-  let prop: ColumnProps;
-  if (!props) {
-    prop = {};
-  } else {
-    prop = props;
-  }
-
-  return Reflect.metadata(columnKey, prop);
+function Column(props: ColumnProps): PropertyDecorator {
+  return Reflect.metadata(columnKey, props);
 }
 
 function getColumnMeta<T>(
@@ -39,9 +32,7 @@ function validateColumnMeta(props?: ColumnProps): boolean {
   if (!props) {
     return false;
   }
-  if (props.canBeNull && props.dataType === undefined) {
-    return false;
-  }
+
   if (props.canBeNull && props.primaryKey) {
     return false;
   }
@@ -58,8 +49,6 @@ function validateColumnMeta(props?: ColumnProps): boolean {
 
   return true;
 }
-
-export { Column, getColumnMeta, validateColumnMeta };
 
 const Entity = (name: string, version = 0): ClassDecorator => {
   return (target) => {
@@ -90,7 +79,7 @@ function validateEntity<T extends ObjectLike>(target: T): boolean {
  * getTableName  by entity
  * @param entity
  */
-export function getEntityNames(entity: IEntity): ClassNameInterface {
+function getEntityNames(entity: IEntity): ClassNameInterface {
   const meta = getEntityMeta(entity);
   if (!meta) {
     throw new Error('InvalidClassMeta');
@@ -101,4 +90,12 @@ export function getEntityNames(entity: IEntity): ClassNameInterface {
   };
 }
 
-export { Entity, getEntityMeta, validateEntity };
+export {
+  Entity,
+  getEntityMeta,
+  validateEntity,
+  Column,
+  getColumnMeta,
+  validateColumnMeta,
+  getEntityNames,
+};

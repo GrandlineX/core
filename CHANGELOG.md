@@ -1,5 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.19.0] 
+
+### Changed
+- update EntityColumnInterface
+  - Datatype must now be set for column
 ## [0.18.0] 
 
 ### Changed

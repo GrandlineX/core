@@ -60,6 +60,7 @@ import { Column, IEntity } from './annotation';
 export default abstract class CoreEntity implements IEntity {
   @Column({
     primaryKey: true,
+    dataType: 'serial',
   })
   e_id: number;
 
