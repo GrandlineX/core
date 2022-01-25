@@ -17,7 +17,7 @@ import {
   ICoreAnyModule,
 } from '../src';
 
-import { TestEnt, TestKernel, TestModule, TestService } from './DebugClasses';
+import { TestEnt, TestKernel, TestPrefab, TestService } from './DebugClasses';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
@@ -192,10 +192,14 @@ describe('Database', () => {
 });
 describe('TestDatabase', () => {
   test('get version', async () => {
-    const db = kernel.getChildModule('testModule')?.getDb();
+    const db = kernel.getChildModule('testModule')?.getDb() as TestPrefab;
     const conf = await db?.getConfig('dbversion');
     expect(conf?.c_value).not.toBeNull();
+  });
+  test('test entity', async () => {
+    const db = kernel.getChildModule('testModule')?.getDb() as TestPrefab;
     expect(db.getEntityMeta()).toHaveLength(1);
+    expect(await db.ent.getObjList()).toHaveLength(1);
   });
   test('manual update', async () => {
     const dbpre = kernel
@@ -278,7 +282,7 @@ describe('Entity', () => {
     wrapper = db.getEntityWrapper<TestEnt>('TestEnt');
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
-      expect((await wrapper.getObjList()).length).toBe(0);
+      expect((await wrapper.getObjList()).length).toBe(1);
     }
   });
   test('create new', async () => {
@@ -290,7 +294,7 @@ describe('Entity', () => {
       expect(entity.e_id).not.toBeNull();
       if (entity && entity.e_id) {
         e_id = entity.e_id;
-        expect((await wrapper.getObjList()).length).toBe(1);
+        expect((await wrapper.getObjList()).length).toBe(2);
         expect(entity.e_id).not.toBe(-1);
       }
     }
@@ -387,7 +391,7 @@ describe('Entity', () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
       expect(await wrapper.delete(e_id)).toBeTruthy();
-      expect((await wrapper.getObjList()).length).toBe(0);
+      expect((await wrapper.getObjList()).length).toBe(1);
     }
   });
   test('full validation', () => {

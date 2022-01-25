@@ -1,5 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.20.0]
+
+### Changed
+- fixed CoreDBPrefab
+  - now trigger correctly `initPrefabDB` on new db
 ## [0.19.0] 
 
 ### Changed

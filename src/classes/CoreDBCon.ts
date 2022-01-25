@@ -257,6 +257,13 @@ export default abstract class CoreDBCon<D, T>
   }
 
   /**
+   * get the db trigger value
+   */
+  getNew(): boolean {
+    return this.isNew;
+  }
+
+  /**
    * trigger the db init
    */
   protected setNew(val: boolean): void {

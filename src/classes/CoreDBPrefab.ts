@@ -77,6 +77,9 @@ export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
 
   async start(): Promise<void> {
     await this.db.start();
+    if (this.db.getNew()) {
+      await this.initPrefabDB();
+    }
   }
 
   async disconnect(): Promise<boolean> {

@@ -21,6 +21,7 @@ import {
   sleep,
   ICoreAnyModule,
   CoreAction,
+  CoreEntityWrapper,
 } from '../src';
 import CorePresenter from '../src/classes/CorePresenter';
 
@@ -194,15 +195,21 @@ class TestEntity extends CoreEntity {
 }
 
 class TestPrefab extends CoreDBPrefab<CoreDBCon<any, any>> {
+  ent: CoreEntityWrapper<TestEnt>;
+
   constructor(db: CoreDBCon<any, any>) {
     super(db);
-    db.setEntityCache(true);
-    db.registerEntity(new TestEnt());
-    db.setUpdateChain(new TestDBUpdate01(db), new TestDBUpdate02(db));
+    this.setEntityCache(true);
+    this.ent = this.registerEntity(new TestEnt());
+    this.setUpdateChain(new TestDBUpdate01(db), new TestDBUpdate02(db));
   }
 
   async initPrefabDB(): Promise<void> {
-    return Promise.resolve(undefined);
+    await this.ent.createObject(
+      new TestEnt({
+        testProp: 1,
+      })
+    );
   }
 }
 
@@ -282,6 +289,7 @@ export {
   TestEntity,
   TestEnt,
   BadEntity,
+  TestPrefab,
   TestModule,
   BridgeTestModule,
 };
