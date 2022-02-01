@@ -266,9 +266,8 @@ describe('Cache', () => {
   });
 });
 describe('Entity', () => {
-  let e_id = 0;
   let wrapper: undefined | CoreEntityWrapper<TestEnt>;
-  let entity: TestEnt | null = null;
+  const entityList: TestEnt[] = [];
 
   test('get wrapper class', async () => {
     const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
@@ -288,34 +287,35 @@ describe('Entity', () => {
   test('create new', async () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
-      entity = new TestEnt();
-      entity = await wrapper.createObject(entity);
-      expect(entity).not.toBeNull();
-      expect(entity.e_id).not.toBeNull();
-      if (entity && entity.e_id) {
-        e_id = entity.e_id;
-        expect((await wrapper.getObjList()).length).toBe(2);
-        expect(entity.e_id).not.toBe(-1);
+      for (const i of [1, 2, 3, 4, 5]) {
+        let entity = new TestEnt();
+        entity = await wrapper.createObject(entity);
+        expect(entity).not.toBeNull();
+        expect(entity.e_id).not.toBeNull();
+        if (entity && entity.e_id) {
+          entityList.push(entity);
+          expect((await wrapper.getObjList()).length).toBe(1 + i);
+          expect(entity.e_id).not.toBe(-1);
+        }
       }
     }
   });
   test('update', async () => {
     expect(wrapper).not.toBeUndefined();
-    expect(entity).not.toBeNull();
-
-    if (wrapper && entity) {
-      let oj = await wrapper.getObjById(e_id);
+    expect(entityList[0]).not.toBeNull();
+    if (wrapper && entityList[0]) {
+      let oj = await wrapper.getObjById(entityList[0].e_id);
 
       expect(oj).not.toBeNull();
       expect(oj?.testProp).not.toBeNull();
       expect(oj?.testProp).toBe(0);
       expect(
-        await wrapper.updateObject(e_id, {
+        await wrapper.updateObject(entityList[0].e_id, {
           testProp: 2,
         })
       ).toBeTruthy();
 
-      oj = await wrapper.getObjById(e_id);
+      oj = await wrapper.getObjById(entityList[0].e_id);
       expect(oj).not.toBeNull();
       expect(oj?.testProp).toBe(2);
     }
@@ -323,7 +323,7 @@ describe('Entity', () => {
   test('get by id', async () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
-      expect(await wrapper.getObjById(e_id)).not.toBeNull();
+      expect(await wrapper.getObjById(entityList[0].e_id)).not.toBeNull();
     }
   });
   test('listing search id', async () => {
@@ -331,7 +331,7 @@ describe('Entity', () => {
     if (wrapper) {
       expect(
         await wrapper.getObjList({
-          e_id,
+          search: { e_id: entityList[0].e_id },
         })
       ).toHaveLength(1);
     }
@@ -340,12 +340,10 @@ describe('Entity', () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
       expect(
-        await wrapper.getObjList(
-          {
-            e_id,
-          },
-          0
-        )
+        await wrapper.getObjList({
+          search: { e_id: entityList[0].e_id },
+          limit: 0,
+        })
       ).toHaveLength(0);
     }
   });
@@ -353,13 +351,13 @@ describe('Entity', () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
       expect(
-        await wrapper.getObjList(
-          {
-            e_id,
+        await wrapper.getObjList({
+          search: {
+            e_id: entityList[0].e_id,
           },
-          1,
-          [{ key: 'e_id', order: 'ASC' }]
-        )
+          limit: 1,
+          order: [{ key: 'e_id', order: 'ASC' }],
+        })
       ).toHaveLength(1);
     }
   });
@@ -367,22 +365,46 @@ describe('Entity', () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
       expect(
-        await wrapper.getObjList(
-          {
-            e_id,
+        await wrapper.getObjList({
+          search: {
+            e_id: entityList[0].e_id,
           },
-          2,
-          [{ key: 'e_id', order: 'DESC' }]
-        )
+          limit: 2,
+          order: [{ key: 'e_id', order: 'DESC' }],
+        })
       ).toHaveLength(1);
     }
   });
+
+  test.each([
+    [10, 0, 6],
+    [0, 0, 0],
+    [10, 1, 5],
+    [10, 2, 4],
+    [10, 3, 3],
+    [10, 4, 2],
+    [10, 5, 1],
+    [10, 6, 0],
+  ])(
+    'Limit offset:(%i %i %i):',
+    async (limit: number, offset: number, length: number) => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            limit,
+            offset,
+          })
+        ).toHaveLength(length);
+      }
+    }
+  );
   test('find entity by id', async () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
       expect(
         await wrapper.findObj({
-          e_id,
+          e_id: entityList[0].e_id,
         })
       ).not.toBeNull();
     }
@@ -390,13 +412,17 @@ describe('Entity', () => {
   test('delete', async () => {
     expect(wrapper).not.toBeUndefined();
     if (wrapper) {
-      expect(await wrapper.delete(e_id)).toBeTruthy();
-      expect((await wrapper.getObjList()).length).toBe(1);
+      let len = entityList.length;
+      for (const el of entityList) {
+        expect(await wrapper.delete(el.e_id)).toBeTruthy();
+        len--;
+        expect((await wrapper.getObjList()).length).toBe(len + 1);
+      }
     }
   });
   test('full validation', () => {
-    if (entity) {
-      expect(validateEntity(entity)).toBeTruthy();
+    if (entityList[0]) {
+      expect(validateEntity(entityList[0])).toBeTruthy();
     }
   });
   test.each([

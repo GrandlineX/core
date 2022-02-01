@@ -3,17 +3,13 @@ import {
   IBaseDBUpdate,
   ICoreCache,
   IDataBase,
+  QueryInterface,
   RawQuery,
 } from '../lib';
 import CoreEntity from './CoreEntity';
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreElement from './CoreElement';
-import {
-  ColumnPropMap,
-  EntityConfig,
-  EOrderBy,
-  EUpDateProperties,
-} from './annotation';
+import { ColumnPropMap, EntityConfig, EUpDateProperties } from './annotation';
 import CoreDBCon from './CoreDBCon';
 
 export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
@@ -168,20 +164,12 @@ export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
 
   /**
    * Get Entity object list
-   * @param config
-   * @param limit
-   * @param search
-   * @param order
+   * @param query
    */
   async getEntityList<E extends CoreEntity>(
-    config: EntityConfig<E>,
-    limit?: number,
-    search?: {
-      [P in keyof E]?: E[P];
-    },
-    order?: EOrderBy<E>
+    query: QueryInterface<E>
   ): Promise<E[]> {
-    return this.db.getEntityList<E>(config, limit, search, order);
+    return this.db.getEntityList<E>(query);
   }
 
   /**

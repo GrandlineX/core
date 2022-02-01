@@ -31,14 +31,7 @@ export interface ICoreEntityHandler {
 
   deleteEntityById(className: string, id: number): Promise<boolean>;
 
-  getEntityList<E extends IEntity>(
-    config: EntityConfig<E>,
-    limit?: number,
-    search?: {
-      [P in keyof E]?: E[P];
-    },
-    order?: EOrderBy<E>
-  ): Promise<E[]>;
+  getEntityList<E extends IEntity>(query: QueryInterface<E>): Promise<E[]>;
 
   findEntity<E extends IEntity>(
     config: EntityConfig<E>,
@@ -349,4 +342,17 @@ export interface IStore {
   has(key: string): boolean;
 
   set(key: string, value: string): void;
+}
+
+export interface QInterface<E> {
+  limit?: number;
+  offset?: number;
+  search?: {
+    [P in keyof E]?: E[P];
+  };
+  order?: EOrderBy<E>;
+}
+
+export interface QueryInterface<E> extends QInterface<E> {
+  config: EntityConfig<E>;
 }

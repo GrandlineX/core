@@ -1,7 +1,12 @@
 import CoreDBCon from '../../classes/CoreDBCon';
-import { ConfigType, ICoreKernelModule, RawQuery } from '../../lib';
+import {
+  ConfigType,
+  ICoreKernelModule,
+  QueryInterface,
+  RawQuery,
+} from '../../lib';
 import CoreEntity from '../../classes/CoreEntity';
-import { EntityConfig, EOrderBy, EUpDateProperties } from '../../classes';
+import { EntityConfig, EUpDateProperties } from '../../classes';
 
 function eFilter<E extends CoreEntity>(
   row: E,
@@ -123,13 +128,15 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   }
 
   async getEntityList<E extends CoreEntity>(
-    config: EntityConfig<E>,
-    limit?: number,
-    search?: { [P in keyof E]?: E[P] },
-    order?: EOrderBy<E>
+    query: QueryInterface<E>
   ): Promise<E[]> {
+    const { config, limit, search, order, offset } = query;
     const table = this.e_map.get(config.className);
-    if (!table || limit === 0) {
+    if (
+      !table ||
+      limit === 0 ||
+      (offset !== undefined && offset > table.length)
+    ) {
       return [];
     }
     let out: E[];
@@ -143,7 +150,9 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
       out = out.reverse();
     }
     if (!!limit && limit > 0) {
-      return out.slice(0, limit);
+      const off = offset || 0;
+      const end = off === 0 ? limit + off : limit;
+      return out.slice(off, end);
     }
     return out;
   }

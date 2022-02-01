@@ -1,5 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.21.0]
+
+### Changed
+- change entity query interface to object parameter 
+  - add offset to entity query interface
+
 ## [0.20.0]
 
 ### Changed

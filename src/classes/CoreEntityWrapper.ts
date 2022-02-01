@@ -1,9 +1,8 @@
 import CoreEntity from './CoreEntity';
-import { ICoreCache, ICoreEntityHandler } from '../lib';
+import { ICoreCache, ICoreEntityHandler, QInterface } from '../lib';
 import {
   ColumnPropMap,
   ColumnProps,
-  EOrderBy,
   EProperties,
   EUpDateProperties,
   getColumnMeta,
@@ -74,22 +73,14 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     return res;
   }
 
-  async getObjList(
-    search?: {
-      [P in keyof E]?: E[P];
-    },
-    limit?: number,
-    order?: EOrderBy<E>
-  ): Promise<E[]> {
-    return this.e_con.getEntityList<E>(
-      {
+  async getObjList(query?: QInterface<E>): Promise<E[]> {
+    return this.e_con.getEntityList<E>({
+      config: {
         className: this.className,
         meta: this.propMap,
       },
-      limit,
-      search,
-      order
-    );
+      ...query,
+    });
   }
 
   async findObj(search: {

@@ -4,6 +4,7 @@ import {
   ICoreCache,
   ICoreKernelModule,
   IDataBase,
+  QueryInterface,
   RawQuery,
 } from '../lib';
 import CoreEntity from './CoreEntity';
@@ -12,7 +13,6 @@ import CoreElement from './CoreElement';
 import {
   ColumnPropMap,
   EntityConfig,
-  EOrderBy,
   EUpDateProperties,
   getEntityNames,
   validateEntity,
@@ -213,18 +213,10 @@ export default abstract class CoreDBCon<D, T>
 
   /**
    * Get Entity object list
-   * @param config
-   * @param limit
-   * @param search
-   * @param order
+   * @param query search query config
    */
   abstract getEntityList<E extends CoreEntity>(
-    config: EntityConfig<E>,
-    limit?: number,
-    search?: {
-      [P in keyof E]?: E[P];
-    },
-    order?: EOrderBy<E>
+    query: QueryInterface<E>
   ): Promise<E[]>;
 
   /**
