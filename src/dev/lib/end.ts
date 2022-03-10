@@ -1,4 +1,5 @@
-import { removeFolderIfExist, sleep, TestKernel } from '../../src';
+import { removeFolderIfExist, sleep } from '../../utils';
+import { TestKernel } from '../DevKernel';
 
 const kernel = TestKernel.getEntity();
 

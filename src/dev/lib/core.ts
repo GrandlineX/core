@@ -1,13 +1,9 @@
-import {
-  CoreCache,
-  generateSeed,
-  ICoreAnyModule,
-  ICoreKernelModule,
-  ILogChannel,
-  sleep,
-  TestKernel,
-} from '../../src';
-import TestService from '../../src/dev/testClass/service/TestService';
+import { ICoreAnyModule, ICoreKernelModule, ILogChannel } from '../../lib';
+import { sleep } from '../../utils';
+import TestService from '../testClass/service/TestService';
+import { CoreCache } from '../../classes';
+import { generateSeed } from '../../modules';
+import { TestKernel } from '../DevKernel';
 
 const testText = 'hello_world';
 const kernel = TestKernel.getEntity();

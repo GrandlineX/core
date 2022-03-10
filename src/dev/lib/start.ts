@@ -1,4 +1,4 @@
-import { TestKernel } from '../../src';
+import { TestKernel } from '../DevKernel';
 
 const kernel = TestKernel.getEntity();
 describe('Clean start', () => {

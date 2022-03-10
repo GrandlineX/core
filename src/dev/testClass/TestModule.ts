@@ -14,6 +14,7 @@ import TestPresenter from './client/TestPresenter';
 import { TCoreKernel } from './TestBaseMod';
 import TestPrefab from './db/TestPrefab';
 
+export type TestFc = (mod: TestModule) => TestInterface;
 export type TestInterface = {
   db?: CoreDBCon<any, any>;
   cache?: CoreCache | null;
@@ -29,7 +30,7 @@ export default class TestModule extends CoreBundleModule<
 > {
   testInterface: TestInterface | null;
 
-  constructor(kernel: TCoreKernel, init?: (mod: TestModule) => TestInterface) {
+  constructor(kernel: TCoreKernel, init?: TestFc) {
     super('testModule', kernel);
     this.addAction(new TestAction(this));
     this.addService(new OfflineService(this));

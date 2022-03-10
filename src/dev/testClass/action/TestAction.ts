@@ -6,5 +6,7 @@ export default class TestAction extends CoreAction {
     super('test-action', mod);
   }
 
-  register(): void {}
+  register(): void {
+    this.log('register');
+  }
 }

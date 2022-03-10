@@ -15,8 +15,8 @@ const kernel = TestKernel.getEntity(
 
 setupDevKernel(kernel);
 
-require('./lib/start');
-require('./lib/core');
-require('./lib/dbcon');
-require('./lib/end');
-require('./lib/orm');
+require('../src/dev/lib/start');
+require('../src/dev/lib/core');
+require('../src/dev/lib/dbcon');
+require('../src/dev/lib/end');
+require('../src/dev/lib/orm');

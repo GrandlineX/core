@@ -1,16 +1,14 @@
+import TestEntity from '../testClass/db/entity/TestEntity';
 import {
-  TestKernel,
   CoreDBCon,
-  CoreEntityWrapper,
-  ICoreKernelModule,
   CoreDBPrefab,
-  InMemDB,
+  CoreEntityWrapper,
   validateEntity,
-} from '../../src';
-
-import TestEntity from '../../src/dev/testClass/db/entity/TestEntity';
-import TestEntityLinked from '../../src/dev/testClass/db/entity/TestEntityLinked';
-import TestPrefab from '../../src/dev/testClass/db/TestPrefab';
+} from '../../classes';
+import { ICoreKernelModule } from '../../lib';
+import TestPrefab from '../testClass/db/TestPrefab';
+import { TestKernel } from '../DevKernel';
+import TestEntityLinked from '../testClass/db/entity/TestEntityLinked';
 
 const testText = 'hello_world';
 const kernel = TestKernel.getEntity();
@@ -67,6 +65,7 @@ describe('TestDatabase', () => {
     expect(await db.canUpdate()).toBeTruthy();
     expect(await db.update()).toBeTruthy();
     expect(await db.getCurrenDBVersion()).toBe('2');
+    await db.setConfig('dbversion', '0');
   });
 });
 

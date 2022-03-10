@@ -1,4 +1,4 @@
-import BadEntity from '../../src/dev/testClass/db/entity/BadEntity';
+import BadEntity from '../testClass/db/entity/BadEntity';
 import {
   camelToSnakeCase,
   getColumnMeta,
@@ -6,8 +6,8 @@ import {
   instanceOfEntity,
   validateColumnMeta,
   validateEntity,
-} from '../../src';
-import TestEnt from '../../src/dev/testClass/db/entity/TestEnt';
+} from '../../classes';
+import TestEnt from '../testClass/db/entity/TestEnt';
 
 describe('annotation', () => {
   const first = new TestEnt({
