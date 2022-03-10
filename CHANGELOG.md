@@ -1,5 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.22.0-alpha.0]
+
+
+### Breaking Changes
+- Entity_ID is now from type `string`
+
+### Added 
+- exportable jest test
+- add uuid DataType
+- 
+
+### Fixed
+- **InMemDb**:
+  - Close bug with object listing offset
+
 ## [0.21.0]
 
 ### Changed

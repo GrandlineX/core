@@ -1,14 +1,16 @@
-import { BadEntity, TestEntity } from './DebugClasses';
+import BadEntity from '../../src/dev/testClass/db/entity/BadEntity';
 import {
+  camelToSnakeCase,
   getColumnMeta,
   getEntityMeta,
+  instanceOfEntity,
   validateColumnMeta,
   validateEntity,
-} from '../src/classes/annotation/Meta';
-import { camelToSnakeCase, instanceOfEntity } from '../src';
+} from '../../src';
+import TestEnt from '../../src/dev/testClass/db/entity/TestEnt';
 
 describe('annotation', () => {
-  const first = new TestEntity({
+  const first = new TestEnt({
     name: 'Bob',
     notAColumn: 'test',
     simpleNumber: 1,
@@ -24,7 +26,7 @@ describe('annotation', () => {
     expect(classMeta).toBeUndefined();
   });
   test('instance test', () => {
-    expect(instanceOfEntity(new TestEntity())).toBeTruthy();
+    expect(instanceOfEntity(new TestEnt())).toBeTruthy();
   });
   test('util test', () => {
     expect(camelToSnakeCase('')).toBe('');

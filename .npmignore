@@ -9,7 +9,8 @@ jest.config.js
 package-lock.json
 data
 src
-tests
+tests/*.ts
+tests/.env
 scripts
 glconf.json
 site
@@ -25,3 +26,4 @@ coverage
 junit.xml
 .github
 CHANGELOG.md
+!tests/lib

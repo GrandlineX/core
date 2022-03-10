@@ -26,7 +26,7 @@ type EntityProps = {
 };
 
 type IEntity = {
-  e_id: number;
+  e_id: string;
 };
 
 function instanceOfEntity(object: any): object is IEntity {
@@ -34,7 +34,7 @@ function instanceOfEntity(object: any): object is IEntity {
     object !== undefined &&
     object !== null &&
     object.e_id !== undefined &&
-    typeof object.e_id === 'number'
+    typeof object.e_id === 'string'
   );
 }
 

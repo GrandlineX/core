@@ -135,7 +135,7 @@ export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
    */
   async updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    e_id: number,
+    e_id: string,
     entity: EUpDateProperties<E>
   ): Promise<boolean> {
     return this.db.updateEntity<E>(config, e_id, entity);
@@ -148,7 +148,7 @@ export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
    */
   async getEntityById<E extends CoreEntity>(
     config: EntityConfig<E>,
-    id: number
+    id: string
   ): Promise<E | null> {
     return this.db.getEntityById<E>(config, id);
   }
@@ -156,10 +156,10 @@ export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
   /**
    * Delete Entity object by ID
    * @param className
-   * @param id
+   * @param e_id
    */
-  async deleteEntityById(className: string, id: number): Promise<boolean> {
-    return this.db.deleteEntityById(className, id);
+  async deleteEntityById(className: string, e_id: string): Promise<boolean> {
+    return this.db.deleteEntityById(className, e_id);
   }
 
   /**

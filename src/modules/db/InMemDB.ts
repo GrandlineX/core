@@ -64,13 +64,13 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
 
   async getEntityById<E extends CoreEntity>(
     config: EntityConfig<E>,
-    id: number
+    e_id: string
   ): Promise<E | null> {
     const table = this.e_map.get(config.className);
     if (!table) {
       return null;
     }
-    const temp = table.find((el) => el.e_id === id);
+    const temp = table.find((el) => el.e_id === e_id);
     if (!temp) {
       return null;
     }
@@ -86,26 +86,23 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     if (!table) {
       throw this.lError('Cant create Entity');
     }
-    if (clone.e_id === -1) {
-      clone.e_id = this.getNewObjectID();
-    }
     table.push(clone);
     return clone;
   }
 
-  async deleteEntityById(className: string, id: number): Promise<boolean> {
+  async deleteEntityById(className: string, e_id: string): Promise<boolean> {
     const table = this.e_map.get(className);
     if (!table) {
       return false;
     }
-    const temp = table.filter((el) => el.e_id !== id);
+    const temp = table.filter((el) => el.e_id !== e_id);
     this.e_map.set(className, temp);
     return true;
   }
 
   async updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    e_id: number,
+    e_id: string,
     entity: EUpDateProperties<E>
   ): Promise<boolean> {
     const table = this.e_map.get(config.className);
@@ -151,7 +148,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     }
     if (!!limit && limit > 0) {
       const off = offset || 0;
-      const end = off === 0 ? limit + off : limit;
+      const end = off === 0 ? limit : limit + off;
       return out.slice(off, end);
     }
     return out;
@@ -190,10 +187,5 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
       c_key: key,
     });
     return true;
-  }
-
-  private getNewObjectID() {
-    this.dbCounter += 1;
-    return this.dbCounter;
   }
 }

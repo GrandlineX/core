@@ -190,18 +190,18 @@ export default abstract class CoreDBCon<D, T>
    */
   abstract updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    e_id: number,
+    e_id: string,
     entity: EUpDateProperties<E>
   ): Promise<boolean>;
 
   /**
    * Get Entity object by ID
    * @param config
-   * @param id
+   * @param e_id
    */
   abstract getEntityById<E extends CoreEntity>(
     config: EntityConfig<E>,
-    id: number
+    e_id: string
   ): Promise<E | null>;
 
   /**
@@ -209,7 +209,7 @@ export default abstract class CoreDBCon<D, T>
    * @param className
    * @param id
    */
-  abstract deleteEntityById(className: string, id: number): Promise<boolean>;
+  abstract deleteEntityById(className: string, e_id: string): Promise<boolean>;
 
   /**
    * Get Entity object list

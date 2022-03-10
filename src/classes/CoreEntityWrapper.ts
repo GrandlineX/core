@@ -38,7 +38,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
   }
 
   async updateObject(
-    e_id: number,
+    e_id: string,
     args: EUpDateProperties<E>
   ): Promise<boolean> {
     await this.cache?.deleteE(this.className, e_id);
@@ -53,7 +53,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     );
   }
 
-  async getObjById(id: number): Promise<E | null> {
+  async getObjById(id: string): Promise<E | null> {
     if (this.cache) {
       const has = await this.cache.getE<E>(this.className, id);
       if (has) {
@@ -95,7 +95,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     );
   }
 
-  async delete(e_id: number): Promise<boolean> {
+  async delete(e_id: string): Promise<boolean> {
     return this.e_con.deleteEntityById(this.className, e_id);
   }
 

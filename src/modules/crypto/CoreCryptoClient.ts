@@ -70,4 +70,8 @@ export default class CoreCryptoClient implements ICoreCClient {
       .update(seed + val)
       .digest('hex');
   }
+
+  getUUID(): string {
+    return crypto.randomUUID();
+  }
 }

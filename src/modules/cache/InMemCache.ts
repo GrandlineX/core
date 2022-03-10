@@ -5,7 +5,7 @@ import { ICoreKernelModule } from '../../lib';
 export default class InMemCache extends CoreCache {
   keyMap: Map<string, string>;
 
-  eMap: Map<string, Map<number, any>>;
+  eMap: Map<string, Map<string, any>>;
 
   loop: ReturnType<typeof setInterval> | null;
 
@@ -17,7 +17,7 @@ export default class InMemCache extends CoreCache {
   ) {
     super('inMemCache', module);
     this.keyMap = new Map<string, string>();
-    this.eMap = new Map<string, Map<number, any>>();
+    this.eMap = new Map<string, Map<string, any>>();
     this.loop = null;
     this.deleteTime = deleteTime;
     this.flash = this.flash.bind(this);
@@ -35,7 +35,7 @@ export default class InMemCache extends CoreCache {
     this.keyMap.delete(key);
   }
 
-  async deleteE(className: string, e_id: number): Promise<boolean> {
+  async deleteE(className: string, e_id: string): Promise<boolean> {
     return this.eMap.get(className)?.delete(e_id) || true;
   }
 
@@ -49,7 +49,7 @@ export default class InMemCache extends CoreCache {
 
   async getE<E extends IEntity>(
     className: string,
-    e_id: number
+    e_id: string
   ): Promise<E | null> {
     return this.eMap.get(className)?.get(e_id);
   }
@@ -62,7 +62,7 @@ export default class InMemCache extends CoreCache {
     let cur = this.eMap.get(className);
 
     if (!cur) {
-      cur = new Map<number, any>();
+      cur = new Map<string, any>();
       this.eMap.set(className, cur);
     }
     cur.set(val.e_id, val);

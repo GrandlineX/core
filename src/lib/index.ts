@@ -20,16 +20,16 @@ export interface ICoreEntityHandler {
 
   updateEntity<E extends IEntity>(
     config: EntityConfig<E>,
-    e_id: number,
+    e_id: string,
     entity: EUpDateProperties<E>
   ): Promise<boolean>;
 
   getEntityById<E extends IEntity>(
     config: EntityConfig<E>,
-    e_id: number
+    e_id: string
   ): Promise<E | null>;
 
-  deleteEntityById(className: string, id: number): Promise<boolean>;
+  deleteEntityById(className: string, e_id: string): Promise<boolean>;
 
   getEntityList<E extends IEntity>(query: QueryInterface<E>): Promise<E[]>;
 
@@ -75,9 +75,9 @@ export interface ICoreCache {
 
   setE<E extends IEntity>(className: string, val: E): Promise<void>;
 
-  getE<E extends IEntity>(className: string, e_id: number): Promise<E | null>;
+  getE<E extends IEntity>(className: string, e_id: string): Promise<E | null>;
 
-  deleteE(className: string, e_id: number): Promise<boolean>;
+  deleteE(className: string, e_id: string): Promise<boolean>;
 
   clearAllE(className: string): Promise<void>;
 

@@ -4,6 +4,7 @@
  */
 import CoreKernel from './CoreKernel';
 
+export * from './dev/DevKernel';
 export * from './classes';
 export * from './lib';
 export * from './modules';

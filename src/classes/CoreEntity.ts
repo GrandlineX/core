@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import { Column, IEntity } from './annotation';
 
 /**
@@ -60,11 +61,11 @@ import { Column, IEntity } from './annotation';
 export default abstract class CoreEntity implements IEntity {
   @Column({
     primaryKey: true,
-    dataType: 'serial',
+    dataType: 'uuid',
   })
-  e_id: number;
+  e_id: string;
 
-  protected constructor() {
-    this.e_id = -1;
+  protected constructor(id?: string) {
+    this.e_id = id || randomUUID();
   }
 }

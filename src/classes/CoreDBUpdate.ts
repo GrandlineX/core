@@ -32,6 +32,7 @@ export default abstract class CoreDBUpdate<D, T> implements IBaseDBUpdate {
         `Updating DB from ${this.srcVersion} to ${this.tarVersion} failed`
       );
     }
+    await this.db.setConfig('dbversion', this.tarVersion);
     const next = await this.updateNext();
 
     return perf && next;

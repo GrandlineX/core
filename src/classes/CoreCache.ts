@@ -29,11 +29,11 @@ export default abstract class CoreCache
 
   abstract clearAllE(className: string): Promise<void>;
 
-  abstract deleteE(className: string, e_id: number): Promise<boolean>;
+  abstract deleteE(className: string, e_id: string): Promise<boolean>;
 
   abstract getE<E extends IEntity>(
     className: string,
-    e_id: number
+    e_id: string
   ): Promise<E | null>;
 
   abstract setE<E extends IEntity>(className: string, val: E): Promise<void>;

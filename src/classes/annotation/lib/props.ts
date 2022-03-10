@@ -13,6 +13,7 @@ type DataType =
   | 'boolean'
   | 'json'
   | 'date'
+  | 'uuid'
   | 'serial';
 
 type EPropertyNames<T> = {
@@ -23,6 +24,7 @@ type EPropertyNames<T> = {
  * Constructor parameter interface
  */
 type EProperties<T> = Omit<Pick<T, EPropertyNames<T>>, 'e_id'>;
+type EPropertiesFull<T> = Partial<T>;
 type EPropertiesOpt<T> = Partial<EProperties<T>>;
 type EUpDateProperties<T> = Partial<EProperties<T>>;
 type SortBy = 'ASC' | 'DESC';
@@ -34,6 +36,7 @@ type ObjectLike = Object;
 
 export {
   DataType,
+  EPropertiesFull,
   EPropertyNames,
   EProperties,
   EPropertiesOpt,
