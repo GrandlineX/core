@@ -180,16 +180,6 @@ describe('Entity', () => {
       ).toHaveLength(1);
     }
   });
-  test('listing search bob', async () => {
-    expect(wrapper).not.toBeUndefined();
-    if (wrapper) {
-      expect(
-        await wrapper.getObjList({
-          search: { name: 'Bob' },
-        })
-      ).toHaveLength(1);
-    }
-  });
   test('listing search bob check date', async () => {
     expect(wrapper).not.toBeUndefined();
 

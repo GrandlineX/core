@@ -141,7 +141,7 @@ describe('Cache', () => {
       any
     >;
     const cache = mod.getCache() as CoreCache;
-    const conf = await cache.set('test', 'test');
+    await cache.set('test', 'test');
   });
   test('exist', async () => {
     const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
