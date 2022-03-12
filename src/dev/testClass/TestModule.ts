@@ -6,13 +6,13 @@ import {
   CoreDBPrefab,
   CorePresenter,
 } from '../../classes';
-import { InMemCache, InMemDB } from '../../modules';
+import { CoreCryptoClient, InMemCache, InMemDB } from '../../modules';
 import { OfflineService } from '../../services';
 import TestClient from './client/TestClient';
 import TestAction from './action/TestAction';
 import TestPresenter from './client/TestPresenter';
-import { TCoreKernel } from './TestBaseMod';
 import TestPrefab from './db/TestPrefab';
+import CoreKernel from '../../CoreKernel';
 
 export type TestFc = (mod: TestModule) => TestInterface;
 export type TestInterface = {
@@ -22,7 +22,7 @@ export type TestInterface = {
   client?: CoreClient;
 };
 export default class TestModule extends CoreBundleModule<
-  TCoreKernel,
+  CoreKernel<CoreCryptoClient>,
   CoreDBPrefab<any>,
   TestClient,
   CoreCache,
@@ -30,7 +30,7 @@ export default class TestModule extends CoreBundleModule<
 > {
   testInterface: TestInterface | null;
 
-  constructor(kernel: TCoreKernel, init?: TestFc) {
+  constructor(kernel: CoreKernel<CoreCryptoClient>, init?: TestFc) {
     super('testModule', kernel);
     this.addAction(new TestAction(this));
     this.addService(new OfflineService(this));

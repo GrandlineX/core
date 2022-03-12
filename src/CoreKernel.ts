@@ -12,7 +12,8 @@ import { createFolderIfNotExist } from './utils';
 import initHandler from './utils/initHandler';
 import { CoreLogChannel, CoreLogger } from './classes';
 
-import { DefaultLogger, EnvStore, StoreGlobal } from './modules';
+import { DefaultLogger, EnvStore, InMemDB, StoreGlobal } from './modules';
+import CoreModule from './CoreModule';
 
 /**
  *  Core Kernel class
@@ -108,7 +109,8 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       this.globalLogger.setLogLevel(log);
     }
 
-    this.kernelModule = null;
+    this.kernelModule = new CoreModule(this, (mod) => new InMemDB(mod));
+
     this.setState('init');
   }
 

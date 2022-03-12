@@ -98,6 +98,10 @@ export interface ICoreCClient {
   generateSecureToken(length: number): Promise<string>;
 
   getHash(seed: string, val: string): string;
+
+  keyStoreSave(data: string): Promise<string>;
+
+  keyStoreLoad(e_id: string): Promise<string | null>;
 }
 
 export interface ICoreKernel<X extends ICoreCClient>

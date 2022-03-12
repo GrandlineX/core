@@ -1,7 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-## [0.22.0-alpha.0]
-
+## [0.22.0-alpha.3]
 
 ### Breaking Changes
 - Entity_ID is now from type `string`
@@ -9,7 +8,8 @@ All notable changes to this project will be documented in this file.
 ### Added 
 - exportable jest test
 - add uuid DataType
-- 
+- core base module
+- keystore is now feature in core package 
 
 ### Fixed
 - **InMemDb**:

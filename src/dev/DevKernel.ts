@@ -1,6 +1,5 @@
 import CoreKernel from '../CoreKernel';
 import { CoreCryptoClient } from '../modules';
-import TestBaseMod from './testClass/TestBaseMod';
 import TestModule, { TestFc } from './testClass/TestModule';
 import BridgeTestModule from './testClass/BridgeTestModule';
 import { LogLevel } from '../classes';
@@ -10,9 +9,8 @@ export function setupDevKernel<E extends CoreKernel<any>>(
   kernel: E,
   res?: TestFc
 ): E {
-  kernel.setBaseModule(new TestBaseMod('testbase2', kernel));
   kernel.setCryptoClient(
-    new CoreCryptoClient(CoreCryptoClient.fromPW('testpw'))
+    new CoreCryptoClient(kernel, CoreCryptoClient.fromPW('testpw'))
   );
   kernel.addModule(new TestModule(kernel, res));
   kernel.addModule(new BridgeTestModule(kernel));

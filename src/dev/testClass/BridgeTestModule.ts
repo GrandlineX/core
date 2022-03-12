@@ -1,14 +1,15 @@
 import { CoreKernelModule } from '../../classes';
-import { TCoreKernel } from './TestBaseMod';
+import CoreKernel from '../../CoreKernel';
+import { CoreCryptoClient } from '../../modules';
 
 export default class BridgeTestModule extends CoreKernelModule<
-  TCoreKernel,
+  CoreKernel<CoreCryptoClient>,
   null,
   null,
   null,
   null
 > {
-  constructor(kernel: TCoreKernel) {
+  constructor(kernel: CoreKernel<CoreCryptoClient>) {
     super('bridgeModule', kernel, 'testModule');
   }
 

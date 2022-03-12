@@ -207,6 +207,17 @@ describe('Crypto', () => {
     expect(cc).not.toBeNull();
     expect(await cc?.generateSecureToken(48)).not.toBe('');
   });
+
+  test('keystore', async () => {
+    const text = testText;
+    const cc = kernel.getCryptoClient();
+    expect(cc).not.toBeNull();
+    if (cc) {
+      const keyID = await cc.keyStoreSave(text);
+      const keyreturn = await cc.keyStoreLoad(keyID);
+      expect(keyreturn).toBe(text);
+    }
+  });
 });
 
 describe('Service', () => {
