@@ -1,9 +1,11 @@
+import exp from 'constants';
 import { ICoreAnyModule, ICoreKernelModule, ILogChannel } from '../../lib';
 import { sleep } from '../../utils';
 import TestService from '../testClass/service/TestService';
 import { CoreCache } from '../../classes';
 import { generateSeed } from '../../modules';
 import { TestKernel } from '../DevKernel';
+import { CoreDb } from '../../database';
 
 const testText = 'hello_world';
 const kernel = TestKernel.getEntity();
@@ -211,11 +213,18 @@ describe('Crypto', () => {
   test('keystore', async () => {
     const text = testText;
     const cc = kernel.getCryptoClient();
+    const db = kernel.getDb() as CoreDb;
     expect(cc).not.toBeNull();
     if (cc) {
       const keyID = await cc.keyStoreSave(text);
+      expect(keyID).not.toBeNull();
+      expect(keyID).not.toBeUndefined();
       const keyreturn = await cc.keyStoreLoad(keyID);
+      expect(keyreturn).not.toBeNull();
+      expect(keyreturn).not.toBeUndefined();
       expect(keyreturn).toBe(text);
+      await db.deleteKey(keyID);
+      expect(await db.getKey(keyID)).toBeNull();
     }
   });
 });

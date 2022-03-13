@@ -28,6 +28,6 @@ export default class CoreDb extends CoreDBPrefab<any> {
   }
 
   async setKey(secret: string, iv: Buffer, auth: Buffer): Promise<string> {
-    return (await this.gKey.createObject({ secret, iv, auth })).e_id;
+    return (await this.gKey.createObject(new GKey({ secret, iv, auth }))).e_id;
   }
 }
