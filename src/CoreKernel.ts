@@ -75,14 +75,14 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * - logger: CoreLogger {@link CoreLogger} [optional]
    * @param options Kernel options
    */
-  constructor(options: {
+  protected constructor(options: {
     appName: string;
     appCode: string;
     pathOverride?: string;
-    logger?: CoreLogger;
+    logger?: (kernel: CoreKernel<any>) => CoreLogger;
     envFilePath?: string;
   }) {
-    super('kernel', options.logger || null);
+    super('kernel', null);
     this.appName = options.appName;
     this.devMode = false;
     this.appCode = options.appCode;
@@ -92,18 +92,18 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.updateSkip = false;
     this.appVersion = 'noVersion';
     this.triggerFunction = this.triggerFunction.bind(this);
-    if (options.logger === undefined) {
-      this.globalLogger = new DefaultLogger();
-    } else {
-      this.globalLogger = options.logger;
-    }
-    this.setLogger(this.globalLogger);
 
     this.envStore = new EnvStore(
       this,
       options.pathOverride,
       options.envFilePath
     );
+    if (options.logger === undefined) {
+      this.globalLogger = new DefaultLogger();
+    } else {
+      this.globalLogger = options.logger(this);
+    }
+    this.setLogger(this.globalLogger);
     const log = this.envStore.get(StoreGlobal.GLOBAL_LOG_LEVEL);
     if (log) {
       this.globalLogger.setLogLevel(log);

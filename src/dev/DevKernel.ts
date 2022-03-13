@@ -2,7 +2,7 @@ import CoreKernel from '../CoreKernel';
 import { CoreCryptoClient } from '../modules';
 import TestModule, { TestFc } from './testClass/TestModule';
 import BridgeTestModule from './testClass/BridgeTestModule';
-import { LogLevel } from '../classes';
+import { CoreLogger, LogLevel } from '../classes';
 import { ICoreCClient } from '../lib';
 
 export function setupDevKernel<E extends CoreKernel<any>>(
@@ -39,13 +39,15 @@ export class TestKernel extends CoreKernel<ICoreCClient> {
     appName: string,
     appCode: string,
     testPath: string,
-    envFilePath: string
+    envFilePath: string,
+    logger?: (kernel: CoreKernel<any>) => CoreLogger
   ) {
     super({
       appName,
       appCode,
       pathOverride: testPath,
       envFilePath,
+      logger,
     });
     this.testPath = testPath;
   }
