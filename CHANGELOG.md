@@ -1,6 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-## [0.22.0-alpha.3]
+## [0.22.0]
 
 ### Breaking Changes
 - Entity_ID is now from type `string`
