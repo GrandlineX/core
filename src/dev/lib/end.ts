@@ -1,8 +1,7 @@
 import { removeFolderIfExist, sleep } from '../../utils';
-import { TestKernel } from '../DevKernel';
+import { TestContext } from '../../index';
 
-const kernel = TestKernel.getEntity();
-
+const [kernel, cleanUpPath] = TestContext.getEntity();
 describe('ShutDown', () => {
   test('exit kernel', async () => {
     const result = await kernel.stop();
@@ -15,6 +14,8 @@ describe('ShutDown', () => {
   });
 
   test('cleanup', async () => {
-    removeFolderIfExist(kernel.testPath);
+    if (cleanUpPath) {
+      removeFolderIfExist(cleanUpPath);
+    }
   });
 });

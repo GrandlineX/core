@@ -7,11 +7,12 @@ import {
 } from '../../classes';
 import { ICoreKernelModule } from '../../lib';
 import TestPrefab from '../testClass/db/TestPrefab';
-import { TestKernel } from '../DevKernel';
+
 import TestEntityLinked from '../testClass/db/entity/TestEntityLinked';
+import { TestContext } from '../../index';
 
 const testText = 'hello_world';
-const kernel = TestKernel.getEntity();
+const [kernel] = TestContext.getEntity();
 
 describe('Database', () => {
   test('get version', async () => {

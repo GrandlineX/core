@@ -1,6 +1,6 @@
-import { TestKernel } from '../DevKernel';
+import { TestContext } from '../../index';
 
-const kernel = TestKernel.getEntity();
+const [kernel] = TestContext.getEntity();
 describe('Clean start', () => {
   test('preload', async () => {
     expect(kernel.getState()).toBe('init');

@@ -59,7 +59,10 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected envStore: IStore;
 
-  protected triggerMap: Map<string, (kernel: this) => Promise<unknown>>;
+  protected triggerMap: Map<
+    string,
+    (kernel: CoreKernel<X>) => Promise<unknown>
+  >;
 
   protected globalLogger: CoreLogger;
 
@@ -195,7 +198,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    */
   setTriggerFunction(
     trigger: KernelTrigger,
-    triggerFunc: (ik: this) => Promise<unknown>
+    triggerFunc: (ik: CoreKernel<X>) => Promise<unknown>
   ): void {
     this.triggerMap.set(trigger, triggerFunc);
   }

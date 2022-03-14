@@ -1,15 +1,13 @@
-import exp from 'constants';
 import { ICoreAnyModule, ICoreKernelModule, ILogChannel } from '../../lib';
 import { sleep } from '../../utils';
 import TestService from '../testClass/service/TestService';
 import { CoreCache } from '../../classes';
 import { generateSeed } from '../../modules';
-import { TestKernel } from '../DevKernel';
 import { CoreDb } from '../../database';
+import { TestContext } from '../../index';
 
 const testText = 'hello_world';
-const kernel = TestKernel.getEntity();
-
+const [kernel] = TestContext.getEntity();
 describe('kernel extend', () => {
   test('getChild empty', async () => {
     expect(kernel.getChildModule('invaldimodname')).toBeNull();

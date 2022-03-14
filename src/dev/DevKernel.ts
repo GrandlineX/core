@@ -36,8 +36,6 @@ export function setupDevKernel<E extends CoreKernel<any>>(
 }
 
 export class TestKernel extends CoreKernel<ICoreCClient> {
-  static entity: TestKernel | null;
-
   testPath: string;
 
   constructor(
@@ -55,18 +53,5 @@ export class TestKernel extends CoreKernel<ICoreCClient> {
       logger,
     });
     this.testPath = testPath;
-  }
-
-  static getEntity(ent?: TestKernel): TestKernel {
-    if (this.entity) {
-      return this.entity;
-    }
-    if (ent) {
-      this.entity = ent;
-    } else {
-      throw new Error('NoKernelDefined');
-    }
-
-    return this.entity;
   }
 }
