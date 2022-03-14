@@ -421,7 +421,34 @@
 <a name='L356'></a><a href='#L356'>356</a>
 <a name='L357'></a><a href='#L357'>357</a>
 <a name='L358'></a><a href='#L358'>358</a>
-<a name='L359'></a><a href='#L359'>359</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -475,10 +502,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -788,6 +842,20 @@ import {
   EUpDateProperties,
   IEntity,
 } from '../classes/annotation';
+import GKey from '../database/entity/GKey';
+&nbsp;
+export type ICoreModule = ICoreKernelModule&lt;
+  ICoreKernel&lt;any&gt;,
+  ICoreDb,
+  any,
+  any,
+  any
+&gt;;
+export interface ICoreDb extends IDataBase&lt;any, any&gt; {
+  getKey(e_id: string): Promise&lt;GKey | null&gt;;
+  setKey(secret: string, iv: Buffer, auth: Buffer): Promise&lt;string&gt;;
+  deleteKey(e_id: string): Promise&lt;void&gt;;
+}
 &nbsp;
 export interface ICoreEntityHandler {
   getEntityMeta(): { key: string; meta: ColumnPropMap&lt;any&gt; }[];
@@ -801,16 +869,16 @@ export interface ICoreEntityHandler {
 &nbsp;
   updateEntity&lt;E extends IEntity&gt;(
     config: EntityConfig&lt;E&gt;,
-    e_id: number,
+    e_id: string,
     entity: EUpDateProperties&lt;E&gt;
   ): Promise&lt;boolean&gt;;
 &nbsp;
   getEntityById&lt;E extends IEntity&gt;(
     config: EntityConfig&lt;E&gt;,
-    e_id: number
+    e_id: string
   ): Promise&lt;E | null&gt;;
 &nbsp;
-  deleteEntityById(className: string, id: number): Promise&lt;boolean&gt;;
+  deleteEntityById(className: string, e_id: string): Promise&lt;boolean&gt;;
 &nbsp;
   getEntityList&lt;E extends IEntity&gt;(query: QueryInterface&lt;E&gt;): Promise&lt;E[]&gt;;
 &nbsp;
@@ -827,11 +895,18 @@ export interface ICoreEntityHandler {
 /**
  * Trigger:
  * - pre = executed before modules load
- * - load = executed before modules load except the base module
+ * - load = executed before modules load except the core module
+ * - load = executed after the core and before the base module load
  * - start = executed after modules load
  * - stop = executed before modules stopped
  */
-export type KernelTrigger = 'pre' | 'load' | 'start' | 'stop';
+export type KernelTrigger =
+  | 'pre'
+  | 'core-load'
+  | 'load'
+  | 'start'
+  | 'stop'
+  | string;
 &nbsp;
 export enum BridgeState {
   'init',
@@ -856,9 +931,9 @@ export interface ICoreCache {
 &nbsp;
   setE&lt;E extends IEntity&gt;(className: string, val: E): Promise&lt;void&gt;;
 &nbsp;
-  getE&lt;E extends IEntity&gt;(className: string, e_id: number): Promise&lt;E | null&gt;;
+  getE&lt;E extends IEntity&gt;(className: string, e_id: string): Promise&lt;E | null&gt;;
 &nbsp;
-  deleteE(className: string, e_id: number): Promise&lt;boolean&gt;;
+  deleteE(className: string, e_id: string): Promise&lt;boolean&gt;;
 &nbsp;
   clearAllE(className: string): Promise&lt;void&gt;;
 &nbsp;
@@ -879,6 +954,10 @@ export interface ICoreCClient {
   generateSecureToken(length: number): Promise&lt;string&gt;;
 &nbsp;
   getHash(seed: string, val: string): string;
+&nbsp;
+  keyStoreSave(data: string): Promise&lt;string&gt;;
+&nbsp;
+  keyStoreLoad(e_id: string): Promise&lt;string | null&gt;;
 }
 &nbsp;
 export interface ICoreKernel&lt;X extends ICoreCClient&gt;
@@ -902,18 +981,20 @@ export interface ICoreKernel&lt;X extends ICoreCClient&gt;
 &nbsp;
   hasCryptoClient(): boolean;
 &nbsp;
-  triggerFunction(triger: KernelTrigger): Promise&lt;void&gt;;
+  triggerFunction(trigger: KernelTrigger): Promise&lt;unknown&gt;;
 &nbsp;
   setTriggerFunction(
     trigger: KernelTrigger,
-    triggerFunc: (ik: ICoreKernel&lt;X&gt;) =&gt; Promise&lt;void&gt;
+    triggerFunc: (ik: ICoreKernel&lt;X&gt;) =&gt; Promise&lt;unknown&gt;
   ): void;
 &nbsp;
-  getDb(): IDataBase&lt;any, any&gt; | null;
+  getDb(): ICoreDb;
 &nbsp;
   addModule(module: ICoreAnyModule): void;
 &nbsp;
   getModule(): ICoreAnyModule;
+&nbsp;
+  getCoreModule(): ICoreModule;
 &nbsp;
   getOffline(): boolean;
 &nbsp;
@@ -944,7 +1025,7 @@ export interface ICoreKernelModule&lt;
 &nbsp;
   getDependencyList(): string[];
 &nbsp;
-  register(): Promise&lt;void&gt;;
+  register(action?: KernelTrigger): Promise&lt;void&gt;;
 &nbsp;
   shutdown(): Promise&lt;void&gt;;
 &nbsp;
@@ -1144,7 +1225,7 @@ export interface QueryInterface&lt;E&gt; extends QInterface&lt;E&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Feb 01 2022 21:07:53 GMT+0000 (Coordinated Universal Time)
+                at Mon Mar 14 2022 16:01:13 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
