@@ -184,7 +184,8 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   async triggerFunction(trigger: KernelTrigger): Promise<unknown> {
     const fc = this.triggerMap.get(trigger);
     if (!fc) {
-      throw this.lError('Trigger not implemented.');
+      this.warn('Trigger not implemented.');
+      return undefined;
     }
     return fc(this);
   }

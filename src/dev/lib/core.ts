@@ -58,14 +58,6 @@ describe('DevMode', () => {
   });
 });
 
-describe('EnvStore', () => {
-  test('can load from .env file', async () => {
-    const store = kernel.getConfigStore();
-    expect(store.has('TESTENV')).toBeTruthy();
-    expect(store.get('TESTENV')).toBe('testdata');
-  });
-});
-
 describe.each([
   ['testModule', false, 0, [null]],
   ['bridgeModule', true, 1, ['testModule']],

@@ -19,6 +19,7 @@ const [kernel] = TestContext.getEntity(
 setupDevKernel(kernel);
 
 require('../src/dev/lib/start');
+require('../src/dev/lib/store');
 require('../src/dev/lib/core');
 require('../src/dev/lib/dbcon');
 require('../src/dev/lib/end');
