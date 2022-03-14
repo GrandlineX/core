@@ -1,9 +1,10 @@
 import {
   ICoreAnyModule,
   ICoreCClient,
+  ICoreDb,
   ICoreKernel,
   ICoreKernelModule,
-  IDataBase,
+  ICoreModule,
   IHaveLogger,
   IStore,
   KernelTrigger,
@@ -48,6 +49,8 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected moduleList: ICoreKernelModule<any, any, any, any, any>[];
 
+  protected coreModule: ICoreModule;
+
   protected kernelModule: ICoreKernelModule<any, any, any, any, any> | null;
 
   protected offline: boolean;
@@ -56,13 +59,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected envStore: IStore;
 
-  protected preRun?: (kernel: this) => Promise<void>;
-
-  protected startRun?: (kernel: this) => Promise<void>;
-
-  protected stopRun?: (kernel: this) => Promise<void>;
-
-  protected loadRun?: (kernel: this) => Promise<void>;
+  protected triggerMap: Map<string, (kernel: this) => Promise<unknown>>;
 
   protected globalLogger: CoreLogger;
 
@@ -92,6 +89,10 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.updateSkip = false;
     this.appVersion = 'noVersion';
     this.triggerFunction = this.triggerFunction.bind(this);
+    this.triggerMap = new Map<
+      string,
+      (kernel: CoreKernel<X>) => Promise<unknown>
+    >();
 
     this.envStore = new EnvStore(
       this,
@@ -109,9 +110,16 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       this.globalLogger.setLogLevel(log);
     }
 
-    this.kernelModule = new CoreModule(this, (mod) => new InMemDB(mod));
-
+    this.coreModule = new CoreModule(this, (mod) => new InMemDB(mod));
+    this.kernelModule = null;
     this.setState('init');
+  }
+
+  /**
+   * get core kernel module
+   */
+  getCoreModule(): ICoreModule {
+    return this.coreModule;
   }
 
   /**
@@ -170,31 +178,12 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * @see KernelTrigger
    * @param trigger
    */
-  async triggerFunction(trigger: KernelTrigger): Promise<void> {
-    switch (trigger) {
-      case 'pre':
-        if (this.preRun) {
-          await this.preRun(this);
-        }
-        break;
-      case 'start':
-        if (this.startRun) {
-          await this.startRun(this);
-        }
-        break;
-      case 'stop':
-        if (this.stopRun) {
-          await this.stopRun(this);
-        }
-        break;
-      case 'load':
-        if (this.loadRun) {
-          await this.loadRun(this);
-        }
-        break;
-      default:
-        throw this.lError('Method not implemented.');
+  async triggerFunction(trigger: KernelTrigger): Promise<unknown> {
+    const fc = this.triggerMap.get(trigger);
+    if (!fc) {
+      throw this.lError('Trigger not implemented.');
     }
+    return fc(this);
   }
 
   /**
@@ -206,24 +195,9 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    */
   setTriggerFunction(
     trigger: KernelTrigger,
-    triggerFunc: (ik: this) => Promise<void>
+    triggerFunc: (ik: this) => Promise<unknown>
   ): void {
-    switch (trigger) {
-      case 'pre':
-        this.preRun = triggerFunc;
-        break;
-      case 'start':
-        this.startRun = triggerFunc;
-        break;
-      case 'stop':
-        this.stopRun = triggerFunc;
-        break;
-      case 'load':
-        this.loadRun = triggerFunc;
-        break;
-      default:
-        throw this.lError('Method not implemented.');
-    }
+    this.triggerMap.set(trigger, triggerFunc);
   }
 
   /**
@@ -267,14 +241,11 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   }
 
   /**
-   * Get database object of the base kernel module
-   * @link CoreDBCon
+   * Get database object of the core kernel module
+   * @link ICoreDb
    */
-  getDb(): IDataBase<any, any> | null {
-    if (this.kernelModule) {
-      return this.kernelModule.getDb();
-    }
-    throw this.lError('No base module found');
+  getDb(): ICoreDb {
+    return this.coreModule.getDb();
   }
 
   /**
@@ -330,12 +301,17 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.kernelModule = module;
   }
 
+  setCoreModule<E extends ICoreModule>(module: E): void {
+    this.coreModule = module;
+  }
+
   async stop(): Promise<boolean> {
     const workload: Promise<void>[] = [];
     await this.triggerFunction('stop');
     this.moduleList.forEach((el) => workload.push(el.shutdown()));
     await Promise.all(workload);
     await this.getModule().shutdown();
+    await this.getCoreModule().shutdown();
     this.setState('exited');
     return true;
   }
@@ -369,8 +345,10 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   }
 
   private async startUp() {
-    await this.getModule().register();
+    await this.getCoreModule().register('core-load');
+    await this.getModule().register('load');
     await initHandler(this.moduleList, this);
+    await this.getCoreModule().start();
     await this.getModule().start();
     for (const mod of this.moduleList) {
       if (mod.final !== undefined) {

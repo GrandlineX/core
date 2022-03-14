@@ -9,6 +9,7 @@ import {
   ICorePresenter,
   ICoreService,
   IDataBase,
+  KernelTrigger,
 } from '../lib';
 import CoreAction from './CoreAction';
 import CoreService from './CoreService';
@@ -201,9 +202,12 @@ export default abstract class CoreKernelModule<
     this.verbose('run-before-service');
   }
 
-  async register(): Promise<void> {
+  async register(action?: KernelTrigger): Promise<void> {
     await this.waitForBridgeState(BridgeState.ready);
     await this.initModule();
+    if (action) {
+      await this.getKernel().triggerFunction(action);
+    }
     if (this.trigger) {
       await this.trigger();
     }

@@ -1,6 +1,5 @@
 import * as crypto from 'crypto';
 import { ICoreCClient, ICoreKernel } from '../../lib';
-import CoreDb from '../../database/CoreDb';
 
 const encryptionType = 'aes-256-gcm';
 const encryptionEncoding = 'base64';
@@ -80,13 +79,13 @@ export default class CoreCryptoClient implements ICoreCClient {
   }
 
   async keyStoreSave(data: string): Promise<string> {
-    const db = this.kernel.getDb() as CoreDb;
+    const db = this.kernel.getDb();
     const keyCrypt = this.encrypt(data);
     return db.setKey(keyCrypt.enc, keyCrypt.iv, keyCrypt.auth);
   }
 
   async keyStoreLoad(e_id: string): Promise<string | null> {
-    const db = this.kernel.getDb() as CoreDb;
+    const db = this.kernel.getDb();
     const key = await db.getKey(e_id);
     if (!key) {
       return null;

@@ -1,4 +1,5 @@
-import { Column, CoreEntity, Entity, EProperties } from '../../classes';
+import { Column, Entity, EProperties } from '../../classes/annotation';
+import CoreEntity from '../../classes/CoreEntity';
 
 @Entity('GKey', 0)
 export default class GKey extends CoreEntity {

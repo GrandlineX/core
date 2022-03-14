@@ -2,10 +2,11 @@ import { randomUUID } from 'crypto';
 import GKey from './entity/GKey';
 import { CoreDBCon, CoreDBPrefab, CoreEntityWrapper } from '../classes';
 import { generateSeed } from '../modules/crypto/utils';
+import { ICoreDb } from '../lib';
 
 export const CORE_DB_VERSION = '0';
 
-export default class CoreDb extends CoreDBPrefab<any> {
+export default class CoreDb extends CoreDBPrefab<any> implements ICoreDb {
   private gKey: CoreEntityWrapper<GKey>;
 
   constructor(db: CoreDBCon<any, any>) {

@@ -7,6 +7,20 @@ import {
   EUpDateProperties,
   IEntity,
 } from '../classes/annotation';
+import GKey from '../database/entity/GKey';
+
+export type ICoreModule = ICoreKernelModule<
+  ICoreKernel<any>,
+  ICoreDb,
+  any,
+  any,
+  any
+>;
+export interface ICoreDb extends IDataBase<any, any> {
+  getKey(e_id: string): Promise<GKey | null>;
+  setKey(secret: string, iv: Buffer, auth: Buffer): Promise<string>;
+  deleteKey(e_id: string): Promise<void>;
+}
 
 export interface ICoreEntityHandler {
   getEntityMeta(): { key: string; meta: ColumnPropMap<any> }[];
@@ -46,11 +60,18 @@ export interface ICoreEntityHandler {
 /**
  * Trigger:
  * - pre = executed before modules load
- * - load = executed before modules load except the base module
+ * - load = executed before modules load except the core module
+ * - load = executed after the core and before the base module load
  * - start = executed after modules load
  * - stop = executed before modules stopped
  */
-export type KernelTrigger = 'pre' | 'load' | 'start' | 'stop';
+export type KernelTrigger =
+  | 'pre'
+  | 'core-load'
+  | 'load'
+  | 'start'
+  | 'stop'
+  | string;
 
 export enum BridgeState {
   'init',
@@ -125,18 +146,20 @@ export interface ICoreKernel<X extends ICoreCClient>
 
   hasCryptoClient(): boolean;
 
-  triggerFunction(triger: KernelTrigger): Promise<void>;
+  triggerFunction(trigger: KernelTrigger): Promise<unknown>;
 
   setTriggerFunction(
     trigger: KernelTrigger,
-    triggerFunc: (ik: ICoreKernel<X>) => Promise<void>
+    triggerFunc: (ik: ICoreKernel<X>) => Promise<unknown>
   ): void;
 
-  getDb(): IDataBase<any, any> | null;
+  getDb(): ICoreDb;
 
   addModule(module: ICoreAnyModule): void;
 
   getModule(): ICoreAnyModule;
+
+  getCoreModule(): ICoreModule;
 
   getOffline(): boolean;
 
@@ -167,7 +190,7 @@ export interface ICoreKernelModule<
 
   getDependencyList(): string[];
 
-  register(): Promise<void>;
+  register(action?: KernelTrigger): Promise<void>;
 
   shutdown(): Promise<void>;
 

@@ -4,6 +4,7 @@ import TestModule, { TestFc } from './testClass/TestModule';
 import BridgeTestModule from './testClass/BridgeTestModule';
 import { CoreLogger, LogLevel } from '../classes';
 import { ICoreCClient } from '../lib';
+import TestBaseModule from './testClass/TestBaseModule';
 
 export function setupDevKernel<E extends CoreKernel<any>>(
   kernel: E,
@@ -12,6 +13,7 @@ export function setupDevKernel<E extends CoreKernel<any>>(
   kernel.setCryptoClient(
     new CoreCryptoClient(kernel, CoreCryptoClient.fromPW('testpw'))
   );
+  kernel.setBaseModule(new TestBaseModule(kernel));
   kernel.addModule(new TestModule(kernel, res));
   kernel.addModule(new BridgeTestModule(kernel));
   kernel.setTriggerFunction('pre', async () => {
@@ -25,6 +27,9 @@ export function setupDevKernel<E extends CoreKernel<any>>(
   });
   kernel.setTriggerFunction('load', async () => {
     kernel.log('load');
+  });
+  kernel.setTriggerFunction('core-load', async () => {
+    kernel.log('core-load');
   });
   kernel.getLogger().setLogLevel(LogLevel.VERBOSE);
   return kernel;
