@@ -13,3 +13,4 @@ createFolderIfNotExist(testPath);
 const kernel = new TestKernel(appName, appCode, testPath, testEnv);
 setupDevKernel(kernel);
 kernel.start();
+

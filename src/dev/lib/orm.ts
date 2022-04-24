@@ -8,6 +8,7 @@ import {
   validateEntity,
 } from '../../classes';
 import TestEnt from '../testClass/db/entity/TestEnt';
+import EntityValidator from '../../utils/EntityValidator';
 
 describe('annotation', () => {
   const first = new TestEnt({

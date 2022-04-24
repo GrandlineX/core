@@ -7,6 +7,7 @@ import {
   EUpDateProperties,
   getColumnMeta,
 } from './annotation';
+import EntityValidator from '../utils/EntityValidator';
 
 export default class CoreEntityWrapper<E extends CoreEntity> {
   getIns: () => E;
@@ -28,6 +29,11 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
   }
 
   async createObject(args: EProperties<E>): Promise<E> {
+    if (
+      !EntityValidator.validateObj(this.propMap, this.className, args, false)
+    ) {
+      throw this.e_con.lError(`validation failed for ${this.className} create`);
+    }
     return this.e_con.createEntity<E>(
       {
         className: this.className,
@@ -41,6 +47,11 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     e_id: string,
     args: EUpDateProperties<E>
   ): Promise<boolean> {
+    if (
+      !EntityValidator.validateObj(this.propMap, this.className, args, true)
+    ) {
+      throw this.e_con.lError(`validation failed for ${this.className} update`);
+    }
     await this.cache?.deleteE(this.className, e_id);
 
     return this.e_con.updateEntity<E>(

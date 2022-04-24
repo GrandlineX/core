@@ -10,6 +10,7 @@ import TestPrefab from '../testClass/db/TestPrefab';
 
 import TestEntityLinked from '../testClass/db/entity/TestEntityLinked';
 import { TestContext } from '../../index';
+import EntityValidator from '../../utils/EntityValidator';
 
 const testText = 'hello_world';
 const [kernel] = TestContext.getEntity();
@@ -111,6 +112,9 @@ describe('Entity', () => {
       any
     >;
     const db = mod.getDb() as CoreDBCon<any, any>;
+    expect(
+      EntityValidator.validateManualObj(db, 'TestEntity', entity, false)
+    ).toBeTruthy();
     wrapper = db.getEntityWrapper<TestEntity>('TestEntity');
     wrapper2 = db.getEntityWrapper<TestEntityLinked>('TestEntityLinked');
     expect(wrapper).not.toBeUndefined();

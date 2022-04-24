@@ -22,8 +22,12 @@ export interface ICoreDb extends IDataBase<any, any> {
   deleteKey(e_id: string): Promise<void>;
 }
 
-export interface ICoreEntityHandler {
-  getEntityMeta(): { key: string; meta: ColumnPropMap<any> }[];
+export interface ICoreEntityMetaInterface {
+  key: string;
+  meta: ColumnPropMap<any>;
+}
+export interface ICoreEntityHandler extends ILogChannel {
+  getEntityMeta(): ICoreEntityMetaInterface[];
 
   getCache<E extends ICoreCache>(): E | null;
 
