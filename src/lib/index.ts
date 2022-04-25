@@ -174,6 +174,8 @@ export interface ICoreKernel<X extends ICoreCClient>
   setDevMode(mode: boolean): void;
 
   getConfigStore(): IStore;
+
+  getActionList(): ICoreAction[];
 }
 
 export type ICoreClient = ICoreElement;
@@ -211,6 +213,8 @@ export interface ICoreKernelModule<
   addService(...service: ICoreService[]): void;
 
   getServiceList(): ICoreService[];
+
+  getActionList(): ICoreAction[];
 
   getKernel(): K;
 

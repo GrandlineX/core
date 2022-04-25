@@ -1,4 +1,5 @@
 import {
+  ICoreAction,
   ICoreAnyModule,
   ICoreCClient,
   ICoreDb,
@@ -360,5 +361,13 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       }
     }
     await this.triggerFunction('start');
+  }
+
+  getActionList(): ICoreAction[] {
+    const out: ICoreAction[] = [];
+    this.moduleList.forEach((el) => {
+      out.push(...el.getActionList());
+    });
+    return out;
   }
 }

@@ -18,6 +18,9 @@ describe('kernel extend', () => {
   test('getAppCode', async () => {
     expect(kernel.getAppCode()).not.toBe('');
   });
+  test('getActionList', async () => {
+    expect(kernel.getActionList().length).toBeGreaterThan(0);
+  });
 });
 
 describe.each([

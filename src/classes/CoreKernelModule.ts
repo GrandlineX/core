@@ -1,5 +1,6 @@
 import {
   BridgeState,
+  ICoreAction,
   ICoreAnyModule,
   ICoreBridge,
   ICoreCache,
@@ -107,6 +108,10 @@ export default abstract class CoreKernelModule<
     this.srcBridges = [];
     this.tarBridges = [];
     this.deps = deps;
+  }
+
+  getActionList(): ICoreAction[] {
+    return this.actionlist;
   }
 
   hasDb(): boolean {
