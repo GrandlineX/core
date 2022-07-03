@@ -13,6 +13,8 @@ import TestAction from './action/TestAction';
 import TestPresenter from './client/TestPresenter';
 import TestPrefab from './db/TestPrefab';
 import CoreKernel from '../../CoreKernel';
+import TestService from './service/TestTriggerService';
+import TestTriggerService from './service/TestTriggerService';
 
 export type TestFc = (mod: TestModule) => TestInterface;
 export type TestInterface = {
@@ -33,7 +35,7 @@ export default class TestModule extends CoreBundleModule<
   constructor(kernel: CoreKernel<CoreCryptoClient>, init?: TestFc) {
     super('testModule', kernel);
     this.addAction(new TestAction(this));
-    this.addService(new OfflineService(this));
+    this.addService(new OfflineService(this), new TestTriggerService(this));
     if (init) {
       this.testInterface = init(this);
     } else {

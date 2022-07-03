@@ -11,6 +11,7 @@ import TestPrefab from '../testClass/db/TestPrefab';
 import TestEntityLinked from '../testClass/db/entity/TestEntityLinked';
 import { TestContext } from '../../index';
 import EntityValidator from '../../utils/EntityValidator';
+import CoreDBJoin from '../../classes/CoreDBJoin';
 
 const testText = 'hello_world';
 const [kernel] = TestContext.getEntity();
@@ -220,6 +221,16 @@ describe('Entity', () => {
       expect(update).not.toBeNull();
       expect(update?.name).toBe('Bobi');
       expect((await wrapper.getObjList()).length).toBe(2);
+    }
+  });
+  test('CoreJoin', async () => {
+    expect(wrapper).not.toBeUndefined();
+    expect(wrapper2).not.toBeUndefined();
+
+    if (wrapper2 && wrapper) {
+      const j = new CoreDBJoin([wrapper2, 'link', 'e_id', wrapper]);
+      const [f] = await j.join();
+      expect(f.join_map).not.toBeNull();
     }
   });
   test('delete', async () => {

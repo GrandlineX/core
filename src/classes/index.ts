@@ -15,6 +15,8 @@ import CorePresenter from './CorePresenter';
 import CoreService from './CoreService';
 import CoreDBUpdate from './CoreDBUpdate';
 import CoreBundleModule from './CoreBundleModule';
+import CoreTriggerService from './CoreTriggerService';
+import CoreDBJoin from './CoreDBJoin';
 
 export {
   CoreLoopService,
@@ -35,6 +37,8 @@ export {
   CoreEntityWrapper,
   CoreDBUpdate,
   LogLevel,
+  CoreTriggerService,
+  CoreDBJoin,
 };
 
 export * from './annotation';

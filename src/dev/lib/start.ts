@@ -1,6 +1,6 @@
 import { TestContext } from '../../index';
 
-const [kernel] = TestContext.getEntity();
+const [kernel, , modLen] = TestContext.getEntity();
 describe('Clean start', () => {
   test('preload', async () => {
     expect(kernel.getState()).toBe('init');
@@ -8,7 +8,7 @@ describe('Clean start', () => {
   test('start kernel', async () => {
     const result = await kernel.start();
     expect(result).toBe(true);
-    expect(kernel.getModCount()).toBe(2);
+    expect(kernel.getModCount()).toBe(modLen === null ? 2 : modLen);
     expect(kernel.getState()).toBe('running');
   });
 });

@@ -26,10 +26,11 @@ export interface ICoreEntityMetaInterface {
   key: string;
   meta: ColumnPropMap<any>;
 }
-export interface ICoreEntityHandler extends ILogChannel {
+export interface ICoreEntityHandler<C extends ICoreCache | null = any>
+  extends ILogChannel {
   getEntityMeta(): ICoreEntityMetaInterface[];
 
-  getCache<E extends ICoreCache>(): E | null;
+  getCache(): C | null;
 
   createEntity<E extends IEntity>(
     config: EntityConfig<E>,
@@ -85,7 +86,13 @@ export enum BridgeState {
 
 export type ServiceStates = 'INIT' | 'RUNNING' | 'SLEEPING';
 
-export interface ICoreCache {
+export interface ICoreCache<
+  K extends ICoreKernel<any> = ICoreKernel<any>,
+  T extends IDataBase<any, any> | null = any,
+  P extends ICoreClient | null = any,
+  C extends ICoreCache | null = any,
+  E extends ICorePresenter<any> | null = any
+> {
   start(): Promise<void>;
 
   set(key: string, val: string): Promise<void>;
@@ -98,9 +105,9 @@ export interface ICoreCache {
 
   exist(key: string): Promise<boolean>;
 
-  setE<E extends IEntity>(className: string, val: E): Promise<void>;
+  setE<R extends IEntity>(className: string, val: R): Promise<void>;
 
-  getE<E extends IEntity>(className: string, e_id: string): Promise<E | null>;
+  getE<R extends IEntity>(className: string, e_id: string): Promise<R | null>;
 
   deleteE(className: string, e_id: string): Promise<boolean>;
 
@@ -214,6 +221,10 @@ export interface ICoreKernelModule<
 
   getServiceList(): ICoreService[];
 
+  stopService(name: string): Promise<ICoreService | null>;
+
+  startService(name: string): Promise<ICoreService | null>;
+
   getActionList(): ICoreAction[];
 
   getKernel(): K;
@@ -245,25 +256,50 @@ export interface ICoreKernelModule<
   getBridgeModule<M extends ICoreAnyModule>(name: string): M | undefined;
 }
 
-export interface ICorePresenter<E> extends ICoreElement {
+export interface ICorePresenter<
+  A,
+  K extends ICoreKernel<any> = ICoreKernel<any>,
+  T extends IDataBase<any, any> | null = any,
+  P extends ICoreClient | null = any,
+  C extends ICoreCache | null = any,
+  E extends ICorePresenter<any> | null = any
+> extends ICoreElement<K, T, P, C, E> {
   start(): Promise<boolean>;
 
   stop(): Promise<boolean>;
 
-  getApp(): E;
+  getApp(): A;
 }
 
-export interface ICoreElement extends ILogChannel {
+export interface ICoreElement<
+  K extends ICoreKernel<any> = ICoreKernel<any>,
+  T extends IDataBase<any, any> | null = any,
+  P extends ICoreClient | null = any,
+  C extends ICoreCache | null = any,
+  E extends ICorePresenter<any> | null = any
+> extends ILogChannel {
   getKernel(): ICoreKernel<any>;
 
-  getModule<M extends ICoreAnyModule>(): M;
+  getModule(): ICoreKernelModule<K, T, P, C, E>;
 }
 
-export interface ICoreAction extends ICoreElement {
+export interface ICoreAction<
+  K extends ICoreKernel<any> = ICoreKernel<any>,
+  T extends IDataBase<any, any> | null = any,
+  P extends ICoreClient | null = any,
+  C extends ICoreCache | null = any,
+  E extends ICorePresenter<any> | null = any
+> extends ICoreElement<K, T, P, C, E> {
   register(): void;
 }
 
-export interface ICoreService extends ICoreElement {
+export interface ICoreService<
+  K extends ICoreKernel<any> = ICoreKernel<any>,
+  T extends IDataBase<any, any> | null = any,
+  P extends ICoreClient | null = any,
+  C extends ICoreCache | null = any,
+  E extends ICorePresenter<any> | null = any
+> extends ICoreElement<K, T, P, C, E> {
   start(): Promise<any>;
 
   stop(): Promise<any>;
@@ -325,7 +361,16 @@ export interface IBaseDBUpdate {
   getSource(): string;
 }
 
-export interface IDataBase<D, T> extends ICoreDB, ICoreEntityHandler {
+export interface IDataBase<
+  D,
+  T,
+  K extends ICoreKernel<any> = ICoreKernel<any>,
+  X extends IDataBase<any, any> | null = any,
+  P extends ICoreClient | null = any,
+  C extends ICoreCache | null = any,
+  Y extends ICorePresenter<any> | null = any
+> extends ICoreDB,
+    ICoreEntityHandler<C> {
   initNewDB(): Promise<void>;
 
   getRawDBObject(): D | null;

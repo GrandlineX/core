@@ -12,7 +12,8 @@ createFolderIfNotExist(testPath);
 const [kernel] = TestContext.getEntity(
   {
     kernel: new TestKernel(appName, appCode, testPath, __dirname),
-    cleanUpPath:testPath
+    cleanUpPath:testPath,
+    modLenth:2,
   }
 );
 

@@ -1,7 +1,6 @@
 import {
   ConfigType,
   IBaseDBUpdate,
-  ICoreCache,
   IDataBase,
   QueryInterface,
   RawQuery,
@@ -12,7 +11,9 @@ import CoreElement from './CoreElement';
 import { ColumnPropMap, EntityConfig, EUpDateProperties } from './annotation';
 import CoreDBCon from './CoreDBCon';
 
-export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
+export default abstract class CoreDBPrefab<
+    T extends CoreDBCon<any, any, any, any, any, any, any>
+  >
   extends CoreElement
   implements IDataBase<unknown, unknown>
 {
@@ -198,7 +199,7 @@ export default abstract class CoreDBPrefab<T extends CoreDBCon<any, any>>
     return this.db.initEntity<E>(className, entity);
   }
 
-  getCache<E extends ICoreCache>(): E | null {
-    return this.db.getCache<E>();
+  getCache() {
+    return this.db.getCache();
   }
 }

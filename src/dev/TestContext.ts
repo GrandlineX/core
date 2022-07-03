@@ -5,6 +5,8 @@ export default class TestContext {
 
   static cleanUpPath: string | null;
 
+  static modLenth: number | null;
+
   /**
    *
    * @param ent testPath
@@ -12,17 +14,19 @@ export default class TestContext {
   static getEntity(ent?: {
     kernel: CoreKernel<any>;
     cleanUpPath?: string;
-  }): [CoreKernel<any>, string | null] {
+    modLenth?: number;
+  }): [CoreKernel<any>, string | null, number | null] {
     if (this.entity) {
-      return [this.entity, this.cleanUpPath];
+      return [this.entity, this.cleanUpPath, this.modLenth];
     }
     if (ent) {
       this.entity = ent.kernel;
       this.cleanUpPath = ent.cleanUpPath || null;
+      this.modLenth = ent.modLenth || null;
     } else {
       throw new Error('NoKernelDefined');
     }
 
-    return [this.entity, this.cleanUpPath];
+    return [this.entity, this.cleanUpPath, this.modLenth];
   }
 }

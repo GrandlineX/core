@@ -1,5 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.24.0]
+
+### Added
+- core entity join 
+- kernel trigger service
+### Fixed
+- Test script fix for mod size
+- more interfaces for core elements
+
 ## [0.22.0]
 
 ### Breaking Changes

@@ -110,8 +110,12 @@ describe.each([
       }
     });
     test('hasServiceList', () => {
-      expect(module.getServiceList()).toHaveLength(failing ? 0 : 1);
+      expect(module.getServiceList()).toHaveLength(failing ? 0 : 2);
     });
+    test('test_trigger', async () => {
+      expect(await kernel.triggerFunction('test_trigger')).toBeTruthy();
+    });
+
     test('hasBridges', () => {
       expect(module.getBridges()).toHaveLength(br);
     });

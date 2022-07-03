@@ -298,8 +298,8 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * @param module
    * @typeParam X Type of Crypto client.
    */
-  addModule(module: ICoreKernelModule<any, any, any, any, any>): void {
-    this.moduleList.push(module);
+  addModule(...module: ICoreKernelModule<any, any, any, any, any>[]): void {
+    this.moduleList.push(...module);
   }
 
   setBaseModule(module: ICoreKernelModule<any, any, any, any, any>): void {

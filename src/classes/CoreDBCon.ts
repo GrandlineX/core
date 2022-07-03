@@ -2,7 +2,10 @@ import {
   ConfigType,
   IBaseDBUpdate,
   ICoreCache,
+  ICoreClient,
+  ICoreKernel,
   ICoreKernelModule,
+  ICorePresenter,
   IDataBase,
   QueryInterface,
   RawQuery,
@@ -18,8 +21,16 @@ import {
   validateEntity,
 } from './annotation';
 
-export default abstract class CoreDBCon<D, T>
-  extends CoreElement
+export default abstract class CoreDBCon<
+    D,
+    T,
+    K extends ICoreKernel<any> = ICoreKernel<any>,
+    X extends IDataBase<any, any> | null = any,
+    P extends ICoreClient | null = any,
+    C extends ICoreCache | null = any,
+    Y extends ICorePresenter<any> | null = any
+  >
+  extends CoreElement<K, X, P, C, Y>
   implements IDataBase<D, T>
 {
   dbVersion: string;
@@ -39,7 +50,7 @@ export default abstract class CoreDBCon<D, T>
   protected constructor(
     dbVersion: string,
     schemaName: string,
-    module: ICoreKernelModule<any, any, any, any, any>
+    module: ICoreKernelModule<K, X, P, C, Y>
   ) {
     super(`db${module.getName()}`, module);
     this.wrapperMap = new Map<string, CoreEntityWrapper<any>>();
@@ -227,7 +238,7 @@ export default abstract class CoreDBCon<D, T>
   abstract findEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
     search: {
-      [P in keyof E]?: E[P];
+      [B in keyof E]?: E[B];
     }
   ): Promise<E | null>;
 
@@ -241,7 +252,7 @@ export default abstract class CoreDBCon<D, T>
     entity: E
   ): Promise<boolean>;
 
-  getCache<E extends ICoreCache>(): E | null {
+  getCache(): C | null {
     if (!this.cacheEnabled) {
       return null;
     }

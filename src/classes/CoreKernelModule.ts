@@ -75,7 +75,7 @@ export default abstract class CoreKernelModule<
 
   private actionlist: CoreAction[];
 
-  private readonly servicelist: CoreService[];
+  private readonly servicelist: Map<string, CoreService>;
 
   private readonly deps: string[];
 
@@ -99,7 +99,7 @@ export default abstract class CoreKernelModule<
     super(`${name}Module`, kernel);
     this.name = name;
     this.actionlist = [];
-    this.servicelist = [];
+    this.servicelist = new Map();
     this.kernel = kernel;
     this.db = null;
     this.client = null;
@@ -223,8 +223,10 @@ export default abstract class CoreKernelModule<
     });
     await this.beforeServiceStart();
     this.servicelist.forEach((service) => {
-      service.log('Starting');
-      service.start();
+      if (!service.skipAutoStart) {
+        service.log('Starting');
+        service.start();
+      }
     });
     this.notifyBridges(BridgeState.ready);
   }
@@ -253,12 +255,33 @@ export default abstract class CoreKernelModule<
 
   addService(...service: CoreService[]): void {
     service.forEach((value) => {
-      this.servicelist.push(value);
+      this.servicelist.set(value.getName(), value);
     });
   }
 
   getServiceList(): ICoreService[] {
-    return this.servicelist;
+    return Array.from(this.servicelist.values());
+  }
+
+  async stopService(name: string): Promise<ICoreService | null> {
+    const s = this.servicelist.get(name);
+    if (!s || !s.isRunning()) {
+      return null;
+    }
+    s.stop();
+    s.state = 'SLEEPING';
+
+    return s;
+  }
+
+  async startService(name: string): Promise<ICoreService | null> {
+    const s = this.servicelist.get(name);
+    if (!s || s.isRunning()) {
+      return null;
+    }
+    s.start();
+    s.state = 'RUNNING';
+    return s;
   }
 
   getKernel(): K {

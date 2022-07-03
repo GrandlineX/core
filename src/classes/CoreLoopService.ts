@@ -1,9 +1,22 @@
 import Timeout = NodeJS.Timeout;
 import CoreService from './CoreService';
-import { ICoreKernelModule } from '../lib';
+import {
+  ICoreCache,
+  ICoreClient,
+  ICoreKernel,
+  ICoreKernelModule,
+  ICorePresenter,
+  IDataBase,
+} from '../lib';
 import { sleep } from '../utils';
 
-export default abstract class CoreLoopService extends CoreService {
+export default abstract class CoreLoopService<
+  K extends ICoreKernel<any> = ICoreKernel<any>,
+  T extends IDataBase<any, any> | null = any,
+  P extends ICoreClient | null = any,
+  C extends ICoreCache | null = any,
+  E extends ICorePresenter<any> | null = any
+> extends CoreService<K, T, P, C, E> {
   interval: Timeout | null;
 
   timeOut: number;
@@ -11,9 +24,10 @@ export default abstract class CoreLoopService extends CoreService {
   constructor(
     name: string,
     timeout: number,
-    module: ICoreKernelModule<any, any, any, any, any>
+    module: ICoreKernelModule<K, T, P, C, E>,
+    skipAutoStart?: boolean
   ) {
-    super(name, module);
+    super(name, module, skipAutoStart);
     this.interval = null;
     this.timeOut = timeout;
     this.startUp = this.startUp.bind(this);
