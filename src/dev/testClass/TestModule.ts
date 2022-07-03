@@ -13,7 +13,6 @@ import TestAction from './action/TestAction';
 import TestPresenter from './client/TestPresenter';
 import TestPrefab from './db/TestPrefab';
 import CoreKernel from '../../CoreKernel';
-import TestService from './service/TestTriggerService';
 import TestTriggerService from './service/TestTriggerService';
 
 export type TestFc = (mod: TestModule) => TestInterface;

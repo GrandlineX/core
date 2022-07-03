@@ -1,4 +1,3 @@
-import Timeout = NodeJS.Timeout;
 import CoreService from './CoreService';
 import {
   ICoreCache,
