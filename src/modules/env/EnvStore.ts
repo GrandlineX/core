@@ -2,10 +2,8 @@ import * as Path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 import { ICoreKernel, IStore } from '../../lib';
-import { ArchType, OsRelease, StoreGlobal } from './Global';
+import { EnvKey, StoreGlobal, StoreItem } from './Global';
 
-type EnvKey = StoreGlobal | string;
-type StoreItem = ArchType | OsRelease | string;
 export default class EnvStore implements IStore {
   store: Map<EnvKey, StoreItem>;
 

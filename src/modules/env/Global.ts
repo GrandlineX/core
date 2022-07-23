@@ -1,3 +1,5 @@
+export type EnvKey = StoreGlobal | string;
+export type StoreItem = ArchType | OsRelease | string;
 export enum OsRelease {
   WIN32 = 'win32',
   DARWIN = 'darwin',

@@ -8,6 +8,7 @@ import {
   IEntity,
 } from '../classes/annotation';
 import GKey from '../database/entity/GKey';
+import { EnvKey, StoreItem } from '../modules/env/Global';
 
 export type ICoreModule = ICoreKernelModule<
   ICoreKernel<any>,
@@ -416,12 +417,12 @@ export interface IHaveLogger {
 
 export interface IStore {
   clear(): void;
-
-  get(key: string): string | undefined;
-
-  has(key: string): boolean;
-
-  set(key: string, value: string): void;
+  get(key: EnvKey): string | undefined;
+  has(key: EnvKey): boolean;
+  set(key: EnvKey, value: StoreItem): void;
+  delete(key: EnvKey): boolean;
+  setBulk(...list: [EnvKey, StoreItem][]): void;
+  getBulk(...list: [EnvKey, string?][]): StoreItem[];
 }
 
 export interface QInterface<E> {

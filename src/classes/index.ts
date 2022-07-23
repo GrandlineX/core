@@ -42,3 +42,4 @@ export {
 };
 
 export * from './annotation';
+export * from './annotation/MetaExtend';

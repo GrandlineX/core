@@ -81,4 +81,6 @@ export {
   Column,
   getColumnMeta,
   validateColumnMeta,
+  columnKey,
+  entityKey,
 };

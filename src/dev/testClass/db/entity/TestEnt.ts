@@ -6,6 +6,7 @@ import {
 } from '../../../../classes';
 import { XUtil } from '../../../../utils';
 import TestEntity from './TestEntity';
+import { EntityColumn } from '../../../../classes/annotation/MetaExtend';
 
 @Entity('TestEnt', 1)
 export default class TestEnt extends CoreEntity {
@@ -43,12 +44,8 @@ export default class TestEnt extends CoreEntity {
   })
   invalidKey: any;
 
-  @Column({
-    canBeNull: true,
-    dataType: 'float',
-    foreignKey: XUtil.entityRelation(new TestEntity(), 'noSchema'),
-  })
-  autoRelation: number;
+  @EntityColumn(new TestEntity(), undefined, { canBeNull: true })
+  autoRelation: string;
 
   notAColumn: string;
 
@@ -59,6 +56,6 @@ export default class TestEnt extends CoreEntity {
     this.simpleNumber = val?.simpleNumber || 0;
     this.primaryKeyNull = null;
     this.invalidKey = null;
-    this.autoRelation = val?.autoRelation || -1;
+    this.autoRelation = val?.autoRelation || '';
   }
 }
