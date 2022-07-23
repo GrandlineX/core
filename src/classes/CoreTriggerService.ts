@@ -25,7 +25,7 @@ export default abstract class CoreTriggerService<
   ) {
     super(name, module, skipAutoStart);
     this.triggerName = triggerName;
-    this.getKernel().setTriggerFunction(triggerName, async (ik) => {
+    this.getKernel().setTriggerFunction(triggerName, async () => {
       return this.start();
     });
   }

@@ -9,7 +9,7 @@ export default class OfflineService extends CoreLoopService {
   }
 
   static checkInternet(): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve) => {
       dns.lookup('google.com', (err) => {
         if (err && err.code === 'ENOTFOUND') {
           resolve(false);
