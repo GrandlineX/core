@@ -2,9 +2,10 @@ import {
   Column,
   CoreEntity,
   Entity,
-  entityRelation,
   EPropertiesOpt,
 } from '../../../../classes';
+import { XUtil } from '../../../../utils';
+import TestEntity from './TestEntity';
 
 @Entity('TestEnt', 1)
 export default class TestEnt extends CoreEntity {
@@ -45,7 +46,7 @@ export default class TestEnt extends CoreEntity {
   @Column({
     canBeNull: true,
     dataType: 'float',
-    foreignKey: { ...entityRelation('TestEntity'), schema: 'noSchema' },
+    foreignKey: XUtil.entityRelation(new TestEntity(), 'noSchema'),
   })
   autoRelation: number;
 

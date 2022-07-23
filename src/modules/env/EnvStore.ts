@@ -33,8 +33,13 @@ export default class EnvStore implements IStore {
       }
     }
 
-    this.store.set(StoreGlobal.GLOBAL_OS, os.platform());
-    this.store.set(StoreGlobal.GLOBAL_ARCH, os.arch());
+    this.setBulk(
+      [StoreGlobal.GLOBAL_OS, os.platform()],
+      [StoreGlobal.GLOBAL_ARCH, os.arch()],
+      [StoreGlobal.GLOBAL_HOME_DIR, os.homedir()],
+      [StoreGlobal.GLOBAL_HOST_NAME, os.hostname()]
+    );
+
     const appName = this.kernel.getAppName();
     let base;
     if (os.platform() === 'darwin') {
@@ -46,18 +51,16 @@ export default class EnvStore implements IStore {
         ? Path.join(pathOverride, appName)
         : Path.join(os.homedir(), appName);
     }
-    this.store.set(StoreGlobal.GLOBAL_PATH_HOME, base);
-    this.store.set(StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data'));
-    this.store.set(StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db'));
-    this.store.set(StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp'));
-
+    this.setBulk(
+      [StoreGlobal.GLOBAL_PATH_HOME, base],
+      [StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data')],
+      [StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db')],
+      [StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp')]
+    );
     if (process.env.npm_package_version) {
-      this.store.set(
-        StoreGlobal.GLOBAL_APP_VERSION,
-        process.env.npm_package_version
-      );
+      this.set(StoreGlobal.GLOBAL_APP_VERSION, process.env.npm_package_version);
     } else {
-      this.store.set(StoreGlobal.GLOBAL_APP_VERSION, '0.0.0');
+      this.set(StoreGlobal.GLOBAL_APP_VERSION, '0.0.0');
     }
   }
 
@@ -65,8 +68,8 @@ export default class EnvStore implements IStore {
     this.store = new Map<EnvKey, StoreItem>();
   }
 
-  get(key: EnvKey): StoreItem | undefined {
-    return this.store.get(key);
+  get(key: EnvKey, defaultValue = ''): StoreItem {
+    return this.store.get(key) || defaultValue;
   }
 
   has(key: EnvKey): boolean {
@@ -79,6 +82,16 @@ export default class EnvStore implements IStore {
 
   set(key: EnvKey, value: StoreItem): void {
     this.store.set(key, value);
+  }
+
+  setBulk(...list: [EnvKey, StoreItem][]): void {
+    for (const [key, value] of list) {
+      this.store.set(key, value);
+    }
+  }
+
+  getBulk(...list: [EnvKey, string?][]): StoreItem[] {
+    return list.map(([key, value]) => this.get(key, value));
   }
 
   private loadFromFile(path: string) {

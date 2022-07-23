@@ -6,7 +6,7 @@ export type ValidationInterface = {
   invalidKey: string[];
 };
 
-export default class EntityValidator {
+export class EntityValidator {
   static validateManualObj(
     db: IDataBase<any, any>,
     entity: string,

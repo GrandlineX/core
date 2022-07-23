@@ -1,10 +1,9 @@
 import { ICoreAnyModule, ICoreKernelModule, ILogChannel } from '../../lib';
-import { sleep } from '../../utils';
 import TestService from '../testClass/service/TestService';
 import { CoreCache } from '../../classes';
 import { generateSeed } from '../../modules';
 import { CoreDb } from '../../database';
-import { TestContext } from '../../index';
+import { TestContext, XUtil } from '../../index';
 
 const testText = 'hello_world';
 const [kernel] = TestContext.getEntity();
@@ -20,6 +19,9 @@ describe('kernel extend', () => {
   });
   test('getActionList', async () => {
     expect(kernel.getActionList().length).toBeGreaterThan(0);
+  });
+  test('getServiceList', async () => {
+    expect(kernel.getServiceList().length).toBeGreaterThan(0);
   });
 });
 
@@ -245,7 +247,7 @@ describe('Service', () => {
     mod.addService(service);
     await service.start();
 
-    await sleep(10);
+    await XUtil.sleep(10);
 
     expect(service.state).toBe('RUNNING');
 

@@ -1,6 +1,7 @@
 export enum OsRelease {
   WIN32 = 'win32',
-  darwin = 'darwin',
+  DARWIN = 'darwin',
+  LINUX = 'linux',
 }
 
 export enum ArchType {
@@ -19,4 +20,6 @@ export enum StoreGlobal {
   'GLOBAL_PATH_DB' = 'GLOBAL_PATH_DB',
   'GLOBAL_PATH_TEMP' = 'GLOBAL_PATH_TEMP',
   'GLOBAL_APP_VERSION' = 'GLOBAL_APP_VERSION',
+  'GLOBAL_HOME_DIR' = 'GLOBAL_HOME_DIR',
+  'GLOBAL_HOST_NAME' = 'GLOBAL_HOST_NAME',
 }

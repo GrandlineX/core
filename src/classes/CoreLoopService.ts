@@ -8,7 +8,7 @@ import {
   ICorePresenter,
   IDataBase,
 } from '../lib';
-import { sleep } from '../utils';
+import { XUtil } from '../utils';
 
 export default abstract class CoreLoopService<
   K extends ICoreKernel<any> = ICoreKernel<any>,
@@ -68,7 +68,7 @@ export default abstract class CoreLoopService<
       clearInterval(this.interval);
       this.debug('Service Exit');
     } else {
-      await sleep(1000);
+      await XUtil.sleep(1000);
       await this.stop();
     }
   }

@@ -1,6 +1,5 @@
 import BadEntity from '../testClass/db/entity/BadEntity';
 import {
-  camelToSnakeCase,
   getColumnMeta,
   getEntityMeta,
   instanceOfEntity,
@@ -8,6 +7,7 @@ import {
   validateEntity,
 } from '../../classes';
 import TestEnt from '../testClass/db/entity/TestEnt';
+import { XUtil } from '../../utils';
 
 describe('annotation', () => {
   const first = new TestEnt({
@@ -29,7 +29,7 @@ describe('annotation', () => {
     expect(instanceOfEntity(new TestEnt())).toBeTruthy();
   });
   test('util test', () => {
-    expect(camelToSnakeCase('')).toBe('');
+    expect(XUtil.camelToSnakeCase('')).toBe('');
   });
   test('e_id is primary key', () => {
     const meta = getColumnMeta(first, 'e_id');

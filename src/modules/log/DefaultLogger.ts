@@ -1,5 +1,5 @@
 import CoreLogger from '../../classes/CoreLogger';
-import { getTimeStamp } from '../../utils/timeUtil';
+import { XUtil } from '../../utils';
 
 export default class DefaultLogger extends CoreLogger {
   debug(channel: string, ...ags: unknown[]): void {
@@ -27,6 +27,6 @@ export default class DefaultLogger extends CoreLogger {
   }
 
   format(channel: string, ...args: unknown[]): string {
-    return `[${getTimeStamp()}](${channel}) ${args}`;
+    return `[${XUtil.getTimeStamp()}](${channel}) ${args}`;
   }
 }

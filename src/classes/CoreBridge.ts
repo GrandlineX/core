@@ -1,6 +1,6 @@
 import { BridgeState, ICoreBridge, ICoreKernelModule } from '../lib';
-import { sleep } from '../utils/envUtil';
 import CoreLogChannel from './CoreLogChannel';
+import { XUtil } from '../utils';
 
 export default class CoreBridge extends CoreLogChannel implements ICoreBridge {
   private state: BridgeState;
@@ -31,7 +31,7 @@ export default class CoreBridge extends CoreLogChannel implements ICoreBridge {
 
   async waitForState(state: BridgeState): Promise<boolean> {
     while (this.state !== state) {
-      await sleep(1000);
+      await XUtil.sleep(1000);
     }
     return true;
   }

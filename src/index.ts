@@ -5,6 +5,7 @@
 import CoreKernel from './CoreKernel';
 import CoreModule from './CoreModule';
 import TestContext from './dev/TestContext';
+import initHandler from './utils/initHandler';
 
 export * from './dev/DevKernel';
 
@@ -15,5 +16,5 @@ export * from './modules';
 export * from './services';
 export * from './utils';
 
-export { CoreKernel, CoreModule, TestContext };
+export { CoreKernel, CoreModule, TestContext, initHandler };
 export default CoreKernel;

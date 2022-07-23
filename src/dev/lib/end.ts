@@ -1,4 +1,4 @@
-import { removeFolderIfExist, sleep } from '../../utils';
+import { XUtil } from '../../utils';
 import { TestContext } from '../../index';
 
 const [kernel, cleanUpPath] = TestContext.getEntity();
@@ -6,7 +6,7 @@ describe('ShutDown', () => {
   test('exit kernel', async () => {
     const result = await kernel.stop();
 
-    await sleep(1000);
+    await XUtil.sleep(1000);
 
     expect(kernel.getState()).toBe('exited');
 
@@ -15,7 +15,7 @@ describe('ShutDown', () => {
 
   test('cleanup', async () => {
     if (cleanUpPath) {
-      removeFolderIfExist(cleanUpPath);
+      XUtil.removeFolderIfExist(cleanUpPath);
     }
   });
 });

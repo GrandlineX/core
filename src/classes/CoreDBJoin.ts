@@ -1,7 +1,7 @@
 import CoreEntityWrapper from './CoreEntityWrapper';
 import CoreEntity from './CoreEntity';
 import { QInterface } from '../lib';
-import WorkerFactory from '../utils/WorkerFactory';
+import { XUtil } from '../utils';
 
 export default class CoreDBJoin<
   T extends CoreEntity = any,
@@ -27,7 +27,7 @@ export default class CoreDBJoin<
 
   async join(query?: QInterface<T>) {
     const q = await this.a.getObjList(query);
-    return WorkerFactory.buildFromArray(4, q, async (arg) => {
+    return XUtil.workerFactoryFromArray(4, q, async (arg) => {
       const cur = arg.dat[this.key];
       if (typeof cur === 'string') {
         return {

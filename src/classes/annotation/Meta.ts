@@ -1,8 +1,7 @@
 import 'reflect-metadata';
 
 import { ObjectLike } from './lib/props';
-import { ColumnProps, EntityProps, IEntity } from './lib/types';
-import { camelToSnakeCase, ClassNameInterface } from './util/nameUtil';
+import { ColumnProps, EntityProps } from './lib/types';
 
 const columnKey = Symbol('column');
 const entityKey = Symbol('entity');
@@ -75,21 +74,6 @@ function validateEntity<T extends ObjectLike>(target: T): boolean {
   return true;
 }
 
-/**
- * getTableName  by entity
- * @param entity
- */
-function getEntityNames(entity: IEntity): ClassNameInterface {
-  const meta = getEntityMeta(entity);
-  if (!meta) {
-    throw new Error('InvalidClassMeta');
-  }
-  return {
-    className: meta.name,
-    tableName: camelToSnakeCase(meta.name),
-  };
-}
-
 export {
   Entity,
   getEntityMeta,
@@ -97,5 +81,4 @@ export {
   Column,
   getColumnMeta,
   validateColumnMeta,
-  getEntityNames,
 };

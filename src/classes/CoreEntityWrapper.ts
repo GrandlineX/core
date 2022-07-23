@@ -7,7 +7,7 @@ import {
   EUpDateProperties,
   getColumnMeta,
 } from './annotation';
-import EntityValidator from '../utils/EntityValidator';
+import { EntityValidator } from '../utils';
 
 export default class CoreEntityWrapper<E extends CoreEntity> {
   getIns: () => E;

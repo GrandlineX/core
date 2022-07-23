@@ -6,16 +6,18 @@ import {
   ICoreKernel,
   ICoreKernelModule,
   ICoreModule,
+  ICoreService,
   IHaveLogger,
   IStore,
   KernelTrigger,
 } from './lib';
-import { createFolderIfNotExist } from './utils';
+
 import initHandler from './utils/initHandler';
 import { CoreLogChannel, CoreLogger } from './classes';
 
 import { DefaultLogger, EnvStore, InMemDB, StoreGlobal } from './modules';
 import CoreModule from './CoreModule';
+import { XUtil } from './utils';
 
 /**
  *  Core Kernel class
@@ -337,17 +339,21 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     const st = this.getConfigStore();
     this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) || '';
     if (
-      !(
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_HOME) || '') &&
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_DATA) || '') &&
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_DB) || '') &&
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_TEMP) || '')
+      !XUtil.createFolderBulk(
+        st.get(StoreGlobal.GLOBAL_PATH_HOME) || '',
+        st.get(StoreGlobal.GLOBAL_PATH_DATA) || '',
+        st.get(StoreGlobal.GLOBAL_PATH_DB) || '',
+        st.get(StoreGlobal.GLOBAL_PATH_TEMP) || ''
       )
     ) {
       console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
       process.exit(1);
     }
   }
+
+  /**
+   * @private
+   */
 
   private async startUp() {
     await this.getCoreModule().register('core-load');
@@ -367,6 +373,14 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     const out: ICoreAction[] = [];
     this.moduleList.forEach((el) => {
       out.push(...el.getActionList());
+    });
+    return out;
+  }
+
+  getServiceList(): ICoreService[] {
+    const out: ICoreService[] = [];
+    this.moduleList.forEach((el) => {
+      out.push(...el.getServiceList());
     });
     return out;
   }

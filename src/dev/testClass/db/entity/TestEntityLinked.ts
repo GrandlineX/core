@@ -1,10 +1,6 @@
-import {
-  camelToSnakeCase,
-  Column,
-  Entity,
-  EProperties,
-} from '../../../../classes';
+import { Column, Entity, EProperties } from '../../../../classes';
 import TestEntity from './TestEntity';
+import { XUtil } from '../../../../utils';
 
 @Entity('TestEntityLinked')
 export default class TestEntityLinked extends TestEntity {
@@ -14,7 +10,7 @@ export default class TestEntityLinked extends TestEntity {
     canBeNull: true,
     foreignKey: {
       key: 'e_id',
-      relation: camelToSnakeCase('TestEntity'),
+      relation: XUtil.camelToSnakeCase('TestEntity'),
     },
   })
   link: string | null;

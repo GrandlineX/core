@@ -1,14 +1,8 @@
-import * as Path from 'path';
-import { createFolderIfNotExist, setupDevKernel, TestContext, TestKernel } from '../src';
 
+import { setupDevKernel, TestContext, TestKernel, XUtil } from '../src';
 const appName = 'TestKernel';
 const appCode = 'tkernel';
-const msiPath = Path.join(__dirname, '..', 'data');
-const testPath = Path.join(__dirname, '..', 'data', 'config');
-
-createFolderIfNotExist(msiPath);
-createFolderIfNotExist(testPath);
-
+const [testPath] = XUtil.setupEnvironment([__dirname, '..'],['data', 'config'],['test'])
 const [kernel] = TestContext.getEntity(
   {
     kernel: new TestKernel(appName, appCode, testPath, __dirname),

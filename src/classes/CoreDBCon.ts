@@ -17,9 +17,9 @@ import {
   ColumnPropMap,
   EntityConfig,
   EUpDateProperties,
-  getEntityNames,
   validateEntity,
 } from './annotation';
+import { XUtil } from '../utils';
 
 export default abstract class CoreDBCon<
     D,
@@ -72,7 +72,7 @@ export default abstract class CoreDBCon<
       this.error(`Invalid Entity: ${ent.constructor.name}`);
       throw this.lError('Invalid Entity');
     }
-    const cName = getEntityNames(ent);
+    const cName = XUtil.getEntityNames(ent);
     const wrapper = new CoreEntityWrapper(this, cName.tableName, () => {
       return ent;
     });

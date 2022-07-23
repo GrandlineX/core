@@ -10,7 +10,7 @@ import TestPrefab from '../testClass/db/TestPrefab';
 
 import TestEntityLinked from '../testClass/db/entity/TestEntityLinked';
 import { TestContext } from '../../index';
-import EntityValidator from '../../utils/EntityValidator';
+import { EntityValidator } from '../../utils';
 import CoreDBJoin from '../../classes/CoreDBJoin';
 
 const testText = 'hello_world';
