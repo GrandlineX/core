@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.69% </span>
+                <span class="strong">94.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>125/132</span>
+                <span class='fraction'>130/137</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.51% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>19/29</span>
+                <span class='fraction'>15/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.05% </span>
+                <span class="strong">97.22% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>33/34</span>
+                <span class='fraction'>35/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.44% </span>
+                <span class="strong">94.65% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>119/126</span>
+                <span class='fraction'>124/131</span>
             </div>
         
             
@@ -436,7 +436,23 @@
 <a name='L371'></a><a href='#L371'>371</a>
 <a name='L372'></a><a href='#L372'>372</a>
 <a name='L373'></a><a href='#L373'>373</a>
-<a name='L374'></a><a href='#L374'>374</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -450,8 +466,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -787,6 +803,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -808,6 +828,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   ICoreAction,
@@ -817,16 +845,18 @@
   ICoreKernel,
   ICoreKernelModule,
   ICoreModule,
+  ICoreService,
   IHaveLogger,
   IStore,
   KernelTrigger,
 } from './lib';
-import { createFolderIfNotExist } from './utils';
+&nbsp;
 import initHandler from './utils/initHandler';
 import { CoreLogChannel, CoreLogger } from './classes';
 &nbsp;
 import { DefaultLogger, EnvStore, InMemDB, StoreGlobal } from './modules';
 import CoreModule from './CoreModule';
+import { XUtil } from './utils';
 &nbsp;
 /**
  *  Core Kernel class
@@ -1148,17 +1178,21 @@ export default abstract class CoreKernel&lt;X extends ICoreCClient&gt;
     const st = this.getConfigStore();
     this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) || <span class="branch-1 cbranch-no" title="branch not covered" >'';</span>
     <span class="missing-if-branch" title="if path not taken" >I</span>if (
-      !(
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_HOME) || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span> &amp;&amp;
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_DATA) || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span> &amp;&amp;
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_DB) || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span> &amp;&amp;
-        createFolderIfNotExist(st.get(StoreGlobal.GLOBAL_PATH_TEMP) || <span class="branch-1 cbranch-no" title="branch not covered" >'')</span>
+      !XUtil.createFolderBulk(
+        st.get(StoreGlobal.GLOBAL_PATH_HOME) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
+        st.get(StoreGlobal.GLOBAL_PATH_DATA) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
+        st.get(StoreGlobal.GLOBAL_PATH_DB) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
+        st.get(StoreGlobal.GLOBAL_PATH_TEMP) || <span class="branch-1 cbranch-no" title="branch not covered" >''</span>
       )
     ) {
 <span class="cstat-no" title="statement not covered" >      console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);</span>
 <span class="cstat-no" title="statement not covered" >      process.exit(1);</span>
     }
   }
+&nbsp;
+  /**
+   * @private
+   */
 &nbsp;
   private async startUp() {
     await this.getCoreModule().register('core-load');
@@ -1181,6 +1215,14 @@ export default abstract class CoreKernel&lt;X extends ICoreCClient&gt;
     });
     return out;
   }
+&nbsp;
+  getServiceList(): ICoreService[] {
+    const out: ICoreService[] = [];
+    this.moduleList.forEach((el) =&gt; {
+      out.push(...el.getServiceList());
+    });
+    return out;
+  }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -1189,7 +1231,7 @@ export default abstract class CoreKernel&lt;X extends ICoreCClient&gt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Jul 03 2022 20:49:11 GMT+0000 (Coordinated Universal Time)
+                at 2022-07-23T01:46:59.223Z
             </div>
         <script src="../prettify.js"></script>
         <script>
