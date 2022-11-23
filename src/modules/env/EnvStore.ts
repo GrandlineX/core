@@ -4,22 +4,37 @@ import * as os from 'os';
 import { ICoreKernel, IStore } from '../../lib';
 import { EnvKey, StoreGlobal, StoreItem } from './Global';
 
+export type EnvStoreCProps = {
+  kernel: ICoreKernel<any>;
+  pathOverride?: string;
+  envFilePath?: string;
+  loadFromLocalEnv?: boolean;
+};
 export default class EnvStore implements IStore {
   store: Map<EnvKey, StoreItem>;
 
   kernel: ICoreKernel<any>;
 
-  constructor(
-    kernel: ICoreKernel<any>,
-    pathOverride?: string,
-    envFilePath?: string
-  ) {
+  constructor(props: EnvStoreCProps) {
     this.store = new Map<EnvKey, StoreItem>();
-    this.kernel = kernel;
-    this.initNew(pathOverride, envFilePath);
+    this.kernel = props.kernel;
+    this.initNew(props);
   }
 
-  initNew(pathOverride?: string, envFilePath?: string): void {
+  loadLocalEnv() {
+    const lEnv: Record<string, any> = {
+      ...process.env,
+    };
+    const lKeyRing = Object.keys(lEnv);
+    for (const key of lKeyRing) {
+      if (key) {
+        this.set(key, lEnv[key]);
+      }
+    }
+  }
+
+  initNew(props: EnvStoreCProps): void {
+    const { envFilePath, pathOverride, loadFromLocalEnv } = props;
     this.clear();
     const root = envFilePath || process.env.npm_config_local_prefix;
     if (root) {
@@ -30,7 +45,9 @@ export default class EnvStore implements IStore {
         this.kernel.warn(`Cant load env from ${path}`);
       }
     }
-
+    if (loadFromLocalEnv) {
+      this.loadLocalEnv();
+    }
     this.setBulk(
       [StoreGlobal.GLOBAL_OS, os.platform()],
       [StoreGlobal.GLOBAL_ARCH, os.arch()],

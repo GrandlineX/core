@@ -17,21 +17,22 @@ export function setupDevKernel<E extends CoreKernel<any>>(
   kernel.addModule(new TestModule(kernel, res));
   kernel.addModule(new BridgeTestModule(kernel));
   kernel.setTriggerFunction('pre', async () => {
-    kernel.log('pre');
+    kernel.verbose('pre');
   });
   kernel.setTriggerFunction('start', async () => {
-    kernel.log('start');
+    kernel.verbose('start');
   });
   kernel.setTriggerFunction('stop', async () => {
-    kernel.log('stop');
+    kernel.verbose('stop');
   });
   kernel.setTriggerFunction('load', async () => {
-    kernel.log('load');
+    kernel.verbose('load');
   });
   kernel.setTriggerFunction('core-load', async () => {
-    kernel.log('core-load');
+    kernel.verbose('core-load');
   });
   kernel.getLogger().setLogLevel(LogLevel.VERBOSE);
+  // (kernel.getLogger() as DefaultLogger).setNoColor(true);
   return kernel;
 }
 
@@ -51,6 +52,7 @@ export class TestKernel extends CoreKernel<ICoreCClient> {
       pathOverride: testPath,
       envFilePath,
       logger,
+      loadFromLocalEnv: true,
     });
     this.testPath = testPath;
   }

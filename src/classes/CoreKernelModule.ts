@@ -224,7 +224,7 @@ export default abstract class CoreKernelModule<
     await this.beforeServiceStart();
     this.servicelist.forEach((service) => {
       if (!service.skipAutoStart) {
-        service.log('Starting');
+        service.debug('Starting');
         service.start();
       }
     });

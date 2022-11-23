@@ -1,4 +1,4 @@
-import EnvStore from './EnvStore';
+import EnvStore, { EnvStoreCProps } from './EnvStore';
 
 export * from './Global';
-export { EnvStore };
+export { EnvStore, EnvStoreCProps };

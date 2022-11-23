@@ -78,7 +78,7 @@ export default class InMemCache extends CoreCache {
     if (this.deleteTime) {
       this.loop = setInterval(this.flash, this.deleteTime);
     }
-    this.log(`Init cache:${this.channel}`);
+    this.debug(`Init cache:${this.channel}`);
   }
 
   async stop(): Promise<void> {

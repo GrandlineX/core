@@ -14,6 +14,6 @@ export default class BridgeTestModule extends CoreKernelModule<
   }
 
   async initModule(): Promise<void> {
-    this.log('LaterTHIS');
+    this.debug('LaterTHIS');
   }
 }

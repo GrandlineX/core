@@ -17,6 +17,6 @@ export default class TestAction extends CoreAction<
   }
 
   register(): void {
-    this.log('register');
+    this.debug('register');
   }
 }

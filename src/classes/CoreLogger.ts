@@ -51,6 +51,10 @@ export default abstract class CoreLogger {
     }
   }
 
+  getLogLevel() {
+    return this.logLevel;
+  }
+
   isOnLevel(value: LogLevel): boolean {
     switch (value) {
       case LogLevel.VERBOSE:

@@ -4,6 +4,7 @@ module.exports = {
   collectCoverageFrom: ["**/*.ts", "!**/node_modules/**","!tests/**"],
   testPathIgnorePatterns: ["/dist/", "/node_modules/"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  setupFilesAfterEnv: ["./jest.pre.config.js"],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },

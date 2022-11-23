@@ -24,7 +24,7 @@ export default abstract class CoreDBUpdate<
   async update(): Promise<boolean> {
     const perf = await this.performe();
     if (perf) {
-      this.db.log(
+      this.db.info(
         `Update DB from ${this.srcVersion} to ${this.tarVersion} successful`
       );
     } else {

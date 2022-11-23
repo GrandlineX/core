@@ -1,4 +1,3 @@
-
 import { setupDevKernel, TestContext, TestKernel, XUtil } from '../src';
 const appName = 'TestKernel';
 const appCode = 'tkernel';

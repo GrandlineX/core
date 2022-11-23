@@ -45,7 +45,7 @@ export default class TestModule extends CoreBundleModule<
   async initModule(): Promise<void> {
     this.setClient(this.testInterface?.client || new TestClient('testc', this));
     this.setPresenter(this.testInterface?.presenter || new TestPresenter(this));
-    this.log('FirstTHIS');
+    this.debug('FirstTHIS');
     this.setCache(this.testInterface?.cache || new InMemCache(this, 10000));
     const db = new TestPrefab(this.testInterface?.db || new InMemDB(this));
     db.setEntityCache(this.testInterface?.cache !== null);
@@ -55,6 +55,6 @@ export default class TestModule extends CoreBundleModule<
   }
 
   async initBundleModule(): Promise<void> {
-    this.log('triggerBundleInit');
+    this.debug('triggerBundleInit');
   }
 }

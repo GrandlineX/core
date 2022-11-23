@@ -4,7 +4,6 @@ import {
   Entity,
   EPropertiesOpt,
 } from '../../../../classes';
-import { XUtil } from '../../../../utils';
 import TestEntity from './TestEntity';
 import { EntityColumn } from '../../../../classes/annotation/MetaExtend';
 

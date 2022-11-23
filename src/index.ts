@@ -2,7 +2,7 @@
  * @name CoreKernel Main Module
  * @author David Nagy
  */
-import CoreKernel from './CoreKernel';
+import CoreKernel, { CoreKernelProps } from './CoreKernel';
 import CoreModule from './CoreModule';
 import TestContext from './dev/TestContext';
 import initHandler from './utils/initHandler';
@@ -16,5 +16,5 @@ export * from './modules';
 export * from './services';
 export * from './utils';
 
-export { CoreKernel, CoreModule, TestContext, initHandler };
+export { CoreKernel, CoreModule, TestContext, initHandler, CoreKernelProps };
 export default CoreKernel;

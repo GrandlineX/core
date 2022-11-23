@@ -1,10 +1,12 @@
 import { TestContext } from '../../index';
 
 const [kernel, , modLen] = TestContext.getEntity();
+
 describe('Clean start', () => {
   test('preload', async () => {
     expect(kernel.getState()).toBe('init');
   });
+
   test('start kernel', async () => {
     const result = await kernel.start();
     expect(result).toBe(true);

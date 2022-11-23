@@ -1,5 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.26.0]
+
+### Added
+- Env Store now can load from process env.
+- More colorful default logger 
+### Fixed
+- Move developing logs to verbose/debug log channel 
+
+### Update
+- Dependency update 
+
 ## [0.24.0]
 
 ### Added

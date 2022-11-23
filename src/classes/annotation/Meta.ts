@@ -24,7 +24,7 @@ function getColumnMeta<T>(
     throw new Error('no numeric objkey is allowed');
   }
 
-  return Reflect.getMetadata(columnKey, target, propertyKey);
+  return Reflect.getMetadata(columnKey, target as object, propertyKey);
 }
 
 function validateColumnMeta(props?: ColumnProps): boolean {

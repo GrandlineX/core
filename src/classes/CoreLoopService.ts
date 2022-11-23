@@ -38,7 +38,7 @@ export default abstract class CoreLoopService<
       this.setRunning();
       this.interval = setTimeout(this.startUp, 0);
     } else if (!this.forceStop) {
-      this.debug(this.state);
+      this.verbose(this.state);
       this.interval = setTimeout(this.startUp, this.timeOut);
     }
   }
@@ -46,7 +46,7 @@ export default abstract class CoreLoopService<
   async startUp(): Promise<any> {
     if (!this.forceStop) {
       this.setRunning();
-      this.debug(this.state);
+      this.verbose(this.state);
       await this.loop();
     } else {
       this.setSleeping();
@@ -59,7 +59,7 @@ export default abstract class CoreLoopService<
   }
 
   async stop(): Promise<any> {
-    this.log('try to stop service');
+    this.debug('try to stop service');
     this.forceStop = true;
     this.debug('ForceStop');
     if (this.state === 'INIT') {

@@ -18,6 +18,7 @@ import { CoreLogChannel, CoreLogger } from './classes';
 import { DefaultLogger, EnvStore, InMemDB, StoreGlobal } from './modules';
 import CoreModule from './CoreModule';
 import { XUtil } from './utils';
+import { EnvStoreCProps } from './modules/env/EnvStore';
 
 /**
  *  Core Kernel class
@@ -33,6 +34,12 @@ import { XUtil } from './utils';
  * kernel.start();
  * ```
  */
+
+export type CoreKernelProps = {
+  appName: string;
+  appCode: string;
+  logger?: (kernel: CoreKernel<any>) => CoreLogger;
+} & Omit<EnvStoreCProps, 'kernel'>;
 
 export default abstract class CoreKernel<X extends ICoreCClient>
   extends CoreLogChannel
@@ -78,13 +85,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * - logger: CoreLogger {@link CoreLogger} [optional]
    * @param options Kernel options
    */
-  protected constructor(options: {
-    appName: string;
-    appCode: string;
-    pathOverride?: string;
-    logger?: (kernel: CoreKernel<any>) => CoreLogger;
-    envFilePath?: string;
-  }) {
+  protected constructor(options: CoreKernelProps) {
     super('kernel', null);
     this.appName = options.appName;
     this.devMode = false;
@@ -100,11 +101,10 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       (kernel: CoreKernel<X>) => Promise<unknown>
     >();
 
-    this.envStore = new EnvStore(
-      this,
-      options.pathOverride,
-      options.envFilePath
-    );
+    this.envStore = new EnvStore({
+      kernel: this,
+      ...options,
+    });
     if (options.logger === undefined) {
       this.globalLogger = new DefaultLogger();
     } else {
@@ -163,16 +163,12 @@ export default abstract class CoreKernel<X extends ICoreCClient>
    * startup kernel
    */
   public async start(): Promise<boolean> {
-    this.log(
-      `Start Kernel v${process.env.npm_package_version} ${
-        this.devMode ? 'DEV' : 'Prod'
-      }`
-    );
-    this.log('Run startup script');
+    this.startUpInfo();
+    this.debug('Run startup script');
     this.preloadSetup();
     await this.triggerFunction('pre');
-    this.log('Startup script complete');
-    this.log('Run launcher');
+    this.info('Startup script complete');
+    this.debug('Run launcher');
     await this.startUp();
     this.setState('running');
     return true;
@@ -187,7 +183,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   async triggerFunction(trigger: KernelTrigger): Promise<unknown> {
     const fc = this.triggerMap.get(trigger);
     if (!fc) {
-      this.warn('Trigger not implemented.');
+      this.debug(`Trigger not implemented. [${trigger}]`);
       return undefined;
     }
     return fc(this);
@@ -351,6 +347,23 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     }
   }
 
+  /**
+   * Prints the default startup message
+   * @private
+   */
+  private startUpInfo() {
+    const out = [
+      `Starting Kernel`,
+      `⊢ Code:           ${this.appCode}`,
+      `⊢ Version:        ${this.envStore.get(StoreGlobal.GLOBAL_APP_VERSION)}`,
+      `⊢ Mode:           ${this.devMode ? 'Dev' : 'Prod'}`,
+      `⊢ Mod count:      ${this.moduleList.length}`,
+      `⊢ Action count:   ${this.getActionList().length}`,
+      `⊢ Service count:  ${this.getServiceList().length}`,
+      `⊢ Log level:      ${this.globalLogger.getLogLevel()}`,
+    ];
+    out.forEach((x) => this.info(x));
+  }
   /**
    * @private
    */
