@@ -18,3 +18,4 @@ require('../src/dev/lib/core');
 require('../src/dev/lib/dbcon');
 require('../src/dev/lib/end');
 require('../src/dev/lib/orm');
+require('../src/dev/lib/util');

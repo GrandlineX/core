@@ -1,5 +1,6 @@
 import fs from 'fs';
 import * as Path from 'path';
+import { spawn, SpawnOptionsWithoutStdio } from 'child_process';
 import { ColumnProps, getEntityMeta, IEntity } from '../classes/annotation';
 import CoreEntity from '../classes/CoreEntity';
 
@@ -8,7 +9,12 @@ export interface ClassNameInterface {
   tableName: string;
 }
 export type WDat<T> = { dat: T; i: number };
-
+export type XExecResult = {
+  exitCode: number | null;
+  error: boolean;
+  stdout: string;
+  stderr: string;
+};
 export class XUtil {
   /*
    * TIME
@@ -104,7 +110,7 @@ export class XUtil {
 
   static createFolderIfNotExist(path: string): boolean {
     if (!fs.existsSync(path)) {
-      fs.mkdirSync(path);
+      fs.mkdirSync(path, { recursive: true });
     }
     return true;
   }
@@ -190,5 +196,36 @@ export class XUtil {
     });
 
     return out;
+  }
+
+  static exec(
+    cmd: string,
+    args?: string[],
+    options?: SpawnOptionsWithoutStdio
+  ): Promise<XExecResult> {
+    return new Promise<XExecResult>((resolve) => {
+      const child = spawn(cmd, args, options);
+      let stdout = '';
+      let stderr = '';
+      if (child.stdout) {
+        child.stdout.on('data', (data) => {
+          stdout += data;
+        });
+      }
+      if (child.stderr) {
+        child.stderr.on('data', (data) => {
+          stderr += data;
+        });
+      }
+      child.on('close', (code) => {
+        const out: XExecResult = {
+          exitCode: code,
+          error: code !== 0,
+          stdout,
+          stderr,
+        };
+        resolve(out);
+      });
+    });
   }
 }

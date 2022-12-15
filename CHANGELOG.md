@@ -1,5 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## [0.27.0]
+
+### Added
+- CMap - Map interface extension. 
+- CoreSemaphor - Semaphore like interface for special synchronisation cases.
+- CachedFC - Time based cache function
+- exec - Promise based child_process spawn interface
+### Fixed
+- The `createFolderIfNotExist` now creates directories recursively 
+
 ## [0.26.0]
 
 ### Added

@@ -17,6 +17,8 @@ import CoreDBUpdate from './CoreDBUpdate';
 import CoreBundleModule from './CoreBundleModule';
 import CoreTriggerService from './CoreTriggerService';
 import CoreDBJoin from './CoreDBJoin';
+import CoreCachedFc from './CoreCachedFc';
+import CMap from './CoreMap';
 
 export {
   CoreLoopService,
@@ -39,7 +41,10 @@ export {
   LogLevel,
   CoreTriggerService,
   CoreDBJoin,
+  CoreCachedFc,
+  CMap,
 };
 
 export * from './annotation';
+export * from './CoreSemaphor';
 export * from './annotation/MetaExtend';
