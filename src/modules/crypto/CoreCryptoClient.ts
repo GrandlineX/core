@@ -1,4 +1,5 @@
 import * as crypto from 'crypto';
+import { timingSafeEqual } from 'crypto';
 import { ICoreCClient, ICoreKernel } from '../../lib';
 
 const encryptionType = 'aes-256-gcm';
@@ -91,5 +92,19 @@ export default class CoreCryptoClient implements ICoreCClient {
       return null;
     }
     return this.decrypt(key.secret, key.iv, key.auth);
+  }
+
+  timeSavePWValidation(content: string, validator: string): boolean {
+    let a;
+    let b;
+
+    if (content.length !== validator.length) {
+      a = Buffer.from('a');
+      b = Buffer.from('b');
+      return timingSafeEqual(a, b);
+    }
+    a = Buffer.from(content);
+    b = Buffer.from(validator);
+    return timingSafeEqual(a, b);
   }
 }

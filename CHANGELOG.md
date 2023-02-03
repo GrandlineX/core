@@ -1,5 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+
+## [0.28.0]
+
+### Added
+- CClient TimeSavePWValidation
+
+### Fixed
+- Validator bug
+
 ## [0.27.0]
 
 ### Added

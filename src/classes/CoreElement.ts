@@ -1,11 +1,13 @@
 import {
   ICoreCache,
+  ICoreCClient,
   ICoreClient,
   ICoreElement,
   ICoreKernel,
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
+  IStore,
 } from '../lib';
 import CoreLogChannel from './CoreLogChannel';
 
@@ -26,11 +28,19 @@ export default abstract class CoreElement<
     this.module = module;
   }
 
-  getKernel(): ICoreKernel<any> {
+  getKernel(): K {
     return this.module.getKernel();
   }
 
   getModule(): ICoreKernelModule<K, T, P, C, E> {
     return this.module;
+  }
+
+  getConfigStore(): IStore {
+    return this.getKernel().getConfigStore();
+  }
+
+  getCClient<X extends ICoreCClient>(): X {
+    return this.getKernel().getCryptoClient();
   }
 }

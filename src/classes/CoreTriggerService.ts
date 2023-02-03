@@ -14,7 +14,7 @@ export default abstract class CoreTriggerService<
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
   E extends ICorePresenter<any> | null = any
-> extends CoreService {
+> extends CoreService<K, T, P, C, E> {
   triggerName: string;
 
   constructor(

@@ -135,6 +135,10 @@ export interface ICoreCClient {
   keyStoreSave(data: string): Promise<string>;
 
   keyStoreLoad(e_id: string): Promise<string | null>;
+
+  getUUID(): string;
+
+  timeSavePWValidation(content: string, validator: string): boolean;
 }
 
 export interface ICoreKernel<X extends ICoreCClient>
@@ -282,6 +286,9 @@ export interface ICoreElement<
   getKernel(): ICoreKernel<any>;
 
   getModule(): ICoreKernelModule<K, T, P, C, E>;
+  getConfigStore(): IStore;
+
+  getCClient<X extends ICoreCClient>(): X;
 }
 
 export interface ICoreAction<

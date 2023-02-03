@@ -122,8 +122,13 @@ export class EntityValidator {
 
         break;
 
-      case 'blob':
       case 'json':
+        if (typeof value !== 'object') {
+          return err();
+        }
+        break;
+      case 'blob':
+        return err();
       default:
         throw new Error('Validation failed: Invalid type');
     }
