@@ -1,4 +1,4 @@
-import dns = require('dns');
+import dns from 'dns';
 import CoreLoopService from '../classes/CoreLoopService';
 import { ICoreKernelModule } from '../lib';
 

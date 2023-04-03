@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.30.0]
+
+### Added
+- Hybrid Package cjs + mjs
+- export ts-config
+### Changed
+- reorganize jest test lib
+
 ## [0.28.0]
 
 ### Added

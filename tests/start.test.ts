@@ -1,4 +1,4 @@
-import { setupDevKernel, TestContext, TestKernel, XUtil } from '../src';
+import { setupDevKernel, TestContext, TestKernel, XUtil,JestLib } from '../src';
 const appName = 'TestKernel';
 const appCode = 'tkernel';
 const [testPath] = XUtil.setupEnvironment([__dirname, '..'],['data', 'config'],['test'])
@@ -12,10 +12,10 @@ const [kernel] = TestContext.getEntity(
 
 setupDevKernel(kernel);
 
-require('../src/dev/lib/start');
-require('../src/dev/lib/store');
-require('../src/dev/lib/core');
-require('../src/dev/lib/dbcon');
-require('../src/dev/lib/end');
-require('../src/dev/lib/orm');
-require('../src/dev/lib/util');
+JestLib.jestStart();
+JestLib.jestStore();
+JestLib.jestCore();
+JestLib.jestDb();
+JestLib.jestEnd();
+JestLib.jestOrm();
+JestLib.jestUtils();
