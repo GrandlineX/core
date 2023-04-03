@@ -527,15 +527,15 @@ export default abstract class CoreDBPrefab&lt;
 <span class="cstat-no" title="statement not covered" >    this.db.setUpdateChain(...chain);</span>
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >canUpdate(</span>): Promise&lt;boolean&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>canUpdate(): Promise&lt;boolean&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.canUpdate();</span>
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >getCurrenDBVersion(</span>): Promise&lt;string&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>getCurrenDBVersion(): Promise&lt;string&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.getCurrenDBVersion();</span>
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >update(</span>): Promise&lt;boolean&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>update(): Promise&lt;boolean&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.update();</span>
   }
 &nbsp;
@@ -558,11 +558,11 @@ export default abstract class CoreDBPrefab&lt;
     return this.db.disconnect();
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >connect(</span>): Promise&lt;boolean&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>connect(): Promise&lt;boolean&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.connect();</span>
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >execScripts(</span>list: RawQuery[]): Promise&lt;T[]&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>execScripts(list: RawQuery[]): Promise&lt;T[]&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.execScripts(list);</span>
   }
 &nbsp;
@@ -582,11 +582,11 @@ export default abstract class CoreDBPrefab&lt;
     return this.db.removeConfig(key);
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >getRawDBObject(</span>): Promise&lt;unknown&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>getRawDBObject(): Promise&lt;unknown&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.getRawDBObject();</span>
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >initNewDB(</span>): Promise&lt;void&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>initNewDB(): Promise&lt;void&gt; {
 <span class="cstat-no" title="statement not covered" >    await this.db.initNewDB();</span>
 <span class="cstat-no" title="statement not covered" >    await this.initPrefabDB();</span>
   }
@@ -596,7 +596,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param config
    * @param entity
    */
-  async <span class="fstat-no" title="function not covered" >createEntity&lt;</span>E extends CoreEntity&gt;(
+<span class="fstat-no" title="function not covered" >  async </span>createEntity&lt;E extends CoreEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     entity: E
   ): Promise&lt;E&gt; {
@@ -609,7 +609,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param e_id
    * @param entity
    */
-  async <span class="fstat-no" title="function not covered" >updateEntity&lt;</span>E extends CoreEntity&gt;(
+<span class="fstat-no" title="function not covered" >  async </span>updateEntity&lt;E extends CoreEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     e_id: string,
     entity: EUpDateProperties&lt;E&gt;
@@ -622,7 +622,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param config
    * @param id
    */
-  async <span class="fstat-no" title="function not covered" >getEntityById&lt;</span>E extends CoreEntity&gt;(
+<span class="fstat-no" title="function not covered" >  async </span>getEntityById&lt;E extends CoreEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     id: string
   ): Promise&lt;E | null&gt; {
@@ -634,7 +634,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param className
    * @param e_id
    */
-  async <span class="fstat-no" title="function not covered" >deleteEntityById(</span>className: string, e_id: string): Promise&lt;boolean&gt; {
+<span class="fstat-no" title="function not covered" >  async </span>deleteEntityById(className: string, e_id: string): Promise&lt;boolean&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.deleteEntityById(className, e_id);</span>
   }
 &nbsp;
@@ -642,7 +642,7 @@ export default abstract class CoreDBPrefab&lt;
    * Get Entity object list
    * @param query
    */
-  async <span class="fstat-no" title="function not covered" >getEntityList&lt;</span>E extends CoreEntity&gt;(
+<span class="fstat-no" title="function not covered" >  async </span>getEntityList&lt;E extends CoreEntity&gt;(
     query: QueryInterface&lt;E&gt;
   ): Promise&lt;E[]&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.getEntityList&lt;E&gt;(query);</span>
@@ -653,7 +653,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param config
    * @param search
    */
-  async <span class="fstat-no" title="function not covered" >findEntity&lt;</span>E extends CoreEntity&gt;(
+<span class="fstat-no" title="function not covered" >  async </span>findEntity&lt;E extends CoreEntity&gt;(
     config: EntityConfig&lt;E&gt;,
     search: {
       [P in keyof E]?: E[P];
@@ -667,7 +667,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param className
    * @param entity
    */
-  async <span class="fstat-no" title="function not covered" >initEntity&lt;</span>E extends CoreEntity&gt;(
+<span class="fstat-no" title="function not covered" >  async </span>initEntity&lt;E extends CoreEntity&gt;(
     className: string,
     entity: E
   ): Promise&lt;boolean&gt; {
@@ -685,7 +685,7 @@ export default abstract class CoreDBPrefab&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-03T16:50:50.421Z
+                at 2023-04-03T18:16:48.970Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
