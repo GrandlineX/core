@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,15 +97,13 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,27 +115,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CoreDBCon, CoreKernelModule } from './classes';
-import { InMemCache } from './modules';
-import { OfflineService } from './services';
-import { ICoreKernel, ICoreModule } from './lib';
-import CoreDb from './database/CoreDb';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { CoreDBCon, CoreKernelModule } from './classes/index.js';</span>
+<span class="cstat-no" title="statement not covered" >import { InMemCache } from './modules/index.js';</span>
+<span class="cstat-no" title="statement not covered" >import { OfflineService } from './services/index.js';</span>
+import { ICoreKernel, ICoreModule } from './lib/index.js';
+<span class="cstat-no" title="statement not covered" >import CoreDb from './database/CoreDb.js';</span>
 &nbsp;
-export default class CoreModule
+<span class="cstat-no" title="statement not covered" >export default class C</span>oreModule
   extends CoreKernelModule&lt;ICoreKernel&lt;any&gt;, CoreDb, null, InMemCache, null&gt;
   implements ICoreModule
 {
@@ -147,22 +147,22 @@ export default class CoreModule
    * @param kernel
    * @param dbFunc
    */
-  constructor(
+<span class="fstat-no" title="function not covered" >  constructor(</span>
     kernel: ICoreKernel&lt;any&gt;,
     dbFunc: (mod: CoreModule) =&gt; CoreDBCon&lt;any, any&gt;
   ) {
-    super('core', kernel);
-    this.addService(new OfflineService(this));
-    this.cdb = dbFunc(this);
+<span class="cstat-no" title="statement not covered" >    super('core', kernel);</span>
+<span class="cstat-no" title="statement not covered" >    this.addService(new OfflineService(this));</span>
+<span class="cstat-no" title="statement not covered" >    this.cdb = dbFunc(this);</span>
   }
 &nbsp;
-  async initModule(): Promise&lt;void&gt; {
-    this.setCache(new InMemCache(this, 480000));
+<span class="fstat-no" title="function not covered" >  async </span>initModule(): Promise&lt;void&gt; {
+<span class="cstat-no" title="statement not covered" >    this.setCache(new InMemCache(this, 480000));</span>
 &nbsp;
-    const db = new CoreDb(this.cdb);
-    db.setEntityCache(true);
+    const db = <span class="cstat-no" title="statement not covered" >new CoreDb(this.cdb);</span>
+<span class="cstat-no" title="statement not covered" >    db.setEntityCache(true);</span>
 &nbsp;
-    this.setDb(db);
+<span class="cstat-no" title="statement not covered" >    this.setDb(db);</span>
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -172,7 +172,7 @@ export default class CoreModule
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-03T18:16:49.053Z
+                at 2023-04-04T18:58:14.489Z
             </div>
         <script src="../prettify.js"></script>
         <script>

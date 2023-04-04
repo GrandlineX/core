@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>20/20</span>
+                <span class='fraction'>0/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/20</span>
+                <span class='fraction'>0/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,57 +92,57 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export type EnvKey = StoreGlobal | string;
 export type StoreItem = ArchType | OsRelease | string;
-export enum OsRelease {
-  WIN32 = 'win32',
-  DARWIN = 'darwin',
-  LINUX = 'linux',
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export enum O</span>sRelease {</span>
+<span class="cstat-no" title="statement not covered" >  WIN32 = 'win32',</span>
+<span class="cstat-no" title="statement not covered" >  DARWIN = 'darwin',</span>
+<span class="cstat-no" title="statement not covered" >  LINUX = 'linux',</span>
 }
 &nbsp;
-export enum ArchType {
-  X32 = 'x32',
-  X64 = 'x64',
-  ARM = 'arm',
-  ARM64 = 'arm64',
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export enum A</span>rchType {</span>
+<span class="cstat-no" title="statement not covered" >  X32 = 'x32',</span>
+<span class="cstat-no" title="statement not covered" >  X64 = 'x64',</span>
+<span class="cstat-no" title="statement not covered" >  ARM = 'arm',</span>
+<span class="cstat-no" title="statement not covered" >  ARM64 = 'arm64',</span>
 }
 &nbsp;
-export enum StoreGlobal {
-  'GLOBAL_OS' = 'GLOBAL_OS',
-  'GLOBAL_ARCH' = 'GLOBAL_ARCH',
-  'GLOBAL_LOG_LEVEL' = 'GLOBAL_LOG_LEVEL',
-  'GLOBAL_PATH_HOME' = 'GLOBAL_PATH_HOME',
-  'GLOBAL_PATH_DATA' = 'GLOBAL_PATH_DATA',
-  'GLOBAL_PATH_DB' = 'GLOBAL_PATH_DB',
-  'GLOBAL_PATH_TEMP' = 'GLOBAL_PATH_TEMP',
-  'GLOBAL_APP_VERSION' = 'GLOBAL_APP_VERSION',
-  'GLOBAL_HOME_DIR' = 'GLOBAL_HOME_DIR',
-  'GLOBAL_HOST_NAME' = 'GLOBAL_HOST_NAME',
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export enum S</span>toreGlobal {</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_OS' = 'GLOBAL_OS',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_ARCH' = 'GLOBAL_ARCH',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_LOG_LEVEL' = 'GLOBAL_LOG_LEVEL',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_PATH_HOME' = 'GLOBAL_PATH_HOME',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_PATH_DATA' = 'GLOBAL_PATH_DATA',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_PATH_DB' = 'GLOBAL_PATH_DB',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_PATH_TEMP' = 'GLOBAL_PATH_TEMP',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_APP_VERSION' = 'GLOBAL_APP_VERSION',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_HOME_DIR' = 'GLOBAL_HOME_DIR',</span>
+<span class="cstat-no" title="statement not covered" >  'GLOBAL_HOST_NAME' = 'GLOBAL_HOST_NAME',</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -151,7 +151,7 @@ export enum StoreGlobal {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-03T18:16:48.970Z
+                at 2023-04-04T18:58:14.349Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
