@@ -1,2 +1,2 @@
-export * from './EntityValidator';
-export * from './XUtil';
+export * from './EntityValidator.js';
+export * from './XUtil.js';

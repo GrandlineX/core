@@ -1,5 +1,5 @@
-import CorePresenter from '../../../classes/CorePresenter';
-import { ICoreAnyModule } from '../../../lib';
+import CorePresenter from '../../../classes/CorePresenter.js';
+import { ICoreAnyModule } from '../../../lib/index.js';
 
 export default class TestPresenter extends CorePresenter<null> {
   constructor(module: ICoreAnyModule) {

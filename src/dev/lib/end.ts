@@ -1,5 +1,5 @@
-import { XUtil } from '../../utils';
-import TestContext from '../TestContext';
+import { XUtil } from '../../utils/index.js';
+import TestContext from '../TestContext.js';
 
 export default function jestEnd() {
   const [kernel, cleanUpPath] = TestContext.getEntity();

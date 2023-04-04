@@ -1,6 +1,6 @@
-import { IBaseDBUpdate } from '../lib';
-import CoreDBCon from './CoreDBCon';
-import CoreDBPrefab from './CoreDBPrefab';
+import { IBaseDBUpdate } from '../lib/index.js';
+import CoreDBCon from './CoreDBCon.js';
+import CoreDBPrefab from './CoreDBPrefab.js';
 
 export default abstract class CoreDBUpdate<
   D extends CoreDBCon<any, any> | CoreDBPrefab<any>

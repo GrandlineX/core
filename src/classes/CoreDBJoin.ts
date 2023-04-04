@@ -1,7 +1,7 @@
-import CoreEntityWrapper from './CoreEntityWrapper';
-import CoreEntity from './CoreEntity';
-import { QInterface } from '../lib';
-import { XUtil } from '../utils';
+import CoreEntityWrapper from './CoreEntityWrapper.js';
+import CoreEntity from './CoreEntity.js';
+import { QInterface } from '../lib/index.js';
+import { XUtil } from '../utils/index.js';
 
 export default class CoreDBJoin<
   T extends CoreEntity = any,

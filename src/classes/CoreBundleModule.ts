@@ -1,6 +1,11 @@
-import { ICoreCache, ICoreKernel, ICorePresenter, IDataBase } from '../lib';
-import CoreClient from './CoreClient';
-import CoreKernelModule from './CoreKernelModule';
+import {
+  ICoreCache,
+  ICoreKernel,
+  ICorePresenter,
+  IDataBase,
+} from '../lib/index.js';
+import CoreClient from './CoreClient.js';
+import CoreKernelModule from './CoreKernelModule.js';
 
 export default abstract class CoreBundleModule<
   K extends ICoreKernel<any>,

@@ -1,4 +1,4 @@
-import CoreService from './CoreService';
+import CoreService from './CoreService.js';
 import {
   ICoreCache,
   ICoreClient,
@@ -6,7 +6,7 @@ import {
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib';
+} from '../lib/index.js';
 
 export default abstract class CoreTriggerService<
   K extends ICoreKernel<any> = ICoreKernel<any>,

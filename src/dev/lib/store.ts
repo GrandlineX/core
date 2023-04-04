@@ -1,4 +1,4 @@
-import TestContext from '../TestContext';
+import TestContext from '../TestContext.js';
 
 export default function jestStore() {
   const [kernel] = TestContext.getEntity();

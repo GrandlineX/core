@@ -1,5 +1,5 @@
-import { XUtil } from '../../utils';
-import { CoreCachedFc, CoreSemaphor, CMap } from '../../classes';
+import { XUtil } from '../../utils/index.js';
+import { CoreCachedFc, CoreSemaphor, CMap } from '../../classes/index.js';
 
 export default function jestUtils() {
   describe('utils', () => {

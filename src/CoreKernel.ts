@@ -10,15 +10,20 @@ import {
   IHaveLogger,
   IStore,
   KernelTrigger,
-} from './lib';
+} from './lib/index.js';
 
-import initHandler from './utils/initHandler';
-import { CoreLogChannel, CoreLogger } from './classes';
+import initHandler from './utils/initHandler.js';
+import { CoreLogChannel, CoreLogger } from './classes/index.js';
 
-import { DefaultLogger, EnvStore, InMemDB, StoreGlobal } from './modules';
-import CoreModule from './CoreModule';
-import { XUtil } from './utils';
-import { EnvStoreCProps } from './modules/env/EnvStore';
+import {
+  DefaultLogger,
+  EnvStore,
+  InMemDB,
+  StoreGlobal,
+  EnvStoreCProps,
+} from './modules/index.js';
+import CoreModule from './CoreModule.js';
+import { XUtil } from './utils/index.js';
 
 /**
  *  Core Kernel class

@@ -1,5 +1,5 @@
-import { IDataBase } from '../lib';
-import { ColumnPropMap } from '../classes/annotation';
+import { IDataBase } from '../lib/index.js';
+import { ColumnPropMap } from '../classes/annotation/index.js';
 
 export type ValidationInterface = {
   valid: boolean;

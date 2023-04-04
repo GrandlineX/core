@@ -1,8 +1,12 @@
 import { randomUUID } from 'crypto';
-import GKey from './entity/GKey';
-import { CoreDBCon, CoreDBPrefab, CoreEntityWrapper } from '../classes';
-import { generateSeed } from '../modules/crypto/utils';
-import { ICoreDb } from '../lib';
+import GKey from './entity/GKey.js';
+import {
+  CoreDBCon,
+  CoreDBPrefab,
+  CoreEntityWrapper,
+} from '../classes/index.js';
+import { generateSeed } from '../modules/index.js';
+import { ICoreDb } from '../lib/index.js';
 
 export const CORE_DB_VERSION = '0';
 

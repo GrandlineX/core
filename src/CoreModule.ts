@@ -1,8 +1,8 @@
-import { CoreDBCon, CoreKernelModule } from './classes';
-import { InMemCache } from './modules';
-import { OfflineService } from './services';
-import { ICoreKernel, ICoreModule } from './lib';
-import CoreDb from './database/CoreDb';
+import { CoreDBCon, CoreKernelModule } from './classes/index.js';
+import { InMemCache } from './modules/index.js';
+import { OfflineService } from './services/index.js';
+import { ICoreKernel, ICoreModule } from './lib/index.js';
+import CoreDb from './database/CoreDb.js';
 
 export default class CoreModule
   extends CoreKernelModule<ICoreKernel<any>, CoreDb, null, InMemCache, null>

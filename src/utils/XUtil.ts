@@ -1,8 +1,8 @@
 import fs from 'fs';
 import * as Path from 'path';
 import { spawn, SpawnOptionsWithoutStdio } from 'child_process';
-import { ColumnProps, getEntityMeta, IEntity } from '../classes/annotation';
-import CoreEntity from '../classes/CoreEntity';
+import { ColumnProps, getEntityMeta, IEntity } from '../classes/index.js';
+import CoreEntity from '../classes/CoreEntity.js';
 
 export interface ClassNameInterface {
   className: string;

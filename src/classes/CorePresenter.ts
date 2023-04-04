@@ -5,8 +5,8 @@ import {
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib';
-import CoreElement from './CoreElement';
+} from '../lib/index.js';
+import CoreElement from './CoreElement.js';
 
 export default abstract class CorePresenter<
     A,

@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 import { timingSafeEqual } from 'crypto';
-import { ICoreCClient, ICoreKernel } from '../../lib';
+import { ICoreCClient, ICoreKernel } from '../../lib/index.js';
 
 const encryptionType = 'aes-256-gcm';
 const encryptionEncoding = 'base64';

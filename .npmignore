@@ -24,3 +24,5 @@ coverage
 junit.xml
 .github
 CHANGELOG.md
+tsconfig.json
+tsconfig-cjs.json

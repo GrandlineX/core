@@ -1,6 +1,6 @@
 import dns from 'dns';
-import CoreLoopService from '../classes/CoreLoopService';
-import { ICoreKernelModule } from '../lib';
+import CoreLoopService from '../classes/CoreLoopService.js';
+import { ICoreKernelModule } from '../lib/index.js';
 
 export default class OfflineService extends CoreLoopService {
   constructor(module: ICoreKernelModule<any, any, any, any, any>) {

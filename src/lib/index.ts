@@ -1,4 +1,4 @@
-import CoreLogger from '../classes/CoreLogger';
+import CoreLogger from '../classes/CoreLogger.js';
 import {
   ColumnPropMap,
   EntityConfig,
@@ -6,9 +6,9 @@ import {
   EProperties,
   EUpDateProperties,
   IEntity,
-} from '../classes/annotation';
-import GKey from '../database/entity/GKey';
-import { EnvKey, StoreItem } from '../modules/env/Global';
+} from '../classes/annotation/index.js';
+import GKey from '../database/entity/GKey.js';
+import { EnvKey, StoreItem } from '../modules/env/Global.js';
 
 export type ICoreModule = ICoreKernelModule<
   ICoreKernel<any>,

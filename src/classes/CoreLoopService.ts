@@ -1,5 +1,5 @@
 import Timeout = NodeJS.Timeout;
-import CoreService from './CoreService';
+import CoreService from './CoreService.js';
 import {
   ICoreCache,
   ICoreClient,
@@ -7,8 +7,8 @@ import {
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib';
-import { XUtil } from '../utils';
+} from '../lib/index.js';
+import { XUtil } from '../utils/index.js';
 
 export default abstract class CoreLoopService<
   K extends ICoreKernel<any> = ICoreKernel<any>,

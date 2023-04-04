@@ -1,7 +1,7 @@
-import CoreEntity from '../CoreEntity';
-import { ColumnProps } from './lib/types';
-import { columnKey } from './Meta';
-import { XUtil } from '../../utils';
+import CoreEntity from '../CoreEntity.js';
+import { ColumnProps } from './lib/types.js';
+import { columnKey } from './Meta.js';
+import { XUtil } from '../../utils/index.js';
 
 function EntityColumn<T extends CoreEntity>(
   entity: T,

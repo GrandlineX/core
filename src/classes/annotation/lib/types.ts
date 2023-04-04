@@ -1,4 +1,4 @@
-import { DataType } from './props';
+import { DataType } from './props.js';
 
 export interface ColumnPropsBase {
   primaryKey?: boolean;

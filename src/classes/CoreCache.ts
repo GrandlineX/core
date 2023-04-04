@@ -5,9 +5,9 @@ import {
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib';
-import CoreElement from './CoreElement';
-import { IEntity } from './annotation';
+} from '../lib/index.js';
+import CoreElement from './CoreElement.js';
+import { IEntity } from './annotation/index.js';
 
 export default abstract class CoreCache<
     K extends ICoreKernel<any> = ICoreKernel<any>,

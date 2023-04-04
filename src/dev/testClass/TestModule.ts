@@ -5,15 +5,15 @@ import {
   CoreDBCon,
   CoreDBPrefab,
   CorePresenter,
-} from '../../classes';
-import { CoreCryptoClient, InMemCache, InMemDB } from '../../modules';
-import { OfflineService } from '../../services';
-import TestClient from './client/TestClient';
-import TestAction from './action/TestAction';
-import TestPresenter from './client/TestPresenter';
-import TestPrefab from './db/TestPrefab';
-import CoreKernel from '../../CoreKernel';
-import TestTriggerService from './service/TestTriggerService';
+} from '../../classes/index.js';
+import { CoreCryptoClient, InMemCache, InMemDB } from '../../modules/index.js';
+import { OfflineService } from '../../services/index.js';
+import TestClient from './client/TestClient.js';
+import TestAction from './action/TestAction.js';
+import TestPresenter from './client/TestPresenter.js';
+import TestPrefab from './db/TestPrefab.js';
+import CoreKernel from '../../CoreKernel.js';
+import TestTriggerService from './service/TestTriggerService.js';
 
 export type TestFc = (mod: TestModule) => TestInterface;
 export type TestInterface = {

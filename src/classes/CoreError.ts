@@ -1,4 +1,4 @@
-import { ILogChannel } from '../lib';
+import { ILogChannel } from '../lib/index.js';
 
 /**
  * Error that's logs error message to the current log channel

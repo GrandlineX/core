@@ -1,4 +1,4 @@
-import { CoreSemaphor } from './CoreSemaphor';
+import { CoreSemaphor } from './CoreSemaphor.js';
 
 export default class CoreCachedFc<T> {
   fc: () => Promise<T>;

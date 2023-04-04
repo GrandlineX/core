@@ -4,12 +4,16 @@ import {
   IDataBase,
   QueryInterface,
   RawQuery,
-} from '../lib';
-import CoreEntity from './CoreEntity';
-import CoreEntityWrapper from './CoreEntityWrapper';
-import CoreElement from './CoreElement';
-import { ColumnPropMap, EntityConfig, EUpDateProperties } from './annotation';
-import CoreDBCon from './CoreDBCon';
+} from '../lib/index.js';
+import CoreEntity from './CoreEntity.js';
+import CoreEntityWrapper from './CoreEntityWrapper.js';
+import CoreElement from './CoreElement.js';
+import {
+  ColumnPropMap,
+  EntityConfig,
+  EUpDateProperties,
+} from './annotation/index.js';
+import CoreDBCon from './CoreDBCon.js';
 
 export default abstract class CoreDBPrefab<
     T extends CoreDBCon<any, any, any, any, any, any, any>

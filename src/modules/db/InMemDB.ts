@@ -1,12 +1,12 @@
-import CoreDBCon from '../../classes/CoreDBCon';
+import CoreDBCon from '../../classes/CoreDBCon.js';
 import {
   ConfigType,
   ICoreKernelModule,
   QueryInterface,
   RawQuery,
-} from '../../lib';
-import CoreEntity from '../../classes/CoreEntity';
-import { EntityConfig, EUpDateProperties } from '../../classes';
+} from '../../lib/index.js';
+import CoreEntity from '../../classes/CoreEntity.js';
+import { EntityConfig, EUpDateProperties } from '../../classes/index.js';
 
 function eFilter<E extends CoreEntity>(
   row: E,

@@ -1,8 +1,8 @@
 import * as Path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
-import { ICoreKernel, IStore } from '../../lib';
-import { EnvKey, StoreGlobal, StoreItem } from './Global';
+import { ICoreKernel, IStore } from '../../lib/index.js';
+import { EnvKey, StoreGlobal, StoreItem } from './Global.js';
 
 export type EnvStoreCProps = {
   kernel: ICoreKernel<any>;

@@ -1,5 +1,5 @@
-import { CoreLoopService } from '../../../classes';
-import { XUtil } from '../../../utils';
+import { CoreLoopService } from '../../../classes/index.js';
+import { XUtil } from '../../../utils/index.js';
 
 export default class TestService extends CoreLoopService {
   async loop(): Promise<void> {

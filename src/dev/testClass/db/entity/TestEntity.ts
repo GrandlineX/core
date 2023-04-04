@@ -1,4 +1,9 @@
-import { Column, CoreEntity, Entity, EProperties } from '../../../../classes';
+import {
+  Column,
+  CoreEntity,
+  Entity,
+  EProperties,
+} from '../../../../classes/index.js';
 
 @Entity('TestEntity')
 export default class TestEntity extends CoreEntity {

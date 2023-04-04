@@ -1,10 +1,10 @@
-import jestCore from './core';
-import jestDb from './dbcon';
-import jestStart from './start';
-import jestOrm from './orm';
-import jestStore from './store';
-import jestEnd from './end';
-import jestUtils from './util';
+import jestCore from './core.js';
+import jestDb from './dbcon.js';
+import jestStart from './start.js';
+import jestOrm from './orm.js';
+import jestStore from './store.js';
+import jestEnd from './end.js';
+import jestUtils from './util.js';
 
 const JestLib = {
   jestCore,

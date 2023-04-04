@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Column, IEntity } from './annotation';
+import { Column, IEntity } from './annotation/index.js';
 
 /**
  * @name CoreEntity

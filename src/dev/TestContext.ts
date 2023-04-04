@@ -1,4 +1,4 @@
-import CoreKernel from '../CoreKernel';
+import CoreKernel from '../CoreKernel.js';
 
 export default class TestContext {
   static entity: CoreKernel<any> | null;

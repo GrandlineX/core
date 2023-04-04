@@ -9,17 +9,17 @@ import {
   IDataBase,
   QueryInterface,
   RawQuery,
-} from '../lib';
-import CoreEntity from './CoreEntity';
-import CoreEntityWrapper from './CoreEntityWrapper';
-import CoreElement from './CoreElement';
+} from '../lib/index.js';
+import CoreEntity from './CoreEntity.js';
+import CoreEntityWrapper from './CoreEntityWrapper.js';
+import CoreElement from './CoreElement.js';
 import {
   ColumnPropMap,
   EntityConfig,
   EUpDateProperties,
   validateEntity,
-} from './annotation';
-import { XUtil } from '../utils';
+} from './annotation/index.js';
+import { XUtil } from '../utils/index.js';
 
 export default abstract class CoreDBCon<
     D,

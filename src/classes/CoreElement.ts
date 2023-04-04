@@ -8,8 +8,8 @@ import {
   ICorePresenter,
   IDataBase,
   IStore,
-} from '../lib';
-import CoreLogChannel from './CoreLogChannel';
+} from '../lib/index.js';
+import CoreLogChannel from './CoreLogChannel.js';
 
 export default abstract class CoreElement<
     K extends ICoreKernel<any> = ICoreKernel<any>,

@@ -1,6 +1,6 @@
-import { IHaveLogger, ILogChannel } from '../lib';
-import CoreLogger, { LogLevel } from './CoreLogger';
-import CoreError from './CoreError';
+import { IHaveLogger, ILogChannel } from '../lib/index.js';
+import CoreLogger, { LogLevel } from './CoreLogger.js';
+import CoreError from './CoreError.js';
 
 export default class CoreLogChannel implements ILogChannel {
   logger: CoreLogger | null;

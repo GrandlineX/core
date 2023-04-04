@@ -1,6 +1,6 @@
-import { CoreKernelModule } from '../../classes';
-import { CoreCryptoClient } from '../../modules';
-import CoreKernel from '../../CoreKernel';
+import { CoreKernelModule } from '../../classes/index.js';
+import { CoreCryptoClient } from '../../modules/index.js';
+import CoreKernel from '../../CoreKernel.js';
 
 export default class TestBaseModule extends CoreKernelModule<
   CoreKernel<CoreCryptoClient>,

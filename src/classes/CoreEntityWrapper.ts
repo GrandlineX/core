@@ -1,13 +1,13 @@
-import CoreEntity from './CoreEntity';
-import { ICoreCache, ICoreEntityHandler, QInterface } from '../lib';
+import CoreEntity from './CoreEntity.js';
+import { ICoreCache, ICoreEntityHandler, QInterface } from '../lib/index.js';
 import {
   ColumnPropMap,
   ColumnProps,
   EProperties,
   EUpDateProperties,
   getColumnMeta,
-} from './annotation';
-import { EntityValidator } from '../utils';
+} from './annotation/index.js';
+import { EntityValidator } from '../utils/index.js';
 
 export default class CoreEntityWrapper<E extends CoreEntity> {
   getIns: () => E;

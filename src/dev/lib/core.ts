@@ -1,10 +1,14 @@
-import { ICoreAnyModule, ICoreKernelModule, ILogChannel } from '../../lib';
-import TestService from '../testClass/service/TestService';
-import { CoreCache } from '../../classes';
-import { generateSeed } from '../../modules';
-import { CoreDb } from '../../database';
-import TestContext from '../TestContext';
-import { XUtil } from '../../utils';
+import {
+  ICoreAnyModule,
+  ICoreKernelModule,
+  ILogChannel,
+} from '../../lib/index.js';
+import TestService from '../testClass/service/TestService.js';
+import { CoreCache } from '../../classes/index.js';
+import { generateSeed } from '../../modules/index.js';
+import { CoreDb } from '../../database/index.js';
+import TestContext from '../TestContext.js';
+import { XUtil } from '../../utils/index.js';
 
 export default function jestCore() {
   const testText = 'hello_world';

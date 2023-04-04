@@ -1,6 +1,6 @@
-import { Column, Entity, EProperties } from '../../../../classes';
-import TestEntity from './TestEntity';
-import { XUtil } from '../../../../utils';
+import { Column, Entity, EProperties } from '../../../../classes/index.js';
+import TestEntity from './TestEntity.js';
+import { XUtil } from '../../../../utils/index.js';
 
 @Entity('TestEntityLinked')
 export default class TestEntityLinked extends TestEntity {

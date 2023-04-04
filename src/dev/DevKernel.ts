@@ -1,10 +1,10 @@
-import CoreKernel from '../CoreKernel';
-import { CoreCryptoClient } from '../modules';
-import TestModule, { TestFc } from './testClass/TestModule';
-import BridgeTestModule from './testClass/BridgeTestModule';
-import { CoreLogger, LogLevel } from '../classes';
-import { ICoreCClient } from '../lib';
-import TestBaseModule from './testClass/TestBaseModule';
+import CoreKernel from '../CoreKernel.js';
+import { CoreCryptoClient } from '../modules/index.js';
+import TestModule, { TestFc } from './testClass/TestModule.js';
+import BridgeTestModule from './testClass/BridgeTestModule.js';
+import { CoreLogger, LogLevel } from '../classes/index.js';
+import { ICoreCClient } from '../lib/index.js';
+import TestBaseModule from './testClass/TestBaseModule.js';
 
 export function setupDevKernel<E extends CoreKernel<any>>(
   kernel: E,

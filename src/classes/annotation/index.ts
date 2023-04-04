@@ -1,3 +1,3 @@
-export * from './lib/props';
-export * from './lib/types';
-export * from './Meta';
+export * from './lib/props.js';
+export * from './lib/types.js';
+export * from './Meta.js';

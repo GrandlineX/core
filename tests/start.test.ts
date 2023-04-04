@@ -1,4 +1,5 @@
-import { setupDevKernel, TestContext, TestKernel, XUtil,JestLib } from '../src';
+import { JestLib, setupDevKernel, TestContext, TestKernel, XUtil } from '../dist/cjs/';
+
 const appName = 'TestKernel';
 const appCode = 'tkernel';
 const [testPath] = XUtil.setupEnvironment([__dirname, '..'],['data', 'config'],['test'])

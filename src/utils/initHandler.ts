@@ -1,5 +1,5 @@
-import { ICoreKernelModule, ILogChannel, WorkLoad } from '../lib';
-import CoreBridge from '../classes/CoreBridge';
+import { ICoreKernelModule, ILogChannel, WorkLoad } from '../lib/index.js';
+import CoreBridge from '../classes/CoreBridge.js';
 
 export default async function initHandler(
   modList: ICoreKernelModule<any, any, any, any, any>[],

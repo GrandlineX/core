@@ -1,6 +1,6 @@
 import { clearInterval } from 'timers';
-import { CoreCache, IEntity } from '../../classes';
-import { ICoreKernelModule } from '../../lib';
+import { CoreCache, IEntity } from '../../classes/index.js';
+import { ICoreKernelModule } from '../../lib/index.js';
 
 export default class InMemCache extends CoreCache {
   keyMap: Map<string, string>;

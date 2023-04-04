@@ -1,4 +1,4 @@
-import CoreElement from './CoreElement';
+import CoreElement from './CoreElement.js';
 import {
   ICoreCache,
   ICoreClient,
@@ -8,7 +8,7 @@ import {
   ICoreService,
   IDataBase,
   ServiceStates,
-} from '../lib';
+} from '../lib/index.js';
 
 export default abstract class CoreService<
     K extends ICoreKernel<any> = ICoreKernel<any>,

@@ -1,13 +1,13 @@
-import BadEntity from '../testClass/db/entity/BadEntity';
+import BadEntity from '../testClass/db/entity/BadEntity.js';
 import {
   getColumnMeta,
   getEntityMeta,
   instanceOfEntity,
   validateColumnMeta,
   validateEntity,
-} from '../../classes';
-import TestEnt from '../testClass/db/entity/TestEnt';
-import { XUtil } from '../../utils';
+} from '../../classes/index.js';
+import TestEnt from '../testClass/db/entity/TestEnt.js';
+import { XUtil } from '../../utils/index.js';
 
 export default function jestOrm() {
   describe('annotation', () => {

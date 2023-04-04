@@ -1,17 +1,17 @@
-import TestEntity from '../testClass/db/entity/TestEntity';
+import TestEntity from '../testClass/db/entity/TestEntity.js';
 import {
   CoreDBCon,
   CoreDBPrefab,
   CoreEntityWrapper,
   validateEntity,
-} from '../../classes';
-import { ICoreKernelModule } from '../../lib';
-import TestPrefab from '../testClass/db/TestPrefab';
+} from '../../classes/index.js';
+import { ICoreKernelModule } from '../../lib/index.js';
+import TestPrefab from '../testClass/db/TestPrefab.js';
 
-import TestEntityLinked from '../testClass/db/entity/TestEntityLinked';
-import { EntityValidator } from '../../utils';
-import CoreDBJoin from '../../classes/CoreDBJoin';
-import TestContext from '../TestContext';
+import TestEntityLinked from '../testClass/db/entity/TestEntityLinked.js';
+import { EntityValidator } from '../../utils/index.js';
+import CoreDBJoin from '../../classes/CoreDBJoin.js';
+import TestContext from '../TestContext.js';
 
 export default function jestDb() {
   const testText = 'hello_world';
