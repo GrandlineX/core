@@ -5,11 +5,11 @@ export default {
   testPathIgnorePatterns: ["/dist/", "/node_modules/"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   setupFilesAfterEnv: ["./jest.pre.config.js"],
-  "extensionsToTreatAsEsm": [".ts"],
-  "moduleNameMapper": {
+  extensionsToTreatAsEsm: [".ts"],
+  moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1"
   },
-  "transform": {
+  transform: {
     // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
     // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
     "^.+\\.tsx?$": [
