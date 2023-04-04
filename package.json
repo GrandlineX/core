@@ -27,8 +27,8 @@
     "test": "jest --runInBand ",
     "run": "ts-node-esm src/run.ts",
     "pack": "eslint && npm run buildprep && npm pack",
-    "test-converage": "npm run build-cjs && jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
-    "doc-converage": "npm run build-cjs && jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./docs/coverage\"  --reporters=default --reporters=jest-junit",
+    "test-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
+    "doc-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./docs/coverage\"  --reporters=default --reporters=jest-junit",
     "makeDocs": "typedoc"
   },
   "keywords": [

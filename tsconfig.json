@@ -81,7 +81,7 @@
     "node_modules",
     "dist",
     "data",
-    "tests"
+    "src/tests"
     ],
   "typedocOptions": {
     "entryPoints": [

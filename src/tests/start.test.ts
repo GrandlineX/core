@@ -1,4 +1,4 @@
-import { JestLib, setupDevKernel, TestContext, TestKernel, XUtil } from '../dist/cjs/';
+import { JestLib, setupDevKernel, TestContext, TestKernel, XUtil } from '../index.js';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
