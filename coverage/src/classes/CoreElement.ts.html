@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -120,11 +120,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -135,16 +133,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,9 +166,9 @@
   IDataBase,
   IStore,
 } from '../lib/index.js';
-<span class="cstat-no" title="statement not covered" >import CoreLogChannel from './CoreLogChannel.js';</span>
+import CoreLogChannel from './CoreLogChannel.js';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default abstract class C</span>oreElement&lt;
+export default abstract class CoreElement&lt;
     K extends ICoreKernel&lt;any&gt; = ICoreKernel&lt;any&gt;,
     T extends IDataBase&lt;any, any&gt; | null = any,
     P extends ICoreClient | null = any,
@@ -180,17 +180,17 @@
 {
   private readonly module: ICoreKernelModule&lt;K, T, P, C, E&gt;;
 &nbsp;
-<span class="fstat-no" title="function not covered" >  constructor(c</span>hannel: string, module: ICoreKernelModule&lt;K, T, P, C, E&gt;) {
-<span class="cstat-no" title="statement not covered" >    super(channel, module);</span>
-<span class="cstat-no" title="statement not covered" >    this.module = module;</span>
+  constructor(channel: string, module: ICoreKernelModule&lt;K, T, P, C, E&gt;) {
+    super(channel, module);
+    this.module = module;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  getKernel(</span>): K {
-<span class="cstat-no" title="statement not covered" >    return this.module.getKernel();</span>
+  getKernel(): K {
+    return this.module.getKernel();
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  getModule(</span>): ICoreKernelModule&lt;K, T, P, C, E&gt; {
-<span class="cstat-no" title="statement not covered" >    return this.module;</span>
+  getModule(): ICoreKernelModule&lt;K, T, P, C, E&gt; {
+    return this.module;
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  getConfigStore(</span>): IStore {
@@ -208,7 +208,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-04T18:58:14.349Z
+                at 2023-04-04T20:08:58.731Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

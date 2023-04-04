@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>18/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,72 +98,72 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ICoreKernelModule, ILogChannel, WorkLoad } from '../lib/index.js';
-<span class="cstat-no" title="statement not covered" >import CoreBridge from '../classes/CoreBridge.js';</span>
+import CoreBridge from '../classes/CoreBridge.js';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default a</span>sync function <span class="fstat-no" title="function not covered" >initHandler(</span>
+export default async function initHandler(
   modList: ICoreKernelModule&lt;any, any, any, any, any&gt;[],
   logger: ILogChannel
 ): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >  modList.forEach(<span class="fstat-no" title="function not covered" >(s</span>rc) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    src.getDependencyList().forEach(<span class="fstat-no" title="function not covered" >(d</span>ep) =&gt; {</span>
-      const tar = <span class="cstat-no" title="statement not covered" >modList.find(<span class="fstat-no" title="function not covered" >(m</span>od) =&gt; <span class="cstat-no" title="statement not covered" >mod.getName() === dep)</span>;</span>
-<span class="cstat-no" title="statement not covered" >      if (tar) {</span>
-        const bridge = <span class="cstat-no" title="statement not covered" >new CoreBridge(src, tar);</span>
-<span class="cstat-no" title="statement not covered" >        bridge.connect();</span>
-      } else {
+  modList.forEach((src) =&gt; {
+    src.getDependencyList().forEach((dep) =&gt; {
+      const tar = modList.find((mod) =&gt; mod.getName() === dep);
+      if (tar) {
+        const bridge = new CoreBridge(src, tar);
+        bridge.connect();
+      } else <span class="missing-if-branch" title="else path not taken" >E</span>{
 <span class="cstat-no" title="statement not covered" >        logger.error(`DEPENDING MOD NOT FOUND: ${dep}`);</span>
 <span class="cstat-no" title="statement not covered" >        process.exit(4);</span>
       }
     });
   });
 &nbsp;
-  const workload: WorkLoad&lt;any&gt; = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >  modList.forEach(<span class="fstat-no" title="function not covered" >(a</span>ction) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    workload.push(action.register());</span>
+  const workload: WorkLoad&lt;any&gt; = [];
+  modList.forEach((action) =&gt; {
+    workload.push(action.register());
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  await Promise.all(workload);</span>
-  const workloadStart: WorkLoad&lt;any&gt; = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >  modList.forEach(<span class="fstat-no" title="function not covered" >(a</span>ction) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (action?.start) {</span>
-<span class="cstat-no" title="statement not covered" >      workloadStart.push(action.start());</span>
+  await Promise.all(workload);
+  const workloadStart: WorkLoad&lt;any&gt; = [];
+  modList.forEach((action) =&gt; {
+    if (action?.start) {
+      workloadStart.push(action.start());
     }
   });
-<span class="cstat-no" title="statement not covered" >  await Promise.all(workloadStart);</span>
+  await Promise.all(workloadStart);
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -172,7 +172,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-04T18:58:14.349Z
+                at 2023-04-04T20:08:58.731Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

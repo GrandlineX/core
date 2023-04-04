@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -116,11 +116,9 @@
 <a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,19 +131,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,9 +166,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import CoreEntityWrapper from './CoreEntityWrapper.js';
 import CoreEntity from './CoreEntity.js';
 import { QInterface } from '../lib/index.js';
-<span class="cstat-no" title="statement not covered" >import { XUtil } from '../utils/index.js';</span>
+import { XUtil } from '../utils/index.js';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default class C</span>oreDBJoin&lt;
+export default class CoreDBJoin&lt;
   T extends CoreEntity = any,
   F extends CoreEntity = any
 &gt; {
@@ -180,22 +180,22 @@ import { QInterface } from '../lib/index.js';
 &nbsp;
   key_2: keyof F;
 &nbsp;
-<span class="fstat-no" title="function not covered" >  constructor(</span>
+  constructor(
     dat: [CoreEntityWrapper&lt;T&gt;, keyof T, keyof F, CoreEntityWrapper&lt;F&gt;]
   ) {
-    const [a, aKey, bKey, b] = <span class="cstat-no" title="statement not covered" >dat;</span>
-<span class="cstat-no" title="statement not covered" >    this.a = a;</span>
-<span class="cstat-no" title="statement not covered" >    this.b = b;</span>
-<span class="cstat-no" title="statement not covered" >    this.key = aKey;</span>
-<span class="cstat-no" title="statement not covered" >    this.key_2 = bKey;</span>
+    const [a, aKey, bKey, b] = dat;
+    this.a = a;
+    this.b = b;
+    this.key = aKey;
+    this.key_2 = bKey;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>join(query?: QInterface&lt;T&gt;) {
-    const q = <span class="cstat-no" title="statement not covered" >await this.a.getObjList(query);</span>
-<span class="cstat-no" title="statement not covered" >    return XUtil.workerFactoryFromArray(4, q, <span class="fstat-no" title="function not covered" >async </span>(arg) =&gt; {</span>
-      const cur = <span class="cstat-no" title="statement not covered" >arg.dat[this.key];</span>
-<span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof cur === 'string') {</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
+  async join(query?: QInterface&lt;T&gt;) {
+    const q = await this.a.getObjList(query);
+    return XUtil.workerFactoryFromArray(4, q, async (arg) =&gt; {
+      const cur = arg.dat[this.key];
+      if (typeof cur === 'string') {
+        return {
           i: arg.i,
           dat: {
             ...arg,
@@ -220,7 +220,7 @@ import { QInterface } from '../lib/index.js';
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-04T18:58:14.349Z
+                at 2023-04-04T20:08:58.731Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
