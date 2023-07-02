@@ -114,7 +114,7 @@ export class EntityValidator {
       case 'date':
         if (!(value instanceof Date)) {
           if (typeof value === 'string') {
-            const date = new Date(value);
+            new Date(value).getTime();
           } else {
             return err();
           }

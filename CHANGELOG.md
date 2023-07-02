@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.31.0]
+
+### Added
+- Extend type interface for kernel
+- Default logger now can print objects
+### Changed
+- Update dependencies
+
 ## [0.30.0]
 
 ### Added

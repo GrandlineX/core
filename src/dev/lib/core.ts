@@ -5,7 +5,7 @@ import {
 } from '../../lib/index.js';
 import TestService from '../testClass/service/TestService.js';
 import { CoreCache } from '../../classes/index.js';
-import { generateSeed } from '../../modules/index.js';
+import { DefaultLogger, generateSeed } from '../../modules/index.js';
 import { CoreDb } from '../../database/index.js';
 import TestContext from '../TestContext.js';
 import { XUtil } from '../../utils/index.js';
@@ -56,6 +56,20 @@ export default function jestCore() {
       } catch (e) {
         callback(false);
       }
+    });
+    test('log - object', async () => {
+      const logger = kernel.getLogger();
+      if (logger instanceof DefaultLogger) {
+        logger.setPrintObject(false);
+      }
+      log.log({ test: 'test' }, { test: 'test' });
+    });
+    test('log - object', async () => {
+      const logger = kernel.getLogger();
+      if (logger instanceof DefaultLogger) {
+        logger.setPrintObject(true);
+      }
+      log.log({ test: 'test' }, { test: 'test' });
     });
   });
 

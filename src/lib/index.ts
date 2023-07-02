@@ -141,8 +141,10 @@ export interface ICoreCClient {
   timeSavePWValidation(content: string, validator: string): boolean;
 }
 
-export interface ICoreKernel<X extends ICoreCClient>
-  extends ILogChannel,
+export interface ICoreKernel<
+  X extends ICoreCClient,
+  Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule
+> extends ILogChannel,
     IHaveLogger {
   start(): Promise<boolean>;
 
@@ -173,7 +175,9 @@ export interface ICoreKernel<X extends ICoreCClient>
 
   addModule(module: ICoreAnyModule): void;
 
-  getModule(): ICoreAnyModule;
+  getModule(): Y;
+
+  setBaseModule(module: Y): void;
 
   getCoreModule(): ICoreModule;
 
@@ -187,7 +191,9 @@ export interface ICoreKernel<X extends ICoreCClient>
 
   getConfigStore(): IStore;
 
-  getActionList(): ICoreAction[];
+  getActionList(full?: boolean): ICoreAction[];
+
+  getServiceList(full?: boolean): ICoreService[];
 }
 
 export type ICoreClient = ICoreElement;

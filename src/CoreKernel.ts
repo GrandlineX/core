@@ -46,7 +46,10 @@ export type CoreKernelProps = {
   logger?: (kernel: CoreKernel<any>) => CoreLogger;
 } & Omit<EnvStoreCProps, 'kernel'>;
 
-export default abstract class CoreKernel<X extends ICoreCClient>
+export default abstract class CoreKernel<
+    X extends ICoreCClient,
+    Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule
+  >
   extends CoreLogChannel
   implements ICoreKernel<X>, IHaveLogger
 {
@@ -66,7 +69,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
 
   protected coreModule: ICoreModule;
 
-  protected kernelModule: ICoreKernelModule<any, any, any, any, any> | null;
+  protected kernelModule: Y | null;
 
   protected offline: boolean;
 
@@ -136,7 +139,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
   /**
    * get base kernel module
    */
-  getModule(): ICoreAnyModule {
+  getModule(): Y {
     if (this.kernelModule) {
       return this.kernelModule;
     }
@@ -305,7 +308,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     this.moduleList.push(...module);
   }
 
-  setBaseModule(module: ICoreKernelModule<any, any, any, any, any>): void {
+  setBaseModule(module: Y): void {
     this.kernelModule = module;
   }
 
@@ -324,16 +327,18 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     return true;
   }
 
-  getChildModule(modName: string): ICoreAnyModule | null {
+  getChildModule<
+    T extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule
+  >(modName: string): T | null {
     const mod = this.moduleList.find((mo) => mo.getName() === modName);
     if (mod) {
-      return mod;
+      return mod as T;
     }
     return null;
   }
 
-  getModCount(): number {
-    return this.moduleList.length;
+  getModCount(full = false): number {
+    return this.moduleList.length + (full ? 2 : 0);
   }
 
   private preloadSetup() {
@@ -348,6 +353,7 @@ export default abstract class CoreKernel<X extends ICoreCClient>
       )
     ) {
       console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
+      this.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
       process.exit(1);
     }
   }
@@ -387,16 +393,24 @@ export default abstract class CoreKernel<X extends ICoreCClient>
     await this.triggerFunction('start');
   }
 
-  getActionList(): ICoreAction[] {
+  getActionList(full = false): ICoreAction[] {
     const out: ICoreAction[] = [];
+    if (full) {
+      this.coreModule.getActionList().forEach((el) => out.push(el));
+      this.kernelModule?.getActionList().forEach((el) => out.push(el));
+    }
     this.moduleList.forEach((el) => {
       out.push(...el.getActionList());
     });
     return out;
   }
 
-  getServiceList(): ICoreService[] {
+  getServiceList(full = false): ICoreService[] {
     const out: ICoreService[] = [];
+    if (full) {
+      this.coreModule.getServiceList().forEach((el) => out.push(el));
+      this.kernelModule?.getServiceList().forEach((el) => out.push(el));
+    }
     this.moduleList.forEach((el) => {
       out.push(...el.getServiceList());
     });

@@ -27,8 +27,14 @@ export enum DC {
 export default class DefaultLogger extends CoreLogger {
   private noColor = false;
 
+  private printObject = false;
+
   setNoColor(val: boolean) {
     this.noColor = val;
+  }
+
+  setPrintObject(val: boolean) {
+    this.printObject = val;
   }
 
   logColor(args: DC[], msg: string) {
@@ -63,7 +69,23 @@ export default class DefaultLogger extends CoreLogger {
     this.logColor([DC.BgYellow, DC.FgBlack], this.format('W', channel, ags));
   }
 
-  format(mode: string, channel: string, ...args: unknown[]): string {
-    return `[${mode}][${XUtil.getTimeStamp()}](${channel}) ${args}`;
+  private printArgs(...args: unknown[]) {
+    if (!this.printObject) {
+      return args;
+    }
+    return args
+      .map((arg) => {
+        if (typeof arg === 'object') {
+          return JSON.stringify(arg);
+        }
+        return arg;
+      })
+      .join(',');
+  }
+
+  private format(mode: string, channel: string, ...args: unknown[]): string {
+    return `[${mode}][${XUtil.getTimeStamp()}](${channel}) ${this.printArgs(
+      args
+    )}`;
   }
 }
