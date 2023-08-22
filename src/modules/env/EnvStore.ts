@@ -1,23 +1,25 @@
 import * as Path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
-import { ICoreKernel, IStore } from '../../lib/index.js';
+import { IStore } from '../../lib/index.js';
 import { EnvKey, StoreGlobal, StoreItem } from './Global.js';
+import { CoreLogChannel } from '../../classes/index.js';
 
 export type EnvStoreCProps = {
-  kernel: ICoreKernel<any>;
+  log: CoreLogChannel;
   pathOverride?: string;
   envFilePath?: string;
   loadFromLocalEnv?: boolean;
+  appName?: string;
 };
 export default class EnvStore implements IStore {
   store: Map<EnvKey, StoreItem>;
 
-  kernel: ICoreKernel<any>;
+  log: CoreLogChannel;
 
   constructor(props: EnvStoreCProps) {
     this.store = new Map<EnvKey, StoreItem>();
-    this.kernel = props.kernel;
+    this.log = props.log;
     this.initNew(props);
   }
 
@@ -42,7 +44,7 @@ export default class EnvStore implements IStore {
       if (fs.existsSync(path)) {
         this.loadFromFile(path);
       } else {
-        this.kernel.warn(`Cant load env from ${path}`);
+        this.log.warn(`Cant load env from ${path}`);
       }
     }
     if (loadFromLocalEnv) {
@@ -55,23 +57,25 @@ export default class EnvStore implements IStore {
       [StoreGlobal.GLOBAL_HOST_NAME, os.hostname()]
     );
 
-    const appName = this.kernel.getAppName();
-    let base;
-    if (os.platform() === 'darwin') {
-      base = pathOverride
-        ? Path.join(pathOverride, appName)
-        : Path.join(os.homedir(), 'Library', appName);
-    } else {
-      base = pathOverride
-        ? Path.join(pathOverride, appName)
-        : Path.join(os.homedir(), appName);
+    const { appName } = props;
+    if (appName) {
+      let base;
+      if (os.platform() === 'darwin') {
+        base = pathOverride
+          ? Path.join(pathOverride, appName)
+          : Path.join(os.homedir(), 'Library', appName);
+      } else {
+        base = pathOverride
+          ? Path.join(pathOverride, appName)
+          : Path.join(os.homedir(), appName);
+      }
+      this.setBulk(
+        [StoreGlobal.GLOBAL_PATH_HOME, base],
+        [StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data')],
+        [StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db')],
+        [StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp')]
+      );
     }
-    this.setBulk(
-      [StoreGlobal.GLOBAL_PATH_HOME, base],
-      [StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data')],
-      [StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db')],
-      [StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp')]
-    );
     if (process.env.npm_package_version) {
       this.set(StoreGlobal.GLOBAL_APP_VERSION, process.env.npm_package_version);
     } else {
@@ -110,7 +114,7 @@ export default class EnvStore implements IStore {
   }
 
   private loadFromFile(path: string) {
-    this.kernel.log(`Load env from ${path}`);
+    this.log.log(`Load env from ${path}`);
     const env = fs.readFileSync(path).toString('utf-8');
     const lines = env.split('\n');
     lines.forEach((line) => {
@@ -119,7 +123,7 @@ export default class EnvStore implements IStore {
       }
       const split = line.indexOf('=');
       if (split > 0) {
-        const key = line.substring(0, split);
+        const key = line.substring(0, split).trim();
         const value = line.substring(split + 1).trim();
         this.store.set(key, value);
       }

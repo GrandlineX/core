@@ -201,7 +201,10 @@ export class XUtil {
   static exec(
     cmd: string,
     args?: string[],
-    options?: SpawnOptionsWithoutStdio
+    options?: SpawnOptionsWithoutStdio & {
+      onStdOut?: (m: string) => void;
+      onStdErr?: (m: string) => void;
+    }
   ): Promise<XExecResult> {
     return new Promise<XExecResult>((resolve) => {
       const child = spawn(cmd, args, options);
@@ -210,11 +213,13 @@ export class XUtil {
       if (child.stdout) {
         child.stdout.on('data', (data) => {
           stdout += data;
+          options?.onStdOut?.(data);
         });
       }
       if (child.stderr) {
         child.stderr.on('data', (data) => {
           stderr += data;
+          options?.onStdErr?.(data);
         });
       }
       child.on('close', (code) => {

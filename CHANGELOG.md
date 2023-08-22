@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.32.0]
+
+### Changed
+- Option to disable timestamp for default logger
+- XUtils exec can now print stdout and stderr on run
+- EnvStore now can be used without kernel
+
 ## [0.31.0]
 
 ### Added

@@ -29,8 +29,14 @@ export default class DefaultLogger extends CoreLogger {
 
   private printObject = false;
 
+  private printTimeStamp = true;
+
   setNoColor(val: boolean) {
     this.noColor = val;
+  }
+
+  setPrintTimestamp(val: boolean) {
+    this.printTimeStamp = val;
   }
 
   setPrintObject(val: boolean) {
@@ -84,8 +90,8 @@ export default class DefaultLogger extends CoreLogger {
   }
 
   private format(mode: string, channel: string, ...args: unknown[]): string {
-    return `[${mode}][${XUtil.getTimeStamp()}](${channel}) ${this.printArgs(
-      args
-    )}`;
+    return `[${mode}]${
+      this.printTimeStamp ? `[${XUtil.getTimeStamp()}]` : ''
+    }(${channel}) ${this.printArgs(args)}`;
   }
 }

@@ -44,7 +44,7 @@ export type CoreKernelProps = {
   appName: string;
   appCode: string;
   logger?: (kernel: CoreKernel<any>) => CoreLogger;
-} & Omit<EnvStoreCProps, 'kernel'>;
+} & Omit<EnvStoreCProps, 'log' | 'appName'>;
 
 export default abstract class CoreKernel<
     X extends ICoreCClient,
@@ -110,8 +110,9 @@ export default abstract class CoreKernel<
     >();
 
     this.envStore = new EnvStore({
-      kernel: this,
       ...options,
+      log: this,
+      appName: this.getAppName(),
     });
     if (options.logger === undefined) {
       this.globalLogger = new DefaultLogger();
