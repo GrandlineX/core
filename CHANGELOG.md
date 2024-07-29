@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2024-07-30
+### Added
+- Bulk operation for orm
+- CoreTimeCache
+### Changed
+- Update Dependencies
+- Rename trigger to event `KernelTrigger -> KernelEvent`
+### Removed
+- Remove CoreDBJoin.ts
+- Remove code smells
 ## [0.32.0]
 
 ### Changed

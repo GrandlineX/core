@@ -27,8 +27,8 @@ export default class TestEntityLinked extends TestEntity {
 
   constructor(param?: EProperties<TestEntityLinked>) {
     super(param);
-    this.link = param?.link || 'null';
+    this.link = param?.link ?? 'null';
     this.flag = !!param?.flag;
-    this.floating = param?.floating || 0.0;
+    this.floating = param?.floating ?? 0.0;
   }
 }

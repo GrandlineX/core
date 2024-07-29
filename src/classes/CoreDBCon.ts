@@ -17,6 +17,7 @@ import {
   ColumnPropMap,
   EntityConfig,
   EUpDateProperties,
+  IEntity,
   validateEntity,
 } from './annotation/index.js';
 import { XUtil } from '../utils/index.js';
@@ -28,7 +29,7 @@ export default abstract class CoreDBCon<
     X extends IDataBase<any, any> | null = any,
     P extends ICoreClient | null = any,
     C extends ICoreCache | null = any,
-    Y extends ICorePresenter<any> | null = any
+    Y extends ICorePresenter<any> | null = any,
   >
   extends CoreElement<K, X, P, C, Y>
   implements IDataBase<D, T>
@@ -50,7 +51,7 @@ export default abstract class CoreDBCon<
   protected constructor(
     dbVersion: string,
     schemaName: string,
-    module: ICoreKernelModule<K, X, P, C, Y>
+    module: ICoreKernelModule<K, X, P, C, Y>,
   ) {
     super(`db${module.getName()}`, module);
     this.wrapperMap = new Map<string, CoreEntityWrapper<any>>();
@@ -67,21 +68,29 @@ export default abstract class CoreDBCon<
     this.cacheEnabled = status;
   }
 
-  registerEntity<E extends CoreEntity>(ent: E): CoreEntityWrapper<E> {
+  registerEntity<E extends CoreEntity>(
+    ent: E,
+    noCache = false,
+  ): CoreEntityWrapper<E> {
     if (!validateEntity(ent)) {
       this.error(`Invalid Entity: ${ent.constructor.name}`);
       throw this.lError('Invalid Entity');
     }
     const cName = XUtil.getEntityNames(ent);
-    const wrapper = new CoreEntityWrapper(this, cName.tableName, () => {
-      return ent;
-    });
+    const wrapper = new CoreEntityWrapper(
+      this,
+      cName.tableName,
+      () => {
+        return ent;
+      },
+      noCache,
+    );
     this.wrapperMap.set(cName.className, wrapper);
     return wrapper;
   }
 
   getEntityWrapper<E extends CoreEntity>(
-    className: string
+    className: string,
   ): CoreEntityWrapper<E> | undefined {
     return this.wrapperMap.get(className);
   }
@@ -121,7 +130,7 @@ export default abstract class CoreDBCon<
 
   async getCurrenDBVersion(): Promise<string> {
     const version = await this.getConfig('dbversion');
-    return version?.c_value || '';
+    return version?.c_value ?? '';
   }
 
   async update(): Promise<boolean> {
@@ -190,7 +199,7 @@ export default abstract class CoreDBCon<
    */
   abstract createEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    entity: E
+    entity: E,
   ): Promise<E>;
 
   /**
@@ -202,7 +211,19 @@ export default abstract class CoreDBCon<
   abstract updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
     e_id: string,
-    entity: EUpDateProperties<E>
+    entity: EUpDateProperties<E>,
+  ): Promise<boolean>;
+
+  /**
+   * Update Entity objects
+   * @param config
+   * @param e_id
+   * @param entity
+   */
+  abstract updateBulkEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    e_id: string[],
+    entity: EUpDateProperties<E>,
   ): Promise<boolean>;
 
   /**
@@ -212,8 +233,17 @@ export default abstract class CoreDBCon<
    */
   abstract getEntityById<E extends CoreEntity>(
     config: EntityConfig<E>,
-    e_id: string
+    e_id: string,
   ): Promise<E | null>;
+  /**
+   * Get Entity object by ID
+   * @param config
+   * @param e_id
+   */
+  abstract getEntityBulkById<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    e_id: string[],
+  ): Promise<E[]>;
 
   /**
    * Delete Entity object by ID
@@ -223,11 +253,21 @@ export default abstract class CoreDBCon<
   abstract deleteEntityById(className: string, e_id: string): Promise<boolean>;
 
   /**
+   * Delete Entity objects by ID
+   * @param className
+   * @param e_id
+   */
+  abstract deleteEntityBulkById(
+    className: string,
+    e_id: string[],
+  ): Promise<boolean>;
+
+  /**
    * Get Entity object list
    * @param query search query config
    */
   abstract getEntityList<E extends CoreEntity>(
-    query: QueryInterface<E>
+    query: QueryInterface<E>,
   ): Promise<E[]>;
 
   /**
@@ -239,7 +279,7 @@ export default abstract class CoreDBCon<
     config: EntityConfig<E>,
     search: {
       [B in keyof E]?: E[B];
-    }
+    },
   ): Promise<E | null>;
 
   /**
@@ -249,7 +289,7 @@ export default abstract class CoreDBCon<
    */
   abstract initEntity<E extends CoreEntity>(
     className: string,
-    entity: E
+    entity: E,
   ): Promise<boolean>;
 
   getCache(): C | null {

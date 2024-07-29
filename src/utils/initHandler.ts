@@ -3,7 +3,7 @@ import CoreBridge from '../classes/CoreBridge.js';
 
 export default async function initHandler(
   modList: ICoreKernelModule<any, any, any, any, any>[],
-  logger: ILogChannel
+  logger: ILogChannel,
 ): Promise<void> {
   modList.forEach((src) => {
     src.getDependencyList().forEach((dep) => {

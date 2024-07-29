@@ -66,6 +66,6 @@ export default abstract class CoreEntity implements IEntity {
   e_id: string;
 
   protected constructor(id?: string) {
-    this.e_id = id || randomUUID();
+    this.e_id = id ?? randomUUID();
   }
 }

@@ -7,7 +7,7 @@ const columnKey = Symbol('column');
 const entityKey = Symbol('entity');
 
 function getEntityMeta<T extends ObjectLike>(
-  target: T
+  target: T,
 ): EntityProps | undefined {
   return Reflect.getMetadata(entityKey, target.constructor.prototype);
 }
@@ -18,7 +18,7 @@ function Column(props: ColumnProps): PropertyDecorator {
 
 function getColumnMeta<T>(
   target: T,
-  propertyKey: keyof T
+  propertyKey: keyof T,
 ): ColumnProps | undefined {
   if (typeof propertyKey === 'number') {
     throw new Error('no numeric objkey is allowed');

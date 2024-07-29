@@ -10,7 +10,7 @@ import {
   ICorePresenter,
   ICoreService,
   IDataBase,
-  KernelTrigger,
+  KernelEvent,
 } from '../lib/index.js';
 import CoreAction from './CoreAction.js';
 import CoreService from './CoreService.js';
@@ -66,7 +66,7 @@ export default abstract class CoreKernelModule<
     T extends IDataBase<any, any> | null,
     P extends ICoreClient | null,
     C extends ICoreCache | null,
-    E extends ICorePresenter<any> | null
+    E extends ICorePresenter<any> | null,
   >
   extends CoreLogChannel
   implements ICoreKernelModule<K, T, P, C, E>
@@ -207,11 +207,11 @@ export default abstract class CoreKernelModule<
     this.verbose('run-before-service');
   }
 
-  async register(action?: KernelTrigger): Promise<void> {
+  async register(action?: KernelEvent): Promise<void> {
     await this.waitForBridgeState(BridgeState.ready);
     await this.initModule();
     if (action) {
-      await this.getKernel().triggerFunction(action);
+      await this.getKernel().triggerEvent(action);
     }
     if (this.trigger) {
       await this.trigger();
@@ -265,7 +265,7 @@ export default abstract class CoreKernelModule<
 
   async stopService(name: string): Promise<ICoreService | null> {
     const s = this.servicelist.get(name);
-    if (!s || !s.isRunning()) {
+    if (!s?.isRunning()) {
       return null;
     }
     s.stop();
@@ -302,7 +302,7 @@ export default abstract class CoreKernelModule<
 
   getBridgeModule<M extends ICoreAnyModule>(name: string): M | undefined {
     const br = this.srcBridges.find(
-      (bridge) => bridge.getTarget().getName() === name
+      (bridge) => bridge.getTarget().getName() === name,
     );
     if (!br) {
       return undefined;

@@ -38,7 +38,7 @@ export default class EnvStore implements IStore {
   initNew(props: EnvStoreCProps): void {
     const { envFilePath, pathOverride, loadFromLocalEnv } = props;
     this.clear();
-    const root = envFilePath || process.env.npm_config_local_prefix;
+    const root = envFilePath ?? process.env.npm_config_local_prefix;
     if (root) {
       const path = Path.join(root, '.env');
       if (fs.existsSync(path)) {
@@ -54,7 +54,7 @@ export default class EnvStore implements IStore {
       [StoreGlobal.GLOBAL_OS, os.platform()],
       [StoreGlobal.GLOBAL_ARCH, os.arch()],
       [StoreGlobal.GLOBAL_HOME_DIR, os.homedir()],
-      [StoreGlobal.GLOBAL_HOST_NAME, os.hostname()]
+      [StoreGlobal.GLOBAL_HOST_NAME, os.hostname()],
     );
 
     const { appName } = props;
@@ -73,7 +73,7 @@ export default class EnvStore implements IStore {
         [StoreGlobal.GLOBAL_PATH_HOME, base],
         [StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data')],
         [StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db')],
-        [StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp')]
+        [StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp')],
       );
     }
     if (process.env.npm_package_version) {
@@ -88,7 +88,7 @@ export default class EnvStore implements IStore {
   }
 
   get(key: EnvKey, defaultValue = ''): StoreItem {
-    return this.store.get(key) || defaultValue;
+    return this.store.get(key) ?? defaultValue;
   }
 
   has(key: EnvKey): boolean {

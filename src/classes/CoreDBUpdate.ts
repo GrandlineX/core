@@ -3,7 +3,7 @@ import CoreDBCon from './CoreDBCon.js';
 import CoreDBPrefab from './CoreDBPrefab.js';
 
 export default abstract class CoreDBUpdate<
-  D extends CoreDBCon<any, any> | CoreDBPrefab<any>
+  D extends CoreDBCon<any, any> | CoreDBPrefab<any>,
 > implements IBaseDBUpdate
 {
   srcVersion: string;
@@ -25,11 +25,11 @@ export default abstract class CoreDBUpdate<
     const perf = await this.performe();
     if (perf) {
       this.db.info(
-        `Update DB from ${this.srcVersion} to ${this.tarVersion} successful`
+        `Update DB from ${this.srcVersion} to ${this.tarVersion} successful`,
       );
     } else {
       throw this.db.lError(
-        `Updating DB from ${this.srcVersion} to ${this.tarVersion} failed`
+        `Updating DB from ${this.srcVersion} to ${this.tarVersion} failed`,
       );
     }
     await this.db.setConfig('dbversion', this.tarVersion);

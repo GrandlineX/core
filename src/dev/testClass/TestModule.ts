@@ -51,7 +51,7 @@ export default class TestModule extends CoreBundleModule<
     db.setEntityCache(this.testInterface?.cache !== null);
     this.setDb(db);
     await this.initBundleModule();
-    await this.getKernel().triggerFunction('load');
+    await this.getKernel().triggerEvent('load');
   }
 
   async initBundleModule(): Promise<void> {

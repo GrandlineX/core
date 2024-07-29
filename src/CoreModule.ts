@@ -16,7 +16,7 @@ export default class CoreModule
    */
   constructor(
     kernel: ICoreKernel<any>,
-    dbFunc: (mod: CoreModule) => CoreDBCon<any, any>
+    dbFunc: (mod: CoreModule) => CoreDBCon<any, any>,
   ) {
     super('core', kernel);
     this.addService(new OfflineService(this));

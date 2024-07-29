@@ -16,9 +16,9 @@ import CoreService from './CoreService.js';
 import CoreDBUpdate from './CoreDBUpdate.js';
 import CoreBundleModule from './CoreBundleModule.js';
 import CoreTriggerService from './CoreTriggerService.js';
-import CoreDBJoin from './CoreDBJoin.js';
 import CoreCachedFc from './CoreCachedFc.js';
 import CMap from './CoreMap.js';
+import CoreTimeCache, { CachedData } from './CoreTimeCache.js';
 
 export {
   CoreLoopService,
@@ -40,9 +40,10 @@ export {
   CoreDBUpdate,
   LogLevel,
   CoreTriggerService,
-  CoreDBJoin,
   CoreCachedFc,
   CMap,
+  CoreTimeCache,
+  CachedData,
 };
 
 export * from './annotation/index.js';

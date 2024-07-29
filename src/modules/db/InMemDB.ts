@@ -6,11 +6,15 @@ import {
   RawQuery,
 } from '../../lib/index.js';
 import CoreEntity from '../../classes/CoreEntity.js';
-import { EntityConfig, EUpDateProperties } from '../../classes/index.js';
+import {
+  EntityConfig,
+  EUpDateProperties,
+  IEntity,
+} from '../../classes/index.js';
 
 function eFilter<E extends CoreEntity>(
   row: E,
-  search: { [P in keyof E]?: E[P] }
+  search: { [P in keyof E]?: E[P] },
 ) {
   const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
   for (const key of keys) {
@@ -49,6 +53,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     return true;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async execScripts(list: RawQuery[]): Promise<any[]> {
     return [];
   }
@@ -57,6 +62,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     return this.map.get(key);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async initEntity<E extends CoreEntity>(className: string): Promise<boolean> {
     this.e_map.set(className, []);
     return true;
@@ -64,7 +70,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
 
   async getEntityById<E extends CoreEntity>(
     config: EntityConfig<E>,
-    e_id: string
+    e_id: string,
   ): Promise<E | null> {
     const table = this.e_map.get(config.className);
     if (!table) {
@@ -77,9 +83,21 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     return temp as E;
   }
 
+  async getEntityBulkById<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    e_id: string[],
+  ): Promise<E[]> {
+    const table = this.e_map.get(config.className);
+    if (!table) {
+      return [];
+    }
+    const temp = table.filter((el) => e_id.includes(el.e_id));
+    return temp as E[];
+  }
+
   async createEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    entity: E
+    entity: E,
   ): Promise<E> {
     const clone = entity;
     const table = this.e_map.get(config.className);
@@ -100,10 +118,23 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     return true;
   }
 
+  async deleteEntityBulkById(
+    className: string,
+    e_id: string[],
+  ): Promise<boolean> {
+    const table = this.e_map.get(className);
+    if (!table) {
+      return false;
+    }
+    const temp = table.filter((el) => !e_id.includes(el.e_id));
+    this.e_map.set(className, temp);
+    return true;
+  }
+
   async updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
     e_id: string,
-    entity: EUpDateProperties<E>
+    entity: EUpDateProperties<E>,
   ): Promise<boolean> {
     const table = this.e_map.get(config.className);
     if (!table) {
@@ -124,8 +155,20 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     return true;
   }
 
+  async updateBulkEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    e_id: string[],
+    entity: EUpDateProperties<E>,
+  ): Promise<boolean> {
+    return (
+      await Promise.all(
+        e_id.map((e) => this.updateEntity<E>(config, e, entity)),
+      )
+    ).every((el) => el);
+  }
+
   async getEntityList<E extends CoreEntity>(
-    query: QueryInterface<E>
+    query: QueryInterface<E>,
   ): Promise<E[]> {
     const { config, limit, search, order, offset } = query;
     const table = this.e_map.get(config.className);
@@ -147,7 +190,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
       out = out.reverse();
     }
     if (!!limit && limit > 0) {
-      const off = offset || 0;
+      const off = offset ?? 0;
       const end = off === 0 ? limit : limit + off;
       return out.slice(off, end);
     }
@@ -156,14 +199,14 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
 
   async findEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    search: { [P in keyof E]?: E[P] | undefined }
+    search: { [P in keyof E]?: E[P] | undefined },
   ): Promise<E | null> {
     const table = this.e_map.get(config.className);
     if (!table) {
       return null;
     }
 
-    return (table as E[]).find((row) => eFilter(row, search)) || null;
+    return (table as E[]).find((row) => eFilter(row, search)) ?? null;
   }
 
   getRawDBObject(): any {

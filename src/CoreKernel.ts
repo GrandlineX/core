@@ -9,7 +9,7 @@ import {
   ICoreService,
   IHaveLogger,
   IStore,
-  KernelTrigger,
+  KernelEvent,
 } from './lib/index.js';
 
 import initHandler from './utils/initHandler.js';
@@ -18,9 +18,9 @@ import { CoreLogChannel, CoreLogger } from './classes/index.js';
 import {
   DefaultLogger,
   EnvStore,
+  EnvStoreCProps,
   InMemDB,
   StoreGlobal,
-  EnvStoreCProps,
 } from './modules/index.js';
 import CoreModule from './CoreModule.js';
 import { XUtil } from './utils/index.js';
@@ -48,7 +48,7 @@ export type CoreKernelProps = {
 
 export default abstract class CoreKernel<
     X extends ICoreCClient,
-    Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule
+    Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule,
   >
   extends CoreLogChannel
   implements ICoreKernel<X>, IHaveLogger
@@ -77,10 +77,7 @@ export default abstract class CoreKernel<
 
   protected envStore: IStore;
 
-  protected triggerMap: Map<
-    string,
-    (kernel: CoreKernel<X>) => Promise<unknown>
-  >;
+  protected eventMap: Map<string, (kernel: CoreKernel<X>) => Promise<unknown>>;
 
   protected globalLogger: CoreLogger;
 
@@ -103,8 +100,8 @@ export default abstract class CoreKernel<
     this.offline = false;
     this.updateSkip = false;
     this.appVersion = 'noVersion';
-    this.triggerFunction = this.triggerFunction.bind(this);
-    this.triggerMap = new Map<
+    this.triggerEvent = this.triggerEvent.bind(this);
+    this.eventMap = new Map<
       string,
       (kernel: CoreKernel<X>) => Promise<unknown>
     >();
@@ -175,7 +172,7 @@ export default abstract class CoreKernel<
     this.startUpInfo();
     this.debug('Run startup script');
     this.preloadSetup();
-    await this.triggerFunction('pre');
+    await this.triggerEvent('pre');
     this.info('Startup script complete');
     this.debug('Run launcher');
     await this.startUp();
@@ -186,13 +183,13 @@ export default abstract class CoreKernel<
   /**
    * Run trigger function
    * Cycle functions
-   * @see KernelTrigger
-   * @param trigger
+   * @see KernelEvent
+   * @param event
    */
-  async triggerFunction(trigger: KernelTrigger): Promise<unknown> {
-    const fc = this.triggerMap.get(trigger);
+  async triggerEvent(event: KernelEvent): Promise<unknown> {
+    const fc = this.eventMap.get(event);
     if (!fc) {
-      this.debug(`Trigger not implemented. [${trigger}]`);
+      this.debug(`Trigger not implemented. [${event}]`);
       return undefined;
     }
     return fc(this);
@@ -202,14 +199,14 @@ export default abstract class CoreKernel<
    * Set function run on trigger
    * Cycle functions
    * @see KernelTrigger
-   * @param trigger
-   * @param triggerFunc
+   * @param event
+   * @param callback
    */
-  setTriggerFunction(
-    trigger: KernelTrigger,
-    triggerFunc: (ik: CoreKernel<X>) => Promise<unknown>
+  on(
+    event: KernelEvent,
+    callback: (ik: CoreKernel<X>) => Promise<unknown>,
   ): void {
-    this.triggerMap.set(trigger, triggerFunc);
+    this.eventMap.set(event, callback);
   }
 
   /**
@@ -319,7 +316,7 @@ export default abstract class CoreKernel<
 
   async stop(): Promise<boolean> {
     const workload: Promise<void>[] = [];
-    await this.triggerFunction('stop');
+    await this.triggerEvent('stop');
     this.moduleList.forEach((el) => workload.push(el.shutdown()));
     await Promise.all(workload);
     await this.getModule().shutdown();
@@ -329,7 +326,7 @@ export default abstract class CoreKernel<
   }
 
   getChildModule<
-    T extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule
+    T extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule,
   >(modName: string): T | null {
     const mod = this.moduleList.find((mo) => mo.getName() === modName);
     if (mod) {
@@ -344,13 +341,13 @@ export default abstract class CoreKernel<
 
   private preloadSetup() {
     const st = this.getConfigStore();
-    this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) || '';
+    this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) ?? '';
     if (
       !XUtil.createFolderBulk(
         st.get(StoreGlobal.GLOBAL_PATH_HOME) || '',
         st.get(StoreGlobal.GLOBAL_PATH_DATA) || '',
         st.get(StoreGlobal.GLOBAL_PATH_DB) || '',
-        st.get(StoreGlobal.GLOBAL_PATH_TEMP) || ''
+        st.get(StoreGlobal.GLOBAL_PATH_TEMP) || '',
       )
     ) {
       console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
@@ -386,12 +383,14 @@ export default abstract class CoreKernel<
     await initHandler(this.moduleList, this);
     await this.getCoreModule().start();
     await this.getModule().start();
+    await this.getCoreModule().final();
+    await this.getModule().final();
     for (const mod of this.moduleList) {
       if (mod.final !== undefined) {
         await mod.final();
       }
     }
-    await this.triggerFunction('start');
+    await this.triggerEvent('start');
   }
 
   getActionList(full = false): ICoreAction[] {

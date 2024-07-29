@@ -10,7 +10,6 @@ import TestPrefab from '../testClass/db/TestPrefab.js';
 
 import TestEntityLinked from '../testClass/db/entity/TestEntityLinked.js';
 import { EntityValidator } from '../../utils/index.js';
-import CoreDBJoin from '../../classes/CoreDBJoin.js';
 import TestContext from '../TestContext.js';
 
 export default function jestDb() {
@@ -103,6 +102,22 @@ export default function jestDb() {
       flag: true,
       floating: 0.9,
     });
+    let entity4: TestEntity = new TestEntity({
+      name: 'Bulk01',
+      age: 1,
+      address: null,
+      time: null,
+      raw: null,
+      json: null,
+    });
+    let entity5: TestEntity = new TestEntity({
+      name: 'Bulk02',
+      age: 1,
+      address: null,
+      time: null,
+      raw: null,
+      json: null,
+    });
 
     test('get wrapper class', async () => {
       const mod = kernel.getChildModule('testModule') as ICoreKernelModule<
@@ -114,7 +129,7 @@ export default function jestDb() {
       >;
       const db = mod.getDb() as CoreDBCon<any, any>;
       expect(
-        EntityValidator.validateManualObj(db, 'TestEntity', entity, false)
+        EntityValidator.validateManualObj(db, 'TestEntity', entity, false),
       ).toBeTruthy();
       wrapper = db.getEntityWrapper<TestEntity>('TestEntity');
       wrapper2 = db.getEntityWrapper<TestEntityLinked>('TestEntityLinked');
@@ -148,6 +163,23 @@ export default function jestDb() {
         expect((await wrapper2.getObjList()).length).toBe(1);
       }
     });
+    test('create new 4', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        entity4 = (await wrapper.createObject(entity4)) || entity4;
+        expect(entity4?.e_id).not.toBeNull();
+        expect((await wrapper.getObjList()).length).toBe(3);
+      }
+    });
+    test('create new 5', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        entity5 = (await wrapper.createObject(entity5)) || entity5;
+        expect(entity5?.e_id).not.toBeNull();
+        expect((await wrapper.getObjList()).length).toBe(4);
+      }
+    });
+
     test('get by id', async () => {
       expect(wrapper).not.toBeUndefined();
       expect(entity.e_id).not.toBeNull();
@@ -162,7 +194,7 @@ export default function jestDb() {
         expect(
           await wrapper.getObjList({
             search: { e_id: entity.e_id },
-          })
+          }),
         ).toHaveLength(1);
       }
     });
@@ -172,7 +204,7 @@ export default function jestDb() {
         expect(
           await wrapper2.getObjList({
             search: { link: entity.e_id },
-          })
+          }),
         ).toHaveLength(1);
       }
     });
@@ -182,7 +214,7 @@ export default function jestDb() {
         expect(
           await wrapper.getObjList({
             search: { name: 'Bob' },
-          })
+          }),
         ).toHaveLength(1);
       }
     });
@@ -203,7 +235,7 @@ export default function jestDb() {
         expect(
           await wrapper.findObj({
             e_id: entity.e_id,
-          })
+          }),
         ).not.toBeNull();
       }
     });
@@ -220,17 +252,43 @@ export default function jestDb() {
         const update = await wrapper.getObjById(entity.e_id);
         expect(update).not.toBeNull();
         expect(update?.name).toBe('Bobi');
-        expect((await wrapper.getObjList()).length).toBe(2);
+        expect((await wrapper.getObjList()).length).toBe(4);
       }
     });
-    test('CoreJoin', async () => {
-      expect(wrapper).not.toBeUndefined();
-      expect(wrapper2).not.toBeUndefined();
 
-      if (wrapper2 && wrapper) {
-        const j = new CoreDBJoin([wrapper2, 'link', 'e_id', wrapper]);
-        const [f] = await j.join();
-        expect(f.join_map).not.toBeNull();
+    test('update-bulk', async () => {
+      expect(wrapper).not.toBeUndefined();
+      expect(entity4.e_id).not.toBeNull();
+      expect(entity5.e_id).not.toBeNull();
+      if (wrapper) {
+        expect(entity4.name).toBe('Bulk01');
+        expect(entity5.name).toBe('Bulk02');
+
+        await wrapper.updateObjectBulk([entity4.e_id, entity5.e_id], {
+          name: 'BulkXX',
+        });
+        const update = await wrapper.getObjByIdBulk([
+          entity4.e_id,
+          entity5.e_id,
+        ]);
+        expect(update.length).toBe(2);
+
+        for (const el of update) {
+          expect(el).not.toBeNull();
+          expect(el?.name).toBe('BulkXX');
+        }
+        expect((await wrapper.getObjList()).length).toBe(4);
+      }
+    });
+
+    test('delete-bulk', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect((await wrapper.getObjList()).length).toBe(4);
+        expect(
+          await wrapper.deleteBulk([entity4.e_id, entity5.e_id]),
+        ).toBeTruthy();
+        expect((await wrapper.getObjList()).length).toBe(2);
       }
     });
     test('delete', async () => {
@@ -294,7 +352,7 @@ export default function jestDb() {
               await wrapper.getObjList({
                 search: { time: entity.time },
               })
-            ).length
+            ).length,
           ).toBeGreaterThanOrEqual(1);
         }
       } else {

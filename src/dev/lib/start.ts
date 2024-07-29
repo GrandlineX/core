@@ -11,12 +11,12 @@ export default function jestStart() {
     test('start kernel', async () => {
       const result = await kernel.start();
       expect(result).toBe(true);
-      expect(kernel.getModCount()).toBe(modLen === null ? 2 : modLen);
+      expect(kernel.getModCount()).toBe(modLen ?? 2);
       expect(kernel.getState()).toBe('running');
     });
     test('kernel info', async () => {
       expect(kernel.getModCount(true)).toBe(
-        modLen === null ? 2 + 2 : modLen + 2
+        modLen === null ? 2 + 2 : modLen + 2,
       );
       expect(kernel.getServiceList(true).length).toBeGreaterThan(0);
       expect(kernel.getActionList(true).length).toBeGreaterThan(0);

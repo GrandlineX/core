@@ -26,7 +26,7 @@ export default class CMap<K, V> implements Map<K, V> {
 
   forEach(
     callbackfn: (value: V, key: K, map: Map<K, V>) => void,
-    thisArg?: any
+    thisArg?: any,
   ): void {
     this.store.forEach(callbackfn, thisArg);
   }

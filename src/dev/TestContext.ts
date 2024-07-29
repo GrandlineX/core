@@ -21,8 +21,8 @@ export default class TestContext {
     }
     if (ent) {
       this.entity = ent.kernel;
-      this.cleanUpPath = ent.cleanUpPath || null;
-      this.modLenth = ent.modLenth || null;
+      this.cleanUpPath = ent.cleanUpPath ?? null;
+      this.modLenth = ent.modLenth ?? null;
     } else {
       throw new Error('NoKernelDefined');
     }

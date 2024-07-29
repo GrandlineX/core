@@ -1,5 +1,11 @@
 import { XUtil } from '../../utils/index.js';
-import { CoreCachedFc, CoreSemaphor, CMap } from '../../classes/index.js';
+import {
+  CMap,
+  CoreCachedFc,
+  CoreSemaphor,
+  CoreTimeCache,
+} from '../../classes/index.js';
+import { DefaultLogger } from '../../modules/index.js';
 
 export default function jestUtils() {
   describe('utils', () => {
@@ -28,6 +34,29 @@ export default function jestUtils() {
       await XUtil.sleep(2000);
       res = await cached.get();
       expect(res).toBe(2);
+    });
+    test('CoreTimeCache', async () => {
+      const cached = new CoreTimeCache<{ a: number }>(
+        'test',
+        {
+          getLogger: () => new DefaultLogger(),
+        },
+        500,
+      );
+      cached.set('123', { a: 1 }, 1000);
+      expect(cached.get('123')?.a).toBe(1);
+      cached.extend('123', 500);
+      await XUtil.sleep(2500);
+      expect(cached.get('123')?.a).toBeUndefined();
+      cached.set('123', { a: 1 }, 1000);
+      expect(cached.has('123')).toBeTruthy();
+      cached.flash();
+      expect(cached.get('123')?.a).toBeUndefined();
+      cached.set('123', { a: 1 }, 1000);
+      expect(cached.has('123')).toBeTruthy();
+      cached.delete('123');
+      expect(cached.get('123')?.a).toBeUndefined();
+      cached.stop();
     });
     test('CMap', async () => {
       let map = new CMap<string, number>();
@@ -63,8 +92,8 @@ export default function jestUtils() {
           new CMap<string, number>([
             ['first', 2],
             ['second', 3],
-          ])
-        ).size
+          ]),
+        ).size,
       ).toBe(2);
       expect(
         map.merge(
@@ -72,8 +101,8 @@ export default function jestUtils() {
             ['first', 4],
             ['second', 5],
           ]),
-          true
-        ).size
+          true,
+        ).size,
       ).toBe(2);
       expect(map.get('first')).toBe(2);
     });

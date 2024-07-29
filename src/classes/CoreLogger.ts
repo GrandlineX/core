@@ -21,7 +21,7 @@ export default abstract class CoreLogger {
     this.info = this.info.bind(this);
     this.warn = this.warn.bind(this);
     this.verbose = this.verbose.bind(this);
-    this.logLevel = logLevel || LogLevel.WARN;
+    this.logLevel = logLevel ?? LogLevel.WARN;
   }
 
   abstract log(channel: string, ...ags: unknown[]): void;

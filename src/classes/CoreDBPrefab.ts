@@ -12,11 +12,12 @@ import {
   ColumnPropMap,
   EntityConfig,
   EUpDateProperties,
+  IEntity,
 } from './annotation/index.js';
 import CoreDBCon from './CoreDBCon.js';
 
 export default abstract class CoreDBPrefab<
-    T extends CoreDBCon<any, any, any, any, any, any, any>
+    T extends CoreDBCon<any, any, any, any, any, any, any>,
   >
   extends CoreElement
   implements IDataBase<unknown, unknown>
@@ -47,7 +48,7 @@ export default abstract class CoreDBPrefab<
   }
 
   getEntityWrapper<E extends CoreEntity>(
-    className: string
+    className: string,
   ): CoreEntityWrapper<E> | undefined {
     return this.db.getEntityWrapper<E>(className);
   }
@@ -127,7 +128,7 @@ export default abstract class CoreDBPrefab<
    */
   async createEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    entity: E
+    entity: E,
   ): Promise<E> {
     return this.db.createEntity<E>(config, entity);
   }
@@ -141,9 +142,23 @@ export default abstract class CoreDBPrefab<
   async updateEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
     e_id: string,
-    entity: EUpDateProperties<E>
+    entity: EUpDateProperties<E>,
   ): Promise<boolean> {
     return this.db.updateEntity<E>(config, e_id, entity);
+  }
+
+  /**
+   * Update Entity objects
+   * @param config
+   * @param e_id
+   * @param entity
+   */
+  async updateBulkEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    e_id: string[],
+    entity: EUpDateProperties<E>,
+  ): Promise<boolean> {
+    return this.db.updateBulkEntity(config, e_id, entity);
   }
 
   /**
@@ -153,9 +168,21 @@ export default abstract class CoreDBPrefab<
    */
   async getEntityById<E extends CoreEntity>(
     config: EntityConfig<E>,
-    id: string
+    id: string,
   ): Promise<E | null> {
     return this.db.getEntityById<E>(config, id);
+  }
+
+  /**
+   * Get Entity objects by ID
+   * @param config
+   * @param id
+   */
+  async getEntityBulkById<E extends CoreEntity>(
+    config: EntityConfig<E>,
+    id: string[],
+  ): Promise<E[]> {
+    return this.db.getEntityBulkById<E>(config, id);
   }
 
   /**
@@ -168,11 +195,20 @@ export default abstract class CoreDBPrefab<
   }
 
   /**
+   * Delete Entity objects by ID
+   * @param className
+   * @param e_id
+   */
+  deleteEntityBulkById(className: string, e_id: string[]): Promise<boolean> {
+    return this.db.deleteEntityBulkById(className, e_id);
+  }
+
+  /**
    * Get Entity object list
    * @param query
    */
   async getEntityList<E extends CoreEntity>(
-    query: QueryInterface<E>
+    query: QueryInterface<E>,
   ): Promise<E[]> {
     return this.db.getEntityList<E>(query);
   }
@@ -186,7 +222,7 @@ export default abstract class CoreDBPrefab<
     config: EntityConfig<E>,
     search: {
       [P in keyof E]?: E[P];
-    }
+    },
   ): Promise<E | null> {
     return this.db.findEntity<E>(config, search);
   }
@@ -198,7 +234,7 @@ export default abstract class CoreDBPrefab<
    */
   async initEntity<E extends CoreEntity>(
     className: string,
-    entity: E
+    entity: E,
   ): Promise<boolean> {
     return this.db.initEntity<E>(className, entity);
   }

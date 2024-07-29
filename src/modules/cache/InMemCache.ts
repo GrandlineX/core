@@ -13,7 +13,7 @@ export default class InMemCache extends CoreCache {
 
   constructor(
     module: ICoreKernelModule<any, any, any, any, any>,
-    deleteTime?: number
+    deleteTime?: number,
   ) {
     super('inMemCache', module);
     this.keyMap = new Map<string, string>();
@@ -44,12 +44,12 @@ export default class InMemCache extends CoreCache {
   }
 
   async get(key: string): Promise<string | null> {
-    return this.keyMap.get(key) || null;
+    return this.keyMap.get(key) ?? null;
   }
 
   async getE<E extends IEntity>(
     className: string,
-    e_id: string
+    e_id: string,
   ): Promise<E | null> {
     return this.eMap.get(className)?.get(e_id);
   }

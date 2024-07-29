@@ -8,6 +8,7 @@ import {
   getColumnMeta,
 } from './annotation/index.js';
 import { EntityValidator } from '../utils/index.js';
+import CMap from './CoreMap.js';
 
 export default class CoreEntityWrapper<E extends CoreEntity> {
   getIns: () => E;
@@ -20,12 +21,17 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
 
   protected className: string;
 
-  constructor(con: ICoreEntityHandler, name: string, getIns: () => E) {
+  constructor(
+    con: ICoreEntityHandler,
+    name: string,
+    getIns: () => E,
+    noCache = false,
+  ) {
     this.e_con = con;
     this.className = name;
     this.getIns = getIns;
     this.propMap = this.genPropMap();
-    this.cache = con.getCache();
+    this.cache = !noCache ? con.getCache() : null;
   }
 
   async createObject(args: EProperties<E>): Promise<E> {
@@ -39,13 +45,13 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
         className: this.className,
         meta: this.propMap,
       },
-      args
+      args,
     );
   }
 
   async updateObject(
     e_id: string,
-    args: EUpDateProperties<E>
+    args: EUpDateProperties<E>,
   ): Promise<boolean> {
     if (
       !EntityValidator.validateObj(this.propMap, this.className, args, true)
@@ -60,7 +66,30 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
         meta: this.propMap,
       },
       e_id,
-      args
+      args,
+    );
+  }
+
+  async updateObjectBulk(
+    e_id: string[],
+    args: EUpDateProperties<E>,
+  ): Promise<boolean> {
+    if (
+      !EntityValidator.validateObj(this.propMap, this.className, args, true)
+    ) {
+      throw this.e_con.lError(`validation failed for ${this.className} update`);
+    }
+    for (const id of e_id) {
+      await this.cache?.deleteE(this.className, id);
+    }
+
+    return this.e_con.updateBulkEntity<E>(
+      {
+        className: this.className,
+        meta: this.propMap,
+      },
+      e_id,
+      args,
     );
   }
 
@@ -76,12 +105,39 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
         className: this.className,
         meta: this.propMap,
       },
-      id
+      id,
     );
     if (res && this.cache) {
       await this.cache.setE<E>(this.className, res);
     }
     return res;
+  }
+
+  async getObjByIdBulk(id: string[]): Promise<E[]> {
+    const map = new CMap<string, E>();
+    if (this.cache) {
+      for (const i of id) {
+        const has = await this.cache.getE<E>(this.className, i);
+        if (has) {
+          map.set(i, has);
+        }
+      }
+    }
+    const missing = id.filter((i) => !map.has(i));
+    const res = await this.e_con.getEntityBulkById<E>(
+      {
+        className: this.className,
+        meta: this.propMap,
+      },
+      missing,
+    );
+    if (res && this.cache) {
+      for (const r of res) {
+        map.set(r.e_id, r);
+        await this.cache.setE<E>(this.className, r);
+      }
+    }
+    return map.toValueArray();
   }
 
   async getObjList(query?: QInterface<E>): Promise<E[]> {
@@ -102,12 +158,20 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
         className: this.className,
         meta: this.propMap,
       },
-      search
+      search,
     );
   }
 
   async delete(e_id: string): Promise<boolean> {
+    await this.cache?.deleteE(this.className, e_id);
     return this.e_con.deleteEntityById(this.className, e_id);
+  }
+
+  async deleteBulk(e_id: string[]): Promise<boolean> {
+    for (const id of e_id) {
+      await this.cache?.deleteE(this.className, id);
+    }
+    return this.e_con.deleteEntityBulkById(this.className, e_id);
   }
 
   async init(): Promise<boolean> {

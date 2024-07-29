@@ -50,11 +50,11 @@ export default class TestEnt extends CoreEntity {
 
   constructor(val?: EPropertiesOpt<TestEnt>) {
     super();
-    this.name = val?.name || '';
-    this.notAColumn = val?.notAColumn || '';
-    this.simpleNumber = val?.simpleNumber || 0;
+    this.name = val?.name ?? '';
+    this.notAColumn = val?.notAColumn ?? '';
+    this.simpleNumber = val?.simpleNumber ?? 0;
     this.primaryKeyNull = null;
     this.invalidKey = null;
-    this.autoRelation = val?.autoRelation || '';
+    this.autoRelation = val?.autoRelation ?? '';
   }
 }

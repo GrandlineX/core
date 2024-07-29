@@ -24,7 +24,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2020,
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
@@ -33,6 +33,7 @@
     "no-restricted-syntax": "warn",
     "no-underscore-dangle": "warn",
     "no-await-in-loop": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
     "class-methods-use-this": "warn",
     "linebreak-style": "off",
     "no-restricted-properties": "warn",

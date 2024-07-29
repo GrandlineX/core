@@ -14,14 +14,14 @@ export default abstract class CoreCache<
     T extends IDataBase<any, any> | null = any,
     P extends ICoreClient | null = any,
     C extends ICoreCache | null = any,
-    E extends ICorePresenter<any> | null = any
+    E extends ICorePresenter<any> | null = any,
   >
   extends CoreElement<K, T, P, C, E>
   implements ICoreCache<K, T, P, C, E>
 {
   constructor(
     channel: string,
-    module: ICoreKernelModule<any, any, any, any, any>
+    module: ICoreKernelModule<any, any, any, any, any>,
   ) {
     super(`client-${channel}`, module);
   }
@@ -46,7 +46,7 @@ export default abstract class CoreCache<
 
   abstract getE<R extends IEntity>(
     className: string,
-    e_id: string
+    e_id: string,
   ): Promise<R | null>;
 
   abstract setE<R extends IEntity>(className: string, val: R): Promise<void>;

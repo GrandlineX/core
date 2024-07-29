@@ -11,7 +11,7 @@ export class EntityValidator {
     db: IDataBase<any, any>,
     entity: string,
     value: any,
-    update: boolean
+    update: boolean,
   ): ValidationInterface {
     const meta = db.getEntityMeta();
     const ent = meta.find((e) => e.key === entity);
@@ -25,7 +25,7 @@ export class EntityValidator {
     meta: ColumnPropMap<any>,
     entity: string,
     value: any,
-    update: boolean
+    update: boolean,
   ): ValidationInterface {
     try {
       const fields: { valid: boolean; key: string }[] = [];
@@ -33,7 +33,7 @@ export class EntityValidator {
       meta.forEach((el, key) => {
         if (!update || value[key] !== undefined) {
           fields.push(
-            this.validateObjKey(meta, entity, key as string, value[key])
+            this.validateObjKey(meta, entity, key as string, value[key]),
           );
         }
       });
@@ -64,7 +64,7 @@ export class EntityValidator {
     metaContainer: ColumnPropMap<any>,
     entity: string,
     key: string,
-    value: unknown
+    value: unknown,
   ): { valid: boolean; key: string } {
     const err = () => {
       return {

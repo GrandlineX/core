@@ -15,7 +15,7 @@ export default abstract class CoreLoopService<
   T extends IDataBase<any, any> | null = any,
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
-  E extends ICorePresenter<any> | null = any
+  E extends ICorePresenter<any> | null = any,
 > extends CoreService<K, T, P, C, E> {
   interval: Timeout | null;
 
@@ -25,7 +25,7 @@ export default abstract class CoreLoopService<
     name: string,
     timeout: number,
     module: ICoreKernelModule<K, T, P, C, E>,
-    skipAutoStart?: boolean
+    skipAutoStart?: boolean,
   ) {
     super(name, module, skipAutoStart);
     this.interval = null;

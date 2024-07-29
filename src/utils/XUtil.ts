@@ -32,11 +32,11 @@ export class XUtil {
   static getTimeStamp(): string {
     const date = new Date();
     return `${date.getFullYear()}-${this.numPrint(
-      date.getMonth() + 1
+      date.getMonth() + 1,
     )}-${this.numPrint(date.getDate())} ${this.numPrint(
-      date.getHours()
+      date.getHours(),
     )}:${this.numPrint(date.getMinutes() + 1)}:${this.numPrint(
-      date.getSeconds()
+      date.getSeconds(),
     )}`;
   }
 
@@ -46,7 +46,7 @@ export class XUtil {
   static async workerFc<T, F>(
     producer: () => Promise<WDat<T> | null>,
     consumer: (arg: WDat<T>) => Promise<WDat<F>>,
-    oMap: Map<number, F>
+    oMap: Map<number, F>,
   ): Promise<void> {
     let next = await producer();
     while (next) {
@@ -59,7 +59,7 @@ export class XUtil {
   static async workerFactoryWithProducer<T, F>(
     count: number,
     producer: () => Promise<WDat<T> | null>,
-    consumer: (arg: WDat<T>) => Promise<WDat<F>>
+    consumer: (arg: WDat<T>) => Promise<WDat<F>>,
   ) {
     const oMap = new Map<number, F>();
     const promises = [];
@@ -74,7 +74,7 @@ export class XUtil {
   static async workerFactoryFromArray<X, F>(
     count: number,
     arr: Array<X>,
-    mapper: (arg: WDat<X>) => Promise<WDat<F>>
+    mapper: (arg: WDat<X>) => Promise<WDat<F>>,
   ) {
     let i = 0;
     return this.workerFactoryWithProducer(
@@ -90,7 +90,7 @@ export class XUtil {
         }
         return null;
       },
-      mapper
+      mapper,
     );
   }
 
@@ -155,7 +155,7 @@ export class XUtil {
 
   static entityRelationColumn<T extends CoreEntity>(
     entity: T,
-    schema?: string
+    schema?: string,
   ): ColumnProps {
     return {
       dataType: 'string',
@@ -181,7 +181,7 @@ export class XUtil {
   static setupEnvironment(
     basePath: string[],
     config: string[],
-    other?: string[]
+    other?: string[],
   ): string[] {
     const base = Path.join(...basePath);
     const out = [];
@@ -204,7 +204,7 @@ export class XUtil {
     options?: SpawnOptionsWithoutStdio & {
       onStdOut?: (m: string) => void;
       onStdErr?: (m: string) => void;
-    }
+    },
   ): Promise<XExecResult> {
     return new Promise<XExecResult>((resolve) => {
       const child = spawn(cmd, args, options);

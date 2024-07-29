@@ -35,21 +35,34 @@ export interface ICoreEntityHandler<C extends ICoreCache | null = any>
 
   createEntity<E extends IEntity>(
     config: EntityConfig<E>,
-    entity: EProperties<E>
+    entity: EProperties<E>,
   ): Promise<E>;
 
   updateEntity<E extends IEntity>(
     config: EntityConfig<E>,
     e_id: string,
-    entity: EUpDateProperties<E>
+    entity: EUpDateProperties<E>,
+  ): Promise<boolean>;
+
+  updateBulkEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    e_id: string[],
+    entity: EUpDateProperties<E>,
   ): Promise<boolean>;
 
   getEntityById<E extends IEntity>(
     config: EntityConfig<E>,
-    e_id: string
+    e_id: string,
   ): Promise<E | null>;
 
+  getEntityBulkById<E extends IEntity>(
+    config: EntityConfig<E>,
+    e_id: string[],
+  ): Promise<E[]>;
+
   deleteEntityById(className: string, e_id: string): Promise<boolean>;
+
+  deleteEntityBulkById(className: string, e_id: string[]): Promise<boolean>;
 
   getEntityList<E extends IEntity>(query: QueryInterface<E>): Promise<E[]>;
 
@@ -57,21 +70,21 @@ export interface ICoreEntityHandler<C extends ICoreCache | null = any>
     config: EntityConfig<E>,
     search: {
       [P in keyof E]?: E[P];
-    }
+    },
   ): Promise<E | null>;
 
   initEntity<E extends IEntity>(className: string, entity: E): Promise<boolean>;
 }
 
 /**
- * Trigger:
+ * Event:
  * - pre = executed before modules load
  * - load = executed before modules load except the core module
  * - load = executed after the core and before the base module load
  * - start = executed after modules load
  * - stop = executed before modules stopped
  */
-export type KernelTrigger =
+export type KernelEvent =
   | 'pre'
   | 'core-load'
   | 'load'
@@ -88,11 +101,16 @@ export enum BridgeState {
 export type ServiceStates = 'INIT' | 'RUNNING' | 'SLEEPING';
 
 export interface ICoreCache<
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   K extends ICoreKernel<any> = ICoreKernel<any>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   T extends IDataBase<any, any> | null = any,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   P extends ICoreClient | null = any,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   C extends ICoreCache | null = any,
-  E extends ICorePresenter<any> | null = any
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  E extends ICorePresenter<any> | null = any,
 > {
   start(): Promise<void>;
 
@@ -143,7 +161,7 @@ export interface ICoreCClient {
 
 export interface ICoreKernel<
   X extends ICoreCClient,
-  Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule
+  Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule,
 > extends ILogChannel,
     IHaveLogger {
   start(): Promise<boolean>;
@@ -164,11 +182,11 @@ export interface ICoreKernel<
 
   hasCryptoClient(): boolean;
 
-  triggerFunction(trigger: KernelTrigger): Promise<unknown>;
+  triggerEvent(trigger: KernelEvent): Promise<unknown>;
 
-  setTriggerFunction(
-    trigger: KernelTrigger,
-    triggerFunc: (ik: ICoreKernel<X>) => Promise<unknown>
+  on(
+    event: KernelEvent,
+    callback: (ik: ICoreKernel<X>) => Promise<unknown>,
   ): void;
 
   getDb(): ICoreDb;
@@ -203,7 +221,7 @@ export interface ICoreKernelModule<
   T extends IDataBase<any, any> | null,
   P extends ICoreClient | null,
   C extends ICoreCache | null,
-  E extends ICorePresenter<any> | null
+  E extends ICorePresenter<any> | null,
 > extends ILogChannel,
     IHaveLogger {
   addSrcBridge(bridge: ICoreBridge): void;
@@ -214,7 +232,7 @@ export interface ICoreKernelModule<
 
   getDependencyList(): string[];
 
-  register(action?: KernelTrigger): Promise<void>;
+  register(action?: KernelEvent): Promise<void>;
 
   shutdown(): Promise<void>;
 
@@ -273,7 +291,7 @@ export interface ICorePresenter<
   T extends IDataBase<any, any> | null = any,
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
-  E extends ICorePresenter<any> | null = any
+  E extends ICorePresenter<any> | null = any,
 > extends ICoreElement<K, T, P, C, E> {
   start(): Promise<boolean>;
 
@@ -287,13 +305,11 @@ export interface ICoreElement<
   T extends IDataBase<any, any> | null = any,
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
-  E extends ICorePresenter<any> | null = any
+  E extends ICorePresenter<any> | null = any,
 > extends ILogChannel {
   getKernel(): ICoreKernel<any>;
-
   getModule(): ICoreKernelModule<K, T, P, C, E>;
   getConfigStore(): IStore;
-
   getCClient<X extends ICoreCClient>(): X;
 }
 
@@ -302,7 +318,7 @@ export interface ICoreAction<
   T extends IDataBase<any, any> | null = any,
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
-  E extends ICorePresenter<any> | null = any
+  E extends ICorePresenter<any> | null = any,
 > extends ICoreElement<K, T, P, C, E> {
   register(): void;
 }
@@ -312,7 +328,7 @@ export interface ICoreService<
   T extends IDataBase<any, any> | null = any,
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
-  E extends ICorePresenter<any> | null = any
+  E extends ICorePresenter<any> | null = any,
 > extends ICoreElement<K, T, P, C, E> {
   start(): Promise<any>;
 
@@ -378,11 +394,15 @@ export interface IBaseDBUpdate {
 export interface IDataBase<
   D,
   T,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   K extends ICoreKernel<any> = ICoreKernel<any>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   X extends IDataBase<any, any> | null = any,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
-  Y extends ICorePresenter<any> | null = any
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  Y extends ICorePresenter<any> | null = any,
 > extends ICoreDB,
     ICoreEntityHandler<C> {
   initNewDB(): Promise<void>;

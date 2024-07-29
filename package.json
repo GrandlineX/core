@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "0.32.0",
+  "version": "1.0.0",
   "description": "Core module",
   "type": "module",
   "exports": {
@@ -24,7 +24,7 @@
     "build-cjs": "tsc -p tsconfig-cjs.json",
     "build-fix": "node fix.js",
     "lint": "eslint src",
-    "test": "jest --runInBand ",
+    "test": "jest --runInBand",
     "run": "ts-node-esm src/run.ts",
     "pack": "eslint && npm run buildprep && npm pack",
     "test-converage": "jest --runInBand --ci --collectCoverage   --coverageDirectory=\"./coverage\"  --reporters=default --reporters=jest-junit",
@@ -43,33 +43,36 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "reflect-metadata": "0.1.13"
+    "reflect-metadata": "0.2.2"
   },
   "devDependencies": {
-    "@types/jest": "29.5.2",
-    "@types/node": "20.3.3",
-    "@typescript-eslint/eslint-plugin": "5.60.1",
-    "@typescript-eslint/parser": "5.60.1",
-    "eslint": "8.44.0",
+    "@types/jest": "29.5.12",
+    "@types/node": "20.14.13",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "eslint": "8.57.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-config-airbnb-typescript": "17.0.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jest": "27.2.2",
-    "eslint-plugin-jsx-a11y": "6.7.1",
-    "eslint-plugin-prettier": "4.2.1",
-    "jest": "29.5.0",
+    "eslint-config-airbnb-typescript": "18.0.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jest": "28.6.0",
+    "eslint-plugin-jsx-a11y": "6.9.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "jest": "29.7.0",
     "jest-junit": "16.0.0",
-    "prettier": "2.8.8",
-    "ts-jest": "29.1.1",
-    "ts-loader": "9.4.4",
-    "ts-node": "10.9.1",
-    "typedoc": "0.24.8",
-    "typescript": "5.1.6"
+    "prettier": "3.3.3",
+    "ts-jest": "29.1.5",
+    "ts-loader": "9.5.1",
+    "ts-node": "10.9.2",
+    "typedoc": "0.26.5",
+    "typescript": "5.5.4"
   },
   "homepage": "https://www.grandlinex.com/",
   "repository": {
     "type": "git",
     "url": "https://github.com/GrandlineX/core.git"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

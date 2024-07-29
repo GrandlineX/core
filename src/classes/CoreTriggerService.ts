@@ -13,7 +13,7 @@ export default abstract class CoreTriggerService<
   T extends IDataBase<any, any> | null = any,
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
-  E extends ICorePresenter<any> | null = any
+  E extends ICorePresenter<any> | null = any,
 > extends CoreService<K, T, P, C, E> {
   triggerName: string;
 
@@ -21,11 +21,11 @@ export default abstract class CoreTriggerService<
     name: string,
     triggerName: string,
     module: ICoreKernelModule<K, T, P, C, E>,
-    skipAutoStart?: boolean
+    skipAutoStart?: boolean,
   ) {
     super(name, module, skipAutoStart);
     this.triggerName = triggerName;
-    this.getKernel().setTriggerFunction(triggerName, async () => {
+    this.getKernel().on(triggerName, async () => {
       return this.start();
     });
   }

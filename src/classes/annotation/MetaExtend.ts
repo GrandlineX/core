@@ -6,7 +6,7 @@ import { XUtil } from '../../utils/index.js';
 function EntityColumn<T extends CoreEntity>(
   entity: T,
   schema?: string,
-  props?: Partial<ColumnProps>
+  props?: Partial<ColumnProps>,
 ): PropertyDecorator {
   return Reflect.metadata(columnKey, {
     ...XUtil.entityRelationColumn(entity, schema),

@@ -20,7 +20,7 @@ export default class GKey extends CoreEntity {
 
   constructor(props?: EProperties<GKey>) {
     super();
-    this.secret = props?.secret || '';
+    this.secret = props?.secret ?? '';
     this.iv = props?.iv || Buffer.from('');
     this.auth = props?.auth || Buffer.from('');
   }

@@ -135,7 +135,7 @@ export default function jestCore() {
         expect(module.getServiceList()).toHaveLength(failing ? 0 : 2);
       });
       test('test_trigger', async () => {
-        expect(await kernel.triggerFunction('test_trigger')).toBeTruthy();
+        expect(await kernel.triggerEvent('test_trigger')).toBeTruthy();
       });
 
       test('hasBridges', () => {
@@ -149,7 +149,7 @@ export default function jestCore() {
           expect(module.getBridgeModule('modnotexist')).toBeUndefined();
         }
       });
-    }
+    },
   );
 
   describe('Cache', () => {

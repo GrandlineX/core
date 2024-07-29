@@ -11,7 +11,7 @@ export default class CoreBridge extends CoreLogChannel implements ICoreBridge {
 
   constructor(
     src: ICoreKernelModule<any, any, any, any, any>,
-    target: ICoreKernelModule<any, any, any, any, any>
+    target: ICoreKernelModule<any, any, any, any, any>,
   ) {
     super(`BR:${src.getName()} => ${target.getName()}`, src.getKernel());
     this.src = src;

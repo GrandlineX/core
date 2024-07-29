@@ -8,27 +8,27 @@ import TestBaseModule from './testClass/TestBaseModule.js';
 
 export function setupDevKernel<E extends CoreKernel<any>>(
   kernel: E,
-  res?: TestFc
+  res?: TestFc,
 ): E {
   kernel.setCryptoClient(
-    new CoreCryptoClient(kernel, CoreCryptoClient.fromPW('testpw'))
+    new CoreCryptoClient(kernel, CoreCryptoClient.fromPW('testpw')),
   );
   kernel.setBaseModule(new TestBaseModule(kernel));
   kernel.addModule(new TestModule(kernel, res));
   kernel.addModule(new BridgeTestModule(kernel));
-  kernel.setTriggerFunction('pre', async () => {
+  kernel.on('pre', async () => {
     kernel.verbose('pre');
   });
-  kernel.setTriggerFunction('start', async () => {
+  kernel.on('start', async () => {
     kernel.verbose('start');
   });
-  kernel.setTriggerFunction('stop', async () => {
+  kernel.on('stop', async () => {
     kernel.verbose('stop');
   });
-  kernel.setTriggerFunction('load', async () => {
+  kernel.on('load', async () => {
     kernel.verbose('load');
   });
-  kernel.setTriggerFunction('core-load', async () => {
+  kernel.on('core-load', async () => {
     kernel.verbose('core-load');
   });
   kernel.getLogger().setLogLevel(LogLevel.VERBOSE);
@@ -44,7 +44,7 @@ export class TestKernel extends CoreKernel<ICoreCClient> {
     appCode: string,
     testPath: string,
     envFilePath: string,
-    logger?: (kernel: CoreKernel<any>) => CoreLogger
+    logger?: (kernel: CoreKernel<any>) => CoreLogger,
   ) {
     super({
       appName,
