@@ -15,7 +15,7 @@ export default class InMemCache extends CoreCache {
     module: ICoreKernelModule<any, any, any, any, any>,
     deleteTime?: number,
   ) {
-    super('inMemCache', module);
+    super(`inMemCache`, module);
     this.keyMap = new Map<string, string>();
     this.eMap = new Map<string, Map<string, any>>();
     this.loop = null;

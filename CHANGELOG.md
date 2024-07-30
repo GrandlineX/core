@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2024-07-30
+### Fixed
+- Bulk operation without cache return zero elements
 ## [1.0.0] - 2024-07-30
 ### Added
 - Bulk operation for orm

@@ -23,7 +23,7 @@ export default abstract class CoreCache<
     channel: string,
     module: ICoreKernelModule<any, any, any, any, any>,
   ) {
-    super(`client-${channel}`, module);
+    super(`cache-${channel}-${module.getName()}`, module);
   }
 
   abstract start(): Promise<void>;

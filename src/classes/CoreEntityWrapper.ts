@@ -131,9 +131,9 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
       },
       missing,
     );
-    if (res && this.cache) {
-      for (const r of res) {
-        map.set(r.e_id, r);
+    for (const r of res) {
+      map.set(r.e_id, r);
+      if (this.cache) {
         await this.cache.setE<E>(this.className, r);
       }
     }

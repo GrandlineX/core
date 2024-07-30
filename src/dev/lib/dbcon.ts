@@ -11,6 +11,7 @@ import TestPrefab from '../testClass/db/TestPrefab.js';
 import TestEntityLinked from '../testClass/db/entity/TestEntityLinked.js';
 import { EntityValidator } from '../../utils/index.js';
 import TestContext from '../TestContext.js';
+import { InMemCache } from '../../modules/index.js';
 
 export default function jestDb() {
   const testText = 'hello_world';
@@ -70,8 +71,10 @@ export default function jestDb() {
       await db.setConfig('dbversion', '0');
     });
   });
-
-  describe('Entity', () => {
+  describe.each([
+    ['noCache', false],
+    ['withCache', true],
+  ])('Entity :(%s):', (name: string, hasCace: boolean) => {
     let wrapper: undefined | CoreEntityWrapper<TestEntity>;
     let wrapper2: undefined | CoreEntityWrapper<TestEntityLinked>;
 
@@ -132,6 +135,20 @@ export default function jestDb() {
         EntityValidator.validateManualObj(db, 'TestEntity', entity, false),
       ).toBeTruthy();
       wrapper = db.getEntityWrapper<TestEntity>('TestEntity');
+      if (wrapper) {
+        if (hasCace) {
+          wrapper.cache = mod.getCache() || new InMemCache(mod);
+        } else {
+          wrapper.cache = null;
+        }
+      }
+      if (wrapper2) {
+        if (hasCace) {
+          wrapper2.cache = mod.getCache() || new InMemCache(mod);
+        } else {
+          wrapper2.cache = null;
+        }
+      }
       wrapper2 = db.getEntityWrapper<TestEntityLinked>('TestEntityLinked');
       expect(wrapper).not.toBeUndefined();
       if (wrapper) {
@@ -311,7 +328,11 @@ export default function jestDb() {
       expect(validateEntity(entity)).toBeTruthy();
     });
   });
-  describe('Bulk Entity', () => {
+
+  describe.each([
+    ['noCache', false],
+    ['withCache', true],
+  ])('Bulk Entity :(%s):', (name: string, hasCace: boolean) => {
     let wrapper: undefined | CoreEntityWrapper<TestEntity>;
     const idList: string[] = [];
     const max = 100;
@@ -325,6 +346,13 @@ export default function jestDb() {
       >;
       const db = mod.getDb() as CoreDBCon<any, any>;
       wrapper = db.getEntityWrapper<TestEntity>('TestEntity');
+      if (wrapper) {
+        if (hasCace) {
+          wrapper.cache = mod.getCache() || new InMemCache(mod);
+        } else {
+          wrapper.cache = null;
+        }
+      }
       expect(wrapper).not.toBeUndefined();
       if (wrapper) {
         expect((await wrapper.getObjList()).length).toBe(0);
