@@ -55,20 +55,22 @@ function aFilter<E extends CoreEntity>(
 }
 function eFilter<E extends CoreEntity>(row: E, search: QInterfaceSearch<E>) {
   const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
+  let cur = true;
   for (const key of keys) {
+    if (!cur) {
+      return false;
+    }
     const r = row[key];
     const s = search[key];
     if (isQInterfaceSearchAdvanced(s)) {
-      return aFilter(r, s);
-    }
-    if (isQInterfaceSearchAdvancedArr(s)) {
-      return s.every((e) => aFilter(r, e));
-    }
-    if (row[key] === s) {
-      return true;
+      cur = aFilter(r, s);
+    } else if (isQInterfaceSearchAdvancedArr(s)) {
+      cur = s.every((e) => aFilter(r, e));
+    } else {
+      cur = row[key] === s;
     }
   }
-  return false;
+  return cur;
 }
 
 export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {

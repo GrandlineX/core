@@ -235,6 +235,50 @@ export default function jestDb() {
         ).toHaveLength(1);
       }
     });
+    test('listing search multi 01', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { age: 1, name: 'Bulk01', address: null },
+          }),
+        ).toHaveLength(1);
+      }
+    });
+    test('listing search multi 02', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: {
+              age: {
+                mode: 'equals',
+                value: 1,
+              },
+              name: 'Bulk01',
+            },
+          }),
+        ).toHaveLength(1);
+      }
+    });
+    test('listing search multi 03', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: {
+              age: [
+                {
+                  mode: 'equals',
+                  value: 1,
+                },
+              ],
+              name: 'Bulk01',
+            },
+          }),
+        ).toHaveLength(1);
+      }
+    });
     test('listing search bob like', async () => {
       expect(wrapper).not.toBeUndefined();
       if (wrapper) {
