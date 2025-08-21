@@ -17,6 +17,7 @@ import CoreDBUpdate from './CoreDBUpdate.js';
 import CoreBundleModule from './CoreBundleModule.js';
 import CoreTriggerService from './CoreTriggerService.js';
 import CoreCachedFc from './CoreCachedFc.js';
+import CoreKernelExtension from './CoreKernelExtension.js';
 import CMap from './CoreMap.js';
 import CoreTimeCache, { CachedData } from './CoreTimeCache.js';
 
@@ -44,6 +45,7 @@ export {
   CMap,
   CoreTimeCache,
   CachedData,
+  CoreKernelExtension,
 };
 
 export * from './annotation/index.js';
