@@ -5,6 +5,7 @@ import BridgeTestModule from './testClass/BridgeTestModule.js';
 import { CoreLogger, LogLevel } from '../classes/index.js';
 import { ICoreCClient } from '../lib/index.js';
 import TestBaseModule from './testClass/TestBaseModule.js';
+import TestExtension from './testClass/client/TestExtension.js';
 
 export function setupDevKernel<E extends CoreKernel<any>>(
   kernel: E,
@@ -13,8 +14,10 @@ export function setupDevKernel<E extends CoreKernel<any>>(
   kernel.setCryptoClient(
     new CoreCryptoClient(kernel, CoreCryptoClient.fromPW('testpw')),
   );
+  const mod = new TestModule(kernel, res);
   kernel.setBaseModule(new TestBaseModule(kernel));
-  kernel.addModule(new TestModule(kernel, res));
+  kernel.addModule(mod);
+  kernel.addExtension('test', new TestExtension('test', mod));
   kernel.addModule(new BridgeTestModule(kernel));
   kernel.on('pre', async () => {
     kernel.verbose('pre');

@@ -1,6 +1,6 @@
 import { CoreDBCon, CoreKernelModule } from './classes/index.js';
 import { InMemCache } from './modules/index.js';
-import { OfflineService } from './services/index.js';
+import { BackgroundService } from './services/index.js';
 import { ICoreKernel, ICoreModule } from './lib/index.js';
 import CoreDb from './database/CoreDb.js';
 
@@ -19,7 +19,7 @@ export default class CoreModule
     dbFunc: (mod: CoreModule) => CoreDBCon<any, any>,
   ) {
     super('core', kernel);
-    this.addService(new OfflineService(this));
+    this.addService(new BackgroundService(this));
     this.cdb = dbFunc(this);
   }
 

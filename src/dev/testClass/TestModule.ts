@@ -7,7 +7,7 @@ import {
   CorePresenter,
 } from '../../classes/index.js';
 import { CoreCryptoClient, InMemCache, InMemDB } from '../../modules/index.js';
-import { OfflineService } from '../../services/index.js';
+import { BackgroundService } from '../../services/index.js';
 import TestClient from './client/TestClient.js';
 import TestAction from './action/TestAction.js';
 import TestPresenter from './client/TestPresenter.js';
@@ -34,7 +34,7 @@ export default class TestModule extends CoreBundleModule<
   constructor(kernel: CoreKernel<CoreCryptoClient>, init?: TestFc) {
     super('testModule', kernel);
     this.addAction(new TestAction(this));
-    this.addService(new OfflineService(this), new TestTriggerService(this));
+    this.addService(new BackgroundService(this), new TestTriggerService(this));
     if (init) {
       this.testInterface = init(this);
     } else {

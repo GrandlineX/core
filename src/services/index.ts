@@ -1,4 +1,4 @@
-import OfflineService from './OfflineService.js';
+import BackgroundService from './BackgroundService.js';
 
 // eslint-disable-next-line import/prefer-default-export
-export { OfflineService };
+export { BackgroundService };

@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-08-20
+### Added
+- Executable class
+- CoreKernel Extension
+### Changed
+- Update Dependencies
+- Update Logger level implementation
+- Update Database search interface for more complex queries
 ## [1.0.1] - 2024-07-30
 ### Fixed
 - Bulk operation without cache return zero elements

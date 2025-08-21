@@ -68,9 +68,7 @@ export interface ICoreEntityHandler<C extends ICoreCache | null = any>
 
   findEntity<E extends IEntity>(
     config: EntityConfig<E>,
-    search: {
-      [P in keyof E]?: E[P];
-    },
+    search: QInterfaceSearch<E>,
   ): Promise<E | null>;
 
   initEntity<E extends IEntity>(className: string, entity: E): Promise<boolean>;
@@ -458,12 +456,47 @@ export interface IStore {
   getBulk(...list: [EnvKey, string?][]): StoreItem[];
 }
 
+export type QInterfaceSearchSimple<E, P extends keyof E> = E[P];
+export type QInterfaceSearchAdvanced<E, P extends keyof E> = {
+  value: E[P];
+  mode: 'equals' | 'like' | 'not' | 'smallerThan' | 'greaterThan';
+};
+export type QInterfaceSearchField<E, P extends keyof E> =
+  | QInterfaceSearchSimple<E, P>
+  | QInterfaceSearchAdvanced<E, P>
+  | QInterfaceSearchAdvanced<E, P>[];
+
+const fieldModes = ['equals', 'like', 'not', 'smallerThan', 'greaterThan'];
+
+export function isQInterfaceSearchAdvanced<E, P extends keyof E>(
+  field: QInterfaceSearchField<E, P>,
+): field is QInterfaceSearchAdvanced<E, P> {
+  return (
+    typeof field === 'object' &&
+    field !== null &&
+    'value' in field &&
+    'mode' in field &&
+    fieldModes.includes(field.mode)
+  );
+}
+
+export function isQInterfaceSearchAdvancedArr<E, P extends keyof E>(
+  field: QInterfaceSearchField<E, P>,
+): field is QInterfaceSearchAdvanced<E, P>[] {
+  if (!Array.isArray(field)) {
+    return false;
+  }
+  return field.every((e) => isQInterfaceSearchAdvanced(e));
+}
+
+export type QInterfaceSearch<E> = {
+  [P in keyof E]?: QInterfaceSearchField<E, P>;
+};
+
 export interface QInterface<E> {
   limit?: number;
   offset?: number;
-  search?: {
-    [P in keyof E]?: E[P];
-  };
+  search?: QInterfaceSearch<E>;
   order?: EOrderBy<E>;
 }
 

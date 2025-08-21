@@ -1,10 +1,10 @@
 export enum LogLevel {
-  VERBOSE = 'VERBOSE',
-  DEBUG = 'DEBUG',
-  WARN = 'WARN',
-  INFO = 'INFO',
-  ERROR = 'ERROR',
-  SILENT = 'SILENT',
+  VERBOSE,
+  DEBUG,
+  WARN,
+  INFO,
+  ERROR,
+  SILENT,
 }
 
 /**
@@ -14,14 +14,16 @@ export enum LogLevel {
 export default abstract class CoreLogger {
   private logLevel: LogLevel;
 
-  constructor(logLevel?: LogLevel) {
+  constructor(logLevel?: string) {
     this.log = this.log.bind(this);
     this.error = this.error.bind(this);
     this.debug = this.debug.bind(this);
     this.info = this.info.bind(this);
     this.warn = this.warn.bind(this);
     this.verbose = this.verbose.bind(this);
-    this.logLevel = logLevel ?? LogLevel.WARN;
+    this.logLevel = logLevel
+      ? CoreLogger.getLogLevelFromString(logLevel)
+      : LogLevel.WARN;
   }
 
   abstract log(channel: string, ...ags: unknown[]): void;
@@ -36,19 +38,31 @@ export default abstract class CoreLogger {
 
   abstract verbose(channel: string, ...ags: unknown[]): void;
 
-  setLogLevel(value: LogLevel | string) {
-    switch (value) {
-      case LogLevel.DEBUG:
-      case LogLevel.WARN:
-      case LogLevel.ERROR:
-      case LogLevel.INFO:
-      case LogLevel.VERBOSE:
-      case LogLevel.SILENT:
-        this.logLevel = value;
-        break;
+  static getLogLevelFromString(value: string): LogLevel {
+    switch (value.toLowerCase()) {
+      case 'verbose':
+        return LogLevel.VERBOSE;
+      case 'debug':
+        return LogLevel.DEBUG;
+      case 'warn':
+        return LogLevel.WARN;
+      case 'info':
+        return LogLevel.INFO;
+      case 'error':
+        return LogLevel.ERROR;
+      case 'silent':
+        return LogLevel.SILENT;
       default:
-        this.error('LOGGER', 'INVALID LOG LEVEL');
+        throw new Error(`Unknown log level: ${value}`);
     }
+  }
+
+  setLogLevel(value: string | LogLevel) {
+    if (typeof value === 'string') {
+      this.logLevel = CoreLogger.getLogLevelFromString(value);
+      return;
+    }
+    this.logLevel = value;
   }
 
   getLogLevel() {
@@ -56,41 +70,6 @@ export default abstract class CoreLogger {
   }
 
   isOnLevel(value: LogLevel): boolean {
-    switch (value) {
-      case LogLevel.VERBOSE:
-        return this.logLevel === LogLevel.VERBOSE;
-
-      case LogLevel.DEBUG:
-        return (
-          this.logLevel === LogLevel.VERBOSE || this.logLevel === LogLevel.DEBUG
-        );
-
-      case LogLevel.WARN:
-        return (
-          this.logLevel === LogLevel.VERBOSE ||
-          this.logLevel === LogLevel.DEBUG ||
-          this.logLevel === LogLevel.WARN
-        );
-
-      case LogLevel.INFO:
-        return (
-          this.logLevel === LogLevel.VERBOSE ||
-          this.logLevel === LogLevel.DEBUG ||
-          this.logLevel === LogLevel.WARN ||
-          this.logLevel === LogLevel.INFO
-        );
-
-      case LogLevel.ERROR:
-        return (
-          this.logLevel === LogLevel.VERBOSE ||
-          this.logLevel === LogLevel.DEBUG ||
-          this.logLevel === LogLevel.WARN ||
-          this.logLevel === LogLevel.INFO ||
-          this.logLevel === LogLevel.ERROR
-        );
-      case LogLevel.SILENT:
-      default:
-        return false;
-    }
+    return value >= this.logLevel;
   }
 }

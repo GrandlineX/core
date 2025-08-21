@@ -2,6 +2,10 @@ import CoreDBCon from '../../classes/CoreDBCon.js';
 import {
   ConfigType,
   ICoreKernelModule,
+  isQInterfaceSearchAdvanced,
+  isQInterfaceSearchAdvancedArr,
+  QInterfaceSearch,
+  QInterfaceSearchAdvanced,
   QueryInterface,
   RawQuery,
 } from '../../lib/index.js';
@@ -12,17 +16,59 @@ import {
   IEntity,
 } from '../../classes/index.js';
 
-function eFilter<E extends CoreEntity>(
-  row: E,
-  search: { [P in keyof E]?: E[P] },
+function aFilter<E extends CoreEntity>(
+  e: E[keyof E],
+  s: QInterfaceSearchAdvanced<QInterfaceSearch<E>, keyof E>,
 ) {
+  switch (s.mode) {
+    case 'equals':
+      return e === s.value;
+    case 'not':
+      return e !== s.value;
+    case 'like':
+      if (typeof e !== 'string' || typeof s.value !== 'string') {
+        return false;
+      }
+      if (e.includes(s.value)) {
+        return true;
+      }
+      break;
+    case 'smallerThan':
+      if (typeof e !== 'number' || typeof s.value !== 'number') {
+        return false;
+      }
+      if (e < s.value) {
+        return true;
+      }
+      break;
+    case 'greaterThan':
+      if (typeof e !== 'number' || typeof s.value !== 'number') {
+        return false;
+      }
+      if (e > s.value) {
+        return true;
+      }
+      break;
+    default:
+  }
+  return false;
+}
+function eFilter<E extends CoreEntity>(row: E, search: QInterfaceSearch<E>) {
   const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
   for (const key of keys) {
-    if (row[key] !== search[key]) {
-      return false;
+    const r = row[key];
+    const s = search[key];
+    if (isQInterfaceSearchAdvanced(s)) {
+      return aFilter(r, s);
+    }
+    if (isQInterfaceSearchAdvancedArr(s)) {
+      return s.every((e) => aFilter(r, e));
+    }
+    if (row[key] === s) {
+      return true;
     }
   }
-  return true;
+  return false;
 }
 
 export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {

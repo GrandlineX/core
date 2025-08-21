@@ -24,6 +24,7 @@ import {
 } from './modules/index.js';
 import CoreModule from './CoreModule.js';
 import { XUtil } from './utils/index.js';
+import CoreKernelExtension from './classes/CoreKernelExtension.js';
 
 /**
  *  Core Kernel class
@@ -79,6 +80,8 @@ export default abstract class CoreKernel<
 
   protected eventMap: Map<string, (kernel: CoreKernel<X>) => Promise<unknown>>;
 
+  protected extension: Map<string, CoreKernelExtension>;
+
   protected globalLogger: CoreLogger;
 
   /**
@@ -101,6 +104,7 @@ export default abstract class CoreKernel<
     this.updateSkip = false;
     this.appVersion = 'noVersion';
     this.triggerEvent = this.triggerEvent.bind(this);
+    this.extension = new Map<string, CoreKernelExtension>();
     this.eventMap = new Map<
       string,
       (kernel: CoreKernel<X>) => Promise<unknown>
@@ -296,14 +300,29 @@ export default abstract class CoreKernel<
 
   /**
    * register new module
-   * > In general there are two places to add Modules correctly: In the Kernel constructor or in the pre-trigger-function
-   *
    * @see CoreKernelModule
    * @param module
    * @typeParam X Type of Crypto client.
    */
   addModule(...module: ICoreKernelModule<any, any, any, any, any>[]): void {
     this.moduleList.push(...module);
+  }
+
+  /**
+   * @see CoreKernelExtension
+   * @param name Name of the extension
+   * @param ext Extension to add
+   */
+  addExtension(name: string, ext: CoreKernelExtension): void {
+    this.extension.set(name, ext);
+  }
+
+  /**
+   * @see CoreKernelExtension
+   * @param name Name of the extension
+   */
+  getExtension<A extends CoreKernelExtension>(name: string): A | undefined {
+    return this.extension.get(name) as A | undefined;
   }
 
   setBaseModule(module: Y): void {

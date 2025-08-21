@@ -235,12 +235,83 @@ export default function jestDb() {
         ).toHaveLength(1);
       }
     });
+    test('listing search bob like', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: {
+              name: {
+                value: 'ob',
+                mode: 'like',
+              },
+            },
+          }),
+        ).toHaveLength(1);
+      }
+    });
+    test('listing search les age', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: {
+              age: {
+                value: 30,
+                mode: 'smallerThan',
+              },
+            },
+          }),
+        ).toHaveLength(3);
+      }
+    });
+    test('listing search greater age', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: {
+              age: {
+                value: 29,
+                mode: 'greaterThan',
+              },
+            },
+          }),
+        ).toHaveLength(1);
+      }
+    });
+    test('listing search multiple', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: {
+              age: [
+                {
+                  value: 1,
+                  mode: 'greaterThan',
+                },
+                {
+                  value: 30,
+                  mode: 'smallerThan',
+                },
+              ],
+            },
+          }),
+        ).toHaveLength(1);
+      }
+    });
     test('listing search bob check date', async () => {
       expect(wrapper).not.toBeUndefined();
 
       if (wrapper) {
         const bonb = await wrapper.getObjList({
-          search: { name: 'Bob' },
+          search: {
+            name: {
+              value: 'Bob',
+              mode: 'equals',
+            },
+          },
         });
         expect(bonb).toHaveLength(1);
         expect(bonb[0].time).not.toBeNull();
@@ -251,7 +322,10 @@ export default function jestDb() {
       if (wrapper) {
         expect(
           await wrapper.findObj({
-            e_id: entity.e_id,
+            e_id: {
+              value: entity.e_id,
+              mode: 'equals',
+            },
           }),
         ).not.toBeNull();
       }

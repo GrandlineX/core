@@ -1,8 +1,8 @@
 import fs from 'fs';
 import * as Path from 'path';
-import { spawn, SpawnOptionsWithoutStdio } from 'child_process';
 import { ColumnProps, getEntityMeta, IEntity } from '../classes/index.js';
 import CoreEntity from '../classes/CoreEntity.js';
+import { Executable, ExecutableOptions } from './Executable.js';
 
 export interface ClassNameInterface {
   className: string;
@@ -201,36 +201,9 @@ export class XUtil {
   static exec(
     cmd: string,
     args?: string[],
-    options?: SpawnOptionsWithoutStdio & {
-      onStdOut?: (m: string) => void;
-      onStdErr?: (m: string) => void;
-    },
+    options?: ExecutableOptions,
   ): Promise<XExecResult> {
-    return new Promise<XExecResult>((resolve) => {
-      const child = spawn(cmd, args, options);
-      let stdout = '';
-      let stderr = '';
-      if (child.stdout) {
-        child.stdout.on('data', (data) => {
-          stdout += data;
-          options?.onStdOut?.(data);
-        });
-      }
-      if (child.stderr) {
-        child.stderr.on('data', (data) => {
-          stderr += data;
-          options?.onStdErr?.(data);
-        });
-      }
-      child.on('close', (code) => {
-        const out: XExecResult = {
-          exitCode: code,
-          error: code !== 0,
-          stdout,
-          stderr,
-        };
-        resolve(out);
-      });
-    });
+    const exe = new Executable(cmd, options);
+    return exe.run(args);
   }
 }

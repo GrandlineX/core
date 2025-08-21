@@ -1,5 +1,10 @@
 import CoreEntity from './CoreEntity.js';
-import { ICoreCache, ICoreEntityHandler, QInterface } from '../lib/index.js';
+import {
+  ICoreCache,
+  ICoreEntityHandler,
+  QInterface,
+  QInterfaceSearch,
+} from '../lib/index.js';
 import {
   ColumnPropMap,
   ColumnProps,
@@ -150,9 +155,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     });
   }
 
-  async findObj(search: {
-    [P in keyof E]?: E[P];
-  }): Promise<E | null> {
+  async findObj(search: QInterfaceSearch<E>): Promise<E | null> {
     return this.e_con.findEntity<E>(
       {
         className: this.className,

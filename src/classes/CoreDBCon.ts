@@ -7,6 +7,7 @@ import {
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
+  QInterfaceSearch,
   QueryInterface,
   RawQuery,
 } from '../lib/index.js';
@@ -277,9 +278,7 @@ export default abstract class CoreDBCon<
    */
   abstract findEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    search: {
-      [B in keyof E]?: E[B];
-    },
+    search: QInterfaceSearch<E>,
   ): Promise<E | null>;
 
   /**
