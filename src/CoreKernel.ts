@@ -13,7 +13,7 @@ import {
 } from './lib/index.js';
 
 import initHandler from './utils/initHandler.js';
-import { CoreLogChannel, CoreLogger } from './classes/index.js';
+import { CMap, CoreLogChannel, CoreLogger } from './classes/index.js';
 
 import {
   DefaultLogger,
@@ -44,6 +44,7 @@ import CoreKernelExtension from './classes/CoreKernelExtension.js';
 export type CoreKernelProps = {
   appName: string;
   appCode: string;
+  folderCreateSkip?: boolean;
   logger?: (kernel: CoreKernel<any>) => CoreLogger;
 } & Omit<EnvStoreCProps, 'log' | 'appName'>;
 
@@ -76,11 +77,13 @@ export default abstract class CoreKernel<
 
   protected updateSkip: boolean;
 
+  protected folderCreateSkip: boolean;
+
   protected envStore: IStore;
 
   protected eventMap: Map<string, (kernel: CoreKernel<X>) => Promise<unknown>>;
 
-  protected extension: Map<string, CoreKernelExtension>;
+  protected extension: CMap<string, CoreKernelExtension>;
 
   protected globalLogger: CoreLogger;
 
@@ -101,10 +104,11 @@ export default abstract class CoreKernel<
     this.cryptoClient = null;
     this.moduleList = [];
     this.offline = false;
+    this.folderCreateSkip = options.folderCreateSkip ?? false;
     this.updateSkip = false;
     this.appVersion = 'noVersion';
     this.triggerEvent = this.triggerEvent.bind(this);
-    this.extension = new Map<string, CoreKernelExtension>();
+    this.extension = new CMap<string, CoreKernelExtension>();
     this.eventMap = new Map<
       string,
       (kernel: CoreKernel<X>) => Promise<unknown>
@@ -336,6 +340,7 @@ export default abstract class CoreKernel<
   async stop(): Promise<boolean> {
     const workload: Promise<void>[] = [];
     await this.triggerEvent('stop');
+    await Promise.all(this.extension.map((e) => e.stop()));
     this.moduleList.forEach((el) => workload.push(el.shutdown()));
     await Promise.all(workload);
     await this.getModule().shutdown();
@@ -361,17 +366,19 @@ export default abstract class CoreKernel<
   private preloadSetup() {
     const st = this.getConfigStore();
     this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) ?? '';
-    if (
-      !XUtil.createFolderBulk(
-        st.get(StoreGlobal.GLOBAL_PATH_HOME) || '',
-        st.get(StoreGlobal.GLOBAL_PATH_DATA) || '',
-        st.get(StoreGlobal.GLOBAL_PATH_DB) || '',
-        st.get(StoreGlobal.GLOBAL_PATH_TEMP) || '',
-      )
-    ) {
-      console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
-      this.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
-      process.exit(1);
+    if (!this.folderCreateSkip) {
+      if (
+        !XUtil.createFolderBulk(
+          st.get(StoreGlobal.GLOBAL_PATH_HOME) || '',
+          st.get(StoreGlobal.GLOBAL_PATH_DATA) || '',
+          st.get(StoreGlobal.GLOBAL_PATH_DB) || '',
+          st.get(StoreGlobal.GLOBAL_PATH_TEMP) || '',
+        )
+      ) {
+        console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
+        this.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
+        process.exit(1);
+      }
     }
   }
 
@@ -402,6 +409,14 @@ export default abstract class CoreKernel<
     await initHandler(this.moduleList, this);
     await this.getCoreModule().start();
     await this.getModule().start();
+    await Promise.all(
+      this.extension.map((e) => {
+        if (e.start !== undefined) {
+          return e.start();
+        }
+        return Promise.resolve();
+      }),
+    );
     await this.getCoreModule().final();
     await this.getModule().final();
     for (const mod of this.moduleList) {

@@ -9,6 +9,7 @@ import {
 } from '../classes/annotation/index.js';
 import GKey from '../database/entity/GKey.js';
 import { EnvKey, StoreItem } from '../modules/env/Global.js';
+import CoreKernelExtension from '../classes/CoreKernelExtension.js';
 
 export type ICoreModule = ICoreKernelModule<
   ICoreKernel<any>,
@@ -210,6 +211,10 @@ export interface ICoreKernel<
   getActionList(full?: boolean): ICoreAction[];
 
   getServiceList(full?: boolean): ICoreService[];
+
+  addExtension(name: string, ext: CoreKernelExtension): void;
+
+  getExtension<A extends CoreKernelExtension>(name: string): A | undefined;
 }
 
 export type ICoreClient = ICoreElement;

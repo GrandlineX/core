@@ -19,7 +19,17 @@ export default abstract class CoreKernelExtension<
   extends CoreElement<K, T, P, C, E>
   implements ICoreElement<K, T, P, C, E>
 {
-  constructor(channel: string, module: ICoreKernelModule<K, T, P, C, E>) {
+  skipKernelStart;
+
+  constructor(
+    channel: string,
+    module: ICoreKernelModule<K, T, P, C, E>,
+    skipKernelStart = false,
+  ) {
     super(`ex-${channel}`, module);
+    this.skipKernelStart = skipKernelStart;
   }
+
+  abstract start(): Promise<void>;
+  abstract stop(): Promise<void>;
 }
