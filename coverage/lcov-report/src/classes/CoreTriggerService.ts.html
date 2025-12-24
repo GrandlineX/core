@@ -95,7 +95,48 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -106,6 +147,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,6 +191,20 @@ import {
   IDataBase,
 } from '../lib/index.js';
 &nbsp;
+/**
+ * Abstract service that starts automatically when a specified trigger event is emitted by the kernel.
+ *
+ * The service inherits from {@link CoreService} and listens for the kernel event identified by
+ * {@link CoreTriggerService.triggerName}. When the event fires, the service's {@link CoreService.start}
+ * method is invoked, ensuring that the service is activated in response to external signals.
+ *
+ * @template K extends ICoreKernel&lt;any&gt; = ICoreKernel&lt;any&gt;
+ * @template T extends IDataBase&lt;any, any&gt; | null = any
+ * @template P extends ICoreClient | null = any
+ * @template C extends ICoreCache | null = any
+ * @template E extends ICorePresenter&lt;any&gt; | null = any
+ * @extends CoreService&lt;K, T, P, C, E&gt;
+ */
 export default abstract class CoreTriggerService&lt;
   K extends ICoreKernel&lt;any&gt; = ICoreKernel&lt;any&gt;,
   T extends IDataBase&lt;any, any&gt; | null = any,
@@ -146,6 +214,19 @@ export default abstract class CoreTriggerService&lt;
 &gt; extends CoreService&lt;K, T, P, C, E&gt; {
   triggerName: string;
 &nbsp;
+  /**
+   * Creates an instance that registers a listener on the kernel for a specified trigger.
+   *
+   * When the kernel emits the event named {@link triggerName}, the listener will
+   * invoke {@link start} on this instance. The {@link skipAutoStart} flag determines
+   * whether the instance should start automatically during construction or not.
+   *
+   * @param {string} name The name of the instance.
+   * @param {string} triggerName The kernel event name that will trigger a start.
+   * @param {ICoreKernelModule&lt;K, T, P, C, E&gt;} module The module associated with this instance.
+   * @param {boolean} [skipAutoStart] If true, the instance will not start automatically.
+   * @return {void}
+   */
   constructor(
     name: string,
     triggerName: string,
@@ -166,7 +247,7 @@ export default abstract class CoreTriggerService&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-22T19:53:32.068Z
+                at 2025-12-24T12:05:43.891Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
