@@ -2,6 +2,16 @@ import { BridgeState, ICoreBridge, ICoreKernelModule } from '../lib/index.js';
 import CoreLogChannel from './CoreLogChannel.js';
 import { XUtil } from '../utils/index.js';
 
+/**
+ * Manages a bidirectional bridge between two kernel modules.
+ *
+ * The bridge exposes a simple lifecycle: it can be connected to its source
+ * and target modules, its state can be updated, and callers can await a
+ * specific state transition.
+ *
+ * @extends CoreLogChannel
+ * @implements ICoreBridge
+ */
 export default class CoreBridge extends CoreLogChannel implements ICoreBridge {
   private state: BridgeState;
 

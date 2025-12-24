@@ -43,7 +43,7 @@ export default class TestModule extends CoreBundleModule<
   }
 
   async initModule(): Promise<void> {
-    this.setClient(this.testInterface?.client || new TestClient('testc', this));
+    this.setClient(this.testInterface?.client || new TestClient(this));
     this.setPresenter(this.testInterface?.presenter || new TestPresenter(this));
     this.debug('FirstTHIS');
     this.setCache(this.testInterface?.cache || new InMemCache(this, 10000));

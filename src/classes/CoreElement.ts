@@ -11,6 +11,24 @@ import {
 } from '../lib/index.js';
 import CoreLogChannel from './CoreLogChannel.js';
 
+/**
+ * A fundamental building block of the kernel architecture.
+ * Each {@link CoreElement} encapsulates a specific kernel module and exposes
+ * convenient accessors for the underlying kernel, module, configuration store,
+ * and cryptographic client.
+ *
+ * @template K  The type of the kernel instance (extends {@link ICoreKernel}).
+ * @template T  The type of the database used by the module; may be {@code null}.
+ * @template P  The type of the client component; may be {@code null}.
+ * @template C  The type of the cache component; may be {@code null}.
+ * @template E  The type of the presenter component; may be {@code null}.
+ *
+ * @extends CoreLogChannel
+ * @implements ICoreElement<K, T, P, C, E>
+ *
+ * @param {string} channel - Identifier used for logging and tracing.
+ * @param {ICoreKernelModule<K, T, P, C, E>} module - The module that this element manages.
+ */
 export default abstract class CoreElement<
     K extends ICoreKernel<any> = ICoreKernel<any>,
     T extends IDataBase<any, any> | null = any,

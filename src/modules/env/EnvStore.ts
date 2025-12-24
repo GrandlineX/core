@@ -12,6 +12,20 @@ export type EnvStoreCProps = {
   loadFromLocalEnv?: boolean;
   appName?: string;
 };
+/**
+ * Configuration options for initializing an EnvStoreC instance.
+ *
+ * The configuration object accepts the following properties:
+ *
+ * * `log` – A {@link CoreLogChannel} instance used for logging.
+ * * `pathOverride` – Optional custom path that overrides the default store location.
+ * * `envFilePath` – Optional path to a `.env` file from which environment variables can be loaded.
+ * * `loadFromLocalEnv` – Optional boolean indicating whether to load variables from the local environment.
+ * * `appName` – Optional name of the application associated with the store.
+ *
+ * All properties except `log` are optional.  The object is passed to the
+ * constructor of EnvStoreC to configure its behavior.
+ */
 export default class EnvStore implements IStore {
   store: Map<EnvKey, StoreItem>;
 

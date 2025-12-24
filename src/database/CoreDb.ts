@@ -10,6 +10,37 @@ import { ICoreDb } from '../lib/index.js';
 
 export const CORE_DB_VERSION = '0';
 
+/**
+ * CoreDb handles the storage, retrieval, and deletion of cryptographic keys (GKey entities) within the underlying database.
+ *
+ * @class
+ * @extends CoreDBPrefab<any>
+ * @implements ICoreDb
+ *
+ * @constructor
+ * @param {CoreDBCon<any, any>} db - The CoreDBCon instance that this CoreDb wraps.
+ *
+ * @method initPrefabDB
+ * @returns {Promise<void>}
+ * @description Generates a seed and a unique identifier, then stores them in the configuration. This method is called to initialize the prefab database.
+ *
+ * @method deleteKey
+ * @param {string} e_id - The identifier of the GKey to delete.
+ * @returns {Promise<void>}
+ * @description Removes the GKey identified by `e_id` from the database.
+ *
+ * @method getKey
+ * @param {string} e_id - The identifier of the GKey to retrieve.
+ * @returns {Promise<GKey|null>}
+ * @description Retrieves a GKey object by its identifier. Returns `null` if no matching key is found.
+ *
+ * @method setKey
+ * @param {string} secret - The secret key value.
+ * @param {Buffer} iv - The initialization vector.
+ * @param {Buffer} auth - The authentication data.
+ * @returns {Promise<string>}
+ * @description Creates a new GKey entry with the provided parameters and returns the newly generated identifier.
+ */
 export default class CoreDb extends CoreDBPrefab<any> implements ICoreDb {
   private gKey: CoreEntityWrapper<GKey>;
 

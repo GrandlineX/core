@@ -9,6 +9,18 @@ import {
 import CoreElement from './CoreElement.js';
 import { IEntity } from './annotation/index.js';
 
+/**
+ * Abstract base class that defines the API for cache implementations within the core framework.
+ *
+ * The cache is identified by a unique channel and module name. Concrete subclasses
+ * must provide the storage logic for all abstract methods.
+ *
+ * @template K - Type of the kernel that must extend {@link ICoreKernel}.
+ * @template T - Type of the database, which can be {@link IDataBase} or `null`.
+ * @template P - Type of the client, which can be {@link ICoreClient} or `null`.
+ * @template C - Type of the cache, which can be {@link ICoreCache} or `null`.
+ * @template E - Type of the presenter, which can be {@link ICorePresenter} or `null`.
+ */
 export default abstract class CoreCache<
     K extends ICoreKernel<any> = ICoreKernel<any>,
     T extends IDataBase<any, any> | null = any,

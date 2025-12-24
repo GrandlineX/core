@@ -7,6 +7,16 @@ export type CachedData<T> = {
   ttl: number;
   data: T;
 };
+/**
+ * A cache that stores values with a time‑to‑live (TTL) and automatically removes
+ * expired entries after a configurable interval.
+ *
+ * The cache stores data objects wrapped in a `CachedData<T>` structure that
+ * tracks the insertion time (`last`) and the remaining TTL. When an entry
+ * expires, a background loop removes it and optionally logs the event.
+ *
+ * @template T The type of the cached data.
+ */
 export default class CoreTimeCache<T> extends CoreLogChannel {
   private cache = new CMap<string, CachedData<T>>();
 

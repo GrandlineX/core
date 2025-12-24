@@ -15,6 +15,13 @@ import {
 import { EntityValidator } from '../utils/index.js';
 import CMap from './CoreMap.js';
 
+/**
+ * A wrapper for CoreEntity operations providing a convenient API for CRUD
+ * actions, bulk operations, and caching support. The wrapper is parameterized
+ * by a concrete entity type {@link E} that extends {@link CoreEntity}.
+ *
+ * @template E - The entity type managed by this wrapper.
+ */
 export default class CoreEntityWrapper<E extends CoreEntity> {
   getIns: () => E;
 

@@ -8,6 +8,16 @@ import {
 } from '../lib/index.js';
 import CoreElement from './CoreElement.js';
 
+/**
+ * Base class for presenters within the Core framework.
+ *
+ * @template A    The type of application instance managed by the presenter.
+ * @template K    The kernel type. Defaults to {@link ICoreKernel<any>}.
+ * @template T    The data‑base type or {@code null}. Defaults to {@code any}.
+ * @template P    The client type or {@code null}. Defaults to {@code any}.
+ * @template C    The cache type or {@code null}. Defaults to {@code any}.
+ * @template E    The parent presenter type or {@code null}. Defaults to {@code any}.
+ */
 export default abstract class CorePresenter<
     A,
     K extends ICoreKernel<any> = ICoreKernel<any>,

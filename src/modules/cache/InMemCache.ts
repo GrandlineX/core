@@ -2,6 +2,14 @@ import { clearInterval } from 'timers';
 import { CoreCache, IEntity } from '../../classes/index.js';
 import { ICoreKernelModule } from '../../lib/index.js';
 
+/**
+ * In-memory cache implementation that extends {@link CoreCache}.
+ *
+ * This cache stores simple key/value pairs as well as entity objects indexed
+ * by their class name and unique identifier.  It optionally clears all
+ * cached data at a configurable interval via {@link #start} and
+ * {@link #stop}.
+ */
 export default class InMemCache extends CoreCache {
   keyMap: Map<string, string>;
 

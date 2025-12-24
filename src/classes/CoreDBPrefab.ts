@@ -16,6 +16,18 @@ import {
 } from './annotation/index.js';
 import CoreDBCon from './CoreDBCon.js';
 
+/**
+ * Abstract base class for database prefabs that wrap a CoreDBCon instance.
+ * <p>
+ * A prefab encapsulates database operations and entity management while
+ * providing a unified interface for initializing, updating, and querying
+ * the underlying database. Concrete subclasses implement {@link initPrefabDB}
+ * to perform prefab‑specific initialization logic.
+ *
+ * @template T The concrete CoreDBCon type that the prefab operates on.
+ * @extends CoreElement
+ * @implements IDataBase<unknown, unknown>
+ */
 export default abstract class CoreDBPrefab<
     T extends CoreDBCon<any, any, any, any, any, any, any>,
   >

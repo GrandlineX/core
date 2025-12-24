@@ -10,6 +10,16 @@ import {
   ServiceStates,
 } from '../lib/index.js';
 
+/**
+ * Abstract service class that represents a unit of functionality within the Core framework.
+ * Concrete implementations must provide the `start` and `stop` lifecycle methods.
+ *
+ * @template K - Kernel type extending {@link ICoreKernel}.
+ * @template T - DataBase type or {@code null} extending {@link IDataBase}.
+ * @template P - Client type or {@code null} extending {@link ICoreClient}.
+ * @template C - Cache type or {@code null} extending {@link ICoreCache}.
+ * @template E - Presenter type or {@code null} extending {@link ICorePresenter}.
+ */
 export default abstract class CoreService<
     K extends ICoreKernel<any> = ICoreKernel<any>,
     T extends IDataBase<any, any> | null = any,

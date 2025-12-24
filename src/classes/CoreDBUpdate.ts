@@ -2,6 +2,18 @@ import { IBaseDBUpdate } from '../lib/index.js';
 import CoreDBCon from './CoreDBCon.js';
 import CoreDBPrefab from './CoreDBPrefab.js';
 
+/**
+ * Represents a migration step that updates the database schema or data from one
+ * version to another.
+ * The update logic is encapsulated in the {@link performe} method, which must
+ * be implemented by subclasses.  Updates can be chained by setting a
+ * successor via {@link setNext}.  The {@link update} method runs the current
+ * step, persists the new version and then recursively triggers the next step.
+ *
+ * @template D - The database instance type. Must be either {@link CoreDBCon} or
+ * {@link CoreDBPrefab}.
+ * @implements {IBaseDBUpdate}
+ */
 export default abstract class CoreDBUpdate<
   D extends CoreDBCon<any, any> | CoreDBPrefab<any>,
 > implements IBaseDBUpdate

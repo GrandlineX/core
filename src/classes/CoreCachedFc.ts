@@ -1,5 +1,12 @@
 import { CoreSemaphor } from './CoreSemaphor.js';
 
+/**
+ * A cache wrapper around an asynchronous function that stores the result
+ * for a specified timeout period. Subsequent calls within the timeout
+ * return the cached value instead of invoking the function again.
+ *
+ * @template T The type of the value returned by the wrapped function.
+ */
 export default class CoreCachedFc<T> {
   fc: () => Promise<T>;
 

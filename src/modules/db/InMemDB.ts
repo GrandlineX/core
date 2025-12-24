@@ -73,6 +73,11 @@ function eFilter<E extends CoreEntity>(row: E, search: QInterfaceSearch<E>) {
   return cur;
 }
 
+/**
+ * In-memory implementation of {@link CoreDBCon}.
+ * This class stores all configuration values and entities in JavaScript Maps,
+ * making it suitable for testing or scenarios where persistence is not required.
+ */
 export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   map: Map<string, ConfigType>;
 

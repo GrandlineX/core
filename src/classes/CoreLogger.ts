@@ -8,8 +8,14 @@ export enum LogLevel {
 }
 
 /**
+ * Abstract base class for logging implementations.
  *
+ * The class manages a log level and provides a set of abstract methods that
+ * concrete logger subclasses must implement. The log level can be set using a
+ * string or a {@link LogLevel} value. Subclasses should respect the current
+ * log level when emitting messages.
  * set StoreGlobal.GLOBAL_LOG_LEVEL {VERBOSE, DEBUG, WARN, INFO, ERROR, SILENT}
+ * @abstract
  */
 export default abstract class CoreLogger {
   private logLevel: LogLevel;

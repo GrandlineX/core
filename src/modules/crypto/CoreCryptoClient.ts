@@ -6,6 +6,15 @@ const encryptionType = 'aes-256-gcm';
 const encryptionEncoding = 'base64';
 const bufferEncryption = 'utf8';
 
+/**
+ * Provides cryptographic utilities used by the Core module.
+ *
+ * This client handles key derivation, encryption/decryption,
+ * secure token generation, hashing, UUID generation, and
+ * interaction with the kernel's key storage. The implementation
+ * relies on the Node.js `crypto` module and expects a 32‑byte
+ * AES key.
+ */
 export default class CoreCryptoClient implements ICoreCClient {
   protected AesKey: string;
 
@@ -25,6 +34,13 @@ export default class CoreCryptoClient implements ICoreCClient {
   static fromPW(pw: string): string {
     const shasum = crypto.createHash('sha512').update(pw).digest('hex');
     return shasum.substring(0, 32);
+  }
+
+  static clientFromPW(kernel: ICoreKernel<any>, pw: string): CoreCryptoClient {
+    return new CoreCryptoClient(
+      kernel,
+      crypto.createHash('sha512').update(pw).digest('hex'),
+    );
   }
 
   generateSecureToken(length: number): Promise<string> {

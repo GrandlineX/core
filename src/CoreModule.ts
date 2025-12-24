@@ -4,6 +4,15 @@ import { BackgroundService } from './services/index.js';
 import { ICoreKernel, ICoreModule } from './lib/index.js';
 import CoreDb from './database/CoreDb.js';
 
+/**
+ * CoreModule is the primary module that orchestrates the core services of the application.
+ * It extends {@link CoreKernelModule} with specific type parameters and implements {@link ICoreModule}.
+ * The module is responsible for initializing the core database, setting up an in-memory cache,
+ * and registering essential background services.
+ *
+ * @extends CoreKernelModule<ICoreKernel<any>, CoreDb, null, InMemCache, null>
+ * @implements ICoreModule
+ */
 export default class CoreModule
   extends CoreKernelModule<ICoreKernel<any>, CoreDb, null, InMemCache, null>
   implements ICoreModule

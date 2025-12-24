@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "1.2.0",
+  "version": "1.3.0-alpha.0",
   "description": "Core module",
   "type": "module",
   "exports": {
@@ -64,8 +64,8 @@
     "ts-jest": "29.3.4",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
-    "typedoc": "0.28.10",
-    "typescript": "5.9.2"
+    "typedoc": "0.28.15",
+    "typescript": "5.9.3"
   },
   "homepage": "https://www.grandlinex.com/",
   "repository": {
@@ -73,6 +73,6 @@
     "url": "https://github.com/GrandlineX/core.git"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   }
 }

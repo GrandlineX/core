@@ -47,7 +47,25 @@ export type CoreKernelProps = {
   folderCreateSkip?: boolean;
   logger?: (kernel: CoreKernel<any>) => CoreLogger;
 } & Omit<EnvStoreCProps, 'log' | 'appName'>;
-
+/**
+ * Abstract base class that implements the core kernel functionality.
+ *
+ * Provides a foundation for registering modules, handling lifecycle
+ * events, managing configuration, logging, and cryptographic
+ * operations.  Concrete kernels should extend this class, supply a
+ * specific base module via {@link setBaseModule}, and optionally
+ * customize behaviour.
+ *
+ * The kernel is generic over a cryptographic client type {@link ICoreCClient}
+ * and a base module type {@link ICoreKernelModule}.  It extends
+ * {@link CoreLogChannel} and implements {@link ICoreKernel} and
+ * {@link IHaveLogger}.
+ *
+ * @template X - Type of the global crypto client.
+ * @template Y - Type of the base kernel module, defaults to
+ *              {@link ICoreAnyModule}.
+ * @param {CoreKernelProps} options - Configuration options for the kernel.
+ */
 export default abstract class CoreKernel<
     X extends ICoreCClient,
     Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule,

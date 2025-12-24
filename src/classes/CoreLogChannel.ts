@@ -2,6 +2,16 @@ import { IHaveLogger, ILogChannel } from '../lib/index.js';
 import CoreLogger, { LogLevel } from './CoreLogger.js';
 import CoreError from './CoreError.js';
 
+/**
+ * Provides a channel‑specific wrapper around a {@link CoreLogger}.
+ *
+ * Each channel is identified by a string name.  The class forwards all
+ * logging calls to an underlying {@link CoreLogger} instance if it
+ * exists and if the desired log level is enabled.  If no logger is
+ * attached, all logging methods become no‑ops.
+ *
+ * @implements {ILogChannel}
+ */
 export default class CoreLogChannel implements ILogChannel {
   logger: CoreLogger | null;
 

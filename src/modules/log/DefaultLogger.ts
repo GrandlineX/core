@@ -24,6 +24,14 @@ export enum DC {
   'BgWhite' = '\x1b[47m',
 }
 
+/**
+ * Logger implementation that outputs messages to the console with optional color,
+ * timestamps, and object stringification. The logger categorizes messages by level
+ * (debug, error, info, log, verbose, warn) and prefixes each line with a mode
+ * identifier and an optional timestamp.
+ *
+ * @extends CoreLogger
+ */
 export default class DefaultLogger extends CoreLogger {
   private noColor = false;
 

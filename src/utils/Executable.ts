@@ -5,6 +5,17 @@ export type ExecutableOptions = SpawnOptionsWithoutStdio & {
   onStdOut?: (m: string) => void;
   onStdErr?: (m: string) => void;
 };
+
+/**
+ * Executes a shell command and streams its output.
+ *
+ * The {@link Executable} class uses Node.js's {@link child_process.spawn} to run
+ * a given command. It collects the standard output and error streams,
+ * optionally forwards the data through callbacks provided in the options
+ * object, and resolves a promise once the child process exits.
+ *
+ * @class
+ */
 export class Executable {
   cmd: string;
 
@@ -15,6 +26,12 @@ export class Executable {
     this.options = options;
   }
 
+  /**
+   * Executes the command specified by {@link cmd} with optional arguments and options.
+   *
+   * @param {string[]} [args] - Optional array of arguments to pass to the command.
+   * @returns {Promise<XExecResult>} A promise that resolves when the child process exits. The resolved value includes the exit code, a boolean indicating whether an error occurred, and the collected `stdout` and `stderr` output.
+   */
   async run(args?: string[]) {
     return new Promise<XExecResult>((resolve) => {
       const child = spawn(this.cmd, args, this.options);

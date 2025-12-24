@@ -1,6 +1,27 @@
 import crypto from 'crypto';
 
 export type SemElement = [string, (value: any | PromiseLike<any>) => void];
+
+/**
+ * A semaphore implementation that limits the number of concurrent operations.
+ * <p>
+ * The semaphore maintains an internal queue of pending requests and a set of
+ * active tokens. When the number of active tokens is below the configured
+ * maximum, the next request in the queue is granted immediately. Each granted
+ * request receives a release callback; calling this callback frees a token
+ * and triggers the next pending request.
+ * <p>
+ * Internally the semaphore tracks active tokens in a {@link Map} and pending
+ * requests in an array. The {@link request} method returns a {@link Promise}
+ * that resolves to a release function. The release function removes the
+ * token from the active set and potentially starts the next pending request.
+ * <p>
+ * The semaphore is thread‑safe with respect to the event loop, as all state
+ * mutations occur synchronously within the call stack of the {@link request}
+ * and {@link release} methods.
+ *
+ * @param {number} [max=1] - The maximum number of concurrent operations allowed.
+ */
 export class CoreSemaphor {
   private curQueue: Map<string, SemElement>;
 

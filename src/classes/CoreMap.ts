@@ -1,5 +1,10 @@
 /**
- * Map extension
+ * A custom map implementation that extends the native `Map` interface with
+ * additional utility methods. Internally it stores its data in a standard
+ * `Map` instance and keeps its `size` property in sync with that store.
+ *
+ * @template K The type of keys maintained by this map.
+ * @template V The type of values stored in this map.
  */
 export default class CMap<K, V> implements Map<K, V> {
   private readonly store;
