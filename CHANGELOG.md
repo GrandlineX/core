@@ -1,6 +1,26 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] – 2026‑01‑06 
+### Added
+- **`XUtil.calcDirSize`** – Recursively calculates the size of a directory, optionally excluding file names.
+- Extensive JSDoc documentation across core modules (`BackgroundService`, `GKey`, `Executable`, `XUtil`, `CoreElement`, etc.).
+- `CoreClient` constructor now takes only a module instance; the channel name is derived automatically.
+
+### Changed
+- `CoreKernelExtension.getExtension` and `CoreKernelModule.getBridgeModule` now throw explicit errors instead of returning `undefined`.
+- Updated `CoreDBUpdate.perform` signature and renamed the abstract method accordingly.
+- Bumped Node and Bun engine requirements (`node >=22`, `bun >=1.3.5`).
+- Updated TypeScript, Typedoc, and Jest to latest 5.9.3 / 0.28.15 / 29.7.0.
+- Minor typos and type refinements across the codebase.
+
+### Fixed
+- Corrected missing `long` data type handling in `EntityValidator`.
+- Fixed typo in `CoreError` documentation.
+
+### Removed
+- No removal in this release; the feature set is entirely additive or refactored.
+ 
 ## [1.1.0] - 2025-08-20
 ### Added
 - Executable class
