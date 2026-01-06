@@ -5,6 +5,7 @@
  */
 type DataType =
   | 'int'
+  | 'long'
   | 'float'
   | 'double'
   | 'text'

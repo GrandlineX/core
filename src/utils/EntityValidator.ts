@@ -92,6 +92,7 @@ export class EntityValidator {
     switch (meta.dataType) {
       case 'serial':
       case 'int':
+      case 'long':
       case 'double':
       case 'float':
         if (typeof value !== 'number') {

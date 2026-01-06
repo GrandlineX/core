@@ -460,14 +460,14 @@ export default abstract class CoreKernelModule<
   /**
    * Returns a bridge module by name.
    * @param name Name of the module
-   * @returns The bridge module or undefined
+   * @returns The bridge module
    */
-  getBridgeModule<M extends ICoreAnyModule>(name: string): M | undefined {
+  getBridgeModule<M extends ICoreAnyModule>(name: string): M {
     const br = this.srcBridges.find(
       (bridge) => bridge.getTarget().getName() === name,
     );
     if (!br) {
-      return undefined;
+      throw this.lError(`no bridge module found: ${name}`);
     }
     return br.getTarget() as M;
   }

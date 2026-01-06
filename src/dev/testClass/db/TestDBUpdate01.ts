@@ -5,7 +5,7 @@ export default class TestDBUpdate01 extends CoreDBUpdate<any> {
     super('0', '1', db);
   }
 
-  async performe(): Promise<boolean> {
+  async perform(): Promise<boolean> {
     this.getDb().debug(`${this.srcVersion}->${this.tarVersion}`);
     return true;
   }

@@ -34,7 +34,7 @@ export default abstract class CoreDBUpdate<
   }
 
   async update(): Promise<boolean> {
-    const perf = await this.performe();
+    const perf = await this.perform();
     if (perf) {
       this.db.info(
         `Update DB from ${this.srcVersion} to ${this.tarVersion} successful`,
@@ -50,7 +50,7 @@ export default abstract class CoreDBUpdate<
     return perf && next;
   }
 
-  abstract performe(): Promise<boolean>;
+  abstract perform(): Promise<boolean>;
 
   async updateNext(): Promise<boolean> {
     if (this.nextUpdate !== null) {

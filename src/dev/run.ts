@@ -1,4 +1,4 @@
-import * as process from 'node:process';
+import * as process from 'process';
 import { XUtil } from '../utils/index.js';
 import { TestContext } from './index.js';
 import { setupDevKernel, TestKernel } from './DevKernel.js';

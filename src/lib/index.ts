@@ -214,7 +214,7 @@ export interface ICoreKernel<
 
   addExtension(name: string, ext: CoreKernelExtension): void;
 
-  getExtension<A extends CoreKernelExtension>(name: string): A | undefined;
+  getExtension<A extends CoreKernelExtension>(name: string): A;
 }
 
 export type ICoreClient = ICoreElement;
@@ -285,7 +285,7 @@ export interface ICoreKernelModule<
 
   hasCache(): boolean;
 
-  getBridgeModule<M extends ICoreAnyModule>(name: string): M | undefined;
+  getBridgeModule<M extends ICoreAnyModule>(name: string): M;
 }
 
 export interface ICorePresenter<
@@ -381,7 +381,7 @@ export interface RawQuery {
 export interface IBaseDBUpdate {
   update(): Promise<boolean>;
 
-  performe(): Promise<boolean>;
+  perform(): Promise<boolean>;
 
   updateNext(): Promise<boolean>;
 

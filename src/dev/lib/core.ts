@@ -146,7 +146,7 @@ export default function jestCore() {
         if (mName) {
           expect(module.getBridgeModule(mName)).not.toBeUndefined();
         } else {
-          expect(module.getBridgeModule('modnotexist')).toBeUndefined();
+          expect(() => module.getBridgeModule('modnotexist')).toThrow();
         }
       });
     },

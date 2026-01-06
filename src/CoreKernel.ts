@@ -343,8 +343,11 @@ export default abstract class CoreKernel<
    * @see CoreKernelExtension
    * @param name Name of the extension
    */
-  getExtension<A extends CoreKernelExtension>(name: string): A | undefined {
-    return this.extension.get(name) as A | undefined;
+  getExtension<A extends CoreKernelExtension>(name: string): A {
+    if (!this.extension.get(name)) {
+      throw this.lError('Extension missing in CoreKernelExtension');
+    }
+    return this.extension.get(name) as A;
   }
 
   setBaseModule(module: Y): void {
