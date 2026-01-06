@@ -2,6 +2,7 @@ import fs from 'fs';
 import * as Path from 'path';
 import https from 'https';
 import http from 'http';
+import path from 'path';
 import { ColumnProps, getEntityMeta, IEntity } from '../classes/index.js';
 import CoreEntity from '../classes/CoreEntity.js';
 import { Executable, ExecutableOptions } from './Executable.js';
@@ -415,5 +416,25 @@ export class XUtil {
         resolve(null);
       }
     });
+  }
+
+  static async calcDirSize(
+    dirPath: string,
+    exclude?: string[],
+  ): Promise<number> {
+    let totalSize = 0;
+    const files = await fs.promises.readdir(dirPath);
+    for (const file of files) {
+      const filePath = path.join(dirPath, file);
+      const stats = await fs.promises.stat(filePath);
+      if (!exclude || !exclude.includes(file)) {
+        if (stats.isDirectory()) {
+          totalSize += await this.calcDirSize(filePath);
+        } else {
+          totalSize += stats.size;
+        }
+      }
+    }
+    return totalSize;
   }
 }
