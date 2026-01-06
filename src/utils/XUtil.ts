@@ -2,7 +2,6 @@ import fs from 'fs';
 import * as Path from 'path';
 import https from 'https';
 import http from 'http';
-import path from 'path';
 import { ColumnProps, getEntityMeta, IEntity } from '../classes/index.js';
 import CoreEntity from '../classes/CoreEntity.js';
 import { Executable, ExecutableOptions } from './Executable.js';
@@ -425,7 +424,7 @@ export class XUtil {
     let totalSize = 0;
     const files = await fs.promises.readdir(dirPath);
     for (const file of files) {
-      const filePath = path.join(dirPath, file);
+      const filePath = Path.join(dirPath, file);
       const stats = await fs.promises.stat(filePath);
       if (!exclude || !exclude.includes(file)) {
         if (stats.isDirectory()) {
