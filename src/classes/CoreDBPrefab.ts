@@ -2,6 +2,8 @@ import {
   ConfigType,
   IBaseDBUpdate,
   IDataBase,
+  PopulatedResult,
+  QInterfaceSearch,
   QueryInterface,
   RawQuery,
 } from '../lib/index.js';
@@ -249,6 +251,29 @@ export default abstract class CoreDBPrefab<
     entity: E,
   ): Promise<boolean> {
     return this.db.initEntity<E>(className, entity);
+  }
+
+  countEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    search: QInterfaceSearch<E>,
+  ): Promise<number> {
+    return this.db.countEntity(config, search);
+  }
+
+  async populate<
+    E extends CoreEntity,
+    EK extends keyof E,
+    R extends CoreEntity,
+  >(entity: E, field: EK): Promise<PopulatedResult<E, EK, R>> {
+    return this.db.populate(entity, field);
+  }
+
+  async populateMany<
+    E extends CoreEntity,
+    EK extends keyof E,
+    R extends CoreEntity,
+  >(entity: E[], field: EK): Promise<PopulatedResult<E, EK, R>[]> {
+    return this.db.populateMany(entity, field);
   }
 
   getCache() {

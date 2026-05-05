@@ -10,6 +10,7 @@ import {
 import GKey from '../database/entity/GKey.js';
 import { EnvKey, StoreItem } from '../modules/env/Global.js';
 import CoreKernelExtension from '../classes/CoreKernelExtension.js';
+import CoreEntity from '../classes/CoreEntity.js';
 
 export type ICoreModule = ICoreKernelModule<
   ICoreKernel<any>,
@@ -67,12 +68,26 @@ export interface ICoreEntityHandler<C extends ICoreCache | null = any>
 
   getEntityList<E extends IEntity>(query: QueryInterface<E>): Promise<E[]>;
 
+  countEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    search?: QInterfaceSearch<E>,
+  ): Promise<number>;
+
   findEntity<E extends IEntity>(
     config: EntityConfig<E>,
     search: QInterfaceSearch<E>,
   ): Promise<E | null>;
 
   initEntity<E extends IEntity>(className: string, entity: E): Promise<boolean>;
+
+  populate<E extends CoreEntity, EK extends keyof E, R extends CoreEntity>(
+    entity: E,
+    field: EK,
+  ): Promise<PopulatedResult<E, EK, R>>;
+  populateMany<E extends CoreEntity, EK extends keyof E, R extends CoreEntity>(
+    entity: E[],
+    field: EK,
+  ): Promise<PopulatedResult<E, EK, R>[]>;
 }
 
 /**
@@ -533,3 +548,10 @@ export interface QInterface<E> {
 export interface QueryInterface<E> extends QInterface<E> {
   config: EntityConfig<E>;
 }
+export type FindOrCreateResult<E> = { entity: E; created: boolean };
+
+export type PopulatedResult<
+  A extends CoreEntity,
+  K extends keyof A,
+  B extends CoreEntity,
+> = Omit<A, K> & Record<K, B>;

@@ -7,6 +7,7 @@ import {
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
+  PopulatedResult,
   QInterfaceSearch,
   QueryInterface,
   RawQuery,
@@ -18,6 +19,7 @@ import {
   ColumnPropMap,
   EntityConfig,
   EUpDateProperties,
+  getColumnMeta,
   IEntity,
   validateEntity,
 } from './annotation/index.js';
@@ -92,8 +94,11 @@ export default abstract class CoreDBCon<
 
   getEntityWrapper<E extends CoreEntity>(
     className: string,
-  ): CoreEntityWrapper<E> | undefined {
-    return this.wrapperMap.get(className);
+  ): CoreEntityWrapper<E> {
+    if (!this.wrapperMap.has(className)) {
+      throw this.lError(`Entity not registered: ${className}`);
+    }
+    return this.wrapperMap.get(className)!;
   }
 
   getEntityMeta() {
@@ -290,6 +295,74 @@ export default abstract class CoreDBCon<
     className: string,
     entity: E,
   ): Promise<boolean>;
+  abstract countEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    search: QInterfaceSearch<E>,
+  ): Promise<number>;
+
+  async populate<
+    E extends CoreEntity,
+    EK extends keyof E,
+    R extends CoreEntity,
+  >(entity: E, field: EK): Promise<PopulatedResult<E, EK, R>> {
+    const meta = getColumnMeta(entity, field);
+    if (!meta?.foreignKey) {
+      throw this.lError(
+        `No foreignKey relation metadata found for field "${String(field)}"`,
+      );
+    }
+    if (meta.foreignKey.schema) {
+      throw this.lError(
+        `Cross schema relations are not supported for field "${String(field)}"`,
+      );
+    }
+    const targetWrapper = this.getEntityWrapper<R>(meta.foreignKey.relation);
+
+    const search: QInterfaceSearch<R> = {};
+    (search as any)[meta.foreignKey.key] = entity[field];
+    return {
+      ...entity,
+      [field]: (await targetWrapper.findObj(search))!,
+    };
+  }
+
+  async populateMany<
+    E extends CoreEntity,
+    EK extends keyof E,
+    R extends CoreEntity,
+  >(entity: E[], field: EK): Promise<PopulatedResult<E, EK, R>[]> {
+    if (entity.length === 0) {
+      return [];
+    }
+    const meta = getColumnMeta(entity[0], field);
+    if (!meta?.foreignKey) {
+      throw this.lError(
+        `No foreignKey relation metadata found for field "${String(field)}"`,
+      );
+    }
+    if (meta.foreignKey.schema) {
+      throw this.lError(
+        `Cross schema relations are not supported for field "${String(field)}"`,
+      );
+    }
+    const targetWrapper = this.getEntityWrapper<R>(meta.foreignKey.relation);
+
+    const search: QInterfaceSearch<R> = {};
+    (search as any)[meta.foreignKey.key] = {
+      mode: 'in',
+      value: entity.map((e) => e[field]),
+    };
+
+    const result = await targetWrapper.getObjList({ search });
+
+    return entity.map<PopulatedResult<E, EK, R>>((e) => ({
+      ...e,
+      [field]: result.find(
+        (x) =>
+          (x as Record<string, unknown>)[meta.foreignKey!.key] === e[field],
+      )!,
+    }));
+  }
 
   getCache(): C | null {
     if (!this.cacheEnabled) {

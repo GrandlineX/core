@@ -163,6 +163,21 @@ export default function jestDb() {
         expect((await wrapper.getObjList()).length).toBe(1);
       }
     });
+    test('create new - failing', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          wrapper!.createObject({
+            name: 'FailBob',
+            age: 30,
+            address: 'home',
+            time: new Date(),
+            raw: null,
+            json: { some: 'value' },
+          } as any),
+        ).rejects.toThrow();
+      }
+    });
     test('create new 2', async () => {
       expect(wrapper).not.toBeUndefined();
       if (wrapper) {
@@ -515,14 +530,14 @@ export default function jestDb() {
       if (wrapper) {
         const result = await wrapper.upsert(
           { name: 'Bobi' },
-          {
+          new TestEntity({
             name: 'Bobi',
             age: 31,
             address: 'home',
             time: null,
             raw: null,
             json: null,
-          },
+          }),
         );
         expect(result.age).toBe(31);
         expect(await wrapper.count()).toBe(4);
@@ -534,14 +549,14 @@ export default function jestDb() {
       if (wrapper) {
         const result = await wrapper.upsert(
           { name: 'Temp' },
-          {
+          new TestEntity({
             name: 'Temp',
             age: 5,
             address: null,
             time: null,
             raw: null,
             json: null,
-          },
+          }),
         );
         expect(result.name).toBe('Temp');
         expect(await wrapper.count()).toBe(5);
@@ -552,40 +567,40 @@ export default function jestDb() {
     test('findOrCreate - existing', async () => {
       expect(wrapper).not.toBeUndefined();
       if (wrapper) {
-        const { entity, created } = await wrapper.findOrCreate(
+        const { entity: et, created } = await wrapper.findOrCreate(
           { name: 'Bobi' },
-          {
+          new TestEntity({
             name: 'Bobi',
             age: 30,
             address: 'home',
             time: null,
             raw: null,
             json: null,
-          },
+          }),
         );
         expect(created).toBe(false);
-        expect(entity.name).toBe('Bobi');
+        expect(et.name).toBe('Bobi');
         expect(await wrapper.count()).toBe(4);
       }
     });
     test('findOrCreate - new', async () => {
       expect(wrapper).not.toBeUndefined();
       if (wrapper) {
-        const { entity, created } = await wrapper.findOrCreate(
+        const { entity: et, created } = await wrapper.findOrCreate(
           { name: 'NewGuy' },
-          {
+          new TestEntity({
             name: 'NewGuy',
             age: 50,
             address: null,
             time: null,
             raw: null,
             json: null,
-          },
+          }),
         );
         expect(created).toBe(true);
-        expect(entity.name).toBe('NewGuy');
+        expect(et.name).toBe('NewGuy');
         expect(await wrapper.count()).toBe(5);
-        await wrapper.delete(entity.e_id);
+        await wrapper.delete(et.e_id);
         expect(await wrapper.count()).toBe(4);
       }
     });

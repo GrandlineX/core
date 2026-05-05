@@ -18,76 +18,58 @@ export class EntityValidator {
     if (!ent || typeof value !== 'object') {
       throw new Error('Validation failed');
     }
-    return this.validateObj(ent.meta, entity, value, update);
+    return this.validateObj(ent.meta, value, update);
   }
 
   static validateObj(
     meta: ColumnPropMap<any>,
-    entity: string,
     value: any,
     update: boolean,
   ): ValidationInterface {
+    if (typeof value !== 'object' || !value || Array.isArray(value)) {
+      return {
+        valid: false,
+        invalidKey: ['value is not an object'],
+      };
+    }
     try {
       const fields: { valid: boolean; key: string }[] = [];
 
       meta.forEach((el, key) => {
         if (!update || value[key] !== undefined) {
-          fields.push(
-            this.validateObjKey(meta, entity, key as string, value[key]),
-          );
+          fields.push({
+            valid: this.validateObjKey(meta, key as string, value[key]),
+            key: key as string,
+          });
         }
       });
 
-      const keys = Object.keys(value);
-      for (const key of keys) {
+      Object.keys(value).forEach((key) => {
         if (!meta.has(key)) {
-          fields.push({
-            key,
-            valid: false,
-          });
+          fields.push({ key, valid: false });
         }
-      }
+      });
 
       return {
-        valid: !fields.find((el) => !el.valid),
+        valid: !fields.some((el) => !el.valid),
         invalidKey: fields.filter((el) => !el.valid).map((el) => el.key),
       };
     } catch (e) {
-      return {
-        valid: false,
-        invalidKey: ['unknown'],
-      };
+      return { valid: false, invalidKey: ['unknown'] };
     }
   }
 
   static validateObjKey(
     metaContainer: ColumnPropMap<any>,
-    entity: string,
     key: string,
     value: unknown,
-  ): { valid: boolean; key: string } {
-    const err = () => {
-      return {
-        valid: false,
-        key,
-      };
-    };
-
-    if (value === undefined) {
-      return err();
-    }
+  ): boolean {
+    if (value === undefined) return false;
 
     const meta = metaContainer.get(key);
-    if (!meta) {
-      return err();
-    }
+    if (!meta) return false;
 
-    if (meta.canBeNull && value === null) {
-      return {
-        valid: true,
-        key,
-      };
-    }
+    if (meta.canBeNull && value === null) return true;
 
     switch (meta.dataType) {
       case 'serial':
@@ -95,48 +77,26 @@ export class EntityValidator {
       case 'long':
       case 'double':
       case 'float':
-        if (typeof value !== 'number') {
-          return err();
-        }
-        break;
+        return typeof value === 'number';
       case 'string':
       case 'text':
       case 'uuid':
-        if (typeof value !== 'string') {
-          return err();
-        }
-        break;
+        return typeof value === 'string';
       case 'boolean':
-        if (typeof value !== 'boolean' && !(value === 0 || value === 1)) {
-          return err();
-        }
-        break;
-
+        return typeof value === 'boolean' || value === 0 || value === 1;
       case 'date':
-        if (!(value instanceof Date)) {
-          if (typeof value === 'string') {
-            new Date(value).getTime();
-          } else {
-            return err();
-          }
-        }
-
-        break;
+        return (
+          value instanceof Date ||
+          (typeof value === 'string' &&
+            !Number.isNaN(new Date(value).getTime()))
+        );
 
       case 'json':
-        if (typeof value !== 'object') {
-          return err();
-        }
-        break;
+        return typeof value === 'object';
       case 'blob':
-        return err();
+        return value instanceof Buffer;
       default:
-        throw new Error('Validation failed: Invalid type');
+        return false;
     }
-
-    return {
-      valid: true,
-      key,
-    };
   }
 }

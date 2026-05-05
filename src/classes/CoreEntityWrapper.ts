@@ -1,5 +1,6 @@
 import CoreEntity from './CoreEntity.js';
 import {
+  FindOrCreateResult,
   ICoreCache,
   ICoreEntityHandler,
   QInterface,
@@ -8,14 +9,11 @@ import {
 import {
   ColumnPropMap,
   ColumnProps,
-  EProperties,
   EUpDateProperties,
   getColumnMeta,
 } from './annotation/index.js';
 import { EntityValidator } from '../utils/index.js';
 import CMap from './CoreMap.js';
-
-export type FindOrCreateResult<E> = { entity: E; created: boolean };
 
 /**
  * A wrapper for CoreEntity operations providing a convenient API for CRUD
@@ -48,11 +46,16 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     this.cache = !noCache ? con.getCache() : null;
   }
 
-  async createObject(args: EProperties<E>): Promise<E> {
-    if (
-      !EntityValidator.validateObj(this.propMap, this.className, args, false)
-    ) {
-      throw this.e_con.lError(`validation failed for ${this.className} create`);
+  async createObject(args: E): Promise<E> {
+    const { valid, invalidKey } = EntityValidator.validateObj(
+      this.propMap,
+      args,
+      false,
+    );
+    if (!valid) {
+      throw this.e_con.lError(
+        `validation failed for ${this.className} create\nInvalid Fields:${invalidKey.join(',')}`,
+      );
     }
     return this.e_con.createEntity<E>(
       {
@@ -67,9 +70,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     e_id: string,
     args: EUpDateProperties<E>,
   ): Promise<boolean> {
-    if (
-      !EntityValidator.validateObj(this.propMap, this.className, args, true)
-    ) {
+    if (!EntityValidator.validateObj(this.propMap, args, true)) {
       throw this.e_con.lError(`validation failed for ${this.className} update`);
     }
     await this.cache?.deleteE(this.className, e_id);
@@ -88,9 +89,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     e_id: string[],
     args: EUpDateProperties<E>,
   ): Promise<boolean> {
-    if (
-      !EntityValidator.validateObj(this.propMap, this.className, args, true)
-    ) {
+    if (!EntityValidator.validateObj(this.propMap, args, true)) {
       throw this.e_con.lError(`validation failed for ${this.className} update`);
     }
     for (const id of e_id) {
@@ -175,11 +174,10 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
   }
 
   async count(search?: QInterfaceSearch<E>): Promise<number> {
-    const results = await this.e_con.getEntityList<E>({
-      config: { className: this.className, meta: this.propMap },
+    return this.e_con.countEntity<E>(
+      { className: this.className, meta: this.propMap },
       search,
-    });
-    return results.length;
+    );
   }
 
   async exists(search: QInterfaceSearch<E>): Promise<boolean> {
@@ -190,7 +188,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
     return result !== null;
   }
 
-  async upsert(search: QInterfaceSearch<E>, data: EProperties<E>): Promise<E> {
+  async upsert(search: QInterfaceSearch<E>, data: E): Promise<E> {
     const existing = await this.findObj(search);
     if (existing) {
       await this.updateObject(existing.e_id, data);
@@ -201,7 +199,7 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
 
   async findOrCreate(
     search: QInterfaceSearch<E>,
-    createData: EProperties<E>,
+    createData: E,
   ): Promise<FindOrCreateResult<E>> {
     const existing = await this.findObj(search);
     if (existing) {

@@ -269,7 +269,7 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
 
   async findEntity<E extends CoreEntity>(
     config: EntityConfig<E>,
-    search: { [P in keyof E]?: E[P] | undefined },
+    search: QInterfaceSearch<E>,
   ): Promise<E | null> {
     const table = this.e_map.get(config.className);
     if (!table) {
@@ -277,6 +277,25 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
     }
 
     return (table as E[]).find((row) => eFilter(row, search)) ?? null;
+  }
+
+  async countEntity<E extends IEntity>(
+    config: EntityConfig<E>,
+    search?: QInterfaceSearch<E>,
+  ): Promise<number> {
+    const table = this.e_map.get(config.className);
+    if (!table) {
+      return 0;
+    }
+    if (!search) {
+      return table.length;
+    }
+    return (
+      (table as E[]).reduce(
+        (counter, row) => counter + (eFilter(row, search) ? 1 : 0),
+        0,
+      ) ?? null
+    );
   }
 
   getRawDBObject(): any {

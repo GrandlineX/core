@@ -6,7 +6,7 @@ import CoreDBCon from './CoreDBCon.js';
 import CoreDBPrefab from './CoreDBPrefab.js';
 import CoreElement from './CoreElement.js';
 import CoreEntity from './CoreEntity.js';
-import CoreEntityWrapper, { FindOrCreateResult } from './CoreEntityWrapper.js';
+import CoreEntityWrapper from './CoreEntityWrapper.js';
 import CoreKernelModule from './CoreKernelModule.js';
 import CoreLogChannel from './CoreLogChannel.js';
 import CoreLogger, { LogLevel } from './CoreLogger.js';
@@ -38,7 +38,6 @@ export {
   CoreLogChannel,
   CoreEntity,
   CoreEntityWrapper,
-  FindOrCreateResult,
   CoreDBUpdate,
   LogLevel,
   CoreTriggerService,
