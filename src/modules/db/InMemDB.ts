@@ -26,32 +26,49 @@ function aFilter<E extends CoreEntity>(
     case 'not':
       return e !== s.value;
     case 'like':
-      if (typeof e !== 'string' || typeof s.value !== 'string') {
-        return false;
-      }
-      if (e.includes(s.value)) {
-        return true;
-      }
-      break;
+      return (
+        typeof e === 'string' &&
+        typeof s.value === 'string' &&
+        e.includes(s.value)
+      );
+    case 'startsWith':
+      return (
+        typeof e === 'string' &&
+        typeof s.value === 'string' &&
+        e.startsWith(s.value)
+      );
+    case 'endsWith':
+      return (
+        typeof e === 'string' &&
+        typeof s.value === 'string' &&
+        e.endsWith(s.value)
+      );
     case 'smallerThan':
-      if (typeof e !== 'number' || typeof s.value !== 'number') {
-        return false;
-      }
-      if (e < s.value) {
-        return true;
-      }
-      break;
+      return (
+        typeof e === 'number' && typeof s.value === 'number' && e < s.value
+      );
     case 'greaterThan':
-      if (typeof e !== 'number' || typeof s.value !== 'number') {
+      return (
+        typeof e === 'number' && typeof s.value === 'number' && e > s.value
+      );
+    case 'in':
+      return Array.isArray(s.value) && (s.value as unknown[]).includes(e);
+    case 'notIn':
+      return Array.isArray(s.value) && !(s.value as unknown[]).includes(e);
+    case 'between': {
+      if (!Array.isArray(s.value) || s.value.length < 2) {
         return false;
       }
-      if (e > s.value) {
-        return true;
-      }
-      break;
+      const [min, max] = s.value as [unknown, unknown];
+      return e >= (min as E[keyof E]) && e <= (max as E[keyof E]);
+    }
+    case 'isNull':
+      return e === null || e === undefined;
+    case 'isNotNull':
+      return e !== null && e !== undefined;
     default:
+      return false;
   }
-  return false;
 }
 function eFilter<E extends CoreEntity>(row: E, search: QInterfaceSearch<E>) {
   const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];

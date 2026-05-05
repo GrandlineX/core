@@ -462,16 +462,41 @@ export interface IStore {
 }
 
 export type QInterfaceSearchSimple<E, P extends keyof E> = E[P];
-export type QInterfaceSearchAdvanced<E, P extends keyof E> = {
-  value: E[P];
-  mode: 'equals' | 'like' | 'not' | 'smallerThan' | 'greaterThan';
-};
+export type QInterfaceSearchAdvanced<E, P extends keyof E> =
+  | {
+      value: E[P];
+      mode:
+        | 'equals'
+        | 'not'
+        | 'like'
+        | 'startsWith'
+        | 'endsWith'
+        | 'smallerThan'
+        | 'greaterThan';
+    }
+  | { value: E[P][]; mode: 'in' | 'notIn' }
+  | { value: [E[P], E[P]]; mode: 'between' }
+  | { mode: 'isNull' | 'isNotNull' };
+
 export type QInterfaceSearchField<E, P extends keyof E> =
   | QInterfaceSearchSimple<E, P>
   | QInterfaceSearchAdvanced<E, P>
   | QInterfaceSearchAdvanced<E, P>[];
 
-const fieldModes = ['equals', 'like', 'not', 'smallerThan', 'greaterThan'];
+const fieldModes = [
+  'equals',
+  'not',
+  'like',
+  'startsWith',
+  'endsWith',
+  'smallerThan',
+  'greaterThan',
+  'in',
+  'notIn',
+  'between',
+  'isNull',
+  'isNotNull',
+];
 
 export function isQInterfaceSearchAdvanced<E, P extends keyof E>(
   field: QInterfaceSearchField<E, P>,
@@ -479,9 +504,9 @@ export function isQInterfaceSearchAdvanced<E, P extends keyof E>(
   return (
     typeof field === 'object' &&
     field !== null &&
-    'value' in field &&
+    !Array.isArray(field) &&
     'mode' in field &&
-    fieldModes.includes(field.mode)
+    fieldModes.includes((field as { mode: string }).mode)
   );
 }
 

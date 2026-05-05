@@ -15,6 +15,8 @@ import {
 import { EntityValidator } from '../utils/index.js';
 import CMap from './CoreMap.js';
 
+export type FindOrCreateResult<E> = { entity: E; created: boolean };
+
 /**
  * A wrapper for CoreEntity operations providing a convenient API for CRUD
  * actions, bulk operations, and caching support. The wrapper is parameterized
@@ -170,6 +172,43 @@ export default class CoreEntityWrapper<E extends CoreEntity> {
       },
       search,
     );
+  }
+
+  async count(search?: QInterfaceSearch<E>): Promise<number> {
+    const results = await this.e_con.getEntityList<E>({
+      config: { className: this.className, meta: this.propMap },
+      search,
+    });
+    return results.length;
+  }
+
+  async exists(search: QInterfaceSearch<E>): Promise<boolean> {
+    const result = await this.e_con.findEntity<E>(
+      { className: this.className, meta: this.propMap },
+      search,
+    );
+    return result !== null;
+  }
+
+  async upsert(search: QInterfaceSearch<E>, data: EProperties<E>): Promise<E> {
+    const existing = await this.findObj(search);
+    if (existing) {
+      await this.updateObject(existing.e_id, data);
+      return (await this.getObjById(existing.e_id))!;
+    }
+    return this.createObject(data);
+  }
+
+  async findOrCreate(
+    search: QInterfaceSearch<E>,
+    createData: EProperties<E>,
+  ): Promise<FindOrCreateResult<E>> {
+    const existing = await this.findObj(search);
+    if (existing) {
+      return { entity: existing, created: false };
+    }
+    const entity = await this.createObject(createData);
+    return { entity, created: true };
   }
 
   async delete(e_id: string): Promise<boolean> {

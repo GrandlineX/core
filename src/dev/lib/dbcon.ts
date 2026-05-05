@@ -345,6 +345,76 @@ export default function jestDb() {
         ).toHaveLength(1);
       }
     });
+    test('listing search in', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { age: { value: [1, 29], mode: 'in' } },
+          }),
+        ).toHaveLength(3);
+      }
+    });
+    test('listing search notIn', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { age: { value: [1, 29], mode: 'notIn' } },
+          }),
+        ).toHaveLength(1);
+      }
+    });
+    test('listing search between', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { age: { value: [1, 29], mode: 'between' } },
+          }),
+        ).toHaveLength(3);
+      }
+    });
+    test('listing search isNull', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { address: { mode: 'isNull' } },
+          }),
+        ).toHaveLength(3);
+      }
+    });
+    test('listing search isNotNull', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { address: { mode: 'isNotNull' } },
+          }),
+        ).toHaveLength(1);
+      }
+    });
+    test('listing search startsWith', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { name: { value: 'B', mode: 'startsWith' } },
+          }),
+        ).toHaveLength(3);
+      }
+    });
+    test('listing search endsWith', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(
+          await wrapper.getObjList({
+            search: { name: { value: '01', mode: 'endsWith' } },
+          }),
+        ).toHaveLength(1);
+      }
+    });
     test('listing search bob check date', async () => {
       expect(wrapper).not.toBeUndefined();
 
@@ -416,6 +486,109 @@ export default function jestDb() {
       }
     });
 
+    test('count all', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(await wrapper.count()).toBe(4);
+      }
+    });
+    test('count with search', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(await wrapper.count({ age: 1 })).toBe(2);
+      }
+    });
+    test('exists - true', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(await wrapper.exists({ name: 'Bobi' })).toBe(true);
+      }
+    });
+    test('exists - false', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        expect(await wrapper.exists({ name: 'Bob' })).toBe(false);
+      }
+    });
+    test('upsert - update existing', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        const result = await wrapper.upsert(
+          { name: 'Bobi' },
+          {
+            name: 'Bobi',
+            age: 31,
+            address: 'home',
+            time: null,
+            raw: null,
+            json: null,
+          },
+        );
+        expect(result.age).toBe(31);
+        expect(await wrapper.count()).toBe(4);
+        await wrapper.updateObject(result.e_id, { age: 30 });
+      }
+    });
+    test('upsert - create new', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        const result = await wrapper.upsert(
+          { name: 'Temp' },
+          {
+            name: 'Temp',
+            age: 5,
+            address: null,
+            time: null,
+            raw: null,
+            json: null,
+          },
+        );
+        expect(result.name).toBe('Temp');
+        expect(await wrapper.count()).toBe(5);
+        await wrapper.delete(result.e_id);
+        expect(await wrapper.count()).toBe(4);
+      }
+    });
+    test('findOrCreate - existing', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        const { entity, created } = await wrapper.findOrCreate(
+          { name: 'Bobi' },
+          {
+            name: 'Bobi',
+            age: 30,
+            address: 'home',
+            time: null,
+            raw: null,
+            json: null,
+          },
+        );
+        expect(created).toBe(false);
+        expect(entity.name).toBe('Bobi');
+        expect(await wrapper.count()).toBe(4);
+      }
+    });
+    test('findOrCreate - new', async () => {
+      expect(wrapper).not.toBeUndefined();
+      if (wrapper) {
+        const { entity, created } = await wrapper.findOrCreate(
+          { name: 'NewGuy' },
+          {
+            name: 'NewGuy',
+            age: 50,
+            address: null,
+            time: null,
+            raw: null,
+            json: null,
+          },
+        );
+        expect(created).toBe(true);
+        expect(entity.name).toBe('NewGuy');
+        expect(await wrapper.count()).toBe(5);
+        await wrapper.delete(entity.e_id);
+        expect(await wrapper.count()).toBe(4);
+      }
+    });
     test('delete-bulk', async () => {
       expect(wrapper).not.toBeUndefined();
       if (wrapper) {
