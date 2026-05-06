@@ -20,4 +20,3 @@ JestLib.jestEnd();
 JestLib.jestOrm();
 JestLib.jestUtils();
 JestLib.jestType();
-JestLib.jestCoverage();
