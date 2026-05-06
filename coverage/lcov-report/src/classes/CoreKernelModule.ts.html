@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.31% </span>
+                <span class="strong">90.19% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>86/102</span>
+                <span class='fraction'>92/102</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.46% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/13</span>
+                <span class='fraction'>8/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.34% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>41/43</span>
+                <span class='fraction'>43/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.83% </span>
+                <span class="strong">89.89% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>83/99</span>
+                <span class='fraction'>89/99</span>
             </div>
         
             
@@ -795,10 +795,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -833,10 +833,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -957,9 +957,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -973,9 +973,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -986,14 +986,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1444,10 +1444,10 @@ export default abstract class CoreKernelModule&lt;
    * @param name Name of the service
    * @returns The stopped service or null
    */
-<span class="fstat-no" title="function not covered" >  async </span>stopService(name: string): Promise&lt;ICoreService | null&gt; {
-    const s = <span class="cstat-no" title="statement not covered" >this.servicelist.get(name);</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!s?.isRunning()) {</span>
-<span class="cstat-no" title="statement not covered" >      return null;</span>
+  async stopService(name: string): Promise&lt;ICoreService | null&gt; {
+    const s = this.servicelist.get(name);
+    if (!s?.isRunning()) {
+      return null;
     }
 <span class="cstat-no" title="statement not covered" >    s.stop();</span>
 <span class="cstat-no" title="statement not covered" >    s.state = 'SLEEPING';</span>
@@ -1460,10 +1460,10 @@ export default abstract class CoreKernelModule&lt;
    * @param name Name of the service
    * @returns The started service or null
    */
-<span class="fstat-no" title="function not covered" >  async </span>startService(name: string): Promise&lt;ICoreService | null&gt; {
-    const s = <span class="cstat-no" title="statement not covered" >this.servicelist.get(name);</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!s || s.isRunning()) {</span>
-<span class="cstat-no" title="statement not covered" >      return null;</span>
+  async startService(name: string): Promise&lt;ICoreService | null&gt; {
+    const s = this.servicelist.get(name);
+    if (!s || <span class="branch-1 cbranch-no" title="branch not covered" >s.isRunning())</span> {
+      return null;
     }
 <span class="cstat-no" title="statement not covered" >    s.start();</span>
 <span class="cstat-no" title="statement not covered" >    s.state = 'RUNNING';</span>
@@ -1534,7 +1534,7 @@ export default abstract class CoreKernelModule&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-06T04:49:43.850Z
+                at 2026-05-06T08:15:24.417Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
