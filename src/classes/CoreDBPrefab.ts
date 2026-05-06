@@ -63,7 +63,7 @@ export default abstract class CoreDBPrefab<
 
   getEntityWrapper<E extends CoreEntity>(
     className: string,
-  ): CoreEntityWrapper<E> | undefined {
+  ): CoreEntityWrapper<E> {
     return this.db.getEntityWrapper<E>(className);
   }
 

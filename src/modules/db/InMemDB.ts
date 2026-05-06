@@ -208,14 +208,14 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   ): Promise<boolean> {
     const table = this.e_map.get(config.className);
     if (!table) {
-      throw this.lError('Cant create Entity');
+      return false;
     }
     const target: any = table.find((el) => {
       return el.e_id === e_id;
     });
 
     if (!target) {
-      throw this.lError('Cant create Entity');
+      return false;
     }
     const keys = Object.keys(entity) as (keyof EUpDateProperties<E>)[];
     for (const key of keys) {
