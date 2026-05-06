@@ -320,34 +320,6 @@ export class XUtil {
   }
 
   /**
-   * Sets up the environment by creating the specified folder hierarchy.
-   *
-   * @param {string[]} basePath - The components that form the base path for the environment.
-   * @param {string[]} config - The sequence of folder names to be appended to the base path, creating nested directories.
-   * @param {string[]} [other] - Optional additional folder names that will be created inside the final configuration directory.
-   * @returns {string[]} An array containing the final configuration path after all directories have been created.
-   */
-  static setupEnvironment(
-    basePath: string[],
-    config: string[],
-    other?: string[],
-  ): string[] {
-    const base = Path.join(...basePath);
-    const out = [];
-    let confPath = base;
-    for (const e of config) {
-      confPath = Path.join(confPath, e);
-      this.createFolderIfNotExist(confPath);
-    }
-    out.push(confPath);
-    other?.forEach((e) => {
-      this.createFolderIfNotExist(Path.join(confPath, e));
-    });
-
-    return out;
-  }
-
-  /**
    * Executes the specified command with optional arguments and options.
    *
    * @param {string} cmd - The command to execute.

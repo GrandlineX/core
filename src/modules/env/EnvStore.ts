@@ -4,13 +4,15 @@ import * as os from 'os';
 import { IStore } from '../../lib/index.js';
 import { EnvKey, StoreGlobal, StoreItem } from './Global.js';
 import { CoreLogChannel } from '../../classes/index.js';
+import { GlobalFolder } from '../../CoreKernel.js';
 
 export type EnvStoreCProps = {
-  log: CoreLogChannel;
+  log?: CoreLogChannel;
   pathOverride?: string;
   envFilePath?: string;
   loadFromLocalEnv?: boolean;
   appName?: string;
+  globalFolder?: GlobalFolder[];
 };
 /**
  * Configuration options for initializing an EnvStoreC instance.
@@ -29,11 +31,11 @@ export type EnvStoreCProps = {
 export default class EnvStore implements IStore {
   store: Map<EnvKey, StoreItem>;
 
-  log: CoreLogChannel;
+  log: CoreLogChannel | undefined;
 
-  constructor(props: EnvStoreCProps) {
+  constructor(props?: EnvStoreCProps) {
     this.store = new Map<EnvKey, StoreItem>();
-    this.log = props.log;
+    this.log = props?.log;
     this.initNew(props);
   }
 
@@ -49,8 +51,9 @@ export default class EnvStore implements IStore {
     }
   }
 
-  initNew(props: EnvStoreCProps): void {
-    const { envFilePath, pathOverride, loadFromLocalEnv } = props;
+  initNew(props?: EnvStoreCProps): void {
+    const { envFilePath, pathOverride, loadFromLocalEnv, appName } =
+      props ?? {};
     this.clear();
     const root = envFilePath ?? process.env.npm_config_local_prefix;
     if (root) {
@@ -58,7 +61,7 @@ export default class EnvStore implements IStore {
       if (fs.existsSync(path)) {
         this.loadFromFile(path);
       } else {
-        this.log.warn(`Cant load env from ${path}`);
+        this.log?.warn(`Cant load env from ${path}`);
       }
     }
     if (loadFromLocalEnv) {
@@ -71,24 +74,29 @@ export default class EnvStore implements IStore {
       [StoreGlobal.GLOBAL_HOST_NAME, os.hostname()],
     );
 
-    const { appName } = props;
     if (appName) {
-      let base;
-      if (os.platform() === 'darwin') {
-        base = pathOverride
-          ? Path.join(pathOverride, appName)
-          : Path.join(os.homedir(), 'Library', appName);
-      } else {
-        base = pathOverride
-          ? Path.join(pathOverride, appName)
-          : Path.join(os.homedir(), appName);
-      }
+      const base = pathOverride
+        ? Path.join(pathOverride, appName)
+        : Path.join(process.cwd(), 'data', 'config', appName);
       this.setBulk(
         [StoreGlobal.GLOBAL_PATH_HOME, base],
         [StoreGlobal.GLOBAL_PATH_DATA, Path.join(base, 'data')],
         [StoreGlobal.GLOBAL_PATH_DB, Path.join(base, 'db')],
         [StoreGlobal.GLOBAL_PATH_TEMP, Path.join(base, 'temp')],
       );
+      props?.globalFolder?.forEach(({ storeKey, folderName, base: b }) => {
+        if (b === 'root') {
+          this.set(
+            `GLOBAL_FOLDER_${storeKey.toUpperCase()}`,
+            Path.join(process.cwd(), folderName),
+          );
+        } else {
+          this.set(
+            `GLOBAL_FOLDER_${storeKey.toUpperCase()}`,
+            Path.join(base, folderName),
+          );
+        }
+      });
     }
     if (process.env.npm_package_version) {
       this.set(StoreGlobal.GLOBAL_APP_VERSION, process.env.npm_package_version);
@@ -128,7 +136,7 @@ export default class EnvStore implements IStore {
   }
 
   private loadFromFile(path: string) {
-    this.log.log(`Load env from ${path}`);
+    this.log?.log(`Load env from ${path}`);
     const env = fs.readFileSync(path).toString('utf-8');
     const lines = env.split('\n');
     lines.forEach((line) => {

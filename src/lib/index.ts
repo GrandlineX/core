@@ -11,6 +11,7 @@ import GKey from '../database/entity/GKey.js';
 import { EnvKey, StoreItem } from '../modules/env/Global.js';
 import CoreKernelExtension from '../classes/CoreKernelExtension.js';
 import CoreEntity from '../classes/CoreEntity.js';
+import CoreEntityWrapper from '../classes/CoreEntityWrapper.js';
 
 export type ICoreModule = ICoreKernelModule<
   ICoreKernel<any>,
@@ -79,6 +80,10 @@ export interface ICoreEntityHandler<C extends ICoreCache | null = any>
   ): Promise<E | null>;
 
   initEntity<E extends IEntity>(className: string, entity: E): Promise<boolean>;
+  registerEntity<E extends CoreEntity>(
+    ent: E,
+    noCache: boolean,
+  ): CoreEntityWrapper<E>;
 
   populate<E extends CoreEntity, EK extends keyof E, R extends CoreEntity>(
     entity: E,
@@ -196,11 +201,11 @@ export interface ICoreKernel<
 
   hasCryptoClient(): boolean;
 
-  triggerEvent(trigger: KernelEvent): Promise<unknown>;
+  triggerEvent<A = any>(trigger: KernelEvent, payload?: A): Promise<unknown>;
 
-  on(
+  on<A = any>(
     event: KernelEvent,
-    callback: (ik: ICoreKernel<X>) => Promise<unknown>,
+    callback: (ik: ICoreKernel<X>, payload?: A) => Promise<unknown>,
   ): void;
 
   getDb(): ICoreDb;

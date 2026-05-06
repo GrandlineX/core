@@ -22,5 +22,18 @@ export default function jestStart() {
       expect(kernel.getActionList(true).length).toBeGreaterThan(0);
       expect(kernel.getState()).toBe('running');
     });
+
+    describe('CoreKernelModule service management', () => {
+      test('stopService - non-existent service returns null', async () => {
+        const mod = kernel.getChildModule('testModule') as any;
+        const result = await mod.stopService('__nonexistent__');
+        expect(result).toBeNull();
+      });
+      test('startService - non-existent service returns null', async () => {
+        const mod = kernel.getChildModule('testModule') as any;
+        const result = await mod.startService('__nonexistent__');
+        expect(result).toBeNull();
+      });
+    });
   });
 }

@@ -6,6 +6,7 @@ import jestStore from './store.js';
 import jestEnd from './end.js';
 import jestUtils from './util.js';
 import jestCoverage from './coverage.js';
+import jestType from './type.js';
 
 const JestLib = {
   jestCore,
@@ -16,6 +17,7 @@ const JestLib = {
   jestEnd,
   jestUtils,
   jestCoverage,
+  jestType,
 };
 
 export default JestLib;

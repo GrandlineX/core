@@ -41,11 +41,22 @@ import CoreKernelExtension from './classes/CoreKernelExtension.js';
  * ```
  */
 
+export type GlobalFolder = {
+  storeKey: string;
+  base: 'root' | 'config';
+  folderName: string;
+};
+/**
+ * Configuration options for initializing the CoreKernel instance.
+ * Combines application identification and behavior settings with extended environment store properties, while excluding log and appName fields.
+ */
 export type CoreKernelProps = {
   appName: string;
   appCode: string;
   folderCreateSkip?: boolean;
   logger?: (kernel: CoreKernel<any>) => CoreLogger;
+  // Override the globalThis console log with the internal logger
+  overrideGlobalConsoleLog?: boolean;
 } & Omit<EnvStoreCProps, 'log' | 'appName'>;
 /**
  * Abstract base class that implements the core kernel functionality.
@@ -97,9 +108,14 @@ export default abstract class CoreKernel<
 
   protected folderCreateSkip: boolean;
 
+  protected globalFolderKeys: string[];
+
   protected envStore: IStore;
 
-  protected eventMap: Map<string, (kernel: CoreKernel<X>) => Promise<unknown>>;
+  protected eventMap: Map<
+    string,
+    (kernel: CoreKernel<X>, payload?: any) => Promise<unknown>
+  >;
 
   protected extension: CMap<string, CoreKernelExtension>;
 
@@ -115,14 +131,22 @@ export default abstract class CoreKernel<
    * @param options Kernel options
    */
   protected constructor(options: CoreKernelProps) {
+    const {
+      appCode,
+      appName,
+      folderCreateSkip,
+      logger,
+      overrideGlobalConsoleLog,
+      globalFolder,
+    } = options;
     super('kernel', null);
-    this.appName = options.appName;
+    this.appName = appName;
     this.devMode = false;
-    this.appCode = options.appCode;
+    this.appCode = appCode;
     this.cryptoClient = null;
     this.moduleList = [];
     this.offline = false;
-    this.folderCreateSkip = options.folderCreateSkip ?? false;
+    this.folderCreateSkip = folderCreateSkip ?? false;
     this.updateSkip = false;
     this.appVersion = 'noVersion';
     this.triggerEvent = this.triggerEvent.bind(this);
@@ -137,16 +161,27 @@ export default abstract class CoreKernel<
       log: this,
       appName: this.getAppName(),
     });
-    if (options.logger === undefined) {
+    if (logger === undefined) {
       this.globalLogger = new DefaultLogger();
     } else {
-      this.globalLogger = options.logger(this);
+      this.globalLogger = logger(this);
     }
     this.setLogger(this.globalLogger);
     const log = this.envStore.get(StoreGlobal.GLOBAL_LOG_LEVEL);
     if (log) {
       this.globalLogger.setLogLevel(log);
     }
+
+    if (overrideGlobalConsoleLog) {
+      globalThis.console.log = (x: any) => this.log(x);
+      globalThis.console.warn = (x: any) => this.warn(x);
+      globalThis.console.error = (x: any) => this.error(x);
+    }
+
+    this.globalFolderKeys =
+      globalFolder?.map(
+        ({ storeKey }) => `GLOBAL_FOLDER_${storeKey.toUpperCase()}`,
+      ) || [];
 
     this.coreModule = new CoreModule(this, (mod) => new InMemDB(mod));
     this.kernelModule = null;
@@ -212,13 +247,16 @@ export default abstract class CoreKernel<
    * @see KernelEvent
    * @param event
    */
-  async triggerEvent(event: KernelEvent): Promise<unknown> {
+  async triggerEvent<A = any>(
+    event: KernelEvent,
+    payload?: A,
+  ): Promise<unknown> {
     const fc = this.eventMap.get(event);
     if (!fc) {
       this.debug(`Trigger not implemented. [${event}]`);
       return undefined;
     }
-    return fc(this);
+    return fc(this, payload);
   }
 
   /**
@@ -228,9 +266,9 @@ export default abstract class CoreKernel<
    * @param event
    * @param callback
    */
-  on(
+  on<A = any>(
     event: KernelEvent,
-    callback: (ik: CoreKernel<X>) => Promise<unknown>,
+    callback: (ik: CoreKernel<X>, payload?: A) => Promise<unknown>,
   ): void {
     this.eventMap.set(event, callback);
   }
@@ -372,12 +410,12 @@ export default abstract class CoreKernel<
 
   getChildModule<
     T extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule,
-  >(modName: string): T | null {
+  >(modName: string): T {
     const mod = this.moduleList.find((mo) => mo.getName() === modName);
     if (mod) {
       return mod as T;
     }
-    return null;
+    throw this.lError(`Module ${modName} not found`);
   }
 
   getModCount(full = false): number {
@@ -399,6 +437,11 @@ export default abstract class CoreKernel<
         console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
         this.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
         process.exit(1);
+      }
+      for (const folder of this.globalFolderKeys) {
+        const fPath = st.get(folder)!;
+        this.debug(`Create global folder for ${folder} @${fPath}`);
+        XUtil.createFolderIfNotExist(fPath);
       }
     }
   }

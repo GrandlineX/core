@@ -1,13 +1,12 @@
-import { JestLib, setupDevKernel, TestContext, TestKernel, XUtil } from '../index.js';
+import { JestLib, setupDevKernel, TestContext, TestKernel } from '../index.js';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
-const [testPath] = XUtil.setupEnvironment([__dirname, '..'],['data', 'config'],['test'])
 const [kernel] = TestContext.getEntity(
   {
-    kernel: new TestKernel(appName, appCode, testPath, __dirname),
-    cleanUpPath:testPath,
-    modLenth:2,
+    kernel: new TestKernel(appName, appCode, __dirname),
+    cleanUp :true,
+    modLength:2,
   }
 );
 
@@ -20,4 +19,5 @@ JestLib.jestDb();
 JestLib.jestEnd();
 JestLib.jestOrm();
 JestLib.jestUtils();
+JestLib.jestType();
 JestLib.jestCoverage();

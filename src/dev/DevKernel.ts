@@ -40,23 +40,35 @@ export function setupDevKernel<E extends CoreKernel<any>>(
 }
 
 export class TestKernel extends CoreKernel<ICoreCClient> {
-  testPath: string;
-
   constructor(
     appName: string,
     appCode: string,
-    testPath: string,
     envFilePath: string,
     logger?: (kernel: CoreKernel<any>) => CoreLogger,
   ) {
     super({
       appName,
       appCode,
-      pathOverride: testPath,
       envFilePath,
       logger,
       loadFromLocalEnv: true,
+      globalFolder: [
+        {
+          storeKey: 'dev',
+          base: 'config',
+          folderName: 'dev',
+        },
+        {
+          storeKey: 'res',
+          base: 'root',
+          folderName: 'res',
+        },
+        {
+          storeKey: 'res_image',
+          base: 'root',
+          folderName: 'res/image',
+        },
+      ],
     });
-    this.testPath = testPath;
   }
 }

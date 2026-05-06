@@ -1,8 +1,9 @@
 import { XUtil } from '../../utils/index.js';
 import TestContext from '../TestContext.js';
+import { StoreGlobal } from '../../modules/index.js';
 
 export default function jestEnd() {
-  const [kernel, cleanUpPath] = TestContext.getEntity();
+  const [kernel, clean] = TestContext.getEntity();
   describe('ShutDown', () => {
     test('exit kernel', async () => {
       const result = await kernel.stop();
@@ -15,8 +16,10 @@ export default function jestEnd() {
     });
 
     test('cleanup', async () => {
-      if (cleanUpPath) {
-        XUtil.removeFolderIfExist(cleanUpPath);
+      if (clean) {
+        XUtil.removeFolderIfExist(
+          kernel.getConfigStore().get(StoreGlobal.GLOBAL_PATH_HOME)!,
+        );
       }
     });
   });

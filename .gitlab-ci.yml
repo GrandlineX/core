@@ -15,5 +15,3 @@ include:
     file: '/test/sast.yml'
   - project: 'grandlinex/templates'
     file: '/update/update-glx.yml'
-  - project: 'grandlinex/templates'
-    file: '/trigger/public-core.yml'

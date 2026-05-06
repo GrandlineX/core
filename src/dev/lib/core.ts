@@ -4,18 +4,27 @@ import {
   ILogChannel,
 } from '../../lib/index.js';
 import TestService from '../testClass/service/TestService.js';
-import { CoreCache } from '../../classes/index.js';
-import { DefaultLogger, generateSeed } from '../../modules/index.js';
+import {
+  CoreCache,
+  CoreLogChannel,
+  CoreLogger,
+  LogLevel,
+} from '../../classes/index.js';
+import {
+  CoreCryptoClient,
+  DefaultLogger,
+  generateSeed,
+} from '../../modules/index.js';
 import { CoreDb } from '../../database/index.js';
 import TestContext from '../TestContext.js';
-import { XUtil } from '../../utils/index.js';
+import { Type, XUtil } from '../../utils/index.js';
 
 export default function jestCore() {
   const testText = 'hello_world';
   const [kernel] = TestContext.getEntity();
   describe('kernel extend', () => {
-    test('getChild empty', async () => {
-      expect(kernel.getChildModule('invaldimodname')).toBeNull();
+    test('getChild empty', () => {
+      expect(() => kernel.getChildModule('invaldimodname')).toThrow();
     });
     test('getOffline', async () => {
       expect(kernel.getOffline()).toBeFalsy();
@@ -274,6 +283,115 @@ export default function jestCore() {
       await service.stop();
 
       expect(service.state).toBe('SLEEPING');
+    });
+  });
+  describe('CoreLogger', () => {
+    test('getLogLevelFromString - all valid levels', () => {
+      expect(CoreLogger.getLogLevelFromString('verbose')).toBe(
+        LogLevel.VERBOSE,
+      );
+      expect(CoreLogger.getLogLevelFromString('debug')).toBe(LogLevel.DEBUG);
+      expect(CoreLogger.getLogLevelFromString('warn')).toBe(LogLevel.WARN);
+      expect(CoreLogger.getLogLevelFromString('info')).toBe(LogLevel.INFO);
+      expect(CoreLogger.getLogLevelFromString('error')).toBe(LogLevel.ERROR);
+      expect(CoreLogger.getLogLevelFromString('silent')).toBe(LogLevel.SILENT);
+    });
+    test('getLogLevelFromString - unknown level throws', () => {
+      expect(() => CoreLogger.getLogLevelFromString('invalid')).toThrow();
+    });
+    test('constructor with logLevel string', () => {
+      const logger = new DefaultLogger('debug');
+      expect(logger.getLogLevel()).toBe(LogLevel.DEBUG);
+    });
+    test('setLogLevel with string', () => {
+      const logger = new DefaultLogger();
+      logger.setLogLevel('error');
+      expect(logger.getLogLevel()).toBe(LogLevel.ERROR);
+    });
+    test('setLogLevel with numeric LogLevel', () => {
+      const logger = new DefaultLogger();
+      logger.setLogLevel(LogLevel.VERBOSE);
+      expect(logger.getLogLevel()).toBe(LogLevel.VERBOSE);
+    });
+    test('isOnLevel', () => {
+      const logger = new DefaultLogger();
+      logger.setLogLevel(LogLevel.WARN);
+      expect(logger.isOnLevel(LogLevel.ERROR)).toBe(true);
+      expect(logger.isOnLevel(LogLevel.WARN)).toBe(true);
+      expect(logger.isOnLevel(LogLevel.DEBUG)).toBe(false);
+      expect(logger.isOnLevel(LogLevel.VERBOSE)).toBe(false);
+    });
+    test('setNoColor disables ANSI codes in output', () => {
+      const logger = new DefaultLogger();
+      logger.setNoColor(true);
+      expect(() => logger.error('ch', 'msg')).not.toThrow();
+      expect(() => logger.warn('ch', 'msg')).not.toThrow();
+    });
+    test('setPrintTimestamp false omits timestamp', () => {
+      const logger = new DefaultLogger();
+      logger.setPrintTimestamp(false);
+      expect(() => logger.log('ch', 'msg')).not.toThrow();
+    });
+    test('printObject=true with primitive arg hits non-object branch', () => {
+      const logger = new DefaultLogger();
+      logger.setPrintObject(true);
+      expect(() => logger.log('ch', 'primitive string arg', 42)).not.toThrow();
+    });
+  });
+  describe('CoreLogChannel', () => {
+    test('constructor with CoreLogger instance sets logger directly', () => {
+      const logger = new DefaultLogger();
+      const ch = new CoreLogChannel('coverage-test', logger);
+      expect(ch.logger).toBe(logger);
+    });
+    test('constructor with null sets logger to null', () => {
+      const ch = new CoreLogChannel('coverage-test', null);
+      expect(ch.logger).toBeNull();
+    });
+  });
+  describe('CoreCryptoClient', () => {
+    test('fromPW derives a 32-char key', () => {
+      const key = CoreCryptoClient.fromPW('my-secret-password');
+      expect(key).toHaveLength(32);
+    });
+    test('constructor with invalid key length throws', () => {
+      expect(() => new CoreCryptoClient(kernel as any, 'short')).toThrow(
+        'INVALID KEY LENGTH',
+      );
+    });
+    test('isValid returns true for valid 32-char key', () => {
+      const cc = kernel.getCryptoClient();
+      expect(cc?.isValid()).toBe(true);
+    });
+    test('getUUID generates a valid UUID string', () => {
+      const cc = kernel.getCryptoClient();
+      const uuid = cc?.getUUID();
+      expect(typeof uuid).toBe('string');
+      expect(Type.isUUID(uuid!)).toBe(true);
+    });
+    test('timeSavePWValidation - equal strings returns true', () => {
+      const cc = kernel.getCryptoClient();
+      expect(cc?.timeSavePWValidation('password', 'password')).toBe(true);
+    });
+    test('timeSavePWValidation - same length but different returns false', () => {
+      const cc = kernel.getCryptoClient();
+      expect(cc?.timeSavePWValidation('hello', 'world')).toBe(false);
+    });
+    test('timeSavePWValidation - different lengths returns false', () => {
+      const cc = kernel.getCryptoClient();
+      expect(cc?.timeSavePWValidation('hi', 'hello world')).toBe(false);
+    });
+    test('keyStoreLoad with non-existent id returns null', async () => {
+      const cc = kernel.getCryptoClient();
+      const result = await cc?.keyStoreLoad(
+        '00000000-0000-0000-0000-000000000000',
+      );
+      expect(result).toBeNull();
+    });
+    test('clientFromPW throws because sha512 hex is 128 chars not 32', () => {
+      expect(() =>
+        CoreCryptoClient.clientFromPW(kernel as any, 'any-password'),
+      ).toThrow('INVALID KEY LENGTH');
     });
   });
 }

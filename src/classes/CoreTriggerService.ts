@@ -28,6 +28,7 @@ export default abstract class CoreTriggerService<
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
   E extends ICorePresenter<any> | null = any,
+  D = any,
 > extends CoreService<K, T, P, C, E> {
   triggerName: string;
 
@@ -48,12 +49,21 @@ export default abstract class CoreTriggerService<
     name: string,
     triggerName: string,
     module: ICoreKernelModule<K, T, P, C, E>,
-    skipAutoStart?: boolean,
   ) {
-    super(name, module, skipAutoStart);
+    super(name, module, true);
     this.triggerName = triggerName;
-    this.getKernel().on(triggerName, async () => {
-      return this.start();
+    this.getKernel().on(triggerName, async (_, payload) => {
+      return this.onTrigger(payload);
     });
+  }
+
+  abstract onTrigger(payload?: D): Promise<boolean>;
+
+  async start() {
+    return true;
+  }
+
+  async stop() {
+    return true;
   }
 }
