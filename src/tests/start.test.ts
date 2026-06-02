@@ -13,6 +13,7 @@ const [kernel] = TestContext.getEntity(
 setupDevKernel(kernel);
 
 JestLib.jestStart();
+JestLib.jestService();
 JestLib.jestStore();
 JestLib.jestCore();
 JestLib.jestDb();

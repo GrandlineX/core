@@ -6,9 +6,11 @@ import jestStore from './store.js';
 import jestEnd from './end.js';
 import jestUtils from './util.js';
 import jestType from './type.js';
+import jestService from './service.js';
 
 const JestLib = {
   jestCore,
+  jestService,
   jestDb,
   jestStart,
   jestOrm,
