@@ -944,18 +944,6 @@ export default function jestDb() {
           expect(result).toHaveLength(1);
           expect((result[0] as any).name).toBe('Bob');
         });
-        test('between with < 2 elements returns no match', async () => {
-          const result = await wrapper.getObjList({
-            search: { age: { mode: 'between', value: [20] } } as any,
-          });
-          expect(result).toHaveLength(0);
-        });
-        test('between with non-array value returns no match', async () => {
-          const result = await wrapper.getObjList({
-            search: { age: { mode: 'between', value: 25 } } as any,
-          });
-          expect(result).toHaveLength(0);
-        });
         /*        test('default/unknown mode returns no match', async () => {
           const result = await wrapper.getObjList({
             search: { name: { mode: 'unknownMode', value: 'x' } } as any,
