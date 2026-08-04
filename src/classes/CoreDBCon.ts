@@ -307,8 +307,8 @@ export default abstract class CoreDBCon<
   async populate<
     E extends CoreEntity,
     EK extends keyof E,
-    R extends CoreEntity,
-  >(entity: E, field: EK): Promise<PopulatedResult<E, EK, R>> {
+    Z extends CoreEntity,
+  >(entity: E, field: EK): Promise<PopulatedResult<E, EK, Z>> {
     const meta = getColumnMeta(entity, field);
     if (!meta?.foreignKey) {
       throw this.lError(
@@ -320,9 +320,9 @@ export default abstract class CoreDBCon<
         `Cross schema relations are not supported for field "${String(field)}"`,
       );
     }
-    const targetWrapper = this.getEntityWrapper<R>(meta.foreignKey.relation);
+    const targetWrapper = this.getEntityWrapper<Z>(meta.foreignKey.relation);
 
-    const search: QInterfaceSearch<R> = {};
+    const search: QInterfaceSearch<Z> = {};
     (search as any)[meta.foreignKey.key] = entity[field];
     return {
       ...entity,
@@ -333,8 +333,8 @@ export default abstract class CoreDBCon<
   async populateMany<
     E extends CoreEntity,
     EK extends keyof E,
-    R extends CoreEntity,
-  >(entity: E[], field: EK): Promise<PopulatedResult<E, EK, R>[]> {
+    Z extends CoreEntity,
+  >(entity: E[], field: EK): Promise<PopulatedResult<E, EK, Z>[]> {
     if (entity.length === 0) {
       return [];
     }
@@ -349,9 +349,9 @@ export default abstract class CoreDBCon<
         `Cross schema relations are not supported for field "${String(field)}"`,
       );
     }
-    const targetWrapper = this.getEntityWrapper<R>(meta.foreignKey.relation);
+    const targetWrapper = this.getEntityWrapper<Z>(meta.foreignKey.relation);
 
-    const search: QInterfaceSearch<R> = {};
+    const search: QInterfaceSearch<Z> = {};
     (search as any)[meta.foreignKey.key] = {
       mode: 'in',
       value: entity.map((e) => e[field]),
@@ -359,7 +359,7 @@ export default abstract class CoreDBCon<
 
     const result = await targetWrapper.getObjList({ search });
 
-    return entity.map<PopulatedResult<E, EK, R>>((e) => ({
+    return entity.map<PopulatedResult<E, EK, Z>>((e) => ({
       ...e,
       [field]: result.find(
         (x) =>
