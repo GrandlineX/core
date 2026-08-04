@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.93% </span>
+                <span class="strong">83.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>124/146</span>
+                <span class='fraction'>125/149</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.71% </span>
+                <span class="strong">68.57% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>23/35</span>
+                <span class='fraction'>24/35</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.05% </span>
+                <span class="strong">86.86% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>118/134</span>
+                <span class='fraction'>119/137</span>
             </div>
         
             
@@ -580,7 +580,11 @@
 <a name='L515'></a><a href='#L515'>515</a>
 <a name='L516'></a><a href='#L516'>516</a>
 <a name='L517'></a><a href='#L517'>517</a>
-<a name='L518'></a><a href='#L518'>518</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L518'></a><a href='#L518'>518</a>
+<a name='L519'></a><a href='#L519'>519</a>
+<a name='L520'></a><a href='#L520'>520</a>
+<a name='L521'></a><a href='#L521'>521</a>
+<a name='L522'></a><a href='#L522'>522</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1009,7 +1013,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1019,11 +1023,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1525,22 +1533,26 @@ export default abstract class CoreKernel&lt;
     const st = this.getConfigStore();
     this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) ?? <span class="branch-1 cbranch-no" title="branch not covered" >'';</span>
     if (!this.folderCreateSkip) {
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (
-        !XUtil.createFolderBulk(
+      try {
+        XUtil.createFolderBulk(
           st.get(StoreGlobal.GLOBAL_PATH_HOME) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
           st.get(StoreGlobal.GLOBAL_PATH_DATA) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
           st.get(StoreGlobal.GLOBAL_PATH_DB) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
           st.get(StoreGlobal.GLOBAL_PATH_TEMP) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
-        )
-      ) {
+        );
+      } catch (e) {
+<span class="cstat-no" title="statement not covered" >        console.error(e);</span>
 <span class="cstat-no" title="statement not covered" >        console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);</span>
+<span class="cstat-no" title="statement not covered" >        this.error(e);</span>
 <span class="cstat-no" title="statement not covered" >        this.error(`Cant create config folder at $GLOBAL_PATH_HOME`);</span>
 <span class="cstat-no" title="statement not covered" >        process.exit(1);</span>
       }
+&nbsp;
       for (const folder of this.globalFolderKeys) {
         const fPath = st.get(folder)!;
-        this.debug(`Create global folder for ${folder} @${fPath}`);
-        XUtil.createFolderIfNotExist(fPath);
+        if (XUtil.createFolderIfNotExist(fPath)) {
+          this.debug(`Global folder for ${folder} @${fPath} created`);
+        }
       }
     }
   }
@@ -1621,7 +1633,7 @@ export default abstract class CoreKernel&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-02T10:03:41.023Z
+                at 2026-08-04T16:15:04.765Z
             </div>
         <script src="../prettify.js"></script>
         <script>
