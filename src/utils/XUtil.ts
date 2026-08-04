@@ -81,11 +81,12 @@ export class XUtil {
    * Formats a number as a two‑digit string. If the provided number is less than 10, a leading zero is added.
    *
    * @param {number} num - The number to format.
+   * @param length
    * @return {string} The formatted number as a string, padded with a leading zero if necessary.
    */
 
-  static numPrint(num: number): string {
-    return num < 10 ? `0${num}` : `${num}`;
+  static numPrint(num: number, length = 2): string {
+    return num.toString().padStart(length, '0');
   }
 
   /**
@@ -205,32 +206,30 @@ export class XUtil {
   }
 
   /**
-   * Creates multiple folders if they do not already exist.
-   *
-   * @param {...string} path - One or more folder paths to create.
-   * @returns {boolean} `true` if all folders were created successfully or already existed; `false` if any folder failed to be created.
+   * Creates multiple folders specified by the given paths.
+   * @param {...string} path - The list of directory paths to be created.
+   * @returns {boolean} Returns `true` if all folders were successfully created, otherwise `false` if some already exist.
    */
   static createFolderBulk(...path: string[]): boolean {
     let res = true;
     path.forEach((e) => {
-      if (!this.createFolderIfNotExist(e)) {
-        res = false;
-      }
+      res = res && this.createFolderIfNotExist(e);
     });
     return res;
   }
 
   /**
-   * Creates a folder at the specified path if it does not already exist.
+   * Ensures that the specified folder exists by creating it if it does not.
    *
-   * @param {string} path - The path of the folder to create.
-   * @return {boolean} Always returns true.
+   * @param path - The filesystem path of the folder to verify or create.
+   * @returns `true` if the folder was created during this call; `false` if the folder already existed.
    */
   static createFolderIfNotExist(path: string): boolean {
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path, { recursive: true });
+      return true;
     }
-    return true;
+    return false;
   }
 
   /**
@@ -342,12 +341,14 @@ export class XUtil {
    * @param {string} url - The URL from which to download the file.
    * @param {string} path - The destination file path without extension. The file extension is derived from the response MIME type.
    * @param {Map<string,string>} [extMap=MineTypeMap] - A map that associates MIME types with file extensions. Used to determine the file extension to append.
+   * @param fExt - override extension
    * @returns {Promise<{name:string, size:number, type:string} | null>} A promise that resolves to an object containing the file name, size in bytes, and MIME type, or null if the download fails.
    */
   static downloadFile(
     url: string,
     path: string,
     extMap = MineTypeMap,
+    fExt?: string,
   ): Promise<{
     name: string;
     size: number;
@@ -357,24 +358,34 @@ export class XUtil {
       try {
         selectClient(url)
           .get(url, (res) => {
+            if (res.statusCode === 301 || res.statusCode === 302) {
+              if (res.headers.location) {
+                this.downloadFile(
+                  res.headers.location,
+                  path,
+                  extMap,
+                  fExt,
+                ).then(resolve);
+                return;
+              }
+            }
             const raw = extMap.get(res.headers['content-type'] as string);
             const ext = raw || 'blob';
-            const fName = `${path}.${ext}`;
+            const fName = `${path}.${fExt || ext}`;
             const file = fs.createWriteStream(fName);
-            // A chunk of data has been received.
-            res.on('data', (chunk) => {
-              file.write(chunk);
-            });
-
-            // The whole response has been received. Print out the result.
-            res.on('end', () => {
-              const cl = res.headers['content-length'];
-              const cli = parseInt(cl as string, 10);
-              file.close();
-              resolve({
-                size: cli,
-                name: Path.basename(fName),
-                type: res.headers['content-type'] || '',
+            res.pipe(file);
+            file.on('finish', () => {
+              file.close((err) => {
+                if (err) {
+                  resolve(null);
+                  return;
+                }
+                const cl = res.headers['content-length'];
+                resolve({
+                  size: parseInt(cl as string, 10),
+                  name: Path.basename(fName),
+                  type: res.headers['content-type'] || '',
+                });
               });
             });
           })

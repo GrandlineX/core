@@ -17,7 +17,7 @@ export default class CoreModule
   extends CoreKernelModule<ICoreKernel<any>, CoreDb, null, InMemCache, null>
   implements ICoreModule
 {
-  cdb: CoreDBCon<any, any>;
+  cdb: CoreDBCon<any>;
 
   /**
    * @param kernel
@@ -25,7 +25,7 @@ export default class CoreModule
    */
   constructor(
     kernel: ICoreKernel<any>,
-    dbFunc: (mod: CoreModule) => CoreDBCon<any, any>,
+    dbFunc: (mod: CoreModule) => CoreDBCon<any>,
   ) {
     super('core', kernel);
     this.addService(new BackgroundService(this));

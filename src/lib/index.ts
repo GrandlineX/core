@@ -20,7 +20,7 @@ export type ICoreModule = ICoreKernelModule<
   any,
   any
 >;
-export interface ICoreDb extends IDataBase<any, any> {
+export interface ICoreDb extends IDataBase<any, any, any> {
   getKey(e_id: string): Promise<GKey | null>;
   setKey(secret: string, iv: Buffer, auth: Buffer): Promise<string>;
   deleteKey(e_id: string): Promise<void>;
@@ -123,7 +123,7 @@ export interface ICoreCache<
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   K extends ICoreKernel<any> = ICoreKernel<any>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  T extends IDataBase<any, any> | null = any,
+  T extends IDataBase<any> | null = any,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   P extends ICoreClient | null = any,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -241,7 +241,7 @@ export type ICoreClient = ICoreElement;
 export type ICoreAnyModule = ICoreKernelModule<any, any, any, any, any>;
 export interface ICoreKernelModule<
   K extends ICoreKernel<any>,
-  T extends IDataBase<any, any> | null,
+  T extends IDataBase<any> | null,
   P extends ICoreClient | null,
   C extends ICoreCache | null,
   E extends ICorePresenter<any> | null,
@@ -311,7 +311,7 @@ export interface ICoreKernelModule<
 export interface ICorePresenter<
   A,
   K extends ICoreKernel<any> = ICoreKernel<any>,
-  T extends IDataBase<any, any> | null = any,
+  T extends IDataBase<any> | null = any,
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
   E extends ICorePresenter<any> | null = any,
@@ -398,6 +398,11 @@ export interface RawQuery {
   param: any[];
 }
 
+export interface RawQueryResult<R, M = any> {
+  rows: R[];
+  meta: M;
+}
+
 export interface IBaseDBUpdate {
   update(): Promise<boolean>;
 
@@ -409,18 +414,19 @@ export interface IBaseDBUpdate {
 
   find(version: string): IBaseDBUpdate | null;
 
-  getDb(): IDataBase<any, any>;
+  getDb(): IDataBase<any, any, any>;
 
   getSource(): string;
 }
 
 export interface IDataBase<
   D,
-  T,
+  R = any,
+  M = any,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   K extends ICoreKernel<any> = ICoreKernel<any>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  X extends IDataBase<any, any> | null = any,
+  X extends IDataBase<any, any, any> | null = any,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   P extends ICoreClient | null = any,
   C extends ICoreCache | null = any,
@@ -440,7 +446,9 @@ export interface IDataBase<
 
   getConfig(key: string): Promise<ConfigType | undefined>;
 
-  execScripts(list: RawQuery[]): Promise<T[] | null>;
+  runScripts(...list: RawQuery[]): Promise<R[]>;
+
+  queryScript<E>(query: RawQuery): Promise<RawQueryResult<E, M>>;
 
   canUpdate(): Promise<boolean>;
 

@@ -426,22 +426,26 @@ export default abstract class CoreKernel<
     const st = this.getConfigStore();
     this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) ?? '';
     if (!this.folderCreateSkip) {
-      if (
-        !XUtil.createFolderBulk(
+      try {
+        XUtil.createFolderBulk(
           st.get(StoreGlobal.GLOBAL_PATH_HOME) || '',
           st.get(StoreGlobal.GLOBAL_PATH_DATA) || '',
           st.get(StoreGlobal.GLOBAL_PATH_DB) || '',
           st.get(StoreGlobal.GLOBAL_PATH_TEMP) || '',
-        )
-      ) {
+        );
+      } catch (e) {
+        console.error(e);
         console.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
+        this.error(e);
         this.error(`Cant create config folder at $GLOBAL_PATH_HOME`);
         process.exit(1);
       }
+
       for (const folder of this.globalFolderKeys) {
         const fPath = st.get(folder)!;
-        this.debug(`Create global folder for ${folder} @${fPath}`);
-        XUtil.createFolderIfNotExist(fPath);
+        if (XUtil.createFolderIfNotExist(fPath)) {
+          this.debug(`Global folder for ${folder} @${fPath} created`);
+        }
       }
     }
   }

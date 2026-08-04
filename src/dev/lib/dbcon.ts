@@ -775,7 +775,10 @@ export default function jestDb() {
         expect(prefab.isConnected()).toBeTruthy();
       });
       test('execScripts', async () => {
-        expect(Array.isArray(await prefab.execScripts([]))).toBe(true);
+        expect(Array.isArray(await prefab.runScripts())).toBe(true);
+      });
+      test('queryScript', async () => {
+        expect(await prefab.queryScript({ exec: '', param: [] })).toBeDefined();
       });
       test('setConfig, getConfig, configExist, removeConfig', async () => {
         await prefab.setConfig('_cov_key', 'cov_val');
@@ -905,8 +908,8 @@ export default function jestDb() {
         db = mod.getDb() as IDataBase<any, any>;
       });
 
-      test('execScripts returns empty array', async () => {
-        const result = await db.execScripts([]);
+      test('runScripts returns empty array', async () => {
+        const result = await db.runScripts();
         expect(result).toHaveLength(0);
       });
 

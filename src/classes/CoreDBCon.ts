@@ -11,6 +11,7 @@ import {
   QInterfaceSearch,
   QueryInterface,
   RawQuery,
+  RawQueryResult,
 } from '../lib/index.js';
 import CoreEntity from './CoreEntity.js';
 import CoreEntityWrapper from './CoreEntityWrapper.js';
@@ -27,7 +28,8 @@ import { XUtil } from '../utils/index.js';
 
 export default abstract class CoreDBCon<
     D,
-    T,
+    R = any,
+    M = any,
     K extends ICoreKernel<any> = ICoreKernel<any>,
     X extends IDataBase<any, any> | null = any,
     P extends ICoreClient | null = any,
@@ -35,7 +37,7 @@ export default abstract class CoreDBCon<
     Y extends ICorePresenter<any> | null = any,
   >
   extends CoreElement<K, X, P, C, Y>
-  implements IDataBase<D, T>
+  implements IDataBase<D>
 {
   dbVersion: string;
 
@@ -184,7 +186,9 @@ export default abstract class CoreDBCon<
 
   abstract connect(): Promise<boolean>;
 
-  abstract execScripts(list: RawQuery[]): Promise<T[]>;
+  abstract runScripts(...list: RawQuery[]): Promise<R[]>;
+
+  abstract queryScript<E>(query: RawQuery): Promise<RawQueryResult<E, M>>;
 
   abstract getConfig(key: string): Promise<ConfigType | undefined>;
 

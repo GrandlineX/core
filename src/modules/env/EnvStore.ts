@@ -135,6 +135,16 @@ export default class EnvStore implements IStore {
     return list.map(([key, value]) => this.get(key, value));
   }
 
+  /**
+   * Retrieves the value of a global folder constant.
+   *
+   * @param {string} folder - The name of the folder to retrieve.
+   * @returns {string} The value of the global folder constant.
+   */
+  gf(folder: string) {
+    return this.get(`GLOBAL_FOLDER_${folder.toUpperCase()}`)!;
+  }
+
   private loadFromFile(path: string) {
     this.log?.log(`Load env from ${path}`);
     const env = fs.readFileSync(path).toString('utf-8');

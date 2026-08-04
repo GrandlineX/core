@@ -6,6 +6,7 @@ import {
   QInterfaceSearch,
   QueryInterface,
   RawQuery,
+  RawQueryResult,
 } from '../lib/index.js';
 import CoreEntity from './CoreEntity.js';
 import CoreEntityWrapper from './CoreEntityWrapper.js';
@@ -106,8 +107,12 @@ export default abstract class CoreDBPrefab<
     return this.db.connect();
   }
 
-  async execScripts(list: RawQuery[]): Promise<T[]> {
-    return this.db.execScripts(list);
+  async runScripts(...list: RawQuery[]): Promise<any[]> {
+    return this.db.runScripts(...list);
+  }
+
+  async queryScript<E>(query: RawQuery): Promise<RawQueryResult<E, any>> {
+    return this.db.queryScript(query);
   }
 
   async getConfig(key: string): Promise<ConfigType | undefined> {

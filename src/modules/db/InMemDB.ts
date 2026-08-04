@@ -8,6 +8,7 @@ import {
   QInterfaceSearchAdvanced,
   QueryInterface,
   RawQuery,
+  RawQueryResult,
 } from '../../lib/index.js';
 import CoreEntity from '../../classes/CoreEntity.js';
 import {
@@ -70,6 +71,7 @@ function aFilter<E extends CoreEntity>(
       return false;
   }
 }
+
 function eFilter<E extends CoreEntity>(row: E, search: QInterfaceSearch<E>) {
   const keys: (keyof E)[] = Object.keys(search) as (keyof E)[];
   let cur = true;
@@ -95,7 +97,7 @@ function eFilter<E extends CoreEntity>(row: E, search: QInterfaceSearch<E>) {
  * This class stores all configuration values and entities in JavaScript Maps,
  * making it suitable for testing or scenarios where persistence is not required.
  */
-export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
+export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>> {
   map: Map<string, ConfigType>;
 
   e_map: Map<string, CoreEntity[]>;
@@ -124,8 +126,13 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>, any> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async execScripts(list: RawQuery[]): Promise<any[]> {
+  async runScripts(...list: RawQuery[]): Promise<any[]> {
     return [];
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async queryScript<E>(query: RawQuery): Promise<RawQueryResult<E, null>> {
+    return { rows: [], meta: null };
   }
 
   async getConfig(key: string): Promise<ConfigType | undefined> {
