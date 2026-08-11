@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.96% </span>
+                <span class="strong">67.34% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>66/93</span>
+                <span class='fraction'>66/98</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">48.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/26</span>
+                <span class='fraction'>13/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.07% </span>
+                <span class="strong">63.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>19/26</span>
+                <span class='fraction'>19/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.32% </span>
+                <span class="strong">68.08% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>64/91</span>
+                <span class='fraction'>64/94</span>
             </div>
         
             
@@ -485,7 +485,26 @@
 <a name='L420'></a><a href='#L420'>420</a>
 <a name='L421'></a><a href='#L421'>421</a>
 <a name='L422'></a><a href='#L422'>422</a>
-<a name='L423'></a><a href='#L423'>423</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a>
+<a name='L431'></a><a href='#L431'>431</a>
+<a name='L432'></a><a href='#L432'>432</a>
+<a name='L433'></a><a href='#L433'>433</a>
+<a name='L434'></a><a href='#L434'>434</a>
+<a name='L435'></a><a href='#L435'>435</a>
+<a name='L436'></a><a href='#L436'>436</a>
+<a name='L437'></a><a href='#L437'>437</a>
+<a name='L438'></a><a href='#L438'>438</a>
+<a name='L439'></a><a href='#L439'>439</a>
+<a name='L440'></a><a href='#L440'>440</a>
+<a name='L441'></a><a href='#L441'>441</a>
+<a name='L442'></a><a href='#L442'>442</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -748,6 +767,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1173,6 +1211,25 @@ export class XUtil {
   }
 &nbsp;
   /**
+   * Executes a promise with a maximum wait time. If the promise does not resolve or reject before the specified timeout,
+   * the returned promise is rejected with an Error.
+   *
+   * @param {Promise&lt;T&gt;} promise - The promise to execute.
+   * @param {number} [ms=45000] - The maximum number of milliseconds to wait before timing out.
+   * @return {Promise&lt;T&gt;} A promise that resolves or rejects with the original promise's outcome, or rejects with a timeout error if the specified time elapses. */
+<span class="fstat-no" title="function not covered" >  static </span>async promiseWithTimeout&lt;T&gt;(
+    promise: Promise&lt;T&gt;,
+    ms: number = <span class="branch-0 cbranch-no" title="branch not covered" >45000,</span>
+  ): Promise&lt;T | undefined&gt; {
+    let timer: NodeJS.Timeout;
+    const timeout = <span class="cstat-no" title="statement not covered" >new Promise&lt;undefined&gt;(<span class="fstat-no" title="function not covered" >(_</span>, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      timer = setTimeout(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >reject(new Error('Promise timeout')),</span> ms);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return Promise.race([promise, timeout]).finally(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >clearTimeout(timer))</span>; </span>// don't leak the timer
+  }
+&nbsp;
+  /**
    * Returns the relation metadata for a given entity.
    *
    * @param {T} entity - The entity instance for which to retrieve relation metadata.
@@ -1336,7 +1393,7 @@ export class XUtil {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-04T16:21:49.025Z
+                at 2026-08-11T02:47:26.730Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
