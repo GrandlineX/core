@@ -487,6 +487,7 @@ export interface IStore {
   delete(key: EnvKey): boolean;
   setBulk(...list: [EnvKey, StoreItem][]): void;
   getBulk(...list: [EnvKey, string?][]): StoreItem[];
+  gf(folder: string): string;
 }
 
 export type QInterfaceSearchSimple<E, P extends keyof E> = E[P];

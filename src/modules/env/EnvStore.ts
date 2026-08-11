@@ -141,7 +141,7 @@ export default class EnvStore implements IStore {
    * @param {string} folder - The name of the folder to retrieve.
    * @returns {string} The value of the global folder constant.
    */
-  gf(folder: string) {
+  gf(folder: string): string {
     return this.get(`GLOBAL_FOLDER_${folder.toUpperCase()}`)!;
   }
 

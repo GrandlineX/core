@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.3",
   "description": "Core module",
   "type": "module",
   "exports": {
@@ -64,7 +64,7 @@
     "ts-jest": "29.3.4",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
-    "typedoc": "0.28.15",
+    "typedoc": "0.28.20",
     "typescript": "5.9.3"
   },
   "homepage": "https://www.grandlinex.com/",

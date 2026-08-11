@@ -264,6 +264,25 @@ export class XUtil {
   }
 
   /**
+   * Executes a promise with a maximum wait time. If the promise does not resolve or reject before the specified timeout,
+   * the returned promise is rejected with an Error.
+   *
+   * @param {Promise<T>} promise - The promise to execute.
+   * @param {number} [ms=45000] - The maximum number of milliseconds to wait before timing out.
+   * @return {Promise<T>} A promise that resolves or rejects with the original promise's outcome, or rejects with a timeout error if the specified time elapses. */
+  static async promiseWithTimeout<T>(
+    promise: Promise<T>,
+    ms: number = 45000,
+  ): Promise<T | undefined> {
+    let timer: NodeJS.Timeout;
+    const timeout = new Promise<undefined>((_, reject) => {
+      timer = setTimeout(() => reject(new Error('Promise timeout')), ms);
+    });
+
+    return Promise.race([promise, timeout]).finally(() => clearTimeout(timer)); // don't leak the timer
+  }
+
+  /**
    * Returns the relation metadata for a given entity.
    *
    * @param {T} entity - The entity instance for which to retrieve relation metadata.
