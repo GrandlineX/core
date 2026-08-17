@@ -1,4 +1,4 @@
-import { TestLib, setupDevKernel, TestContext, TestKernel } from '../src';
+import { TestLib, setupDevKernel, TestContext, TestKernel } from '../src/dev';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';
