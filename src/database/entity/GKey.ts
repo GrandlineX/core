@@ -1,4 +1,4 @@
-import { Column, Entity, type EProperties } from '../../classes';
+import { Column, Entity, type EProperties } from '../../classes/annotation';
 import CoreEntity from '../../classes/CoreEntity';
 
 /**
