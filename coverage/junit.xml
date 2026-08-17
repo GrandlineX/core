@@ -1,493 +1,404 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="257" failures="0" errors="0" time="9.672248021">
-    <testsuite name="tests/start.test.ts" timestamp="2026-08-17T08:40:53.839Z" hostname="runnervmzvulz" tests="257" failures="0" errors="0" skipped="0" time="9.672248021">
-        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; preload" time="0.002267915">
+<testsuites name="vitest tests" tests="257" failures="0" errors="0" time="9.653415726">
+    <testsuite name="tests/start.test.ts" timestamp="2026-08-17T08:55:36.994Z" hostname="runnervmzvulz" tests="257" failures="0" errors="0" skipped="0" time="9.653415726">
+        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; preload" time="0.002166212">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; start kernel" time="1.009369564">
+        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; start kernel" time="1.008471606">
             <system-out>
-[32m[I][2026-08-17 08:41:43](kernel) Starting Kernel[0m
-[32m[I][2026-08-17 08:41:43](kernel) ⊢ Code:           tkernel[0m
-[32m[I][2026-08-17 08:41:43](kernel) ⊢ Version:        3.0.0-alpha.5[0m
-[32m[I][2026-08-17 08:41:43](kernel) ⊢ Mode:           Prod[0m
-[32m[I][2026-08-17 08:41:43](kernel) ⊢ Mod count:      2[0m
-[32m[I][2026-08-17 08:41:43](kernel) ⊢ Action count:   1[0m
-[32m[I][2026-08-17 08:41:43](kernel) ⊢ Service count:  2[0m
-[32m[I][2026-08-17 08:41:43](kernel) ⊢ Log level:      0[0m
-[35m[D][2026-08-17 08:41:43](kernel) Run startup script[0m
-[35m[D][2026-08-17 08:41:43](kernel) Global folder for GLOBAL_FOLDER_DEV @/home/runner/work/core/core/data/config/TestKernel/dev created[0m
-[35m[D][2026-08-17 08:41:43](kernel) Global folder for GLOBAL_FOLDER_RES @/home/runner/work/core/core/res created[0m
-[35m[D][2026-08-17 08:41:43](kernel) Global folder for GLOBAL_FOLDER_RES_IMAGE @/home/runner/work/core/core/res/image created[0m
-[34m[V][2026-08-17 08:41:43](kernel) pre[0m
+[32m[I][2026-08-17 08:56:27](kernel) Starting Kernel[0m
+[32m[I][2026-08-17 08:56:27](kernel) ⊢ Code:           tkernel[0m
+[32m[I][2026-08-17 08:56:27](kernel) ⊢ Version:        3.0.0-alpha.6[0m
+[32m[I][2026-08-17 08:56:27](kernel) ⊢ Mode:           Prod[0m
+[32m[I][2026-08-17 08:56:27](kernel) ⊢ Mod count:      2[0m
+[32m[I][2026-08-17 08:56:27](kernel) ⊢ Action count:   1[0m
+[32m[I][2026-08-17 08:56:27](kernel) ⊢ Service count:  2[0m
+[32m[I][2026-08-17 08:56:27](kernel) ⊢ Log level:      0[0m
+[35m[D][2026-08-17 08:56:27](kernel) Run startup script[0m
+[35m[D][2026-08-17 08:56:27](kernel) Global folder for GLOBAL_FOLDER_DEV @/home/runner/work/core/core/data/config/TestKernel/dev created[0m
+[35m[D][2026-08-17 08:56:27](kernel) Global folder for GLOBAL_FOLDER_RES @/home/runner/work/core/core/res created[0m
+[35m[D][2026-08-17 08:56:27](kernel) Global folder for GLOBAL_FOLDER_RES_IMAGE @/home/runner/work/core/core/res/image created[0m
+[34m[V][2026-08-17 08:56:27](kernel) pre[0m
 
-[32m[I][2026-08-17 08:41:43](kernel) Startup script complete[0m
-[35m[D][2026-08-17 08:41:43](kernel) Run launcher[0m
+[32m[I][2026-08-17 08:56:27](kernel) Startup script complete[0m
+[35m[D][2026-08-17 08:56:27](kernel) Run launcher[0m
 
-[34m[V][2026-08-17 08:41:43](kernel) core-load[0m
+[34m[V][2026-08-17 08:56:27](kernel) core-load[0m
 
-[35m[D][2026-08-17 08:41:43](cache-inMemCache-core) Init cache:cache-inMemCache-core[0m
+[35m[D][2026-08-17 08:56:27](cache-inMemCache-core) Init cache:cache-inMemCache-core[0m
 
-[34m[V][2026-08-17 08:41:43](coreModule) run-before-service[0m
+[34m[V][2026-08-17 08:56:27](coreModule) run-before-service[0m
 
-[35m[D][2026-08-17 08:41:43](background-service) Starting[0m
+[35m[D][2026-08-17 08:56:27](background-service) Starting[0m
 
-[34m[V][2026-08-17 08:41:43](kernel) load[0m
+[34m[V][2026-08-17 08:56:27](kernel) load[0m
 
-[34m[V][2026-08-17 08:41:43](testBaseModuleModule) run-before-service[0m
+[34m[V][2026-08-17 08:56:27](testBaseModuleModule) run-before-service[0m
 
-[35m[D][2026-08-17 08:41:43](BR:bridgeModule =&gt; testModule) connected[0m
+[35m[D][2026-08-17 08:56:27](BR:bridgeModule =&gt; testModule) connected[0m
 
-[35m[D][2026-08-17 08:41:43](testModuleModule) FirstTHIS[0m
-[35m[D][2026-08-17 08:41:43](testModuleModule) triggerBundleInit[0m
+[35m[D][2026-08-17 08:56:27](testModuleModule) FirstTHIS[0m
+[35m[D][2026-08-17 08:56:27](testModuleModule) triggerBundleInit[0m
 
-[34m[V][2026-08-17 08:41:43](kernel) load[0m
+[34m[V][2026-08-17 08:56:27](kernel) load[0m
 
-[35m[D][2026-08-17 08:41:43](testModuleModule) triggerBundleInit[0m
+[35m[D][2026-08-17 08:56:27](testModuleModule) triggerBundleInit[0m
 
-[35m[D][2026-08-17 08:41:43](cache-inMemCache-testModule) Init cache:cache-inMemCache-testModule[0m
+[35m[D][2026-08-17 08:56:27](cache-inMemCache-testModule) Init cache:cache-inMemCache-testModule[0m
 
-[35m[D][2026-08-17 08:41:43](test-action) register[0m
-[34m[V][2026-08-17 08:41:43](testModuleModule) run-before-service[0m
+[35m[D][2026-08-17 08:56:27](test-action) register[0m
+[34m[V][2026-08-17 08:56:27](testModuleModule) run-before-service[0m
 
-[35m[D][2026-08-17 08:41:43](background-service) Starting[0m
+[35m[D][2026-08-17 08:56:27](background-service) Starting[0m
 
-[34m[V][2026-08-17 08:41:43](background-service) RUNNING[0m
-[34m[V][2026-08-17 08:41:43](background-service) SLEEPING[0m
+[34m[V][2026-08-17 08:56:27](background-service) RUNNING[0m
+[34m[V][2026-08-17 08:56:27](background-service) SLEEPING[0m
 
-[34m[V][2026-08-17 08:41:43](background-service) RUNNING[0m
-[34m[V][2026-08-17 08:41:43](background-service) SLEEPING[0m
+[34m[V][2026-08-17 08:56:27](background-service) RUNNING[0m
+[34m[V][2026-08-17 08:56:27](background-service) SLEEPING[0m
 
-[35m[D][2026-08-17 08:41:44](bridgeModuleModule) LaterTHIS[0m
+[35m[D][2026-08-17 08:56:28](bridgeModuleModule) LaterTHIS[0m
 
-[34m[V][2026-08-17 08:41:44](bridgeModuleModule) run-before-service[0m
+[34m[V][2026-08-17 08:56:28](bridgeModuleModule) run-before-service[0m
 
-[34m[V][2026-08-17 08:41:44](testModuleModule) run-startup[0m
-[34m[V][2026-08-17 08:41:44](bridgeModuleModule) run-startup[0m
+[34m[V][2026-08-17 08:56:28](testModuleModule) run-startup[0m
+[34m[V][2026-08-17 08:56:28](bridgeModuleModule) run-startup[0m
 
-[34m[V][2026-08-17 08:41:44](coreModule) run-startup[0m
+[34m[V][2026-08-17 08:56:28](coreModule) run-startup[0m
 
-[34m[V][2026-08-17 08:41:44](testBaseModuleModule) run-startup[0m
+[34m[V][2026-08-17 08:56:28](testBaseModuleModule) run-startup[0m
 
-[32m[I][2026-08-17 08:41:44](ex-test) Starting[0m
+[32m[I][2026-08-17 08:56:28](ex-test) Starting[0m
 
-[34m[V][2026-08-17 08:41:44](coreModule) run-final[0m
+[34m[V][2026-08-17 08:56:28](coreModule) run-final[0m
 
-[34m[V][2026-08-17 08:41:44](testBaseModuleModule) run-final[0m
+[34m[V][2026-08-17 08:56:28](testBaseModuleModule) run-final[0m
 
-[34m[V][2026-08-17 08:41:44](testModuleModule) run-final[0m
+[34m[V][2026-08-17 08:56:28](testModuleModule) run-final[0m
 
-[34m[V][2026-08-17 08:41:44](bridgeModuleModule) run-final[0m
+[34m[V][2026-08-17 08:56:28](bridgeModuleModule) run-final[0m
 
-[34m[V][2026-08-17 08:41:44](kernel) start[0m
+[34m[V][2026-08-17 08:56:28](kernel) start[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; kernel info" time="0.000499535">
+        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; kernel info" time="0.000986004">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; stopService - non-existent service returns null" time="0.000351588">
+        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; stopService - non-existent service returns null" time="0.000264455">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; startService - non-existent service returns null" time="0.00023487">
+        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; startService - non-existent service returns null" time="0.000166691">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; can load from .env file" time="0.000278301">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; can load from .env file" time="0.000243335">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; getBulk returns values with fallback defaults" time="0.000210634">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; getBulk returns values with fallback defaults" time="0.000229669">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; delete removes a key" time="0.000220773">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; delete removes a key" time="0.000179506">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; appName with pathOverride sets path globals" time="0.000941011">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; appName with pathOverride sets path globals" time="0.000843024">
             <system-out>
-[43m[30m[W][2026-08-17 08:41:44](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
+[43m[30m[W][2026-08-17 08:56:28](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromFile parses valid key=value lines and skips comments" time="0.000839561">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromFile parses valid key=value lines and skips comments" time="0.000846633">
             <system-out>
-[L][2026-08-17 08:41:44](testBaseModuleModule) Load env from /tmp/envstore-pNKf3S/.env
+[L][2026-08-17 08:56:28](testBaseModuleModule) Load env from /tmp/envstore-zL1nfg/.env
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; missing envFilePath path emits warning and continues" time="0.000670104">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; missing envFilePath path emits warning and continues" time="0.000503522">
             <system-out>
-[43m[30m[W][2026-08-17 08:41:44](testBaseModuleModule) Cant load env from /nonexistent/path/xyz/.env[0m
+[43m[30m[W][2026-08-17 08:56:28](testBaseModuleModule) Cant load env from /nonexistent/path/xyz/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromLocalEnv loads process.env entries" time="0.000874537">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromLocalEnv loads process.env entries" time="0.000687025">
             <system-out>
-[43m[30m[W][2026-08-17 08:41:44](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
+[43m[30m[W][2026-08-17 08:56:28](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; GLOBAL_APP_VERSION falls back to 0.0.0 when npm_package_version is unset" time="0.000372607">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; GLOBAL_APP_VERSION falls back to 0.0.0 when npm_package_version is unset" time="0.00035263">
             <system-out>
-[43m[30m[W][2026-08-17 08:41:44](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
+[43m[30m[W][2026-08-17 08:56:28](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getChild empty" time="0.001353102">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getChild empty" time="0.001233367">
             <system-out>
-[31m[E][2026-08-17 08:41:44](kernel) G-ERR:,Module invaldimodname not found[0m
+[31m[E][2026-08-17 08:56:28](kernel) G-ERR:,Module invaldimodname not found[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getOffline" time="0.000221764">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getOffline" time="0.00025127">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getAppCode" time="0.000892501">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getAppCode" time="0.000795327">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getActionList" time="0.000136395">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getActionList" time="0.000141765">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getServiceList" time="0.000126116">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getServiceList" time="0.000118812">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log" time="0.000163937">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log" time="0.000177742">
             <system-out>
-[L][2026-08-17 08:41:44](kernel) log
+[L][2026-08-17 08:56:28](kernel) log
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; debug" time="0.000367558">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; debug" time="0.000384379">
             <system-out>
-[35m[D][2026-08-17 08:41:44](kernel) debug[0m
+[35m[D][2026-08-17 08:56:28](kernel) debug[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; warn" time="0.000341129">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; warn" time="0.000321441">
             <system-out>
-[43m[30m[W][2026-08-17 08:41:44](kernel) warn[0m
+[43m[30m[W][2026-08-17 08:56:28](kernel) warn[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; error" time="0.000322764">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; error" time="0.000200655">
             <system-out>
-[31m[E][2026-08-17 08:41:44](kernel) error[0m
+[31m[E][2026-08-17 08:56:28](kernel) error[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; verbose" time="0.000222948">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; verbose" time="0.000223939">
             <system-out>
-[34m[V][2026-08-17 08:41:44](kernel) verbose[0m
+[34m[V][2026-08-17 08:56:28](kernel) verbose[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; lError" time="0.000276417">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; lError" time="0.000301354">
             <system-out>
-[31m[E][2026-08-17 08:41:44](kernel) G-ERR:,TestError[0m
+[31m[E][2026-08-17 08:56:28](kernel) G-ERR:,TestError[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000266799">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000257421">
             <system-out>
-[L][2026-08-17 08:41:44](kernel) [object Object],[object Object]
+[L][2026-08-17 08:56:28](kernel) [object Object],[object Object]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000291445">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000205034">
             <system-out>
-[L][2026-08-17 08:41:44](kernel) [[[{&quot;test&quot;:&quot;test&quot;},{&quot;test&quot;:&quot;test&quot;}]]]
+[L][2026-08-17 08:56:28](kernel) [[[{&quot;test&quot;:&quot;test&quot;},{&quot;test&quot;:&quot;test&quot;}]]]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log" time="0.000166452">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log" time="0.000122629">
             <system-out>
-[L][2026-08-17 08:41:44](testBaseModuleModule) [[[&quot;log&quot;]]]
+[L][2026-08-17 08:56:28](testBaseModuleModule) [[[&quot;log&quot;]]]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; debug" time="0.000162013">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; debug" time="0.000115667">
             <system-out>
-[35m[D][2026-08-17 08:41:44](testBaseModuleModule) [[[&quot;debug&quot;]]][0m
+[35m[D][2026-08-17 08:56:28](testBaseModuleModule) [[[&quot;debug&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; warn" time="0.000161322">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; warn" time="0.000110567">
             <system-out>
-[43m[30m[W][2026-08-17 08:41:44](testBaseModuleModule) [[[&quot;warn&quot;]]][0m
+[43m[30m[W][2026-08-17 08:56:28](testBaseModuleModule) [[[&quot;warn&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; error" time="0.000173314">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; error" time="0.000226754">
             <system-out>
-[31m[E][2026-08-17 08:41:44](testBaseModuleModule) [[[&quot;error&quot;]]][0m
+[31m[E][2026-08-17 08:56:28](testBaseModuleModule) [[[&quot;error&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; verbose" time="0.000325379">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; verbose" time="0.000166762">
             <system-out>
-[34m[V][2026-08-17 08:41:44](testBaseModuleModule) [[[&quot;verbose&quot;]]][0m
+[34m[V][2026-08-17 08:56:28](testBaseModuleModule) [[[&quot;verbose&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; lError" time="0.000369622">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; lError" time="0.00038461">
             <system-out>
-[31m[E][2026-08-17 08:41:44](testBaseModuleModule) [[[&quot;G-ERR:&quot;,&quot;TestError&quot;]]][0m
+[31m[E][2026-08-17 08:56:28](testBaseModuleModule) [[[&quot;G-ERR:&quot;,&quot;TestError&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.000312645">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.00029354">
             <system-out>
-[L][2026-08-17 08:41:44](testBaseModuleModule) [object Object],[object Object]
+[L][2026-08-17 08:56:28](testBaseModuleModule) [object Object],[object Object]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.000203812">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.0002618">
             <system-out>
-[L][2026-08-17 08:41:44](testBaseModuleModule) [[[{&quot;test&quot;:&quot;test&quot;},{&quot;test&quot;:&quot;test&quot;}]]]
+[L][2026-08-17 08:56:28](testBaseModuleModule) [[[{&quot;test&quot;:&quot;test&quot;},{&quot;test&quot;:&quot;test&quot;}]]]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; DevMode &gt; switch" time="0.00028834">
+        <testcase classname="tests/start.test.ts" name="core &gt; DevMode &gt; switch" time="0.000272581">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; exist" time="0.000157444">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; exist" time="0.00011753">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasPresenter" time="0.000279022">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasPresenter" time="0.000244768">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasDb" time="0.000307907">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasDb" time="0.000191378">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasCache" time="0.000211646">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasCache" time="0.000156202">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasClient" time="0.000192841">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasClient" time="0.00017615">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasServiceList" time="0.000802241">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasServiceList" time="0.000805266">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; test_trigger" time="0.000288019">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; test_trigger" time="0.000482773">
             <system-out>
-[L][2026-08-17 08:41:44](test_trigger) [[[&quot;TestTriggerService triggered with payload:&quot;,null]]]
+[L][2026-08-17 08:56:28](test_trigger) [[[&quot;TestTriggerService triggered with payload:&quot;,null]]]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasBridges" time="0.000249197">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasBridges" time="0.000231613">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; Bridge: (null):" time="0.000458979">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; Bridge: (null):" time="0.000352189">
             <system-out>
-[31m[E][2026-08-17 08:41:44](testModuleModule) [[[&quot;G-ERR:&quot;,&quot;no bridge module found: modnotexist&quot;]]][0m
+[31m[E][2026-08-17 08:56:28](testModuleModule) [[[&quot;G-ERR:&quot;,&quot;no bridge module found: modnotexist&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; exist" time="0.000125986">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; exist" time="0.000155892">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasPresenter" time="0.000748421">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasPresenter" time="0.000682667">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasDb" time="0.000255489">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasDb" time="0.000265466">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasCache" time="0.000135253">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasCache" time="0.000135072">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasClient" time="0.000120846">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasClient" time="0.000120294">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasServiceList" time="0.000177843">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasServiceList" time="0.000190917">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; test_trigger" time="0.000191588">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; test_trigger" time="0.00020808">
             <system-out>
-[L][2026-08-17 08:41:44](test_trigger) [[[&quot;TestTriggerService triggered with payload:&quot;,null]]]
+[L][2026-08-17 08:56:28](test_trigger) [[[&quot;TestTriggerService triggered with payload:&quot;,null]]]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasBridges" time="0.000178364">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasBridges" time="0.000198702">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; Bridge: (testModule):" time="0.00021907">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; Bridge: (testModule):" time="0.000175949">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; set" time="0.000163206">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; set" time="0.000110517">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; exist" time="0.000182452">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; exist" time="0.000160951">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; get" time="0.000146424">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; get" time="0.000140664">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; del" time="0.000135443">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; del" time="0.000135593">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; encrypt/decrypt" time="0.001149781">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; encrypt/decrypt" time="0.001133019">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; seeded hash" time="0.000294732">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; seeded hash" time="0.000298639">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; token gen" time="0.000990624">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; token gen" time="0.001011752">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; keystore" time="0.000775612">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; keystore" time="0.000782734">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; test tates" time="0.000287147">
+        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; test tates" time="0.000267831">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; loop service cycle" time="2.012687903">
+        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; loop service cycle" time="2.012172132">
             <system-out>
-[34m[V][2026-08-17 08:41:44](hello) [[[&quot;RUNNING&quot;]]][0m
+[34m[V][2026-08-17 08:56:28](hello) [[[&quot;RUNNING&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:44](hello) [[[&quot;try to stop service&quot;]]][0m
-[35m[D][2026-08-17 08:41:44](hello) [[[&quot;ForceStop&quot;]]][0m
+[35m[D][2026-08-17 08:56:28](hello) [[[&quot;try to stop service&quot;]]][0m
+[35m[D][2026-08-17 08:56:28](hello) [[[&quot;ForceStop&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:45](hello) [[[&quot;try to stop service&quot;]]][0m
-[35m[D][2026-08-17 08:41:45](hello) [[[&quot;ForceStop&quot;]]][0m
+[35m[D][2026-08-17 08:56:29](hello) [[[&quot;try to stop service&quot;]]][0m
+[35m[D][2026-08-17 08:56:29](hello) [[[&quot;ForceStop&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:46](hello) [[[&quot;try to stop service&quot;]]][0m
-[35m[D][2026-08-17 08:41:46](hello) [[[&quot;ForceStop&quot;]]][0m
-[35m[D][2026-08-17 08:41:46](hello) [[[&quot;Service Exit&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](hello) [[[&quot;try to stop service&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](hello) [[[&quot;ForceStop&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](hello) [[[&quot;Service Exit&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - all valid levels" time="0.000504434">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - all valid levels" time="0.000562913">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - unknown level throws" time="0.000302055">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - unknown level throws" time="0.000369632">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; constructor with logLevel string" time="0.000227575">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; constructor with logLevel string" time="0.000240179">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with string" time="0.00023515">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with string" time="0.000261148">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with numeric LogLevel" time="0.000211827">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with numeric LogLevel" time="0.000190356">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; isOnLevel" time="0.000291917">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; isOnLevel" time="0.000204302">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setNoColor disables ANSI codes in output" time="0.000734294">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setNoColor disables ANSI codes in output" time="0.000522938">
             <system-out>
-[E][2026-08-17 08:41:46](ch) msg
-[W][2026-08-17 08:41:46](ch) msg
+[E][2026-08-17 08:56:30](ch) msg
+[W][2026-08-17 08:56:30](ch) msg
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setPrintTimestamp false omits timestamp" time="0.000424174">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setPrintTimestamp false omits timestamp" time="0.000527006">
             <system-out>
 [L](ch) msg
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; printObject=true with primitive arg hits non-object branch" time="0.00047567">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; printObject=true with primitive arg hits non-object branch" time="0.000382986">
             <system-out>
-[L][2026-08-17 08:41:46](ch) [[&quot;primitive string arg&quot;,42]]
+[L][2026-08-17 08:56:30](ch) [[&quot;primitive string arg&quot;,42]]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with CoreLogger instance sets logger directly" time="0.000161011">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with CoreLogger instance sets logger directly" time="0.000252822">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with null sets logger to null" time="0.000201858">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with null sets logger to null" time="0.000141745">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; fromPW derives a 32-char key" time="0.000372107">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; fromPW derives a 32-char key" time="0.000272089">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; constructor with invalid key length throws" time="0.000386864">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; constructor with invalid key length throws" time="0.000295002">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; isValid returns true for valid 32-char key" time="0.000195736">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; isValid returns true for valid 32-char key" time="0.000182362">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; getUUID generates a valid UUID string" time="0.000493994">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; getUUID generates a valid UUID string" time="0.00037929">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - equal strings returns true" time="0.000250138">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - equal strings returns true" time="0.000209812">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - same length but different returns false" time="0.000173965">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - same length but different returns false" time="0.000143778">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - different lengths returns false" time="0.000175909">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - different lengths returns false" time="0.00012867">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; keyStoreLoad with non-existent id returns null" time="0.000238677">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; keyStoreLoad with non-existent id returns null" time="0.00016578">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; clientFromPW throws because sha512 hex is 128 chars not 32" time="0.003140615">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; clientFromPW throws because sha512 hex is 128 chars not 32" time="0.000304019">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; get version" time="0.000407082">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; get version" time="0.000318977">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; config test" time="0.002708007">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; config test" time="0.000449471">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; get version" time="0.000233698">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; get version" time="0.000155912">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; isConnected" time="0.000189534">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; isConnected" time="0.000136896">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; test entity" time="0.000698677">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; test entity" time="0.000491529">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; manual update" time="0.001381195">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; manual update" time="0.001038222">
             <system-out>
-[35m[D][2026-08-17 08:41:46](dbtestModule) [[[&quot;0-&gt;1&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](dbtestModule) [[[&quot;0-&gt;1&quot;]]][0m
 
-[32m[I][2026-08-17 08:41:46](dbtestModule) [[[&quot;Update DB from 0 to 1 successful&quot;]]][0m
+[32m[I][2026-08-17 08:56:30](dbtestModule) [[[&quot;Update DB from 0 to 1 successful&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:46](dbtestModule) [[[&quot;1-&gt;2&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](dbtestModule) [[[&quot;1-&gt;2&quot;]]][0m
 
-[32m[I][2026-08-17 08:41:46](dbtestModule) [[[&quot;Update DB from 1 to 2 successful&quot;]]][0m
+[32m[I][2026-08-17 08:56:30](dbtestModule) [[[&quot;Update DB from 1 to 2 successful&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get wrapper class" time="0.00051805">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get wrapper class" time="0.000373709">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new" time="0.000337231">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new" time="0.000216996">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new - failing" time="0.009993451">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new - failing" time="0.009218031">
             <system-out>
-[31m[E][2026-08-17 08:41:47](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;validation failed for test_entity create\nInvalid Fields:e_id&quot;]]][0m
-
-            </system-out>
-            <system-err>
-Promise returned by `expect(actual).rejects.toThrow()` was not awaited. Vitest currently auto-awaits hanging assertions at the end of the test, but this will cause the test to fail in the next Vitest major. Please remember to await the assertion.
-    at /home/runner/work/core/core/src/dev/lib/dbcon.ts:191:12
-
-            </system-err>
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 2" time="0.000370393">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 3" time="0.000405249">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 4" time="0.000226043">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 5" time="0.000208089">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get by id" time="0.000190616">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search id" time="0.000519031">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search fk id" time="0.000273261">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob" time="0.000233958">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 01" time="0.000293589">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 02" time="0.000345988">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 03" time="0.000267861">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob like" time="0.000227075">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search les age" time="0.0002461">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search greater age" time="0.00022992">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multiple" time="0.000295202">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search in" time="0.000232315">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search notIn" time="0.000241743">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search between" time="0.000218529">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNull" time="0.00025656">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNotNull" time="0.000212969">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search startsWith" time="0.000258303">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search endsWith" time="0.000234388">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob check date" time="0.00026173">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; find entity by id" time="0.000269985">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update" time="0.000706653">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update-bulk" time="0.000781012">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count all" time="0.000248375">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count with search" time="0.000201016">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - true" time="0.000233527">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - false" time="0.000168145">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - update existing" time="0.000307426">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - create new" time="0.000266209">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - existing" time="0.000305011">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - new" time="0.000274374">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete-bulk" time="0.00032587">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete" time="0.000348162">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; full validation" time="0.000163085">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get wrapper class" time="0.00014944">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new" time="0.000131026">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new - failing" time="0.001332063">
-            <system-out>
-[31m[E][2026-08-17 08:41:47](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;validation failed for test_entity create\nInvalid Fields:e_id&quot;]]][0m
+[31m[E][2026-08-17 08:56:30](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;validation failed for test_entity create\nInvalid Fields:e_id&quot;]]][0m
 
             </system-out>
             <system-err>
@@ -496,298 +407,387 @@ Promise returned by `expect(actual).rejects.toThrow()` was not awaited. Vitest c
 
             </system-err>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 2" time="0.000266679">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 2" time="0.000365303">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 3" time="0.000145432">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 3" time="0.00034748">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 4" time="0.000125255">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 4" time="0.000216596">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 5" time="0.000299761">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 5" time="0.000275044">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get by id" time="0.000271237">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get by id" time="0.000198001">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search id" time="0.000213539">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search id" time="0.000510274">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search fk id" time="0.000169166">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search fk id" time="0.000372256">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob" time="0.000148608">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob" time="0.000266558">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 01" time="0.000153367">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 01" time="0.000269233">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 02" time="0.0001921">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 02" time="0.000394839">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 03" time="0.000152786">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 03" time="0.000265617">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob like" time="0.000164277">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob like" time="0.000228808">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search les age" time="0.000147415">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search les age" time="0.000245659">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search greater age" time="0.000150452">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search greater age" time="0.000213309">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multiple" time="0.000145402">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multiple" time="0.000306293">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search in" time="0.000283471">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search in" time="0.00022485">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search notIn" time="0.000252783">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search notIn" time="0.000257031">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search between" time="0.00015499">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search between" time="0.000228147">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNull" time="0.00014996">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNull" time="0.000363129">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNotNull" time="0.000145412">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNotNull" time="0.000222666">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search startsWith" time="0.000188694">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search startsWith" time="0.000260687">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search endsWith" time="0.0001767">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search endsWith" time="0.000210394">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob check date" time="0.000167844">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob check date" time="0.000243265">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; find entity by id" time="0.000108593">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; find entity by id" time="0.000250378">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update" time="0.000321731">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update" time="0.000455412">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update-bulk" time="0.000381303">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update-bulk" time="0.000753199">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count all" time="0.000099066">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count all" time="0.000239207">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count with search" time="0.000103825">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count with search" time="0.000196708">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - true" time="0.000131637">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - true" time="0.000208731">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - false" time="0.000096501">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - false" time="0.000189405">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - update existing" time="0.000252853">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - update existing" time="0.000306813">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - create new" time="0.000182021">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - create new" time="0.000263103">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - existing" time="0.000143679">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - existing" time="0.000284301">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - new" time="0.000200887">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - new" time="0.000331911">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete-bulk" time="0.000188793">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete-bulk" time="0.000325489">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete" time="0.000256561">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete" time="0.000328885">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; full validation" time="0.000118442">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; full validation" time="0.000193282">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; get wrapper class" time="0.00020857">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get wrapper class" time="0.000150462">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; create new" time="0.013386461">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new" time="0.000137527">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 0" time="0.000414465">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 1" time="0.000302216">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 2" time="0.000282509">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; test offset" time="0.000377396">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit ASC DESC" time="0.000339015">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; delete" time="0.003271232">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; get wrapper class" time="0.000206868">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; create new" time="0.013530911">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 0" time="0.000203781">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 1" time="0.000192521">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 2" time="0.000149259">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; test offset" time="0.000126798">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit ASC DESC" time="0.000127589">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; delete" time="0.001855673">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; prepare" time="0.000115937">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCurrenDBVersion" time="0.00016073">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; isConnected" time="0.000112561">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; execScripts" time="0.000198191">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; queryScript" time="0.000175338">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; setConfig, getConfig, configExist, removeConfig" time="0.000201657">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getRawDBObject" time="0.000196768">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityWrapper" time="0.000120837">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getConfigStore via CoreElement" time="0.00012869">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCClient via CoreElement" time="0.000160961">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; createEntity and getEntityById" time="0.000213259">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityBulkById" time="0.00019233">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateEntity" time="0.000164128">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateBulkEntity" time="0.000160881">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityList" time="0.000124313">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; findEntity" time="0.00017145">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity" time="0.000120425">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; initEntity" time="0.000147376">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityById" time="0.000123582">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityBulkById" time="0.00013346">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity - after" time="0.000189374">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCache" time="0.000190125">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populateMany with empty array returns []" time="0.000289772">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populate - field without foreignKey throws" time="0.000620702">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new - failing" time="0.00157202">
             <system-out>
-[31m[E][2026-08-17 08:41:47](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;No foreignKey relation metadata found for field \&quot;name\&quot;&quot;]]][0m
+[31m[E][2026-08-17 08:56:30](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;validation failed for test_entity create\nInvalid Fields:e_id&quot;]]][0m
+
+            </system-out>
+            <system-err>
+Promise returned by `expect(actual).rejects.toThrow()` was not awaited. Vitest currently auto-awaits hanging assertions at the end of the test, but this will cause the test to fail in the next Vitest major. Please remember to await the assertion.
+    at /home/runner/work/core/core/src/dev/lib/dbcon.ts:191:12
+
+            </system-err>
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 2" time="0.000259775">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 3" time="0.000196387">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 4" time="0.000189694">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 5" time="0.000324567">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get by id" time="0.000295733">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search id" time="0.000337632">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search fk id" time="0.000166592">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob" time="0.00024061">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 01" time="0.000275706">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 02" time="0.000242764">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 03" time="0.000222456">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob like" time="0.000281817">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search les age" time="0.000180808">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search greater age" time="0.000153176">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multiple" time="0.000157775">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search in" time="0.000259625">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search notIn" time="0.000296404">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search between" time="0.00015464">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNull" time="0.000152275">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNotNull" time="0.000144691">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search startsWith" time="0.000142045">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search endsWith" time="0.000229349">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob check date" time="0.000285284">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; find entity by id" time="0.000200004">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update" time="0.000348932">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update-bulk" time="0.000528729">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count all" time="0.000157685">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count with search" time="0.000170689">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - true" time="0.000220893">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - false" time="0.000110587">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - update existing" time="0.000181459">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - create new" time="0.000171922">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - existing" time="0.000142707">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - new" time="0.000197399">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete-bulk" time="0.000193422">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete" time="0.000274634">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; full validation" time="0.00012283">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; get wrapper class" time="0.000226053">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; create new" time="0.0112384">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 0" time="0.000369341">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 1" time="0.000188713">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 2" time="0.000174145">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; test offset" time="0.000322573">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit ASC DESC" time="0.000238095">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; delete" time="0.001776934">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; get wrapper class" time="0.000103023">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; create new" time="0.0071535">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 0" time="0.000241882">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 1" time="0.000148928">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 2" time="0.00016589">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; test offset" time="0.000128079">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit ASC DESC" time="0.000140303">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; delete" time="0.002009669">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; prepare" time="0.000124914">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCurrenDBVersion" time="0.000153086">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; isConnected" time="0.000115516">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; execScripts" time="0.000180768">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; queryScript" time="0.000172093">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; setConfig, getConfig, configExist, removeConfig" time="0.000187059">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getRawDBObject" time="0.000190757">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityWrapper" time="0.000155732">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getConfigStore via CoreElement" time="0.000135444">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCClient via CoreElement" time="0.000153748">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; createEntity and getEntityById" time="0.000202369">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityBulkById" time="0.000198321">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateEntity" time="0.000154409">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateBulkEntity" time="0.000159999">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityList" time="0.000125374">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; findEntity" time="0.000166732">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity" time="0.000121808">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; initEntity" time="0.00015476">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityById" time="0.000122479">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityBulkById" time="0.000137257">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity - after" time="0.000266358">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCache" time="0.00021431">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populateMany with empty array returns []" time="0.000439593">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populate - field without foreignKey throws" time="0.00072681">
+            <system-out>
+[31m[E][2026-08-17 08:56:30](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;No foreignKey relation metadata found for field \&quot;name\&quot;&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; getEntityWrapper - unknown entity throws" time="0.000425537">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; getEntityWrapper - unknown entity throws" time="0.00047061">
             <system-out>
-[31m[E][2026-08-17 08:41:47](dbcore) [[[&quot;G-ERR:&quot;,&quot;Entity not registered: __NoSuchEntity__&quot;]]][0m
+[31m[E][2026-08-17 08:56:30](dbcore) [[[&quot;G-ERR:&quot;,&quot;Entity not registered: __NoSuchEntity__&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; setUpdateChain - empty args logs and returns" time="0.000461804">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; setUpdateChain - empty args logs and returns" time="0.000497039">
             <system-out>
-[31m[E][2026-08-17 08:41:47](dbcore) [[[&quot;No element in update chain&quot;]]][0m
+[31m[E][2026-08-17 08:56:30](dbcore) [[[&quot;No element in update chain&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; registerEntity - invalid entity (no @Entity decorator) throws" time="0.000560279">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; registerEntity - invalid entity (no @Entity decorator) throws" time="0.000565458">
             <system-out>
-[31m[E][2026-08-17 08:41:47](dbtestModule) [[[&quot;Invalid Entity: BadEntity&quot;]]][0m
-[31m[E][2026-08-17 08:41:47](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;Invalid Entity&quot;]]][0m
+[31m[E][2026-08-17 08:56:30](dbtestModule) [[[&quot;Invalid Entity: BadEntity&quot;]]][0m
+[31m[E][2026-08-17 08:56:30](dbtestModule) [[[&quot;G-ERR:&quot;,&quot;Invalid Entity&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; runScripts returns empty array" time="0.000295333">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; runScripts returns empty array" time="0.000191168">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; not mode excludes matching value" time="0.00022459">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; not mode excludes matching value" time="0.000337872">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; updateEntity - entity not found throws" time="0.000141375">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; updateEntity - entity not found throws" time="0.000222005">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; countEntity without search returns total" time="0.000169617">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; countEntity without search returns total" time="0.000145542">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; getEntityList with offset beyond length returns []" time="0.000187441">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; getEntityList with offset beyond length returns []" time="0.000231283">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; exit kernel" time="2.002291432">
+        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; exit kernel" time="2.001461691">
             <system-out>
-[34m[V][2026-08-17 08:41:47](kernel) [[[&quot;stop&quot;]]][0m
+[34m[V][2026-08-17 08:56:30](kernel) [[[&quot;stop&quot;]]][0m
 
-[32m[I][2026-08-17 08:41:47](ex-test) [[[&quot;Stop&quot;]]][0m
+[32m[I][2026-08-17 08:56:30](ex-test) [[[&quot;Stop&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:47](background-service) [[[&quot;try to stop service&quot;]]][0m
-[35m[D][2026-08-17 08:41:47](background-service) [[[&quot;ForceStop&quot;]]][0m
-[35m[D][2026-08-17 08:41:47](background-service) [[[&quot;Service Exit&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](background-service) [[[&quot;try to stop service&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](background-service) [[[&quot;ForceStop&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](background-service) [[[&quot;Service Exit&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:47](cache-inMemCache-testModule) [[[&quot;Clear cache:cache-inMemCache-testModule&quot;]]][0m
+[35m[D][2026-08-17 08:56:30](cache-inMemCache-testModule) [[[&quot;Clear cache:cache-inMemCache-testModule&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:48](hello) [[[&quot;try to stop service&quot;]]][0m
-[35m[D][2026-08-17 08:41:48](hello) [[[&quot;ForceStop&quot;]]][0m
-[35m[D][2026-08-17 08:41:48](hello) [[[&quot;Service Exit&quot;]]][0m
+[35m[D][2026-08-17 08:56:31](hello) [[[&quot;try to stop service&quot;]]][0m
+[35m[D][2026-08-17 08:56:31](hello) [[[&quot;ForceStop&quot;]]][0m
+[35m[D][2026-08-17 08:56:31](hello) [[[&quot;Service Exit&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:48](background-service) [[[&quot;try to stop service&quot;]]][0m
-[35m[D][2026-08-17 08:41:48](background-service) [[[&quot;ForceStop&quot;]]][0m
-[35m[D][2026-08-17 08:41:48](background-service) [[[&quot;Service Exit&quot;]]][0m
+[35m[D][2026-08-17 08:56:31](background-service) [[[&quot;try to stop service&quot;]]][0m
+[35m[D][2026-08-17 08:56:31](background-service) [[[&quot;ForceStop&quot;]]][0m
+[35m[D][2026-08-17 08:56:31](background-service) [[[&quot;Service Exit&quot;]]][0m
 
-[35m[D][2026-08-17 08:41:48](cache-inMemCache-core) [[[&quot;Clear cache:cache-inMemCache-core&quot;]]][0m
+[35m[D][2026-08-17 08:56:31](cache-inMemCache-core) [[[&quot;Clear cache:cache-inMemCache-core&quot;]]][0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; cleanup" time="0.000544418">
+        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; cleanup" time="0.000646409">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props" time="0.000242424">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props" time="0.000179475">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props empty" time="0.000192661">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props empty" time="0.000146294">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; instance test" time="0.000159879">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; instance test" time="0.000159909">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; util test" time="0.000101951">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; util test" time="0.000164978">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; e_id is primary key" time="0.00021917">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; e_id is primary key" time="0.000182992">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; name is valid" time="0.000298298">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; name is valid" time="0.000155781">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect key not a column" time="0.000155521">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect key not a column" time="0.000124704">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; simple data type" time="0.000380352">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; simple data type" time="0.000396552">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect primaryKeyNull" time="0.000168886">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect primaryKeyNull" time="0.000167874">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect invalidKey" time="0.00027792">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect invalidKey" time="0.000177933">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; full validation" time="0.000132598">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; full validation" time="0.000152876">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; exec" time="0.007501136">
+        <testcase classname="tests/start.test.ts" name="utils &gt; exec" time="0.007574547">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CoreSemaphor" time="0.000439523">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CoreSemaphor" time="0.000392724">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CoreCachedFC" time="2.002697342">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CoreCachedFC" time="2.002694712">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CoreTimeCache" time="2.501420669">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CoreTimeCache" time="2.502133947">
             <system-out>
-[L][2026-08-17 08:41:53](test) clearing cache 123
+[L][2026-08-17 08:56:35](test) clearing cache 123
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CMap" time="0.001045686">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CMap" time="0.000976867">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - single digit gets leading zero" time="0.000184706">
+        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - single digit gets leading zero" time="0.000154308">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - double digit stays as-is" time="0.000124542">
+        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - double digit stays as-is" time="0.000115836">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; getTimeStamp returns formatted string" time="0.000237163">
+        <testcase classname="tests/start.test.ts" name="utils &gt; getTimeStamp returns formatted string" time="0.000380792">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray processes all items" time="0.000530413">
+        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray processes all items" time="0.000558695">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray - empty array" time="0.000204693">
+        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray - empty array" time="0.000228227">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryWithProducer processes items" time="0.000255128">
+        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryWithProducer processes items" time="0.000262681">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - sums file sizes recursively" time="0.001610144">
+        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - sums file sizes recursively" time="0.001489555">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - excludes specified entries" time="0.00080663">
+        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - excludes specified entries" time="0.000836143">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; getEntityNames - throws for object without Entity metadata" time="0.000286336">
+        <testcase classname="tests/start.test.ts" name="utils &gt; getEntityNames - throws for object without Entity metadata" time="0.000261929">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdOut callback receives data" time="0.002804297">
+        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdOut callback receives data" time="0.002761153">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdErr callback receives data on error" time="0.003661542">
+        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdErr callback receives data on error" time="0.003772098">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - valid" time="0.000190847">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - valid" time="0.000196908">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - invalid" time="0.000181831">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - invalid" time="0.000152506">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - valid" time="0.000292417">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - valid" time="0.000330969">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - invalid" time="0.000135363">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - invalid" time="0.000145312">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - valid non-empty string" time="0.000109885">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - valid non-empty string" time="0.000114284">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - empty string is false" time="0.000092653">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - empty string is false" time="0.000096731">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - non-string is false" time="0.000130634">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - non-string is false" time="0.000125274">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - valid numbers" time="0.000172923">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - valid numbers" time="0.000146363">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - non-number is false" time="0.000121016">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - non-number is false" time="0.000170449">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - true and false" time="0.000118051">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - true and false" time="0.000127919">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - non-boolean is false" time="0.000147626">
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - non-boolean is false" time="0.000150301">
         </testcase>
     </testsuite>
 </testsuites>
