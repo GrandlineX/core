@@ -1,4 +1,4 @@
-import {
+import type {
   ICoreAction,
   ICoreAnyModule,
   ICoreCClient,
@@ -10,21 +10,21 @@ import {
   IHaveLogger,
   IStore,
   KernelEvent,
-} from './lib/index.js';
+} from './lib';
 
-import initHandler from './utils/initHandler.js';
-import { CMap, CoreLogChannel, CoreLogger } from './classes/index.js';
+import initHandler from './utils/initHandler';
+import { CMap, CoreLogChannel, CoreLogger } from './classes';
 
 import {
   DefaultLogger,
   EnvStore,
-  EnvStoreCProps,
+  type EnvStoreCProps,
   InMemDB,
   StoreGlobal,
-} from './modules/index.js';
-import CoreModule from './CoreModule.js';
-import { XUtil } from './utils/index.js';
-import CoreKernelExtension from './classes/CoreKernelExtension.js';
+} from './modules';
+import CoreModule from './CoreModule';
+import { XUtil } from './utils';
+import CoreKernelExtension from './classes/CoreKernelExtension';
 
 /**
  *  Core Kernel class

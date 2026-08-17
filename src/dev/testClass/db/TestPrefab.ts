@@ -1,12 +1,8 @@
-import {
-  CoreDBCon,
-  CoreDBPrefab,
-  CoreEntityWrapper,
-} from '../../../classes/index.js';
-import TestDBUpdate01 from './TestDBUpdate01.js';
-import TestDBUpdate02 from './TestDBUpdate02.js';
-import TestEntity from './entity/TestEntity.js';
-import TestEntityLinked from './entity/TestEntityLinked.js';
+import { CoreDBCon, CoreDBPrefab, CoreEntityWrapper } from '../../../classes';
+import TestDBUpdate01 from './TestDBUpdate01';
+import TestDBUpdate02 from './TestDBUpdate02';
+import TestEntity from './entity/TestEntity';
+import TestEntityLinked from './entity/TestEntityLinked';
 
 export default class TestPrefab extends CoreDBPrefab<CoreDBCon<any, any>> {
   ent: CoreEntityWrapper<TestEntity>;

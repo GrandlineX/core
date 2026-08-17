@@ -1,5 +1,5 @@
-import { Column, Entity, EProperties } from '../../classes/annotation/index.js';
-import CoreEntity from '../../classes/CoreEntity.js';
+import { Column, Entity, type EProperties } from '../../classes';
+import CoreEntity from '../../classes/CoreEntity';
 
 /**
  * Represents a cryptographic key with its associated metadata.

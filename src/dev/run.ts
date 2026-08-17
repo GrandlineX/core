@@ -1,6 +1,6 @@
 import * as process from 'process';
-import { TestContext } from './index.js';
-import { setupDevKernel, TestKernel } from './DevKernel.js';
+import { TestContext } from '.';
+import { setupDevKernel, TestKernel } from './DevKernel';
 
 const appName = 'TestKernel';
 const appCode = 'tkernel';

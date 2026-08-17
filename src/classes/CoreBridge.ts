@@ -1,6 +1,6 @@
-import { BridgeState, ICoreBridge, ICoreKernelModule } from '../lib/index.js';
-import CoreLogChannel from './CoreLogChannel.js';
-import { XUtil } from '../utils/index.js';
+import { BridgeState, type ICoreBridge, type ICoreKernelModule } from '../lib';
+import CoreLogChannel from './CoreLogChannel';
+import { XUtil } from '../utils';
 
 /**
  * Manages a bidirectional bridge between two kernel modules.

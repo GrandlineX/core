@@ -1,23 +1,23 @@
-import jestCore from './core.js';
-import jestDb from './dbcon.js';
-import jestStart from './start.js';
-import jestOrm from './orm.js';
-import jestStore from './store.js';
-import jestEnd from './end.js';
-import jestUtils from './util.js';
-import jestType from './type.js';
-import jestService from './service.js';
+import testCore from './core';
+import testDb from './dbcon';
+import testStart from './start';
+import testOrm from './orm';
+import testStore from './store';
+import testEnd from './end';
+import testUtils from './util';
+import testType from './type';
+import testService from './service';
 
-const JestLib = {
-  jestCore,
-  jestService,
-  jestDb,
-  jestStart,
-  jestOrm,
-  jestStore,
-  jestEnd,
-  jestUtils,
-  jestType,
+const TestLib = {
+  testCore,
+  testService,
+  testDb,
+  testStart,
+  testOrm,
+  testStore,
+  testEnd,
+  testUtils,
+  testType,
 };
 
-export default JestLib;
+export default TestLib;

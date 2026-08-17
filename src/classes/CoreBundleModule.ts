@@ -1,11 +1,11 @@
-import {
+import type {
   ICoreCache,
   ICoreKernel,
   ICorePresenter,
   IDataBase,
-} from '../lib/index.js';
-import CoreClient from './CoreClient.js';
-import CoreKernelModule from './CoreKernelModule.js';
+} from '../lib';
+import CoreClient from './CoreClient';
+import CoreKernelModule from './CoreKernelModule';
 
 /**
  * An abstract base class for modules that need to perform bundle‑level initialization

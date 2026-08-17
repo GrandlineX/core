@@ -1,13 +1,14 @@
-import BadEntity from '../testClass/db/entity/BadEntity.js';
+import { describe, test, expect } from 'vitest';
+import BadEntity from '../testClass/db/entity/BadEntity';
 import {
   getColumnMeta,
   getEntityMeta,
   instanceOfEntity,
   validateColumnMeta,
   validateEntity,
-} from '../../classes/index.js';
-import TestEnt from '../testClass/db/entity/TestEnt.js';
-import { XUtil } from '../../utils/index.js';
+} from '../../classes';
+import TestEnt from '../testClass/db/entity/TestEnt';
+import { XUtil } from '../../utils';
 
 export default function jestOrm() {
   describe('orm', () => {

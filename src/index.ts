@@ -2,18 +2,17 @@
  * @name CoreKernel Main Module
  * @author David Nagy
  */
-import CoreKernel, { CoreKernelProps } from './CoreKernel.js';
-import CoreModule from './CoreModule.js';
+import CoreKernel, { type CoreKernelProps } from './CoreKernel';
+import CoreModule from './CoreModule';
 
-import initHandler from './utils/initHandler.js';
+import initHandler from './utils/initHandler';
 
-export * from './dev/index.js';
-export * from './classes/index.js';
-export * from './database/index.js';
-export * from './lib/index.js';
-export * from './modules/index.js';
-export * from './services/index.js';
-export * from './utils/index.js';
+export * from './classes';
+export * from './database';
+export * from './lib';
+export * from './modules';
+export * from './services';
+export * from './utils';
 
-export { CoreKernel, CoreModule, initHandler, CoreKernelProps };
-export default CoreKernel;
+export { CoreKernel, CoreModule, initHandler };
+export type { CoreKernelProps };

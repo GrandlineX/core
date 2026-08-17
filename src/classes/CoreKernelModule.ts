@@ -1,21 +1,21 @@
 import {
   BridgeState,
-  ICoreAction,
-  ICoreAnyModule,
-  ICoreBridge,
-  ICoreCache,
-  ICoreClient,
-  ICoreKernel,
-  ICoreKernelModule,
-  ICorePresenter,
-  ICoreService,
-  IDataBase,
-  KernelEvent,
-} from '../lib/index.js';
-import CoreAction from './CoreAction.js';
-import CoreService from './CoreService.js';
-import CoreLogChannel from './CoreLogChannel.js';
-import CoreLogger from './CoreLogger.js';
+  type ICoreAction,
+  type ICoreAnyModule,
+  type ICoreBridge,
+  type ICoreCache,
+  type ICoreClient,
+  type ICoreKernel,
+  type ICoreKernelModule,
+  type ICorePresenter,
+  type ICoreService,
+  type IDataBase,
+  type KernelEvent,
+} from '../lib';
+import CoreAction from './CoreAction';
+import CoreService from './CoreService';
+import CoreLogChannel from './CoreLogChannel';
+import CoreLogger from './CoreLogger';
 
 /**
  * Core kernel module

@@ -23,7 +23,7 @@ jobs:
         run: npm run makeDocs
 
       - name: Add testreport to docs folder
-        run: npm run doc-converage
+        run: npm run test-coverage
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4

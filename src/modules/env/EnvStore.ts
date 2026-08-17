@@ -1,10 +1,10 @@
 import * as Path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
-import { IStore } from '../../lib/index.js';
-import { EnvKey, StoreGlobal, StoreItem } from './Global.js';
-import { CoreLogChannel } from '../../classes/index.js';
-import { GlobalFolder } from '../../CoreKernel.js';
+import type { IStore } from '../../lib';
+import { type EnvKey, StoreGlobal, type StoreItem } from './Global';
+import { CoreLogChannel } from '../../classes';
+import type { GlobalFolder } from '../../CoreKernel';
 
 export type EnvStoreCProps = {
   log?: CoreLogChannel;

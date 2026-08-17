@@ -1,4 +1,4 @@
-import { ILogChannel } from '../lib/index.js';
+import type { ILogChannel } from '../lib';
 
 /**
  * Represents an error that occurs within the core system.

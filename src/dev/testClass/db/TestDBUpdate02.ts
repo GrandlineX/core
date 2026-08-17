@@ -1,4 +1,4 @@
-import { CoreDBCon, CoreDBUpdate } from '../../../classes/index.js';
+import { CoreDBCon, CoreDBUpdate } from '../../../classes';
 
 export default class TestDBUpdate02 extends CoreDBUpdate<any> {
   constructor(db: CoreDBCon<any, any>) {

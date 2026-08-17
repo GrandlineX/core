@@ -1,6 +1,6 @@
-import { IBaseDBUpdate } from '../lib/index.js';
-import CoreDBCon from './CoreDBCon.js';
-import CoreDBPrefab from './CoreDBPrefab.js';
+import type { IBaseDBUpdate } from '../lib';
+import CoreDBCon from './CoreDBCon';
+import CoreDBPrefab from './CoreDBPrefab';
 
 /**
  * Represents a migration step that updates the database schema or data from one

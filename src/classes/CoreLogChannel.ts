@@ -1,6 +1,6 @@
-import { IHaveLogger, ILogChannel } from '../lib/index.js';
-import CoreLogger, { LogLevel } from './CoreLogger.js';
-import CoreError from './CoreError.js';
+import type { IHaveLogger, ILogChannel } from '../lib';
+import CoreLogger, { LogLevel } from './CoreLogger';
+import CoreError from './CoreError';
 
 /**
  * Provides a channel‑specific wrapper around a {@link CoreLogger}.

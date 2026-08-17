@@ -1,4 +1,5 @@
-import TestContext from '../TestContext.js';
+import { describe, test, expect } from 'vitest';
+import TestContext from '../TestContext';
 
 export default function jestService() {
   describe('service', () => {

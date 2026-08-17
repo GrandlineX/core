@@ -2,9 +2,13 @@ import fs from 'fs';
 import * as Path from 'path';
 import https from 'https';
 import http from 'http';
-import { ColumnProps, getEntityMeta, IEntity } from '../classes/index.js';
-import CoreEntity from '../classes/CoreEntity.js';
-import { Executable, ExecutableOptions } from './Executable.js';
+import {
+  type ColumnProps,
+  getEntityMeta,
+  type IEntity,
+} from '../classes/annotation';
+import CoreEntity from '../classes/CoreEntity';
+import { Executable, type ExecutableOptions } from './Executable';
 
 export interface ClassNameInterface {
   className: string;

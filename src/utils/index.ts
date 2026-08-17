@@ -1,9 +1,9 @@
-import Type from './Type.js';
-import Log from './Log.js';
-import ProgressBar from './ProgressBar.js';
+import Type from './Type';
+import Log from './Log';
+import ProgressBar from './ProgressBar';
 
-export * from './EntityValidator.js';
-export * from './Executable.js';
-export * from './XUtil.js';
+export * from './EntityValidator';
+export * from './Executable';
+export * from './XUtil';
 
 export { Type, Log, ProgressBar };

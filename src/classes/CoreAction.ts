@@ -1,12 +1,12 @@
-import {
+import type {
   ICoreAction,
   ICoreCache,
   ICoreClient,
   ICoreKernel,
   ICorePresenter,
   IDataBase,
-} from '../lib/index.js';
-import CoreElement from './CoreElement.js';
+} from '../lib';
+import CoreElement from './CoreElement';
 
 /**
  * Represents an abstract core action within the application framework.

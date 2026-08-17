@@ -1,1 +1,1 @@
-export * from './cryptoUtils.js';
+export * from './cryptoUtils';

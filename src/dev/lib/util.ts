@@ -1,14 +1,10 @@
+import { describe, test, expect } from 'vitest';
 import fs from 'fs';
 import * as Path from 'node:path';
 import * as os from 'node:os';
-import { Executable, XUtil } from '../../utils/index.js';
-import {
-  CMap,
-  CoreCachedFc,
-  CoreSemaphor,
-  CoreTimeCache,
-} from '../../classes/index.js';
-import { DefaultLogger } from '../../modules/index.js';
+import { Executable, XUtil } from '../../utils';
+import { CMap, CoreCachedFc, CoreSemaphor, CoreTimeCache } from '../../classes';
+import { DefaultLogger } from '../../modules';
 
 export default function jestUtils() {
   describe('utils', () => {

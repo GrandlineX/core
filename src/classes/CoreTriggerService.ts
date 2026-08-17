@@ -1,12 +1,12 @@
-import CoreService from './CoreService.js';
-import {
+import CoreService from './CoreService';
+import type {
   ICoreCache,
   ICoreClient,
   ICoreKernel,
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib/index.js';
+} from '../lib';
 
 /**
  * Abstract service that starts automatically when a specified trigger event is emitted by the kernel.

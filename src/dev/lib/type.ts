@@ -1,4 +1,5 @@
-import Type from '../../utils/Type.js';
+import { describe, test, expect } from 'vitest';
+import Type from '../../utils/Type';
 
 export default function jestType() {
   describe('type', () => {

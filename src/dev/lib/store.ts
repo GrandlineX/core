@@ -1,8 +1,9 @@
+import { describe, test, expect } from 'vitest';
 import fs from 'fs';
 import * as Path from 'node:path';
 import * as os from 'node:os';
-import { EnvStore, StoreGlobal } from '../../modules/index.js';
-import TestContext from '../TestContext.js';
+import { EnvStore, StoreGlobal } from '../../modules';
+import TestContext from '../TestContext';
 
 export default function jestStore() {
   describe('store', () => {

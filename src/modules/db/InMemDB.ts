@@ -1,21 +1,17 @@
-import CoreDBCon from '../../classes/CoreDBCon.js';
+import CoreDBCon from '../../classes/CoreDBCon';
 import {
-  ConfigType,
-  ICoreKernelModule,
+  type ConfigType,
+  type ICoreKernelModule,
   isQInterfaceSearchAdvanced,
   isQInterfaceSearchAdvancedArr,
-  QInterfaceSearch,
-  QInterfaceSearchAdvanced,
-  QueryInterface,
-  RawQuery,
-  RawQueryResult,
-} from '../../lib/index.js';
-import CoreEntity from '../../classes/CoreEntity.js';
-import {
-  EntityConfig,
-  EUpDateProperties,
-  IEntity,
-} from '../../classes/index.js';
+  type QInterfaceSearch,
+  type QInterfaceSearchAdvanced,
+  type QueryInterface,
+  type RawQuery,
+  type RawQueryResult,
+} from '../../lib';
+import CoreEntity from '../../classes/CoreEntity';
+import type { EntityConfig, EUpDateProperties, IEntity } from '../../classes';
 
 function aFilter<E extends CoreEntity>(
   e: E[keyof E],
@@ -102,11 +98,8 @@ export default class InMemDB extends CoreDBCon<Map<string, CoreEntity[]>> {
 
   e_map: Map<string, CoreEntity[]>;
 
-  private dbCounter: number;
-
   constructor(module: ICoreKernelModule<any, any, any, any, any>) {
     super('0', 'main', module);
-    this.dbCounter = 0;
     this.map = new Map<string, ConfigType>();
     this.e_map = new Map<string, CoreEntity[]>();
   }

@@ -52,19 +52,19 @@ export default class CMap<K, V> implements Map<K, V> {
 
   size: number;
 
-  entries(): IterableIterator<[K, V]> {
+  entries(): MapIterator<[K, V]> {
     return this.store.entries();
   }
 
-  keys(): IterableIterator<K> {
+  keys(): MapIterator<K> {
     return this.store.keys();
   }
 
-  values(): IterableIterator<V> {
+  values(): MapIterator<V> {
     return this.store.values();
   }
 
-  [Symbol.iterator](): IterableIterator<[K, V]> {
+  [Symbol.iterator](): MapIterator<[K, V]> {
     return this.store[Symbol.iterator]();
   }
 

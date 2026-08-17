@@ -1,4 +1,4 @@
-import GKey from './entity/GKey.js';
-import CoreDb from './CoreDb.js';
+import GKey from './entity/GKey';
+import CoreDb from './CoreDb';
 
 export { CoreDb, GKey };

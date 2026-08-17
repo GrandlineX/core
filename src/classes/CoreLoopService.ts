@@ -1,14 +1,13 @@
-import Timeout = NodeJS.Timeout;
-import CoreService from './CoreService.js';
-import {
+import CoreService from './CoreService';
+import type {
   ICoreCache,
   ICoreClient,
   ICoreKernel,
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib/index.js';
-import { XUtil } from '../utils/index.js';
+} from '../lib';
+import { XUtil } from '../utils';
 
 /**
  * CoreLoopService is an abstract service that runs a periodic loop task.
@@ -62,7 +61,7 @@ export default abstract class CoreLoopService<
   C extends ICoreCache | null = any,
   E extends ICorePresenter<any> | null = any,
 > extends CoreService<K, T, P, C, E> {
-  interval: Timeout | null;
+  interval: NodeJS.Timeout | null;
 
   timeOut: number;
 

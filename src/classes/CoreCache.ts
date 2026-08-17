@@ -1,13 +1,13 @@
-import {
+import type {
   ICoreCache,
   ICoreClient,
   ICoreKernel,
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib/index.js';
-import CoreElement from './CoreElement.js';
-import { IEntity } from './annotation/index.js';
+} from '../lib';
+import CoreElement from './CoreElement';
+import type { IEntity } from './annotation';
 
 /**
  * Abstract base class that defines the API for cache implementations within the core framework.

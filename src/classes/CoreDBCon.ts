@@ -1,4 +1,4 @@
-import {
+import type {
   ConfigType,
   IBaseDBUpdate,
   ICoreCache,
@@ -12,19 +12,19 @@ import {
   QueryInterface,
   RawQuery,
   RawQueryResult,
-} from '../lib/index.js';
-import CoreEntity from './CoreEntity.js';
-import CoreEntityWrapper from './CoreEntityWrapper.js';
-import CoreElement from './CoreElement.js';
+} from '../lib';
+import CoreEntity from './CoreEntity';
+import CoreEntityWrapper from './CoreEntityWrapper';
+import CoreElement from './CoreElement';
 import {
-  ColumnPropMap,
-  EntityConfig,
-  EUpDateProperties,
+  type ColumnPropMap,
+  type EntityConfig,
+  type EUpDateProperties,
   getColumnMeta,
-  IEntity,
+  type IEntity,
   validateEntity,
-} from './annotation/index.js';
-import { XUtil } from '../utils/index.js';
+} from './annotation';
+import { XUtil } from '../utils';
 
 export default abstract class CoreDBCon<
     D,

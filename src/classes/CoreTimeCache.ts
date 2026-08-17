@@ -1,6 +1,6 @@
-import CoreLogChannel from './CoreLogChannel.js';
-import CMap from './CoreMap.js';
-import { IHaveLogger } from '../lib/index.js';
+import CoreLogChannel from './CoreLogChannel';
+import CMap from './CoreMap';
+import type { IHaveLogger } from '../lib';
 
 export type CachedData<T> = {
   last: number;

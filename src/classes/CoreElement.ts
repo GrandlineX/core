@@ -1,4 +1,4 @@
-import {
+import type {
   ICoreCache,
   ICoreCClient,
   ICoreClient,
@@ -8,8 +8,8 @@ import {
   ICorePresenter,
   IDataBase,
   IStore,
-} from '../lib/index.js';
-import CoreLogChannel from './CoreLogChannel.js';
+} from '../lib';
+import CoreLogChannel from './CoreLogChannel';
 
 /**
  * A fundamental building block of the kernel architecture.

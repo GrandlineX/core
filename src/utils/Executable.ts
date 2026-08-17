@@ -1,5 +1,5 @@
-import { spawn, SpawnOptionsWithoutStdio } from 'child_process';
-import { XExecResult } from './XUtil.js';
+import { spawn, type SpawnOptionsWithoutStdio } from 'child_process';
+import type { XExecResult } from './XUtil';
 
 export type ExecutableOptions = SpawnOptionsWithoutStdio & {
   onStdOut?: (m: string) => void;

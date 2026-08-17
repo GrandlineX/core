@@ -1,4 +1,4 @@
-import CoreCryptoClient from './CoreCryptoClient.js';
+import CoreCryptoClient from './CoreCryptoClient';
 
 export { CoreCryptoClient };
-export * from './utils/index.js';
+export * from './utils';

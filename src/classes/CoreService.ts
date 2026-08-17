@@ -1,5 +1,5 @@
-import CoreElement from './CoreElement.js';
-import {
+import CoreElement from './CoreElement';
+import type {
   ICoreCache,
   ICoreClient,
   ICoreKernel,
@@ -8,7 +8,7 @@ import {
   ICoreService,
   IDataBase,
   ServiceStates,
-} from '../lib/index.js';
+} from '../lib';
 
 /**
  * Abstract service class that represents a unit of functionality within the Core framework.

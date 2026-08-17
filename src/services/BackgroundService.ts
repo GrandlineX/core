@@ -1,5 +1,5 @@
-import CoreLoopService from '../classes/CoreLoopService.js';
-import { ICoreKernelModule } from '../lib/index.js';
+import CoreLoopService from '../classes/CoreLoopService';
+import type { ICoreKernelModule } from '../lib';
 
 /**
  * A service that performs background tasks on a periodic schedule.

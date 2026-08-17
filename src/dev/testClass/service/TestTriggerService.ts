@@ -1,6 +1,6 @@
-import { CoreTriggerService } from '../../../classes/index.js';
+import { CoreTriggerService } from '../../../classes';
 
-import { ICoreAnyModule } from '../../../lib/index.js';
+import type { ICoreAnyModule } from '../../../lib';
 
 export default class TestTriggerService extends CoreTriggerService {
   constructor(module: ICoreAnyModule) {

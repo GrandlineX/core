@@ -1,6 +1,6 @@
-import TestContext from './TestContext.js';
-import JestLib from './lib/index.js';
+import TestContext from './TestContext';
+import TestLib from './lib';
 
-export * from './DevKernel.js';
+export * from './DevKernel';
 
-export { TestContext, JestLib };
+export { TestContext, TestLib };

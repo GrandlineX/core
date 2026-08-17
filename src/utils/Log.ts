@@ -1,5 +1,6 @@
-import { CoreLogChannel, LogLevel } from '../classes/index.js';
-import { DefaultLogger } from '../modules/index.js';
+import CoreLogChannel from '../classes/CoreLogChannel';
+import { LogLevel } from '../classes/CoreLogger';
+import DefaultLogger from '../modules/log/DefaultLogger';
 
 export default class Log {
   private static logChannel: Map<string, CoreLogChannel> = new Map();

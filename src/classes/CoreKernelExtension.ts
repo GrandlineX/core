@@ -1,4 +1,4 @@
-import {
+import type {
   ICoreCache,
   ICoreClient,
   ICoreElement,
@@ -6,8 +6,8 @@ import {
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib/index.js';
-import CoreElement from './CoreElement.js';
+} from '../lib';
+import CoreElement from './CoreElement';
 
 /**
  * An abstract base class for kernel extensions that integrates a kernel module

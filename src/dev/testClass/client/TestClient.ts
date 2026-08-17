@@ -1,3 +1,3 @@
-import { CoreClient } from '../../../classes/index.js';
+import { CoreClient } from '../../../classes';
 
 export default class TestClient extends CoreClient {}

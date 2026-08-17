@@ -1,9 +1,13 @@
-import { CoreAction, CoreCache, CoreDBPrefab } from '../../../classes/index.js';
-import { ICoreAnyModule } from '../../../lib/index.js';
-import TestClient from '../client/TestClient.js';
-import CoreKernel from '../../../CoreKernel.js';
-import { CoreCryptoClient } from '../../../modules/index.js';
-import TestPresenter from '../client/TestPresenter.js';
+import {
+  CoreAction,
+  type CoreCache,
+  type CoreDBPrefab,
+} from '../../../classes';
+import type { ICoreAnyModule } from '../../../lib';
+import TestClient from '../client/TestClient';
+import CoreKernel from '../../../CoreKernel';
+import { CoreCryptoClient } from '../../../modules';
+import TestPresenter from '../client/TestPresenter';
 
 export default class TestAction extends CoreAction<
   CoreKernel<CoreCryptoClient>,

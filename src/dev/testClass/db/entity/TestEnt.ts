@@ -2,10 +2,10 @@ import {
   Column,
   CoreEntity,
   Entity,
-  EPropertiesOpt,
-} from '../../../../classes/index.js';
-import TestEntity from './TestEntity.js';
-import { EntityColumn } from '../../../../classes/annotation/MetaExtend.js';
+  type EPropertiesOpt,
+} from '../../../../classes';
+import TestEntity from './TestEntity';
+import { EntityColumn } from '../../../../classes';
 
 @Entity('TestEnt', 1)
 export default class TestEnt extends CoreEntity {

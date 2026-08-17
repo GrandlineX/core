@@ -1,19 +1,20 @@
-import TestEntity from '../testClass/db/entity/TestEntity.js';
+import { describe, test, expect, beforeAll } from 'vitest';
+import TestEntity from '../testClass/db/entity/TestEntity';
 import {
   CoreDBCon,
   CoreDBPrefab,
   CoreEntityWrapper,
   validateEntity,
-} from '../../classes/index.js';
-import { ICoreKernelModule, IDataBase } from '../../lib/index.js';
-import TestPrefab from '../testClass/db/TestPrefab.js';
+} from '../../classes';
+import type { ICoreKernelModule, IDataBase } from '../../lib';
+import TestPrefab from '../testClass/db/TestPrefab';
 
-import TestEntityLinked from '../testClass/db/entity/TestEntityLinked.js';
-import { EntityValidator } from '../../utils/index.js';
-import TestContext from '../TestContext.js';
-import { InMemCache } from '../../modules/index.js';
-import BadEntity from '../testClass/db/entity/BadEntity.js';
-import TestModule from '../testClass/TestModule.js';
+import TestEntityLinked from '../testClass/db/entity/TestEntityLinked';
+import { EntityValidator } from '../../utils';
+import TestContext from '../TestContext';
+import { InMemCache } from '../../modules';
+import BadEntity from '../testClass/db/entity/BadEntity';
+import TestModule from '../testClass/TestModule';
 
 export default function jestDb() {
   describe('dbcon', () => {

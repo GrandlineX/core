@@ -1,4 +1,4 @@
-import CoreKernelExtension from '../../../classes/CoreKernelExtension.js';
+import CoreKernelExtension from '../../../classes/CoreKernelExtension';
 
 export default class TestExtension extends CoreKernelExtension {
   async start(): Promise<void> {

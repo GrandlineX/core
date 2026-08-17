@@ -1,8 +1,8 @@
-import { CoreDBCon, CoreKernelModule } from './classes/index.js';
-import { InMemCache } from './modules/index.js';
-import { BackgroundService } from './services/index.js';
-import { ICoreKernel, ICoreModule } from './lib/index.js';
-import CoreDb from './database/CoreDb.js';
+import { CoreDBCon, CoreKernelModule } from './classes';
+import { InMemCache } from './modules';
+import { BackgroundService } from './services';
+import type { ICoreKernel, ICoreModule } from './lib';
+import CoreDb from './database/CoreDb';
 
 /**
  * CoreModule is the primary module that orchestrates the core services of the application.

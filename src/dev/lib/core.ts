@@ -1,23 +1,11 @@
-import {
-  ICoreAnyModule,
-  ICoreKernelModule,
-  ILogChannel,
-} from '../../lib/index.js';
-import TestService from '../testClass/service/TestService.js';
-import {
-  CoreCache,
-  CoreLogChannel,
-  CoreLogger,
-  LogLevel,
-} from '../../classes/index.js';
-import {
-  CoreCryptoClient,
-  DefaultLogger,
-  generateSeed,
-} from '../../modules/index.js';
-import { CoreDb } from '../../database/index.js';
-import TestContext from '../TestContext.js';
-import { Type, XUtil } from '../../utils/index.js';
+import { describe, test, expect } from 'vitest';
+import type { ICoreAnyModule, ICoreKernelModule, ILogChannel } from '../../lib';
+import TestService from '../testClass/service/TestService';
+import { CoreCache, CoreLogChannel, CoreLogger, LogLevel } from '../../classes';
+import { CoreCryptoClient, DefaultLogger, generateSeed } from '../../modules';
+import { CoreDb } from '../../database';
+import TestContext from '../TestContext';
+import { Type, XUtil } from '../../utils';
 
 export default function jestCore() {
   describe('core', () => {
@@ -60,11 +48,11 @@ export default function jestCore() {
       test('verbose', async () => {
         log.verbose('verbose');
       });
-      test('lError', (callback) => {
+      test('lError', () => {
         try {
           throw log.lError('TestError');
         } catch (e) {
-          callback(false);
+          expect(false).toBe(false);
         }
       });
       test('log - object', async () => {

@@ -35,7 +35,7 @@ type EOrderBy<T> = {
 }[];
 type ObjectLike = Object;
 
-export {
+export type {
   DataType,
   EPropertiesFull,
   EPropertyNames,

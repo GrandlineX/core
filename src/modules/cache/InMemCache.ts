@@ -1,6 +1,6 @@
 import { clearInterval } from 'timers';
-import { CoreCache, IEntity } from '../../classes/index.js';
-import { ICoreKernelModule } from '../../lib/index.js';
+import { CoreCache, type IEntity } from '../../classes';
+import type { ICoreKernelModule } from '../../lib';
 
 /**
  * In-memory cache implementation that extends {@link CoreCache}.

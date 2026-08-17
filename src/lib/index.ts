@@ -1,17 +1,17 @@
-import CoreLogger from '../classes/CoreLogger.js';
-import {
+import CoreLogger from '../classes/CoreLogger';
+import type {
   ColumnPropMap,
   EntityConfig,
   EOrderBy,
   EProperties,
   EUpDateProperties,
   IEntity,
-} from '../classes/annotation/index.js';
-import GKey from '../database/entity/GKey.js';
-import { EnvKey, StoreItem } from '../modules/env/Global.js';
-import CoreKernelExtension from '../classes/CoreKernelExtension.js';
-import CoreEntity from '../classes/CoreEntity.js';
-import CoreEntityWrapper from '../classes/CoreEntityWrapper.js';
+} from '../classes/annotation';
+import GKey from '../database/entity/GKey';
+import type { EnvKey, StoreItem } from '../modules/env/Global';
+import CoreKernelExtension from '../classes/CoreKernelExtension';
+import CoreEntity from '../classes/CoreEntity';
+import CoreEntityWrapper from '../classes/CoreEntityWrapper';
 
 export type ICoreModule = ICoreKernelModule<
   ICoreKernel<any>,

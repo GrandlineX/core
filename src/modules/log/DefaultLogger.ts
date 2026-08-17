@@ -1,5 +1,5 @@
-import CoreLogger from '../../classes/CoreLogger.js';
-import { XUtil } from '../../utils/index.js';
+import CoreLogger from '../../classes/CoreLogger';
+import { XUtil } from '../../utils/XUtil';
 
 export enum DC {
   'Reset' = '\x1b[0m',

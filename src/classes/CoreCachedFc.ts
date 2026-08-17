@@ -1,4 +1,4 @@
-import { CoreSemaphor } from './CoreSemaphor.js';
+import { CoreSemaphor } from './CoreSemaphor';
 
 /**
  * A cache wrapper around an asynchronous function that stores the result

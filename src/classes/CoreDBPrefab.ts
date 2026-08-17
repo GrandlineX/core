@@ -1,4 +1,4 @@
-import {
+import type {
   ConfigType,
   IBaseDBUpdate,
   IDataBase,
@@ -7,17 +7,17 @@ import {
   QueryInterface,
   RawQuery,
   RawQueryResult,
-} from '../lib/index.js';
-import CoreEntity from './CoreEntity.js';
-import CoreEntityWrapper from './CoreEntityWrapper.js';
-import CoreElement from './CoreElement.js';
-import {
+} from '../lib';
+import CoreEntity from './CoreEntity';
+import CoreEntityWrapper from './CoreEntityWrapper';
+import CoreElement from './CoreElement';
+import type {
   ColumnPropMap,
   EntityConfig,
   EUpDateProperties,
   IEntity,
-} from './annotation/index.js';
-import CoreDBCon from './CoreDBCon.js';
+} from './annotation';
+import CoreDBCon from './CoreDBCon';
 
 /**
  * Abstract base class for database prefabs that wrap a CoreDBCon instance.

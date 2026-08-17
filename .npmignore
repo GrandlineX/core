@@ -26,4 +26,5 @@ junit.xml
 .github
 CHANGELOG.md
 tsconfig.json
-tsconfig-cjs.json
+tsdown.config.ts
+vitest.config.ts

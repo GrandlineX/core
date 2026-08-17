@@ -1,6 +1,7 @@
-import { XUtil } from '../../utils/index.js';
-import TestContext from '../TestContext.js';
-import { StoreGlobal } from '../../modules/index.js';
+import { describe, test, expect } from 'vitest';
+import { XUtil } from '../../utils';
+import TestContext from '../TestContext';
+import { StoreGlobal } from '../../modules';
 
 export default function jestEnd() {
   describe('end', () => {

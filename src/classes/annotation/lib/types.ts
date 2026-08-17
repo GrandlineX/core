@@ -1,4 +1,4 @@
-import { DataType } from './props.js';
+import type { DataType } from './props';
 
 export interface ColumnPropsBase {
   primaryKey?: boolean;
@@ -38,5 +38,5 @@ function instanceOfEntity(object: any): object is IEntity {
   );
 }
 
-export { ColumnPropMap, EntityProps, EntityConfig, IEntity };
+export type { ColumnPropMap, EntityProps, EntityConfig, IEntity };
 export { instanceOfEntity };

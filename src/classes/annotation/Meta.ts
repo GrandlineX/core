@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
-import { ObjectLike } from './lib/props.js';
-import { ColumnProps, EntityProps } from './lib/types.js';
+import type { ObjectLike } from './lib/props';
+import type { ColumnProps, EntityProps } from './lib/types';
 
 const columnKey = Symbol('column');
 const entityKey = Symbol('entity');

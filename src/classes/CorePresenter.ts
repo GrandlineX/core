@@ -1,12 +1,12 @@
-import {
+import type {
   ICoreCache,
   ICoreClient,
   ICoreKernel,
   ICoreKernelModule,
   ICorePresenter,
   IDataBase,
-} from '../lib/index.js';
-import CoreElement from './CoreElement.js';
+} from '../lib';
+import CoreElement from './CoreElement';
 
 /**
  * Base class for presenters within the Core framework.

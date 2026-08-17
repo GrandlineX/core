@@ -1,4 +1,5 @@
-import EnvStore, { EnvStoreCProps } from './EnvStore.js';
+import EnvStore, { type EnvStoreCProps } from './EnvStore';
 
-export * from './Global.js';
-export { EnvStore, EnvStoreCProps };
+export * from './Global';
+export { EnvStore };
+export type { EnvStoreCProps };

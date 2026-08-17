@@ -1,19 +1,19 @@
-import CoreEntity from './CoreEntity.js';
-import {
+import CoreEntity from './CoreEntity';
+import type {
   FindOrCreateResult,
   ICoreCache,
   ICoreEntityHandler,
   QInterface,
   QInterfaceSearch,
-} from '../lib/index.js';
+} from '../lib';
 import {
-  ColumnPropMap,
-  ColumnProps,
-  EUpDateProperties,
+  type ColumnPropMap,
+  type ColumnProps,
+  type EUpDateProperties,
   getColumnMeta,
-} from './annotation/index.js';
-import { EntityValidator } from '../utils/index.js';
-import CMap from './CoreMap.js';
+} from './annotation';
+import { EntityValidator } from '../utils';
+import CMap from './CoreMap';
 
 /**
  * A wrapper for CoreEntity operations providing a convenient API for CRUD
