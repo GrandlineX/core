@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.89% </span>
+                <span class="strong">83.21% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>125/149</span>
+                <span class='fraction'>119/143</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.57% </span>
+                <span class="strong">61.7% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>24/35</span>
+                <span class='fraction'>29/47</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.86% </span>
+                <span class="strong">86.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>119/137</span>
+                <span class='fraction'>113/131</span>
             </div>
         
             
@@ -598,18 +598,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -663,7 +651,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1105,7 +1105,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type {
   ICoreAction,
   ICoreAnyModule,
   ICoreCClient,
@@ -1117,21 +1117,21 @@
   IHaveLogger,
   IStore,
   KernelEvent,
-} from './lib/index.js';
+} from './lib';
 &nbsp;
-import initHandler from './utils/initHandler.js';
-import { CMap, CoreLogChannel, CoreLogger } from './classes/index.js';
+import initHandler from './utils/initHandler';
+import { CMap, CoreLogChannel, CoreLogger } from './classes';
 &nbsp;
 import {
   DefaultLogger,
   EnvStore,
-  EnvStoreCProps,
+  type EnvStoreCProps,
   InMemDB,
   StoreGlobal,
-} from './modules/index.js';
-import CoreModule from './CoreModule.js';
-import { XUtil } from './utils/index.js';
-import CoreKernelExtension from './classes/CoreKernelExtension.js';
+} from './modules';
+import CoreModule from './CoreModule';
+import { XUtil } from './utils';
+import CoreKernelExtension from './classes/CoreKernelExtension';
 &nbsp;
 /**
  *  Core Kernel class
@@ -1275,14 +1275,14 @@ export default abstract class CoreKernel&lt;
     }
     this.setLogger(this.globalLogger);
     const log = this.envStore.get(StoreGlobal.GLOBAL_LOG_LEVEL);
-    if (log) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (log) {
       this.globalLogger.setLogLevel(log);
     }
 &nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (overrideGlobalConsoleLog) {
-<span class="cstat-no" title="statement not covered" >      globalThis.console.log = <span class="fstat-no" title="function not covered" >(x</span>: any) =&gt; <span class="cstat-no" title="statement not covered" >this.log(x);</span></span>
-<span class="cstat-no" title="statement not covered" >      globalThis.console.warn = <span class="fstat-no" title="function not covered" >(x</span>: any) =&gt; <span class="cstat-no" title="statement not covered" >this.warn(x);</span></span>
-<span class="cstat-no" title="statement not covered" >      globalThis.console.error = <span class="fstat-no" title="function not covered" >(x</span>: any) =&gt; <span class="cstat-no" title="statement not covered" >this.error(x);</span></span>
+<span class="cstat-no" title="statement not covered" >      globalThis.console.<span class="fstat-no" title="function not covered" >log = (x</span>: any) =&gt; <span class="cstat-no" title="statement not covered" >this.log(x);</span></span>
+<span class="cstat-no" title="statement not covered" >      globalThis.console.<span class="fstat-no" title="function not covered" >warn = (x</span>: any) =&gt; <span class="cstat-no" title="statement not covered" >this.warn(x);</span></span>
+<span class="cstat-no" title="statement not covered" >      globalThis.console.<span class="fstat-no" title="function not covered" >error = (x</span>: any) =&gt; <span class="cstat-no" title="statement not covered" >this.error(x);</span></span>
     }
 &nbsp;
     this.globalFolderKeys =
@@ -1306,7 +1306,7 @@ export default abstract class CoreKernel&lt;
    * get base kernel module
    */
   getModule(): Y {
-    if (this.kernelModule) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.kernelModule) {
       return this.kernelModule;
     }
 <span class="cstat-no" title="statement not covered" >    throw this.lError('No Base module found');</span>
@@ -1439,7 +1439,7 @@ export default abstract class CoreKernel&lt;
    * Set the offline flag
    * @param mode
    */
-<span class="fstat-no" title="function not covered" >  setOffline(</span>mode: boolean): void {
+<span class="fstat-no" title="function not covered" >  setOffline(m</span>ode: boolean): void {
 <span class="cstat-no" title="statement not covered" >    this.offline = mode;</span>
   }
 &nbsp;
@@ -1488,8 +1488,8 @@ export default abstract class CoreKernel&lt;
    * @see CoreKernelExtension
    * @param name Name of the extension
    */
-<span class="fstat-no" title="function not covered" >  getExtension&lt;</span>A extends CoreKernelExtension&gt;(name: string): A {
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.extension.get(name)) {</span>
+<span class="fstat-no" title="function not covered" >  getExtension&lt;A extends CoreKernelExtension&gt;(n</span>ame: string): A {
+<span class="cstat-no" title="statement not covered" >    if (!this.extension.get(name)) {</span>
 <span class="cstat-no" title="statement not covered" >      throw this.lError('Extension missing in CoreKernelExtension');</span>
     }
 <span class="cstat-no" title="statement not covered" >    return this.extension.get(name) as A;</span>
@@ -1499,7 +1499,7 @@ export default abstract class CoreKernel&lt;
     this.kernelModule = module;
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  setCoreModule&lt;</span>E extends ICoreModule&gt;(module: E): void {
+<span class="fstat-no" title="function not covered" >  setCoreModule&lt;E extends ICoreModule&gt;(m</span>odule: E): void {
 <span class="cstat-no" title="statement not covered" >    this.coreModule = module;</span>
   }
 &nbsp;
@@ -1532,7 +1532,7 @@ export default abstract class CoreKernel&lt;
   private preloadSetup() {
     const st = this.getConfigStore();
     this.appVersion = st.get(StoreGlobal.GLOBAL_APP_VERSION) ?? <span class="branch-1 cbranch-no" title="branch not covered" >'';</span>
-    if (!this.folderCreateSkip) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.folderCreateSkip) {
       try {
         XUtil.createFolderBulk(
           st.get(StoreGlobal.GLOBAL_PATH_HOME) || <span class="branch-1 cbranch-no" title="branch not covered" >'',</span>
@@ -1550,7 +1550,7 @@ export default abstract class CoreKernel&lt;
 &nbsp;
       for (const folder of this.globalFolderKeys) {
         const fPath = st.get(folder)!;
-        if (XUtil.createFolderIfNotExist(fPath)) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (XUtil.createFolderIfNotExist(fPath)) {
           this.debug(`Global folder for ${folder} @${fPath} created`);
         }
       }
@@ -1566,7 +1566,7 @@ export default abstract class CoreKernel&lt;
       `Starting Kernel`,
       `⊢ Code:           ${this.appCode}`,
       `⊢ Version:        ${this.envStore.get(StoreGlobal.GLOBAL_APP_VERSION)}`,
-      `⊢ Mode:           ${this.devMode ? <span class="branch-0 cbranch-no" title="branch not covered" >'Dev' </span>: 'Prod'}`,
+      `⊢ Mode:           ${this.devMode ? <span class="branch-0 cbranch-no" title="branch not covered" >'Dev' : '</span>Prod'}`,
       `⊢ Mod count:      ${this.moduleList.length}`,
       `⊢ Action count:   ${this.getActionList().length}`,
       `⊢ Service count:  ${this.getServiceList().length}`,
@@ -1586,7 +1586,7 @@ export default abstract class CoreKernel&lt;
     await this.getModule().start();
     await Promise.all(
       this.extension.map((e) =&gt; {
-        if (e.start !== undefined) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (e.start !== undefined) {
           return e.start();
         }
 <span class="cstat-no" title="statement not covered" >        return Promise.resolve();</span>
@@ -1595,7 +1595,7 @@ export default abstract class CoreKernel&lt;
     await this.getCoreModule().final();
     await this.getModule().final();
     for (const mod of this.moduleList) {
-      if (mod.final !== undefined) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (mod.final !== undefined) {
         await mod.final();
       }
     }
@@ -1605,8 +1605,8 @@ export default abstract class CoreKernel&lt;
   getActionList(full = false): ICoreAction[] {
     const out: ICoreAction[] = [];
     if (full) {
-      this.coreModule.getActionList().forEach(<span class="fstat-no" title="function not covered" >(e</span>l) =&gt; <span class="cstat-no" title="statement not covered" >out.push(el))</span>;
-      this.kernelModule?.getActionList().forEach(<span class="fstat-no" title="function not covered" >(e</span>l) =&gt; <span class="cstat-no" title="statement not covered" >out.push(el))</span>;
+      this.coreModule.getActionList().<span class="fstat-no" title="function not covered" >forEach((e</span>l) =&gt; <span class="cstat-no" title="statement not covered" >out.push(el))</span>;
+      this.kernelModule?.getActionList().<span class="fstat-no" title="function not covered" >forEach((e</span>l) =&gt; <span class="cstat-no" title="statement not covered" >out.push(el))</span>;
     }
     this.moduleList.forEach((el) =&gt; {
       out.push(...el.getActionList());
@@ -1618,7 +1618,7 @@ export default abstract class CoreKernel&lt;
     const out: ICoreService[] = [];
     if (full) {
       this.coreModule.getServiceList().forEach((el) =&gt; out.push(el));
-      this.kernelModule?.getServiceList().forEach(<span class="fstat-no" title="function not covered" >(e</span>l) =&gt; <span class="cstat-no" title="statement not covered" >out.push(el))</span>;
+      this.kernelModule?.getServiceList().<span class="fstat-no" title="function not covered" >forEach((e</span>l) =&gt; <span class="cstat-no" title="statement not covered" >out.push(el))</span>;
     }
     this.moduleList.forEach((el) =&gt; {
       out.push(...el.getServiceList());
@@ -1633,7 +1633,7 @@ export default abstract class CoreKernel&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-11T02:47:26.669Z
+                at 2026-08-17T08:40:53.942Z
             </div>
         <script src="../prettify.js"></script>
         <script>

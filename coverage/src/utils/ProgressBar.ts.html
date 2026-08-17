@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.03% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/66</span>
+                <span class='fraction'>0/64</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/26</span>
+                <span class='fraction'>0/29</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.03% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/66</span>
+                <span class='fraction'>0/64</span>
             </div>
         
             
@@ -226,7 +226,7 @@
 <a name='L161'></a><a href='#L161'>161</a>
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
-<a name='L164'></a><a href='#L164'>164</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L164'></a><a href='#L164'>164</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -265,7 +265,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -391,29 +391,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import process from 'process';
 &nbsp;
-function <span class="fstat-no" title="function not covered" >clamp(</span>n: number, min: number, max: number): number {
+function <span class="fstat-no" title="function not covered" >clamp(n</span>: number, min: number, max: number): number {
 <span class="cstat-no" title="statement not covered" >  return Math.min(max, Math.max(min, n));</span>
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >pad2(</span>n: number): string {
+function <span class="fstat-no" title="function not covered" >pad2(n</span>: number): string {
 <span class="cstat-no" title="statement not covered" >  return n &lt; 10 ? `0${n}` : `${n}`;</span>
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >formatDuration(</span>ms: number): string {
+function <span class="fstat-no" title="function not covered" >formatDuration(m</span>s: number): string {
   const totalSec = <span class="cstat-no" title="statement not covered" >Math.max(0, Math.floor(ms / 1000));</span>
   const minutes = <span class="cstat-no" title="statement not covered" >Math.floor(totalSec / 60);</span>
   const seconds = <span class="cstat-no" title="statement not covered" >totalSec % 60;</span>
 <span class="cstat-no" title="statement not covered" >  return `${pad2(minutes)}:${pad2(seconds)}`;</span>
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >stripAnsi(</span>input: string): string {
+function <span class="fstat-no" title="function not covered" >stripAnsi(i</span>nput: string): string {
   // Remove ANSI escape sequences so padEnd uses visible text length.
   // eslint-disable-next-line no-control-regex
 <span class="cstat-no" title="statement not covered" >  return input.replace(/\x1b\[[0-9;]*m/g, '');</span>
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >color(</span>enabled: boolean, code: string, text: string): string {
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!enabled) {</span>
+function <span class="fstat-no" title="function not covered" >color(e</span>nabled: boolean, code: string, text: string): string {
+<span class="cstat-no" title="statement not covered" >  if (!enabled) {</span>
 <span class="cstat-no" title="statement not covered" >    return text;</span>
   }
 <span class="cstat-no" title="statement not covered" >  return `\x1b[${code}m${text}\x1b[0m`;</span>
@@ -460,13 +460,13 @@ export default class ProgressBar {
 &nbsp;
   private readonly colorEnabled = <span class="cstat-no" title="statement not covered" >Boolean(process.stdout.isTTY);</span>
 &nbsp;
-<span class="fstat-no" title="function not covered" >  constructor(e</span>nd: number = <span class="branch-0 cbranch-no" title="branch not covered" >1)</span> {
+<span class="fstat-no" title="function not covered" >  constructor(e</span>nd: number = <span class="branch-0 cbranch-no" title="branch not covered" >1) {</span>
 <span class="cstat-no" title="statement not covered" >    this.startMs = Date.now();</span>
 <span class="cstat-no" title="statement not covered" >    this.cur = 0;</span>
 <span class="cstat-no" title="statement not covered" >    this.end = end;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  reset(</span>): void {
+<span class="fstat-no" title="function not covered" >  reset(): void {</span>
 <span class="cstat-no" title="statement not covered" >    this.startMs = Date.now();</span>
 <span class="cstat-no" title="statement not covered" >    this.cur = 0;</span>
 <span class="cstat-no" title="statement not covered" >    this.maxLength = 0;</span>
@@ -474,30 +474,30 @@ export default class ProgressBar {
 <span class="cstat-no" title="statement not covered" >    this.info = null;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  setEnd(</span>end: number): void {
+<span class="fstat-no" title="function not covered" >  setEnd(e</span>nd: number): void {
 <span class="cstat-no" title="statement not covered" >    this.end = end;</span>
 <span class="cstat-no" title="statement not covered" >    this.update();</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  setInfo(</span>info: string | null): void {
+<span class="fstat-no" title="function not covered" >  setInfo(i</span>nfo: string | null): void {
 <span class="cstat-no" title="statement not covered" >    this.info = info;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  setState(</span>cur: number, info?: string | null): void {
+<span class="fstat-no" title="function not covered" >  setState(c</span>ur: number, info?: string | null): void {
 <span class="cstat-no" title="statement not covered" >    this.cur = cur;</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (info !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >    if (info !== undefined) {</span>
 <span class="cstat-no" title="statement not covered" >      this.info = info;</span>
     }
 <span class="cstat-no" title="statement not covered" >    this.update();</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  done(</span>): void {
+<span class="fstat-no" title="function not covered" >  done(): void {</span>
 <span class="cstat-no" title="statement not covered" >    this.cur = this.end;</span>
     const line = <span class="cstat-no" title="statement not covered" >this.renderLine(true);</span>
 <span class="cstat-no" title="statement not covered" >    process.stdout.write(`${line}\r\n`);</span>
   }
 &nbsp;
-  private <span class="fstat-no" title="function not covered" >renderLine(</span>isDone: boolean): string {
+<span class="fstat-no" title="function not covered" >  private r</span>enderLine(isDone: boolean): string {
     const safeEnd = <span class="cstat-no" title="statement not covered" >this.end &lt;= 0 ? 1 : this.end;</span>
     const curClamped = <span class="cstat-no" title="statement not covered" >clamp(this.cur, 0, safeEnd);</span>
     const ratio = <span class="cstat-no" title="statement not covered" >clamp(curClamped / safeEnd, 0, 1);</span>
@@ -536,7 +536,7 @@ export default class ProgressBar {
     let line = <span class="cstat-no" title="statement not covered" >`${frame} ${status} [${bar}] ${perc.toFixed(1)}% (${timeText}) ${speed.toFixed(1)}/s${infoText}`;</span>
 &nbsp;
     const visibleLen = <span class="cstat-no" title="statement not covered" >stripAnsi(line).length;</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (visibleLen &gt; this.maxLength) {</span>
+<span class="cstat-no" title="statement not covered" >    if (visibleLen &gt; this.maxLength) {</span>
 <span class="cstat-no" title="statement not covered" >      this.maxLength = visibleLen;</span>
     }
 &nbsp;
@@ -547,7 +547,7 @@ export default class ProgressBar {
 <span class="cstat-no" title="statement not covered" >    return line;</span>
   }
 &nbsp;
-  private <span class="fstat-no" title="function not covered" >update(</span>): void {
+<span class="fstat-no" title="function not covered" >  private u</span>pdate(): void {
     const line = <span class="cstat-no" title="statement not covered" >this.renderLine(false);</span>
 <span class="cstat-no" title="statement not covered" >    process.stdout.write(`${line}\r`);</span>
   }
@@ -559,7 +559,7 @@ export default class ProgressBar {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-11T02:47:26.669Z
+                at 2026-08-17T08:40:53.942Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

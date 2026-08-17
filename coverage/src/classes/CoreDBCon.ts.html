@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.53% </span>
+                <span class="strong">74.15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>71/94</span>
+                <span class='fraction'>66/89</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/22</span>
+                <span class='fraction'>24/39</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.34% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>71/93</span>
+                <span class='fraction'>66/88</span>
             </div>
         
             
@@ -470,9 +470,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -480,9 +477,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -845,7 +845,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type {
   ConfigType,
   IBaseDBUpdate,
   ICoreCache,
@@ -859,19 +859,19 @@
   QueryInterface,
   RawQuery,
   RawQueryResult,
-} from '../lib/index.js';
-import CoreEntity from './CoreEntity.js';
-import CoreEntityWrapper from './CoreEntityWrapper.js';
-import CoreElement from './CoreElement.js';
+} from '../lib';
+import CoreEntity from './CoreEntity';
+import CoreEntityWrapper from './CoreEntityWrapper';
+import CoreElement from './CoreElement';
 import {
-  ColumnPropMap,
-  EntityConfig,
-  EUpDateProperties,
+  type ColumnPropMap,
+  type EntityConfig,
+  type EUpDateProperties,
   getColumnMeta,
-  IEntity,
+  type IEntity,
   validateEntity,
-} from './annotation/index.js';
-import { XUtil } from '../utils/index.js';
+} from './annotation';
+import { XUtil } from '../utils';
 &nbsp;
 export default abstract class CoreDBCon&lt;
     D,
@@ -989,9 +989,9 @@ export default abstract class CoreDBCon&lt;
   }
 &nbsp;
   async update(): Promise&lt;boolean&gt; {
-    if (this.updater &amp;&amp; (await this.canUpdate())) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.updater &amp;&amp; (await this.canUpdate())) {
       const update = this.updater.find(await this.getCurrenDBVersion());
-      if (update) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (update) {
         return update.update();
       }
     }
@@ -1014,12 +1014,12 @@ export default abstract class CoreDBCon&lt;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (await this.canUpdate()) {
 <span class="cstat-no" title="statement not covered" >      await this.update();</span>
     }
-    if (this.isNew) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.isNew) {
       const keys = this.wrapperMap.keys();
       let key = keys.next().value;
       while (key) {
         const wrapper = this.wrapperMap.get(key);
-        if (wrapper) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (wrapper) {
           await wrapper.init();
         }
         key = keys.next().value;
@@ -1157,12 +1157,12 @@ export default abstract class CoreDBCon&lt;
     Z extends CoreEntity,
   &gt;(entity: E, field: EK): Promise&lt;PopulatedResult&lt;E, EK, Z&gt;&gt; {
     const meta = getColumnMeta(entity, field);
-    if (!meta?.foreignKey) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!meta?.foreignKey) {
       throw this.lError(
         `No foreignKey relation metadata found for field "${String(field)}"`,
       );
     }
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (meta.foreignKey.schema) {</span>
+<span class="cstat-no" title="statement not covered" >    if (meta.foreignKey.schema) {</span>
 <span class="cstat-no" title="statement not covered" >      throw this.lError(</span>
         `Cross schema relations are not supported for field "${String(field)}"`,
       );
@@ -1170,7 +1170,7 @@ export default abstract class CoreDBCon&lt;
     const targetWrapper = <span class="cstat-no" title="statement not covered" >this.getEntityWrapper&lt;Z&gt;(meta.foreignKey.relation);</span>
 &nbsp;
     const search: QInterfaceSearch&lt;Z&gt; = <span class="cstat-no" title="statement not covered" >{};</span>
-    (<span class="cstat-no" title="statement not covered" >search as any)[meta.foreignKey.key] = entity[field];</span>
+<span class="cstat-no" title="statement not covered" >    (search as any)[meta.foreignKey.key] = entity[field];</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
       ...entity,
       [field]: (await targetWrapper.findObj(search))!,
@@ -1182,16 +1182,16 @@ export default abstract class CoreDBCon&lt;
     EK extends keyof E,
     Z extends CoreEntity,
   &gt;(entity: E[], field: EK): Promise&lt;PopulatedResult&lt;E, EK, Z&gt;[]&gt; {
-    if (entity.length === 0) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (entity.length === 0) {
       return [];
     }
     const meta = <span class="cstat-no" title="statement not covered" >getColumnMeta(entity[0], field);</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!meta?.foreignKey) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!meta?.foreignKey) {</span>
 <span class="cstat-no" title="statement not covered" >      throw this.lError(</span>
         `No foreignKey relation metadata found for field "${String(field)}"`,
       );
     }
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (meta.foreignKey.schema) {</span>
+<span class="cstat-no" title="statement not covered" >    if (meta.foreignKey.schema) {</span>
 <span class="cstat-no" title="statement not covered" >      throw this.lError(</span>
         `Cross schema relations are not supported for field "${String(field)}"`,
       );
@@ -1199,17 +1199,17 @@ export default abstract class CoreDBCon&lt;
     const targetWrapper = <span class="cstat-no" title="statement not covered" >this.getEntityWrapper&lt;Z&gt;(meta.foreignKey.relation);</span>
 &nbsp;
     const search: QInterfaceSearch&lt;Z&gt; = <span class="cstat-no" title="statement not covered" >{};</span>
-    (<span class="cstat-no" title="statement not covered" >search as any)[meta.foreignKey.key] = {</span>
+<span class="cstat-no" title="statement not covered" >    (search as any)[meta.foreignKey.key] = {</span>
       mode: 'in',
-      value: entity.map(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e[field])</span>,
+      value: entity.<span class="fstat-no" title="function not covered" >map((e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e[field])</span>,
     };
 &nbsp;
     const result = <span class="cstat-no" title="statement not covered" >await targetWrapper.getObjList({ search });</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return entity.map&lt;PopulatedResult&lt;E, EK, Z&gt;&gt;(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >    return entity.<span class="fstat-no" title="function not covered" >map&lt;PopulatedResult&lt;E, EK, Z&gt;&gt;((e</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
       ...e,
-      [field]: result.find(
-<span class="fstat-no" title="function not covered" >        (x</span>) =&gt;
+      [field]: result.<span class="fstat-no" title="function not covered" >find(</span>
+        (x) =&gt;
           (<span class="cstat-no" title="statement not covered" >x as Record&lt;string, unknown&gt;)[meta.foreignKey!.key] === e[field],</span>
       )!,
     }));
@@ -1243,7 +1243,7 @@ export default abstract class CoreDBCon&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-11T02:47:26.669Z
+                at 2026-08-17T08:40:53.942Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

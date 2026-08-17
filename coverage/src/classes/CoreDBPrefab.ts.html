@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.79% </span>
+                <span class="strong">60.97% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/43</span>
+                <span class='fraction'>25/41</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.79% </span>
+                <span class="strong">60.97% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/43</span>
+                <span class='fraction'>25/41</span>
             </div>
         
             
@@ -362,7 +362,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -383,7 +382,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -637,7 +637,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type {
   ConfigType,
   IBaseDBUpdate,
   IDataBase,
@@ -646,17 +646,17 @@
   QueryInterface,
   RawQuery,
   RawQueryResult,
-} from '../lib/index.js';
-import CoreEntity from './CoreEntity.js';
-import CoreEntityWrapper from './CoreEntityWrapper.js';
-import CoreElement from './CoreElement.js';
-import {
+} from '../lib';
+import CoreEntity from './CoreEntity';
+import CoreEntityWrapper from './CoreEntityWrapper';
+import CoreElement from './CoreElement';
+import type {
   ColumnPropMap,
   EntityConfig,
   EUpDateProperties,
   IEntity,
-} from './annotation/index.js';
-import CoreDBCon from './CoreDBCon.js';
+} from './annotation';
+import CoreDBCon from './CoreDBCon';
 &nbsp;
 /**
  * Abstract base class for database prefabs that wrap a CoreDBCon instance.
@@ -711,7 +711,7 @@ export default abstract class CoreDBPrefab&lt;
     this.db.setUpdateChain(...chain);
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>canUpdate(): Promise&lt;boolean&gt; {
+  async <span class="fstat-no" title="function not covered" >canUpdate(): Promise&lt;boolean&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    return this.db.canUpdate();</span>
   }
 &nbsp;
@@ -719,7 +719,7 @@ export default abstract class CoreDBPrefab&lt;
     return this.db.getCurrenDBVersion();
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>update(): Promise&lt;boolean&gt; {
+  async <span class="fstat-no" title="function not covered" >update(): Promise&lt;boolean&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    return this.db.update();</span>
   }
 &nbsp;
@@ -727,13 +727,13 @@ export default abstract class CoreDBPrefab&lt;
     return this.db.isConnected();
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  setConnected(</span>): void {
+<span class="fstat-no" title="function not covered" >  setConnected(): void {</span>
 <span class="cstat-no" title="statement not covered" >    this.db.setConnected();</span>
   }
 &nbsp;
   async start(): Promise&lt;void&gt; {
     await this.db.start();
-    if (this.db.getNew()) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.db.getNew()) {
       await this.initPrefabDB();
     }
   }
@@ -742,7 +742,7 @@ export default abstract class CoreDBPrefab&lt;
     return this.db.disconnect();
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>connect(): Promise&lt;boolean&gt; {
+  async <span class="fstat-no" title="function not covered" >connect(): Promise&lt;boolean&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    return this.db.connect();</span>
   }
 &nbsp;
@@ -774,7 +774,7 @@ export default abstract class CoreDBPrefab&lt;
     return this.db.getRawDBObject();
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>initNewDB(): Promise&lt;void&gt; {
+  async <span class="fstat-no" title="function not covered" >initNewDB(): Promise&lt;void&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    await this.db.initNewDB();</span>
 <span class="cstat-no" title="statement not covered" >    await this.initPrefabDB();</span>
   }
@@ -784,7 +784,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param config
    * @param entity
    */
-<span class="fstat-no" title="function not covered" >  async </span>createEntity&lt;E extends CoreEntity&gt;(
+  async <span class="fstat-no" title="function not covered" >createEntity&lt;E extends CoreEntity&gt;(</span>
     config: EntityConfig&lt;E&gt;,
     entity: E,
   ): Promise&lt;E&gt; {
@@ -797,7 +797,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param e_id
    * @param entity
    */
-<span class="fstat-no" title="function not covered" >  async </span>updateEntity&lt;E extends CoreEntity&gt;(
+  async <span class="fstat-no" title="function not covered" >updateEntity&lt;E extends CoreEntity&gt;(</span>
     config: EntityConfig&lt;E&gt;,
     e_id: string,
     entity: EUpDateProperties&lt;E&gt;,
@@ -811,7 +811,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param e_id
    * @param entity
    */
-<span class="fstat-no" title="function not covered" >  async </span>updateBulkEntity&lt;E extends IEntity&gt;(
+  async <span class="fstat-no" title="function not covered" >updateBulkEntity&lt;E extends IEntity&gt;(</span>
     config: EntityConfig&lt;E&gt;,
     e_id: string[],
     entity: EUpDateProperties&lt;E&gt;,
@@ -824,7 +824,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param config
    * @param id
    */
-<span class="fstat-no" title="function not covered" >  async </span>getEntityById&lt;E extends CoreEntity&gt;(
+  async <span class="fstat-no" title="function not covered" >getEntityById&lt;E extends CoreEntity&gt;(</span>
     config: EntityConfig&lt;E&gt;,
     id: string,
   ): Promise&lt;E | null&gt; {
@@ -836,7 +836,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param config
    * @param id
    */
-<span class="fstat-no" title="function not covered" >  async </span>getEntityBulkById&lt;E extends CoreEntity&gt;(
+  async <span class="fstat-no" title="function not covered" >getEntityBulkById&lt;E extends CoreEntity&gt;(</span>
     config: EntityConfig&lt;E&gt;,
     id: string[],
   ): Promise&lt;E[]&gt; {
@@ -848,7 +848,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param className
    * @param e_id
    */
-<span class="fstat-no" title="function not covered" >  async </span>deleteEntityById(className: string, e_id: string): Promise&lt;boolean&gt; {
+  async <span class="fstat-no" title="function not covered" >deleteEntityById(c</span>lassName: string, e_id: string): Promise&lt;boolean&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.deleteEntityById(className, e_id);</span>
   }
 &nbsp;
@@ -857,7 +857,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param className
    * @param e_id
    */
-<span class="fstat-no" title="function not covered" >  deleteEntityBulkById(</span>className: string, e_id: string[]): Promise&lt;boolean&gt; {
+<span class="fstat-no" title="function not covered" >  deleteEntityBulkById(c</span>lassName: string, e_id: string[]): Promise&lt;boolean&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.deleteEntityBulkById(className, e_id);</span>
   }
 &nbsp;
@@ -865,7 +865,7 @@ export default abstract class CoreDBPrefab&lt;
    * Get Entity object list
    * @param query
    */
-<span class="fstat-no" title="function not covered" >  async </span>getEntityList&lt;E extends CoreEntity&gt;(
+  async <span class="fstat-no" title="function not covered" >getEntityList&lt;E extends CoreEntity&gt;(</span>
     query: QueryInterface&lt;E&gt;,
   ): Promise&lt;E[]&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.db.getEntityList&lt;E&gt;(query);</span>
@@ -876,7 +876,7 @@ export default abstract class CoreDBPrefab&lt;
    * @param config
    * @param search
    */
-<span class="fstat-no" title="function not covered" >  async </span>findEntity&lt;E extends CoreEntity&gt;(
+  async <span class="fstat-no" title="function not covered" >findEntity&lt;E extends CoreEntity&gt;(</span>
     config: EntityConfig&lt;E&gt;,
     search: {
       [P in keyof E]?: E[P];
@@ -897,7 +897,7 @@ export default abstract class CoreDBPrefab&lt;
     return this.db.initEntity&lt;E&gt;(className, entity);
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  countEntity&lt;</span>E extends IEntity&gt;(
+<span class="fstat-no" title="function not covered" >  countEntity&lt;E extends IEntity&gt;(</span>
     config: EntityConfig&lt;E&gt;,
     search: QInterfaceSearch&lt;E&gt;,
   ): Promise&lt;number&gt; {
@@ -931,7 +931,7 @@ export default abstract class CoreDBPrefab&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-11T02:47:26.669Z
+                at 2026-08-17T08:40:53.942Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

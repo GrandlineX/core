@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.19% </span>
+                <span class="strong">89.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>92/102</span>
+                <span class='fraction'>89/99</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">70.83% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/13</span>
+                <span class='fraction'>17/24</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.89% </span>
+                <span class="strong">89.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>89/99</span>
+                <span class='fraction'>86/96</span>
             </div>
         
             
@@ -551,23 +551,7 @@
 <a name='L486'></a><a href='#L486'>486</a>
 <a name='L487'></a><a href='#L487'>487</a>
 <a name='L488'></a><a href='#L488'>488</a>
-<a name='L489'></a><a href='#L489'>489</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L489'></a><a href='#L489'>489</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -614,7 +598,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1041,22 +1041,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   BridgeState,
-  ICoreAction,
-  ICoreAnyModule,
-  ICoreBridge,
-  ICoreCache,
-  ICoreClient,
-  ICoreKernel,
-  ICoreKernelModule,
-  ICorePresenter,
-  ICoreService,
-  IDataBase,
-  KernelEvent,
-} from '../lib/index.js';
-import CoreAction from './CoreAction.js';
-import CoreService from './CoreService.js';
-import CoreLogChannel from './CoreLogChannel.js';
-import CoreLogger from './CoreLogger.js';
+  type ICoreAction,
+  type ICoreAnyModule,
+  type ICoreBridge,
+  type ICoreCache,
+  type ICoreClient,
+  type ICoreKernel,
+  type ICoreKernelModule,
+  type ICorePresenter,
+  type ICoreService,
+  type IDataBase,
+  type KernelEvent,
+} from '../lib';
+import CoreAction from './CoreAction';
+import CoreService from './CoreService';
+import CoreLogChannel from './CoreLogChannel';
+import CoreLogger from './CoreLogger';
 &nbsp;
 /**
  * Core kernel module
@@ -1446,7 +1446,7 @@ export default abstract class CoreKernelModule&lt;
    */
   async stopService(name: string): Promise&lt;ICoreService | null&gt; {
     const s = this.servicelist.get(name);
-    if (!s?.isRunning()) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!s?.isRunning()) {
       return null;
     }
 <span class="cstat-no" title="statement not covered" >    s.stop();</span>
@@ -1462,7 +1462,7 @@ export default abstract class CoreKernelModule&lt;
    */
   async startService(name: string): Promise&lt;ICoreService | null&gt; {
     const s = this.servicelist.get(name);
-    if (!s || <span class="branch-1 cbranch-no" title="branch not covered" >s.isRunning())</span> {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!s || <span class="branch-1 cbranch-no" title="branch not covered" >s.isRunning()) {</span>
       return null;
     }
 <span class="cstat-no" title="statement not covered" >    s.start();</span>
@@ -1534,7 +1534,7 @@ export default abstract class CoreKernelModule&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-11T02:47:26.669Z
+                at 2026-08-17T08:40:53.942Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
