@@ -16,14 +16,14 @@ timestamps, and object stringification. The logger categorizes messages by level
 (debug, error, info, log, verbose, warn) and prefixes each line with a mode
 identifier and an optional timestamp.</p>
 </div></section>
-<section class="tsd-panel tsd-hierarchy" data-refl="3424">
+<section class="tsd-panel tsd-hierarchy" data-refl="1118">
 <h4>Hierarchy (<a href="../hierarchy.html#DefaultLogger">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><a href="CoreLogger.html" class="tsd-signature-type tsd-kind-class">CoreLogger</a>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">DefaultLogger</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L35">modules/log/DefaultLogger.ts:35</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L35">modules/log/DefaultLogger.ts:35</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -37,6 +37,7 @@ identifier and an optional timestamp.</p>
 <h3 class="tsd-index-heading tsd-anchor-link" id="methods">Methods<a href="#methods" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#debug" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>debug</span></a>
 <a href="#error" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>error</span></a>
+<a href="#format" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>format</span></a>
 <a href="#getloglevel" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Log<wbr/>Level</span></a>
 <a href="#info" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>info</span></a>
 <a href="#isonlevel" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>On<wbr/>Level</span></a>
@@ -66,7 +67,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">DefaultLogger</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/classes/CoreLogger.ts#L23">classes/CoreLogger.ts:23</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/classes/CoreLogger.ts#L23">classes/CoreLogger.ts:23</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -84,7 +85,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#debug">debug</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L62">modules/log/DefaultLogger.ts:62</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L62">modules/log/DefaultLogger.ts:62</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="error"><span>error</span><a href="#error" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -99,7 +100,22 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#error">error</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L66">modules/log/DefaultLogger.ts:66</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L66">modules/log/DefaultLogger.ts:66</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="format"><span>format</span><a href="#format" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="format-1"><span class="tsd-kind-call-signature">format</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">mode</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">channel</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">args</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#format-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">mode</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">channel</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">args</span>: <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L100">modules/log/DefaultLogger.ts:100</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getloglevel"><span>get<wbr/>Log<wbr/>Level</span><a href="#getloglevel" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -109,7 +125,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <a href="../enums/LogLevel.html" class="tsd-signature-type tsd-kind-enum">LogLevel</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#getloglevel">getLogLevel</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/classes/CoreLogger.ts#L74">classes/CoreLogger.ts:74</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/classes/CoreLogger.ts#L74">classes/CoreLogger.ts:74</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="info"><span>info</span><a href="#info" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -124,7 +140,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#info">info</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L70">modules/log/DefaultLogger.ts:70</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L70">modules/log/DefaultLogger.ts:70</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="isonlevel"><span>is<wbr/>On<wbr/>Level</span><a href="#isonlevel" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -138,7 +154,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#isonlevel">isOnLevel</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/classes/CoreLogger.ts#L78">classes/CoreLogger.ts:78</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/classes/CoreLogger.ts#L78">classes/CoreLogger.ts:78</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="log"><span>log</span><a href="#log" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -153,7 +169,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#log">log</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L74">modules/log/DefaultLogger.ts:74</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L74">modules/log/DefaultLogger.ts:74</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="logcolor"><span>log<wbr/>Color</span><a href="#logcolor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -167,7 +183,7 @@ identifier and an optional timestamp.</p>
 <li><span><span class="tsd-kind-parameter">msg</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L54">modules/log/DefaultLogger.ts:54</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L54">modules/log/DefaultLogger.ts:54</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="setloglevel"><span>set<wbr/>Log<wbr/>Level</span><a href="#setloglevel" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -181,7 +197,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#setloglevel">setLogLevel</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/classes/CoreLogger.ts#L66">classes/CoreLogger.ts:66</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/classes/CoreLogger.ts#L66">classes/CoreLogger.ts:66</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setnocolor"><span>set<wbr/>No<wbr/>Color</span><a href="#setnocolor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -194,7 +210,7 @@ identifier and an optional timestamp.</p>
 <li><span><span class="tsd-kind-parameter">val</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L42">modules/log/DefaultLogger.ts:42</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L42">modules/log/DefaultLogger.ts:42</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setprintobject"><span>set<wbr/>Print<wbr/>Object</span><a href="#setprintobject" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -207,7 +223,7 @@ identifier and an optional timestamp.</p>
 <li><span><span class="tsd-kind-parameter">val</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L50">modules/log/DefaultLogger.ts:50</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L50">modules/log/DefaultLogger.ts:50</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setprinttimestamp"><span>set<wbr/>Print<wbr/>Timestamp</span><a href="#setprinttimestamp" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -220,7 +236,7 @@ identifier and an optional timestamp.</p>
 <li><span><span class="tsd-kind-parameter">val</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L46">modules/log/DefaultLogger.ts:46</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L46">modules/log/DefaultLogger.ts:46</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="verbose"><span>verbose</span><a href="#verbose" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -235,7 +251,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#verbose">verbose</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L78">modules/log/DefaultLogger.ts:78</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L78">modules/log/DefaultLogger.ts:78</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="warn"><span>warn</span><a href="#warn" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -250,7 +266,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#warn">warn</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/modules/log/DefaultLogger.ts#L82">modules/log/DefaultLogger.ts:82</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/modules/log/DefaultLogger.ts#L82">modules/log/DefaultLogger.ts:82</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="getloglevelfromstring"><code class="tsd-tag">Static</code><span>get<wbr/>Log<wbr/>Level<wbr/>From<wbr/>String</span><a href="#getloglevelfromstring" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -264,7 +280,7 @@ identifier and an optional timestamp.</p>
 <h4 class="tsd-returns-title">Returns <a href="../enums/LogLevel.html" class="tsd-signature-type tsd-kind-enum">LogLevel</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="CoreLogger.html">CoreLogger</a>.<a href="CoreLogger.html#getloglevelfromstring">getLogLevelFromString</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/GrandlineX/core/blob/5b8b4a715b3d6144b81f344352950696ab125aa1/src/classes/CoreLogger.ts#L47">classes/CoreLogger.ts:47</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/GrandlineX/core/blob/a0c22d092dcbbaabb028cc6c2950d3bb4f43f82d/src/classes/CoreLogger.ts#L47">classes/CoreLogger.ts:47</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -283,7 +299,7 @@ identifier and an optional timestamp.</p>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
-<div><a href="#debug"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>debug</span></a><a href="#error"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>error</span></a><a href="#getloglevel" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Log<wbr/>Level</span></a><a href="#info"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>info</span></a><a href="#isonlevel" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>On<wbr/>Level</span></a><a href="#log"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>log</span></a><a href="#logcolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>log<wbr/>Color</span></a><a href="#setloglevel" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Log<wbr/>Level</span></a><a href="#setnocolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>No<wbr/>Color</span></a><a href="#setprintobject"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Print<wbr/>Object</span></a><a href="#setprinttimestamp"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Print<wbr/>Timestamp</span></a><a href="#verbose"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>verbose</span></a><a href="#warn"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>warn</span></a><a href="#getloglevelfromstring" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Log<wbr/>Level<wbr/>From<wbr/>String</span></a></div></details></div></details></div>
+<div><a href="#debug"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>debug</span></a><a href="#error"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>error</span></a><a href="#format"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>format</span></a><a href="#getloglevel" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Log<wbr/>Level</span></a><a href="#info"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>info</span></a><a href="#isonlevel" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>On<wbr/>Level</span></a><a href="#log"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>log</span></a><a href="#logcolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>log<wbr/>Color</span></a><a href="#setloglevel" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Log<wbr/>Level</span></a><a href="#setnocolor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>No<wbr/>Color</span></a><a href="#setprintobject"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Print<wbr/>Object</span></a><a href="#setprinttimestamp"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Print<wbr/>Timestamp</span></a><a href="#verbose"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>verbose</span></a><a href="#warn"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>warn</span></a><a href="#getloglevelfromstring" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Log<wbr/>Level<wbr/>From<wbr/>String</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html">@grandlinex/core</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
