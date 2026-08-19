@@ -79,7 +79,7 @@ export type CoreKernelProps = {
  */
 export default abstract class CoreKernel<
     X extends ICoreCClient,
-    Y extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule,
+    Y extends ICoreAnyModule = ICoreAnyModule,
   >
   extends CoreLogChannel
   implements ICoreKernel<X>, IHaveLogger
@@ -96,7 +96,7 @@ export default abstract class CoreKernel<
 
   protected state: any = null;
 
-  protected moduleList: ICoreKernelModule<any, any, any, any, any>[];
+  protected moduleList: ICoreAnyModule[];
 
   protected coreModule: ICoreModule;
 
@@ -408,9 +408,9 @@ export default abstract class CoreKernel<
     return true;
   }
 
-  getChildModule<
-    T extends ICoreKernelModule<any, any, any, any, any> = ICoreAnyModule,
-  >(modName: string): T {
+  getChildModule<T extends ICoreAnyModule = ICoreAnyModule>(
+    modName: string,
+  ): T {
     const mod = this.moduleList.find((mo) => mo.getName() === modName);
     if (mod) {
       return mod as T;

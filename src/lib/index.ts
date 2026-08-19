@@ -218,6 +218,8 @@ export interface ICoreKernel<
 
   getCoreModule(): ICoreModule;
 
+  getChildModule<T extends ICoreAnyModule = ICoreAnyModule>(modName: string): T;
+
   getOffline(): boolean;
 
   setOffline(mode: boolean): void;

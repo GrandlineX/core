@@ -1,7 +1,8 @@
-import DefaultLogger, { DC } from './log/DefaultLogger';
 import InMemDB from './db/InMemDB';
 import InMemCache from './cache/InMemCache';
 
-export { DefaultLogger, InMemDB, InMemCache, DC };
+export { InMemDB, InMemCache };
 export * from './crypto';
+export * from './log/DefaultLogger';
+export * from './log/AdvancedLogger';
 export * from './env';

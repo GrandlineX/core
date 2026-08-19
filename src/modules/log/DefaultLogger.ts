@@ -32,7 +32,7 @@ export enum DC {
  *
  * @extends CoreLogger
  */
-export default class DefaultLogger extends CoreLogger {
+export class DefaultLogger extends CoreLogger {
   private noColor = false;
 
   private printObject = false;
@@ -60,27 +60,27 @@ export default class DefaultLogger extends CoreLogger {
   }
 
   debug(channel: string, ...ags: unknown[]): void {
-    this.logColor([DC.FgMagenta], this.format('D', channel, ags));
+    this.logColor([DC.FgMagenta], this.format('D', channel, ...ags));
   }
 
   error(channel: string, ...ags: unknown[]): void {
-    this.logColor([DC.FgRed], this.format('E', channel, ags));
+    this.logColor([DC.FgRed], this.format('E', channel, ...ags));
   }
 
   info(channel: string, ...ags: unknown[]): void {
-    this.logColor([DC.FgGreen], this.format('I', channel, ags));
+    this.logColor([DC.FgGreen], this.format('I', channel, ...ags));
   }
 
   log(channel: string, ...ags: unknown[]): void {
-    this.logColor([], this.format('L', channel, ags));
+    this.logColor([], this.format('L', channel, ...ags));
   }
 
   verbose(channel: string, ...ags: unknown[]): void {
-    this.logColor([DC.FgBlue], this.format('V', channel, ags));
+    this.logColor([DC.FgBlue], this.format('V', channel, ...ags));
   }
 
   warn(channel: string, ...ags: unknown[]): void {
-    this.logColor([DC.BgYellow, DC.FgBlack], this.format('W', channel, ags));
+    this.logColor([DC.BgYellow, DC.FgBlack], this.format('W', channel, ...ags));
   }
 
   private printArgs(...args: unknown[]) {
@@ -97,7 +97,7 @@ export default class DefaultLogger extends CoreLogger {
       .join(',');
   }
 
-  private format(mode: string, channel: string, ...args: unknown[]): string {
+  format(mode: string, channel: string, ...args: unknown[]): string {
     return `[${mode}]${
       this.printTimeStamp ? `[${XUtil.getTimeStamp()}]` : ''
     }(${channel}) ${this.printArgs(args)}`;
