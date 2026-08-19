@@ -217,7 +217,7 @@ export class XUtil {
   static createFolderBulk(...path: string[]): boolean {
     let res = true;
     path.forEach((e) => {
-      res = res && this.createFolderIfNotExist(e);
+      res = this.createFolderIfNotExist(e) && res;
     });
     return res;
   }

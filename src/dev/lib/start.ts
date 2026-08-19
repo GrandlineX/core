@@ -1,5 +1,7 @@
 import { describe, test, expect } from 'vitest';
+import fs from 'fs';
 import TestContext from '../TestContext';
+import { StoreGlobal } from '../../modules';
 
 export default function jestStart() {
   describe('start', () => {
@@ -23,6 +25,19 @@ export default function jestStart() {
         expect(kernel.getServiceList(true).length).toBeGreaterThan(0);
         expect(kernel.getActionList(true).length).toBeGreaterThan(0);
         expect(kernel.getState()).toBe('running');
+      });
+      test('kernel folder', async () => {
+        const folderList = kernel
+          .getConfigStore()
+          .getBulk(
+            [StoreGlobal.GLOBAL_PATH_HOME],
+            [StoreGlobal.GLOBAL_PATH_DATA],
+            [StoreGlobal.GLOBAL_PATH_DB],
+            [StoreGlobal.GLOBAL_PATH_TEMP],
+          );
+        for (const folder of folderList) {
+          expect(fs.existsSync(folder)).toBeTruthy();
+        }
       });
     });
   });

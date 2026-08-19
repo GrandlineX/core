@@ -1,6 +1,6 @@
 {
   "name": "@grandlinex/core",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-alpha.9",
   "description": "Core module",
   "type": "module",
   "exports": {
@@ -60,6 +60,7 @@
     "@types/node": "24.13.3",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
+    "@vitest/coverage-v8": "4.1.10",
     "eslint": "8.57.1",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "18.0.0",
@@ -70,7 +71,6 @@
     "prettier": "3.5.3",
     "tsx": "4.23.12",
     "vitest": "4.1.10",
-    "@vitest/coverage-v8": "4.1.10",
     "tsdown": "0.22.14",
     "typedoc": "0.28.20",
     "typescript": "6.0.3"
