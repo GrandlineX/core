@@ -8,9 +8,18 @@ const [kernel] = TestContext.getEntity({
     appName,
     appCode,
     import.meta.dirname,
-    (k) => new AdvancedLogger(k, 'string', 'verbose'),
+    (k) =>
+      new AdvancedLogger(
+        k,
+        {
+          maxFiles: 2,
+          fileFormat: 'string',
+          maxFileSize: 1024 * 100,
+        },
+        'verbose',
+      ),
   ),
-  cleanUp: true,
+  cleanUp: false,
   modLength: 2,
 });
 
@@ -21,6 +30,7 @@ TestLib.testService();
 TestLib.testStore();
 TestLib.testCore();
 TestLib.testDb();
+TestLib.testLogger();
 TestLib.testEnd();
 TestLib.testOrm();
 TestLib.testUtils();

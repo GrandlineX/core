@@ -23,6 +23,7 @@ export enum DC {
   'BgCyan' = '\x1b[46m',
   'BgWhite' = '\x1b[47m',
 }
+export type DefaultLogMode = 'D' | 'E' | 'I' | 'L' | 'V' | 'W';
 
 /**
  * Logger implementation that outputs messages to the console with optional color,
@@ -97,7 +98,7 @@ export class DefaultLogger extends CoreLogger {
       .join(',');
   }
 
-  format(mode: string, channel: string, ...args: unknown[]): string {
+  format(mode: DefaultLogMode, channel: string, ...args: unknown[]): string {
     return `[${mode}]${
       this.printTimeStamp ? `[${XUtil.getTimeStamp()}]` : ''
     }(${channel}) ${this.printArgs(args)}`;

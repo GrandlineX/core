@@ -7,6 +7,7 @@ import testEnd from './end';
 import testUtils from './util';
 import testType from './type';
 import testService from './service';
+import testLogger from './logger';
 
 const TestLib = {
   testCore,
@@ -18,6 +19,7 @@ const TestLib = {
   testEnd,
   testUtils,
   testType,
+  testLogger,
 };
 
 export default TestLib;
