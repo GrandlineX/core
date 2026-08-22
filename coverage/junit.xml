@@ -1,406 +1,406 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="258" failures="0" errors="0" time="9.64580825">
-    <testsuite name="tests/start.test.ts" timestamp="2026-08-19T18:14:59.380Z" hostname="runnervm76f27" tests="258" failures="0" errors="0" skipped="0" time="9.64580825">
-        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; preload" time="0.002023107">
+<testsuites name="vitest tests" tests="259" failures="0" errors="0" time="9.66844007">
+    <testsuite name="tests/start.test.ts" timestamp="2026-08-22T13:45:37.722Z" hostname="runnervm76f27" tests="259" failures="0" errors="0" skipped="0" time="9.66844007">
+        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; preload" time="0.002235566">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; start kernel" time="1.008666098">
+        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; start kernel" time="1.010416754">
             <system-out>
-[32m[I][2026-08-19 18:15:49](kernel) Starting Kernel[0m
-[32m[I][2026-08-19 18:15:49](kernel) ⊢ Code:           tkernel[0m
-[32m[I][2026-08-19 18:15:49](kernel) ⊢ Version:        3.0.0-alpha.9[0m
-[32m[I][2026-08-19 18:15:49](kernel) ⊢ Mode:           Prod[0m
-[32m[I][2026-08-19 18:15:49](kernel) ⊢ Mod count:      2[0m
-[32m[I][2026-08-19 18:15:49](kernel) ⊢ Action count:   1[0m
-[32m[I][2026-08-19 18:15:49](kernel) ⊢ Service count:  2[0m
-[32m[I][2026-08-19 18:15:49](kernel) ⊢ Log level:      0[0m
-[35m[D][2026-08-19 18:15:49](kernel) Run startup script[0m
-[35m[D][2026-08-19 18:15:49](kernel) Global folder for GLOBAL_FOLDER_DEV @/home/runner/work/core/core/data/config/TestKernel/dev created[0m
-[35m[D][2026-08-19 18:15:49](kernel) Global folder for GLOBAL_FOLDER_RES @/home/runner/work/core/core/res created[0m
-[35m[D][2026-08-19 18:15:49](kernel) Global folder for GLOBAL_FOLDER_RES_IMAGE @/home/runner/work/core/core/res/image created[0m
-[34m[V][2026-08-19 18:15:49](kernel) pre[0m
+[32m[I][2026-08-22 13:46:27](kernel) Starting Kernel[0m
+[32m[I][2026-08-22 13:46:27](kernel) ⊢ Code:           tkernel[0m
+[32m[I][2026-08-22 13:46:27](kernel) ⊢ Version:        3.0.0[0m
+[32m[I][2026-08-22 13:46:27](kernel) ⊢ Mode:           Prod[0m
+[32m[I][2026-08-22 13:46:27](kernel) ⊢ Mod count:      2[0m
+[32m[I][2026-08-22 13:46:27](kernel) ⊢ Action count:   1[0m
+[32m[I][2026-08-22 13:46:27](kernel) ⊢ Service count:  2[0m
+[32m[I][2026-08-22 13:46:27](kernel) ⊢ Log level:      0[0m
+[35m[D][2026-08-22 13:46:27](kernel) Run startup script[0m
+[35m[D][2026-08-22 13:46:27](kernel) Global folder for GLOBAL_FOLDER_DEV @/home/runner/work/core/core/data/config/TestKernel/dev created[0m
+[35m[D][2026-08-22 13:46:27](kernel) Global folder for GLOBAL_FOLDER_RES @/home/runner/work/core/core/res created[0m
+[35m[D][2026-08-22 13:46:27](kernel) Global folder for GLOBAL_FOLDER_RES_IMAGE @/home/runner/work/core/core/res/image created[0m
+[34m[V][2026-08-22 13:46:27](kernel) pre[0m
 
-[32m[I][2026-08-19 18:15:49](kernel) Startup script complete[0m
-[35m[D][2026-08-19 18:15:49](kernel) Run launcher[0m
+[32m[I][2026-08-22 13:46:27](kernel) Startup script complete[0m
+[35m[D][2026-08-22 13:46:27](kernel) Run launcher[0m
 
-[34m[V][2026-08-19 18:15:49](kernel) core-load[0m
+[34m[V][2026-08-22 13:46:27](kernel) core-load[0m
 
-[35m[D][2026-08-19 18:15:49](cache-inMemCache-core) Init cache:cache-inMemCache-core[0m
+[35m[D][2026-08-22 13:46:27](cache-inMemCache-core) Init cache:cache-inMemCache-core[0m
 
-[34m[V][2026-08-19 18:15:49](coreModule) run-before-service[0m
+[34m[V][2026-08-22 13:46:27](coreModule) run-before-service[0m
 
-[35m[D][2026-08-19 18:15:49](background-service) Starting[0m
+[35m[D][2026-08-22 13:46:27](background-service) Starting[0m
 
-[34m[V][2026-08-19 18:15:49](kernel) load[0m
+[34m[V][2026-08-22 13:46:27](kernel) load[0m
 
-[34m[V][2026-08-19 18:15:49](testBaseModuleModule) run-before-service[0m
+[34m[V][2026-08-22 13:46:27](testBaseModuleModule) run-before-service[0m
 
-[35m[D][2026-08-19 18:15:49](BR:bridgeModule =&gt; testModule) connected[0m
+[35m[D][2026-08-22 13:46:27](BR:bridgeModule =&gt; testModule) connected[0m
 
-[35m[D][2026-08-19 18:15:49](testModuleModule) FirstTHIS[0m
-[35m[D][2026-08-19 18:15:49](testModuleModule) triggerBundleInit[0m
+[35m[D][2026-08-22 13:46:27](testModuleModule) FirstTHIS[0m
+[35m[D][2026-08-22 13:46:27](testModuleModule) triggerBundleInit[0m
 
-[34m[V][2026-08-19 18:15:49](kernel) load[0m
+[34m[V][2026-08-22 13:46:27](kernel) load[0m
 
-[35m[D][2026-08-19 18:15:49](testModuleModule) triggerBundleInit[0m
+[35m[D][2026-08-22 13:46:27](testModuleModule) triggerBundleInit[0m
 
-[35m[D][2026-08-19 18:15:49](cache-inMemCache-testModule) Init cache:cache-inMemCache-testModule[0m
+[35m[D][2026-08-22 13:46:27](cache-inMemCache-testModule) Init cache:cache-inMemCache-testModule[0m
 
-[35m[D][2026-08-19 18:15:49](test-action) register[0m
-[34m[V][2026-08-19 18:15:49](testModuleModule) run-before-service[0m
+[35m[D][2026-08-22 13:46:27](test-action) register[0m
+[34m[V][2026-08-22 13:46:27](testModuleModule) run-before-service[0m
 
-[35m[D][2026-08-19 18:15:49](background-service) Starting[0m
+[35m[D][2026-08-22 13:46:27](background-service) Starting[0m
 
-[34m[V][2026-08-19 18:15:49](background-service) RUNNING[0m
-[34m[V][2026-08-19 18:15:49](background-service) SLEEPING[0m
+[34m[V][2026-08-22 13:46:27](background-service) RUNNING[0m
+[34m[V][2026-08-22 13:46:27](background-service) SLEEPING[0m
 
-[34m[V][2026-08-19 18:15:49](background-service) RUNNING[0m
-[34m[V][2026-08-19 18:15:49](background-service) SLEEPING[0m
+[34m[V][2026-08-22 13:46:27](background-service) RUNNING[0m
+[34m[V][2026-08-22 13:46:27](background-service) SLEEPING[0m
 
-[35m[D][2026-08-19 18:15:50](bridgeModuleModule) LaterTHIS[0m
+[35m[D][2026-08-22 13:46:28](bridgeModuleModule) LaterTHIS[0m
 
-[34m[V][2026-08-19 18:15:50](bridgeModuleModule) run-before-service[0m
+[34m[V][2026-08-22 13:46:28](bridgeModuleModule) run-before-service[0m
 
-[34m[V][2026-08-19 18:15:50](testModuleModule) run-startup[0m
-[34m[V][2026-08-19 18:15:50](bridgeModuleModule) run-startup[0m
+[34m[V][2026-08-22 13:46:28](testModuleModule) run-startup[0m
+[34m[V][2026-08-22 13:46:28](bridgeModuleModule) run-startup[0m
 
-[34m[V][2026-08-19 18:15:50](coreModule) run-startup[0m
+[34m[V][2026-08-22 13:46:28](coreModule) run-startup[0m
 
-[34m[V][2026-08-19 18:15:50](testBaseModuleModule) run-startup[0m
+[34m[V][2026-08-22 13:46:28](testBaseModuleModule) run-startup[0m
 
-[32m[I][2026-08-19 18:15:50](ex-test) Starting[0m
+[32m[I][2026-08-22 13:46:28](ex-test) Starting[0m
 
-[34m[V][2026-08-19 18:15:50](coreModule) run-final[0m
+[34m[V][2026-08-22 13:46:28](coreModule) run-final[0m
 
-[34m[V][2026-08-19 18:15:50](testBaseModuleModule) run-final[0m
+[34m[V][2026-08-22 13:46:28](testBaseModuleModule) run-final[0m
 
-[34m[V][2026-08-19 18:15:50](testModuleModule) run-final[0m
+[34m[V][2026-08-22 13:46:28](testModuleModule) run-final[0m
 
-[34m[V][2026-08-19 18:15:50](bridgeModuleModule) run-final[0m
+[34m[V][2026-08-22 13:46:28](bridgeModuleModule) run-final[0m
 
-[34m[V][2026-08-19 18:15:50](kernel) start[0m
+[34m[V][2026-08-22 13:46:28](kernel) start[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; kernel info" time="0.000572622">
+        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; kernel info" time="0.000527148">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; kernel folder" time="0.000469399">
+        <testcase classname="tests/start.test.ts" name="start &gt; Clean start &gt; kernel folder" time="0.000462045">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; stopService - non-existent service returns null" time="0.000206827">
+        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; stopService - non-existent service returns null" time="0.000215043">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; startService - non-existent service returns null" time="0.000167423">
+        <testcase classname="tests/start.test.ts" name="service &gt; CoreKernelModule service management &gt; startService - non-existent service returns null" time="0.000169918">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; can load from .env file" time="0.000216315">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; can load from .env file" time="0.000243105">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; getBulk returns values with fallback defaults" time="0.000201617">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; getBulk returns values with fallback defaults" time="0.000171151">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; delete removes a key" time="0.000277469">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; delete removes a key" time="0.000333554">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; appName with pathOverride sets path globals" time="0.00086558">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; appName with pathOverride sets path globals" time="0.000861283">
             <system-out>
-[43m[30m[W][2026-08-19 18:15:50](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
+[43m[30m[W][2026-08-22 13:46:28](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromFile parses valid key=value lines and skips comments" time="0.000814886">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromFile parses valid key=value lines and skips comments" time="0.000975166">
             <system-out>
-[L][2026-08-19 18:15:50](testBaseModuleModule) Load env from /tmp/envstore-N6Y0sV/.env
+[L][2026-08-22 13:46:28](testBaseModuleModule) Load env from /tmp/envstore-QH8q7c/.env
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; missing envFilePath path emits warning and continues" time="0.000416089">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; missing envFilePath path emits warning and continues" time="0.000450183">
             <system-out>
-[43m[30m[W][2026-08-19 18:15:50](testBaseModuleModule) Cant load env from /nonexistent/path/xyz/.env[0m
+[43m[30m[W][2026-08-22 13:46:28](testBaseModuleModule) Cant load env from /nonexistent/path/xyz/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromLocalEnv loads process.env entries" time="0.000830415">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; loadFromLocalEnv loads process.env entries" time="0.000868296">
             <system-out>
-[43m[30m[W][2026-08-19 18:15:50](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
+[43m[30m[W][2026-08-22 13:46:28](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; GLOBAL_APP_VERSION falls back to 0.0.0 when npm_package_version is unset" time="0.000335788">
+        <testcase classname="tests/start.test.ts" name="store &gt; EnvStore &gt; GLOBAL_APP_VERSION falls back to 0.0.0 when npm_package_version is unset" time="0.000404968">
             <system-out>
-[43m[30m[W][2026-08-19 18:15:50](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
+[43m[30m[W][2026-08-22 13:46:28](testBaseModuleModule) Cant load env from /home/runner/work/core/core/.env[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getChild empty" time="0.001219022">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getChild empty" time="0.001433043">
             <system-out>
-[31m[E][2026-08-19 18:15:50](kernel) G-ERR:,Module invaldimodname not found[0m
+[31m[E][2026-08-22 13:46:28](kernel) G-ERR:,Module invaldimodname not found[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getOffline" time="0.000226514">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getOffline" time="0.000227987">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getAppCode" time="0.000771455">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getAppCode" time="0.000919332">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getActionList" time="0.000139731">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getActionList" time="0.000163436">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getServiceList" time="0.000115927">
+        <testcase classname="tests/start.test.ts" name="core &gt; kernel extend &gt; getServiceList" time="0.000125475">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log" time="0.000171952">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log" time="0.000172343">
             <system-out>
-[L][2026-08-19 18:15:50](kernel) log
+[L][2026-08-22 13:46:28](kernel) log
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; debug" time="0.000359743">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; debug" time="0.000224681">
             <system-out>
-[35m[D][2026-08-19 18:15:50](kernel) debug[0m
+[35m[D][2026-08-22 13:46:28](kernel) debug[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; warn" time="0.00033128">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; warn" time="0.000234619">
             <system-out>
-[43m[30m[W][2026-08-19 18:15:50](kernel) warn[0m
+[43m[30m[W][2026-08-22 13:46:28](kernel) warn[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; error" time="0.000295462">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; error" time="0.000259056">
             <system-out>
-[31m[E][2026-08-19 18:15:50](kernel) error[0m
+[31m[E][2026-08-22 13:46:28](kernel) error[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; verbose" time="0.000291766">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; verbose" time="0.000225582">
             <system-out>
-[34m[V][2026-08-19 18:15:50](kernel) verbose[0m
+[34m[V][2026-08-22 13:46:28](kernel) verbose[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; lError" time="0.000276037">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; lError" time="0.000285004">
             <system-out>
-[31m[E][2026-08-19 18:15:50](kernel) G-ERR:,TestError[0m
+[31m[E][2026-08-22 13:46:28](kernel) G-ERR:,TestError[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000268242">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000267211">
             <system-out>
-[L][2026-08-19 18:15:50](kernel) [object Object],[object Object]
+[L][2026-08-22 13:46:28](kernel) [object Object],[object Object]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000246031">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(kernel): &gt; log - object" time="0.000280815">
             <system-out>
-[L][2026-08-19 18:15:50](kernel) [object Object],[object Object]
+[L][2026-08-22 13:46:28](kernel) [object Object],[object Object]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log" time="0.000188072">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log" time="0.000192801">
             <system-out>
-[L][2026-08-19 18:15:50](testBaseModuleModule) log
+[L][2026-08-22 13:46:28](testBaseModuleModule) log
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; debug" time="0.00021914">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; debug" time="0.000179015">
             <system-out>
-[35m[D][2026-08-19 18:15:50](testBaseModuleModule) debug[0m
+[35m[D][2026-08-22 13:46:28](testBaseModuleModule) debug[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; warn" time="0.000199373">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; warn" time="0.000205875">
             <system-out>
-[43m[30m[W][2026-08-19 18:15:50](testBaseModuleModule) warn[0m
+[43m[30m[W][2026-08-22 13:46:28](testBaseModuleModule) warn[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; error" time="0.000170879">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; error" time="0.000132047">
             <system-out>
-[31m[E][2026-08-19 18:15:50](testBaseModuleModule) error[0m
+[31m[E][2026-08-22 13:46:28](testBaseModuleModule) error[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; verbose" time="0.000310361">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; verbose" time="0.00020342">
             <system-out>
-[34m[V][2026-08-19 18:15:50](testBaseModuleModule) verbose[0m
+[34m[V][2026-08-22 13:46:28](testBaseModuleModule) verbose[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; lError" time="0.000264405">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; lError" time="0.000268372">
             <system-out>
-[31m[E][2026-08-19 18:15:50](testBaseModuleModule) G-ERR:,TestError[0m
+[31m[E][2026-08-22 13:46:28](testBaseModuleModule) G-ERR:,TestError[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.000193392">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.000214342">
             <system-out>
-[L][2026-08-19 18:15:50](testBaseModuleModule) [object Object],[object Object]
+[L][2026-08-22 13:46:28](testBaseModuleModule) [object Object],[object Object]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.000172964">
+        <testcase classname="tests/start.test.ts" name="core &gt; Default logger:(module): &gt; log - object" time="0.000135193">
             <system-out>
-[L][2026-08-19 18:15:50](testBaseModuleModule) [object Object],[object Object]
+[L][2026-08-22 13:46:28](testBaseModuleModule) [object Object],[object Object]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; DevMode &gt; switch" time="0.000281487">
+        <testcase classname="tests/start.test.ts" name="core &gt; DevMode &gt; switch" time="0.000477624">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; exist" time="0.000157415">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; exist" time="0.000128471">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasPresenter" time="0.000307796">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasPresenter" time="0.000220273">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasDb" time="0.000276177">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasDb" time="0.000190036">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasCache" time="0.000254957">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasCache" time="0.000199704">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasClient" time="0.000220623">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasClient" time="0.000183924">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasServiceList" time="0.000861663">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasServiceList" time="0.000824614">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; test_trigger" time="0.000279353">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; test_trigger" time="0.000290874">
             <system-out>
-[L][2026-08-19 18:15:50](test_trigger) TestTriggerService triggered with payload:,
+[L][2026-08-22 13:46:28](test_trigger) TestTriggerService triggered with payload:,
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasBridges" time="0.000256299">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; hasBridges" time="0.000224891">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; Bridge: (null):" time="0.00045959">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (testModule): &gt; Bridge: (null):" time="0.000466413">
             <system-out>
-[31m[E][2026-08-19 18:15:50](testModuleModule) G-ERR:,no bridge module found: modnotexist[0m
+[31m[E][2026-08-22 13:46:28](testModuleModule) G-ERR:,no bridge module found: modnotexist[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; exist" time="0.000187401">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; exist" time="0.00017605">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasPresenter" time="0.000664203">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasPresenter" time="0.000574646">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasDb" time="0.000226895">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasDb" time="0.000223018">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasCache" time="0.000131927">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasCache" time="0.000129913">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasClient" time="0.000120305">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasClient" time="0.000124533">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasServiceList" time="0.000185307">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasServiceList" time="0.000151905">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; test_trigger" time="0.000235551">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; test_trigger" time="0.000189635">
             <system-out>
-[L][2026-08-19 18:15:50](test_trigger) TestTriggerService triggered with payload:,
+[L][2026-08-22 13:46:28](test_trigger) TestTriggerService triggered with payload:,
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasBridges" time="0.000207649">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; hasBridges" time="0.000198281">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; Bridge: (testModule):" time="0.000228558">
+        <testcase classname="tests/start.test.ts" name="core &gt; Module: (bridgeModule): &gt; Bridge: (testModule):" time="0.000224701">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; set" time="0.000140973">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; set" time="0.000152225">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; exist" time="0.000139741">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; exist" time="0.000155762">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; get" time="0.000138419">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; get" time="0.000143458">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; del" time="0.000134031">
+        <testcase classname="tests/start.test.ts" name="core &gt; Cache &gt; del" time="0.000134461">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; encrypt/decrypt" time="0.001054654">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; encrypt/decrypt" time="0.001057209">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; seeded hash" time="0.000319709">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; seeded hash" time="0.000329146">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; token gen" time="0.001986078">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; token gen" time="0.002092358">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; keystore" time="0.000816348">
+        <testcase classname="tests/start.test.ts" name="core &gt; Crypto &gt; keystore" time="0.000806891">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; test tates" time="0.000345106">
+        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; test tates" time="0.000321291">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; loop service cycle" time="2.011836877">
+        <testcase classname="tests/start.test.ts" name="core &gt; Service &gt; loop service cycle" time="2.011407531">
             <system-out>
-[34m[V][2026-08-19 18:15:50](hello) RUNNING[0m
+[34m[V][2026-08-22 13:46:28](hello) RUNNING[0m
 
-[35m[D][2026-08-19 18:15:50](hello) try to stop service[0m
-[35m[D][2026-08-19 18:15:50](hello) ForceStop[0m
+[35m[D][2026-08-22 13:46:28](hello) try to stop service[0m
+[35m[D][2026-08-22 13:46:28](hello) ForceStop[0m
 
-[35m[D][2026-08-19 18:15:51](hello) try to stop service[0m
-[35m[D][2026-08-19 18:15:51](hello) ForceStop[0m
+[35m[D][2026-08-22 13:46:29](hello) try to stop service[0m
+[35m[D][2026-08-22 13:46:29](hello) ForceStop[0m
 
-[35m[D][2026-08-19 18:15:52](hello) try to stop service[0m
-[35m[D][2026-08-19 18:15:52](hello) ForceStop[0m
-[35m[D][2026-08-19 18:15:52](hello) Service Exit[0m
+[35m[D][2026-08-22 13:46:30](hello) try to stop service[0m
+[35m[D][2026-08-22 13:46:30](hello) ForceStop[0m
+[35m[D][2026-08-22 13:46:30](hello) Service Exit[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - all valid levels" time="0.000487652">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - all valid levels" time="0.000572382">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - unknown level throws" time="0.000354533">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; getLogLevelFromString - unknown level throws" time="0.000397594">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; constructor with logLevel string" time="0.000155952">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; constructor with logLevel string" time="0.000201788">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with string" time="0.000129392">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with string" time="0.000145764">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with numeric LogLevel" time="0.000161291">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setLogLevel with numeric LogLevel" time="0.000137567">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; isOnLevel" time="0.000207688">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; isOnLevel" time="0.00025616">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setNoColor disables ANSI codes in output" time="0.000471541">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setNoColor disables ANSI codes in output" time="0.000550801">
             <system-out>
-[E][2026-08-19 18:15:52](ch) msg
-[W][2026-08-19 18:15:52](ch) msg
+[E][2026-08-22 13:46:30](ch) msg
+[W][2026-08-22 13:46:30](ch) msg
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setPrintTimestamp false omits timestamp" time="0.000408484">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; setPrintTimestamp false omits timestamp" time="0.00052193">
             <system-out>
 [L](ch) msg
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; printObject=true with primitive arg hits non-object branch" time="0.000414114">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogger &gt; printObject=true with primitive arg hits non-object branch" time="0.000423183">
             <system-out>
-[L][2026-08-19 18:15:52](ch) [&quot;primitive string arg&quot;,42]
+[L][2026-08-22 13:46:30](ch) [&quot;primitive string arg&quot;,42]
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with CoreLogger instance sets logger directly" time="0.000195376">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with CoreLogger instance sets logger directly" time="0.000201227">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with null sets logger to null" time="0.000216966">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreLogChannel &gt; constructor with null sets logger to null" time="0.000143639">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; fromPW derives a 32-char key" time="0.000252091">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; fromPW derives a 32-char key" time="0.000248655">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; constructor with invalid key length throws" time="0.000370082">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; constructor with invalid key length throws" time="0.000314679">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; isValid returns true for valid 32-char key" time="0.000177713">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; isValid returns true for valid 32-char key" time="0.000202549">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; getUUID generates a valid UUID string" time="0.000296264">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; getUUID generates a valid UUID string" time="0.000348242">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - equal strings returns true" time="0.000165289">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - equal strings returns true" time="0.000177753">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - same length but different returns false" time="0.000123651">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - same length but different returns false" time="0.00013352">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - different lengths returns false" time="0.000120275">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; timeSavePWValidation - different lengths returns false" time="0.000130334">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; keyStoreLoad with non-existent id returns null" time="0.000156983">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; keyStoreLoad with non-existent id returns null" time="0.000180578">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; clientFromPW throws because sha512 hex is 128 chars not 32" time="0.000287789">
+        <testcase classname="tests/start.test.ts" name="core &gt; CoreCryptoClient &gt; clientFromPW throws because sha512 hex is 128 chars not 32" time="0.000293169">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; get version" time="0.000249426">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; get version" time="0.000272751">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; config test" time="0.000387305">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Database &gt; config test" time="0.000425257">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; get version" time="0.00015519">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; get version" time="0.000167624">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; isConnected" time="0.000156683">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; isConnected" time="0.000132509">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; test entity" time="0.000466402">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; test entity" time="0.000461614">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; manual update" time="0.000941711">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; TestDatabase &gt; manual update" time="0.0010681">
             <system-out>
-[35m[D][2026-08-19 18:15:52](dbtestModule) 0-&gt;1[0m
+[35m[D][2026-08-22 13:46:30](dbtestModule) 0-&gt;1[0m
 
-[32m[I][2026-08-19 18:15:52](dbtestModule) Update DB from 0 to 1 successful[0m
+[32m[I][2026-08-22 13:46:30](dbtestModule) Update DB from 0 to 1 successful[0m
 
-[35m[D][2026-08-19 18:15:52](dbtestModule) 1-&gt;2[0m
+[35m[D][2026-08-22 13:46:30](dbtestModule) 1-&gt;2[0m
 
-[32m[I][2026-08-19 18:15:52](dbtestModule) Update DB from 1 to 2 successful[0m
+[32m[I][2026-08-22 13:46:30](dbtestModule) Update DB from 1 to 2 successful[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get wrapper class" time="0.000515134">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get wrapper class" time="0.000401392">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new" time="0.000314829">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new" time="0.000224039">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new - failing" time="0.009347781">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new - failing" time="0.009382651">
             <system-out>
-[31m[E][2026-08-19 18:15:52](dbtestModule) G-ERR:,validation failed for test_entity create
+[31m[E][2026-08-22 13:46:30](dbtestModule) G-ERR:,validation failed for test_entity create
 Invalid Fields:e_id[0m
 
             </system-out>
@@ -410,87 +410,87 @@ Promise returned by `expect(actual).rejects.toThrow()` was not awaited. Vitest c
 
             </system-err>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 2" time="0.000374611">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 2" time="0.000436548">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 3" time="0.000321822">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 3" time="0.000380603">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 4" time="0.000294301">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 4" time="0.000387315">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 5" time="0.000241041">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; create new 5" time="0.000226194">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get by id" time="0.000198402">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; get by id" time="0.000192892">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search id" time="0.000398365">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search id" time="0.000438582">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search fk id" time="0.00026222">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search fk id" time="0.000269034">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob" time="0.000252823">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob" time="0.000235661">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 01" time="0.000242313">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 01" time="0.000277731">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 02" time="0.000340617">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 02" time="0.000436668">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 03" time="0.000285765">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multi 03" time="0.000267421">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob like" time="0.000227856">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob like" time="0.000225102">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search les age" time="0.000211406">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search les age" time="0.000266058">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search greater age" time="0.000210464">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search greater age" time="0.000218199">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multiple" time="0.000237805">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search multiple" time="0.000298248">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search in" time="0.000243105">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search in" time="0.000231463">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search notIn" time="0.000213088">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search notIn" time="0.00023981">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search between" time="0.000239858">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search between" time="0.000282258">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNull" time="0.000215973">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNull" time="0.000226294">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNotNull" time="0.00023517">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search isNotNull" time="0.000207669">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search startsWith" time="0.000205695">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search startsWith" time="0.000242073">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search endsWith" time="0.000205995">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search endsWith" time="0.000213179">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob check date" time="0.000234369">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; listing search bob check date" time="0.000406641">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; find entity by id" time="0.000277188">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; find entity by id" time="0.000305241">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update" time="0.000635418">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update" time="0.000429715">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update-bulk" time="0.000761123">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; update-bulk" time="0.000759352">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count all" time="0.00023522">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count all" time="0.00024016">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count with search" time="0.000200345">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; count with search" time="0.000199494">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - true" time="0.000233657">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - true" time="0.000210595">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - false" time="0.000164819">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; exists - false" time="0.000192741">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - update existing" time="0.000297987">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - update existing" time="0.00029867">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - create new" time="0.000251681">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; upsert - create new" time="0.000255659">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - existing" time="0.000307766">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - existing" time="0.00030429">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - new" time="0.000273301">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; findOrCreate - new" time="0.000279052">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete-bulk" time="0.000315941">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete-bulk" time="0.000319349">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete" time="0.000344885">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; delete" time="0.000324157">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; full validation" time="0.000159849">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(noCache): &gt; full validation" time="0.000183965">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get wrapper class" time="0.00014469">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get wrapper class" time="0.000146415">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new" time="0.000132898">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new" time="0.000132949">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new - failing" time="0.001204983">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new - failing" time="0.001364224">
             <system-out>
-[31m[E][2026-08-19 18:15:52](dbtestModule) G-ERR:,validation failed for test_entity create
+[31m[E][2026-08-22 13:46:30](dbtestModule) G-ERR:,validation failed for test_entity create
 Invalid Fields:e_id[0m
 
             </system-out>
@@ -500,298 +500,1303 @@ Promise returned by `expect(actual).rejects.toThrow()` was not awaited. Vitest c
 
             </system-err>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 2" time="0.000268071">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 2" time="0.00027795">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 3" time="0.000206646">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 3" time="0.00014951">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 4" time="0.00021373">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 4" time="0.000316943">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 5" time="0.000158156">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; create new 5" time="0.000146745">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get by id" time="0.00027806">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; get by id" time="0.000308108">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search id" time="0.000165369">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search id" time="0.000178294">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search fk id" time="0.000150141">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search fk id" time="0.000157014">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob" time="0.00014995">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob" time="0.000150482">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 01" time="0.000147286">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 01" time="0.000156032">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 02" time="0.000147606">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 02" time="0.000148869">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 03" time="0.000179976">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multi 03" time="0.000191138">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob like" time="0.000154199">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob like" time="0.000152165">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search les age" time="0.000147736">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search les age" time="0.000142416">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search greater age" time="0.000140854">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search greater age" time="0.000150041">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multiple" time="0.000140994">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search multiple" time="0.000150742">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search in" time="0.000169216">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search in" time="0.000296215">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search notIn" time="0.000186558">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search notIn" time="0.000185728">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search between" time="0.000189184">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search between" time="0.000156413">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNull" time="0.000144229">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNull" time="0.000152165">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNotNull" time="0.000140303">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search isNotNull" time="0.000146764">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search startsWith" time="0.000169397">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search startsWith" time="0.000198391">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search endsWith" time="0.000145302">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search endsWith" time="0.00029359">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob check date" time="0.000190376">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; listing search bob check date" time="0.000272751">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; find entity by id" time="0.000127298">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; find entity by id" time="0.000204282">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update" time="0.000182672">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update" time="0.000405399">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update-bulk" time="0.000297426">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; update-bulk" time="0.000513562">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count all" time="0.000092693">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count all" time="0.000114594">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count with search" time="0.000116828">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; count with search" time="0.000134091">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - true" time="0.000126978">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - true" time="0.000147245">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - false" time="0.000091742">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; exists - false" time="0.000106349">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - update existing" time="0.000154929">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - update existing" time="0.00018136">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - create new" time="0.00014963">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; upsert - create new" time="0.000169998">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - existing" time="0.000153026">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - existing" time="0.000169608">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - new" time="0.000167032">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; findOrCreate - new" time="0.000200375">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete-bulk" time="0.000125545">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete-bulk" time="0.000201869">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete" time="0.000210704">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; delete" time="0.000210554">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; full validation" time="0.002672919">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Entity :(withCache): &gt; full validation" time="0.002456279">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; get wrapper class" time="0.000279142">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; get wrapper class" time="0.000393426">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; create new" time="0.008058279">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; create new" time="0.008875902">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 0" time="0.000286235">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 0" time="0.000299932">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 1" time="0.000183162">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 1" time="0.000189124">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 2" time="0.000175227">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit 2" time="0.000180368">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; test offset" time="0.000226564">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; test offset" time="0.000227376">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit ASC DESC" time="0.000228066">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; listing search id limit ASC DESC" time="0.00020862">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; delete" time="0.001767375">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(noCache): &gt; delete" time="0.001793238">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; get wrapper class" time="0.000101329">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; get wrapper class" time="0.000108363">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; create new" time="0.007062938">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; create new" time="0.007113591">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 0" time="0.000240079">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 0" time="0.000240681">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 1" time="0.000146093">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 1" time="0.000151814">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 2" time="0.000140793">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit 2" time="0.000135955">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; test offset" time="0.000163265">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; test offset" time="0.000195216">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit ASC DESC" time="0.000129002">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; listing search id limit ASC DESC" time="0.00013868">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; delete" time="0.001823159">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; Bulk Entity :(withCache): &gt; delete" time="0.001910327">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; prepare" time="0.000106769">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; prepare" time="0.000111589">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCurrenDBVersion" time="0.000148137">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCurrenDBVersion" time="0.000146243">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; isConnected" time="0.000111919">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; isConnected" time="0.000113232">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; execScripts" time="0.000152816">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; execScripts" time="0.000152696">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; queryScript" time="0.000165529">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; queryScript" time="0.000168395">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; setConfig, getConfig, configExist, removeConfig" time="0.000325289">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; setConfig, getConfig, configExist, removeConfig" time="0.000282379">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getRawDBObject" time="0.000175518">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getRawDBObject" time="0.000172714">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityWrapper" time="0.000166311">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityWrapper" time="0.000117119">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getConfigStore via CoreElement" time="0.000133349">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getConfigStore via CoreElement" time="0.000132077">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCClient via CoreElement" time="0.000124904">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCClient via CoreElement" time="0.000124994">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; createEntity and getEntityById" time="0.000190937">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; createEntity and getEntityById" time="0.000216315">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityBulkById" time="0.000234067">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityBulkById" time="0.000200486">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateEntity" time="0.00016058">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateEntity" time="0.000241352">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateBulkEntity" time="0.000161932">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; updateBulkEntity" time="0.000162624">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityList" time="0.000219862">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getEntityList" time="0.000123892">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; findEntity" time="0.000147065">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; findEntity" time="0.000131446">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity" time="0.000142356">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity" time="0.000157425">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; initEntity" time="0.000157825">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; initEntity" time="0.000186078">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityById" time="0.000124794">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityById" time="0.000130084">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityBulkById" time="0.000253985">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; deleteEntityBulkById" time="0.000268903">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity - after" time="0.000126346">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; countEntity - after" time="0.000131386">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCache" time="0.000226073">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; getCache" time="0.000157134">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populateMany with empty array returns []" time="0.000388416">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populateMany with empty array returns []" time="0.000327773">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populate - field without foreignKey throws" time="0.000605623">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBPrefab delegating methods &gt; populate - field without foreignKey throws" time="0.000621013">
             <system-out>
-[31m[E][2026-08-19 18:15:52](dbtestModule) G-ERR:,No foreignKey relation metadata found for field &quot;name&quot;[0m
+[31m[E][2026-08-22 13:46:30](dbtestModule) G-ERR:,No foreignKey relation metadata found for field &quot;name&quot;[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; getEntityWrapper - unknown entity throws" time="0.000464899">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; getEntityWrapper - unknown entity throws" time="0.000461324">
             <system-out>
-[31m[E][2026-08-19 18:15:52](dbcore) G-ERR:,Entity not registered: __NoSuchEntity__[0m
+[31m[E][2026-08-22 13:46:30](dbcore) G-ERR:,Entity not registered: __NoSuchEntity__[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; setUpdateChain - empty args logs and returns" time="0.000334977">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; setUpdateChain - empty args logs and returns" time="0.000392836">
             <system-out>
-[31m[E][2026-08-19 18:15:52](dbcore) No element in update chain[0m
+[31m[E][2026-08-22 13:46:30](dbcore) No element in update chain[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; registerEntity - invalid entity (no @Entity decorator) throws" time="0.000725284">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; CoreDBCon error paths &gt; registerEntity - invalid entity (no @Entity decorator) throws" time="0.000564247">
             <system-out>
-[31m[E][2026-08-19 18:15:52](dbtestModule) Invalid Entity: BadEntity[0m
-[31m[E][2026-08-19 18:15:52](dbtestModule) G-ERR:,Invalid Entity[0m
+[31m[E][2026-08-22 13:46:30](dbtestModule) Invalid Entity: BadEntity[0m
+[31m[E][2026-08-22 13:46:30](dbtestModule) G-ERR:,Invalid Entity[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; runScripts returns empty array" time="0.000237174">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; runScripts returns empty array" time="0.000273392">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; not mode excludes matching value" time="0.000232084">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; not mode excludes matching value" time="0.000226755">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; updateEntity - entity not found throws" time="0.000145532">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; updateEntity - entity not found throws" time="0.000143739">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; countEntity without search returns total" time="0.000127378">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; countEntity without search returns total" time="0.000129612">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; getEntityList with offset beyond length returns []" time="0.000219911">
+        <testcase classname="tests/start.test.ts" name="dbcon &gt; DBEdgeCase edge cases &gt; aFilter modes via getEntityList &gt; getEntityList with offset beyond length returns []" time="0.000221535">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; exit kernel" time="2.001503345">
+        <testcase classname="tests/start.test.ts" name="logger &gt; Advanced Logger &gt; Write Many lines" time="0.013829689">
             <system-out>
-[34m[V][2026-08-19 18:15:52](kernel) stop[0m
-
-[32m[I][2026-08-19 18:15:52](ex-test) Stop[0m
-
-[35m[D][2026-08-19 18:15:52](background-service) try to stop service[0m
-[35m[D][2026-08-19 18:15:52](background-service) ForceStop[0m
-[35m[D][2026-08-19 18:15:52](background-service) Service Exit[0m
-
-[35m[D][2026-08-19 18:15:52](cache-inMemCache-testModule) Clear cache:cache-inMemCache-testModule[0m
-
-[35m[D][2026-08-19 18:15:53](hello) try to stop service[0m
-[35m[D][2026-08-19 18:15:53](hello) ForceStop[0m
-[35m[D][2026-08-19 18:15:53](hello) Service Exit[0m
-
-[35m[D][2026-08-19 18:15:53](background-service) try to stop service[0m
-[35m[D][2026-08-19 18:15:53](background-service) ForceStop[0m
-[35m[D][2026-08-19 18:15:53](background-service) Service Exit[0m
-
-[35m[D][2026-08-19 18:15:53](cache-inMemCache-core) Clear cache:cache-inMemCache-core[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 0[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 1[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 2[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 3[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 4[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 5[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 6[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 7[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 8[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 9[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 10[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 11[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 12[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 13[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 14[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 15[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 16[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 17[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 18[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 19[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 20[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 21[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 22[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 23[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 24[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 25[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 26[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 27[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 28[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 29[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 30[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 31[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 32[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 33[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 34[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 35[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 36[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 37[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 38[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 39[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 40[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 41[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 42[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 43[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 44[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 45[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 46[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 47[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 48[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 49[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 50[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 51[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 52[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 53[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 54[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 55[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 56[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 57[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 58[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 59[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 60[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 61[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 62[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 63[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 64[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 65[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 66[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 67[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 68[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 69[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 70[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 71[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 72[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 73[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 74[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 75[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 76[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 77[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 78[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 79[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 80[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 81[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 82[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 83[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 84[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 85[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 86[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 87[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 88[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 89[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 90[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 91[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 92[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 93[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 94[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 95[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 96[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 97[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 98[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 99[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 100[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 101[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 102[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 103[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 104[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 105[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 106[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 107[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 108[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 109[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 110[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 111[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 112[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 113[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 114[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 115[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 116[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 117[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 118[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 119[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 120[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 121[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 122[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 123[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 124[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 125[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 126[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 127[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 128[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 129[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 130[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 131[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 132[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 133[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 134[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 135[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 136[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 137[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 138[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 139[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 140[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 141[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 142[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 143[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 144[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 145[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 146[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 147[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 148[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 149[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 150[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 151[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 152[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 153[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 154[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 155[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 156[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 157[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 158[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 159[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 160[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 161[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 162[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 163[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 164[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 165[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 166[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 167[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 168[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 169[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 170[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 171[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 172[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 173[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 174[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 175[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 176[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 177[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 178[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 179[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 180[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 181[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 182[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 183[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 184[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 185[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 186[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 187[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 188[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 189[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 190[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 191[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 192[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 193[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 194[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 195[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 196[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 197[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 198[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 199[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 200[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 201[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 202[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 203[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 204[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 205[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 206[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 207[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 208[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 209[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 210[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 211[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 212[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 213[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 214[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 215[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 216[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 217[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 218[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 219[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 220[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 221[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 222[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 223[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 224[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 225[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 226[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 227[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 228[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 229[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 230[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 231[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 232[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 233[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 234[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 235[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 236[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 237[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 238[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 239[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 240[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 241[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 242[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 243[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 244[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 245[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 246[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 247[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 248[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 249[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 250[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 251[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 252[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 253[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 254[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 255[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 256[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 257[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 258[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 259[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 260[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 261[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 262[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 263[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 264[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 265[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 266[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 267[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 268[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 269[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 270[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 271[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 272[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 273[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 274[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 275[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 276[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 277[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 278[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 279[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 280[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 281[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 282[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 283[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 284[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 285[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 286[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 287[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 288[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 289[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 290[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 291[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 292[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 293[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 294[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 295[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 296[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 297[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 298[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 299[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 300[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 301[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 302[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 303[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 304[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 305[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 306[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 307[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 308[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 309[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 310[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 311[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 312[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 313[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 314[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 315[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 316[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 317[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 318[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 319[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 320[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 321[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 322[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 323[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 324[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 325[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 326[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 327[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 328[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 329[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 330[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 331[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 332[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 333[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 334[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 335[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 336[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 337[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 338[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 339[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 340[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 341[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 342[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 343[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 344[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 345[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 346[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 347[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 348[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 349[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 350[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 351[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 352[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 353[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 354[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 355[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 356[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 357[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 358[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 359[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 360[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 361[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 362[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 363[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 364[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 365[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 366[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 367[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 368[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 369[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 370[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 371[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 372[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 373[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 374[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 375[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 376[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 377[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 378[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 379[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 380[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 381[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 382[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 383[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 384[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 385[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 386[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 387[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 388[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 389[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 390[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 391[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 392[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 393[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 394[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 395[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 396[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 397[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 398[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 399[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 400[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 401[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 402[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 403[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 404[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 405[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 406[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 407[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 408[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 409[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 410[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 411[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 412[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 413[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 414[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 415[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 416[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 417[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 418[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 419[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 420[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 421[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 422[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 423[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 424[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 425[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 426[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 427[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 428[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 429[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 430[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 431[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 432[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 433[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 434[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 435[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 436[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 437[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 438[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 439[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 440[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 441[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 442[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 443[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 444[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 445[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 446[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 447[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 448[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 449[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 450[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 451[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 452[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 453[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 454[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 455[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 456[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 457[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 458[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 459[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 460[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 461[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 462[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 463[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 464[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 465[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 466[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 467[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 468[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 469[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 470[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 471[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 472[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 473[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 474[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 475[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 476[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 477[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 478[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 479[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 480[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 481[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 482[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 483[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 484[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 485[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 486[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 487[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 488[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 489[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 490[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 491[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 492[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 493[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 494[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 495[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 496[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 497[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 498[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 499[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 500[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 501[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 502[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 503[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 504[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 505[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 506[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 507[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 508[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 509[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 510[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 511[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 512[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 513[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 514[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 515[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 516[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 517[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 518[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 519[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 520[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 521[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 522[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 523[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 524[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 525[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 526[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 527[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 528[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 529[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 530[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 531[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 532[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 533[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 534[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 535[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 536[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 537[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 538[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 539[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 540[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 541[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 542[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 543[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 544[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 545[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 546[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 547[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 548[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 549[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 550[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 551[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 552[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 553[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 554[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 555[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 556[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 557[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 558[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 559[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 560[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 561[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 562[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 563[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 564[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 565[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 566[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 567[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 568[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 569[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 570[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 571[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 572[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 573[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 574[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 575[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 576[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 577[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 578[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 579[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 580[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 581[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 582[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 583[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 584[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 585[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 586[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 587[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 588[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 589[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 590[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 591[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 592[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 593[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 594[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 595[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 596[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 597[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 598[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 599[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 600[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 601[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 602[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 603[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 604[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 605[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 606[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 607[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 608[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 609[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 610[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 611[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 612[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 613[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 614[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 615[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 616[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 617[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 618[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 619[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 620[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 621[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 622[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 623[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 624[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 625[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 626[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 627[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 628[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 629[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 630[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 631[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 632[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 633[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 634[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 635[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 636[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 637[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 638[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 639[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 640[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 641[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 642[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 643[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 644[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 645[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 646[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 647[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 648[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 649[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 650[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 651[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 652[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 653[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 654[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 655[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 656[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 657[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 658[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 659[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 660[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 661[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 662[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 663[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 664[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 665[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 666[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 667[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 668[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 669[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 670[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 671[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 672[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 673[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 674[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 675[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 676[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 677[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 678[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 679[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 680[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 681[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 682[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 683[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 684[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 685[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 686[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 687[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 688[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 689[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 690[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 691[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 692[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 693[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 694[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 695[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 696[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 697[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 698[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 699[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 700[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 701[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 702[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 703[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 704[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 705[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 706[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 707[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 708[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 709[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 710[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 711[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 712[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 713[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 714[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 715[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 716[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 717[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 718[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 719[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 720[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 721[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 722[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 723[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 724[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 725[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 726[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 727[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 728[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 729[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 730[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 731[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 732[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 733[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 734[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 735[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 736[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 737[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 738[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 739[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 740[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 741[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 742[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 743[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 744[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 745[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 746[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 747[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 748[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 749[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 750[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 751[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 752[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 753[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 754[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 755[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 756[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 757[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 758[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 759[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 760[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 761[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 762[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 763[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 764[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 765[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 766[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 767[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 768[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 769[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 770[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 771[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 772[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 773[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 774[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 775[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 776[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 777[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 778[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 779[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 780[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 781[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 782[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 783[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 784[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 785[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 786[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 787[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 788[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 789[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 790[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 791[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 792[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 793[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 794[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 795[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 796[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 797[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 798[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 799[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 800[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 801[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 802[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 803[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 804[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 805[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 806[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 807[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 808[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 809[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 810[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 811[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 812[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 813[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 814[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 815[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 816[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 817[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 818[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 819[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 820[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 821[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 822[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 823[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 824[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 825[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 826[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 827[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 828[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 829[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 830[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 831[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 832[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 833[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 834[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 835[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 836[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 837[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 838[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 839[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 840[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 841[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 842[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 843[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 844[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 845[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 846[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 847[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 848[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 849[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 850[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 851[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 852[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 853[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 854[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 855[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 856[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 857[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 858[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 859[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 860[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 861[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 862[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 863[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 864[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 865[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 866[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 867[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 868[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 869[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 870[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 871[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 872[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 873[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 874[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 875[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 876[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 877[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 878[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 879[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 880[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 881[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 882[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 883[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 884[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 885[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 886[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 887[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 888[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 889[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 890[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 891[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 892[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 893[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 894[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 895[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 896[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 897[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 898[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 899[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 900[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 901[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 902[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 903[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 904[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 905[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 906[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 907[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 908[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 909[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 910[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 911[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 912[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 913[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 914[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 915[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 916[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 917[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 918[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 919[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 920[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 921[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 922[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 923[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 924[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 925[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 926[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 927[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 928[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 929[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 930[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 931[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 932[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 933[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 934[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 935[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 936[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 937[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 938[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 939[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 940[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 941[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 942[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 943[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 944[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 945[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 946[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 947[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 948[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 949[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 950[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 951[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 952[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 953[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 954[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 955[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 956[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 957[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 958[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 959[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 960[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 961[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 962[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 963[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 964[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 965[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 966[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 967[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 968[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 969[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 970[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 971[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 972[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 973[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 974[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 975[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 976[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 977[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 978[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 979[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 980[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 981[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 982[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 983[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 984[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 985[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 986[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 987[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 988[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 989[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 990[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 991[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 992[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 993[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 994[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 995[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 996[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 997[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 998[0m
+[35m[D][2026-08-22 13:46:30](kernel) Test debug line 999[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; cleanup" time="0.000569525">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props" time="0.000239448">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props empty" time="0.00018676">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; instance test" time="0.000204723">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; util test" time="0.000135423">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; e_id is primary key" time="0.000311943">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; name is valid" time="0.000258474">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect key not a column" time="0.000184565">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; simple data type" time="0.000361596">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect primaryKeyNull" time="0.000188021">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect invalidKey" time="0.000171892">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; full validation" time="0.000110016">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; exec" time="0.007835854">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CoreSemaphor" time="0.000393065">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CoreCachedFC" time="2.001187428">
-        </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CoreTimeCache" time="2.50050711">
+        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; exit kernel" time="2.002488672">
             <system-out>
-[L][2026-08-19 18:15:58](test) clearing cache 123
+[34m[V][2026-08-22 13:46:30](kernel) stop[0m
+
+[32m[I][2026-08-22 13:46:30](ex-test) Stop[0m
+
+[35m[D][2026-08-22 13:46:30](background-service) try to stop service[0m
+[35m[D][2026-08-22 13:46:30](background-service) ForceStop[0m
+[35m[D][2026-08-22 13:46:30](background-service) Service Exit[0m
+
+[35m[D][2026-08-22 13:46:30](cache-inMemCache-testModule) Clear cache:cache-inMemCache-testModule[0m
+
+[35m[D][2026-08-22 13:46:31](hello) try to stop service[0m
+[35m[D][2026-08-22 13:46:31](hello) ForceStop[0m
+[35m[D][2026-08-22 13:46:31](hello) Service Exit[0m
+
+[35m[D][2026-08-22 13:46:31](background-service) try to stop service[0m
+[35m[D][2026-08-22 13:46:31](background-service) ForceStop[0m
+[35m[D][2026-08-22 13:46:31](background-service) Service Exit[0m
+
+[35m[D][2026-08-22 13:46:31](cache-inMemCache-core) Clear cache:cache-inMemCache-core[0m
 
             </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; CMap" time="0.000995859">
+        <testcase classname="tests/start.test.ts" name="end &gt; ShutDown &gt; cleanup" time="0.000283521">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - single digit gets leading zero" time="0.000136676">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props" time="0.000221304">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - double digit stays as-is" time="0.000110176">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; entity props empty" time="0.000182972">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; getTimeStamp returns formatted string" time="0.000238225">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; instance test" time="0.00028296">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray processes all items" time="0.000483753">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; util test" time="0.000160411">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray - empty array" time="0.000167743">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; e_id is primary key" time="0.000298629">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryWithProducer processes items" time="0.000227354">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; name is valid" time="0.000332282">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - sums file sizes recursively" time="0.001404651">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect key not a column" time="0.000228739">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - excludes specified entries" time="0.000779435">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; simple data type" time="0.000534561">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; getEntityNames - throws for object without Entity metadata" time="0.000229858">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect primaryKeyNull" time="0.000214482">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdOut callback receives data" time="0.002539931">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; detect invalidKey" time="0.000180849">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdErr callback receives data on error" time="0.003530738">
+        <testcase classname="tests/start.test.ts" name="orm &gt; annotation &gt; full validation" time="0.000121388">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - valid" time="0.000178603">
+        <testcase classname="tests/start.test.ts" name="utils &gt; exec" time="0.007537916">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - invalid" time="0.000131335">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CoreSemaphor" time="0.00044301">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - valid" time="0.000293748">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CoreCachedFC" time="2.002540606">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - invalid" time="0.000132538">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CoreTimeCache" time="2.501086184">
+            <system-out>
+[L][2026-08-22 13:46:36](test) clearing cache 123
+
+            </system-out>
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - valid non-empty string" time="0.000107921">
+        <testcase classname="tests/start.test.ts" name="utils &gt; CMap" time="0.001157688">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - empty string is false" time="0.000088886">
+        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - single digit gets leading zero" time="0.000162595">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - non-string is false" time="0.000115496">
+        <testcase classname="tests/start.test.ts" name="utils &gt; numPrint - double digit stays as-is" time="0.000121607">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - valid numbers" time="0.000121667">
+        <testcase classname="tests/start.test.ts" name="utils &gt; getTimeStamp returns formatted string" time="0.000254777">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - non-number is false" time="0.000096149">
+        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray processes all items" time="0.000542355">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - true and false" time="0.000105738">
+        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryFromArray - empty array" time="0.000178414">
         </testcase>
-        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - non-boolean is false" time="0.000172191">
+        <testcase classname="tests/start.test.ts" name="utils &gt; workerFactoryWithProducer processes items" time="0.000282299">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - sums file sizes recursively" time="0.00135628">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="utils &gt; calcDirSize - excludes specified entries" time="0.000767758">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="utils &gt; getEntityNames - throws for object without Entity metadata" time="0.00025064">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdOut callback receives data" time="0.002762403">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="utils &gt; Executable callbacks &gt; onStdErr callback receives data on error" time="0.003660929">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - valid" time="0.00019199">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isUUID - invalid" time="0.000142948">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - valid" time="0.000278091">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isIsoDate - invalid" time="0.000137227">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - valid non-empty string" time="0.000112511">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - empty string is false" time="0.00014442">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isString - non-string is false" time="0.000131105">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - valid numbers" time="0.000140073">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isNumber - non-number is false" time="0.000104226">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - true and false" time="0.000116488">
+        </testcase>
+        <testcase classname="tests/start.test.ts" name="type &gt; Type &gt; isBoolean - non-boolean is false" time="0.000143549">
         </testcase>
     </testsuite>
 </testsuites>
